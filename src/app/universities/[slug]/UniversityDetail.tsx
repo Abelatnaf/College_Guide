@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { University } from "@/types";
 import { flagFor } from "@/data/universities";
@@ -87,11 +88,13 @@ export function UniversityDetail({ university: u }: { university: University }) 
       {/* Hero */}
       <section className="relative mb-lg overflow-hidden rounded-xl">
         <div className="relative h-64 w-full md:h-[400px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="h-full w-full object-cover"
+          <Image
+            className="object-cover"
             alt={`${u.name} campus`}
             src={u.bannerImage}
+            fill
+            sizes="100vw"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
@@ -104,11 +107,12 @@ export function UniversityDetail({ university: u }: { university: University }) 
         </button>
         <div className="absolute bottom-0 left-0 flex w-full flex-col items-start gap-md p-lg md:flex-row md:items-end">
           <div className="rounded-xl border border-outline-variant bg-white p-2 shadow-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               className="h-20 w-20 rounded-lg object-cover md:h-28 md:w-28"
               alt={`${u.name} logo`}
               src={u.logoImage}
+              width={112}
+              height={112}
             />
           </div>
           <div className="flex-1 pb-1">
@@ -532,12 +536,13 @@ export function UniversityDetail({ university: u }: { university: University }) 
 
       {tab === "campus" && (
         <div className="grid grid-cols-1 gap-gutter lg:grid-cols-2">
-          <div className="overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="h-64 w-full object-cover"
+          <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
+            <Image
+              className="object-cover"
               alt={`${u.name} student life`}
               src={u.bannerImage}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
           <div className="flex flex-col justify-center">

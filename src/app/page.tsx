@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
@@ -70,11 +71,12 @@ export default function HomePage() {
                       key={n}
                       className="h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-slate-200"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         className="h-full w-full object-cover"
                         alt="Student"
                         src={`https://placehold.co/64x64/d3e3dc/006948?text=${n}`}
+                        width={64}
+                        height={64}
                       />
                     </div>
                   ))}
@@ -88,11 +90,13 @@ export default function HomePage() {
             {/* Visual side */}
             <div className="relative hidden lg:block">
               <div className="relative aspect-square w-full overflow-hidden rounded-[32px] shadow-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="h-full w-full object-cover"
+                <Image
+                  className="object-cover"
                   alt="Modern university campus library"
                   src="https://placehold.co/640x640/d3e3dc/006948?text=Campus+Library"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  priority
                 />
                 <Link
                   href="/universities/stanford"
@@ -185,11 +189,12 @@ export default function HomePage() {
           <div className="grid h-auto grid-cols-1 grid-rows-2 gap-md md:h-[600px] md:grid-cols-4">
             <div className="relative flex flex-col justify-end overflow-hidden rounded-[24px] bg-primary p-xl md:col-span-2 md:row-span-2">
               <div className="absolute inset-0 opacity-40">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="h-full w-full object-cover brightness-50 grayscale"
+                <Image
+                  className="object-cover brightness-50 grayscale"
                   alt="Students collaborating"
                   src="https://placehold.co/600x600/141b2b/ffffff?text=Campus"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
                 />
               </div>
               <div className="relative z-10 space-y-sm text-white">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { majors } from "@/data/majors";
 import { MajorCard } from "@/components/ui/MajorCard";
@@ -110,12 +111,13 @@ export default function MajorsPage() {
           </div>
         </div>
 
-        <div className="group relative overflow-hidden rounded-2xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        <div className="group relative min-h-[300px] overflow-hidden rounded-2xl">
+          <Image
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             alt="Students collaborating on campus"
             src="https://placehold.co/800x600/006948/f5fff7?text=Find+Your+Match"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-primary/80 to-transparent p-lg">
             <h3 className="mb-xs font-headline-md text-headline-md text-white">

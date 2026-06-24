@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { universities, flagFor } from "@/data/universities";
 import { majors } from "@/data/majors";
@@ -375,11 +376,12 @@ export default function QuizPage() {
                 >
                   <div className="flex flex-col sm:flex-row">
                     <div className="relative h-32 w-full sm:h-auto sm:w-40 sm:shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        className="h-full w-full object-cover"
+                      <Image
+                        className="object-cover"
                         alt={m.university.name}
                         src={m.university.bannerImage}
+                        fill
+                        sizes="160px"
                       />
                       <div className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 font-label-md text-caption text-primary shadow-sm backdrop-blur">
                         #{i + 1}

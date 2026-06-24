@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { University } from "@/types";
 import { flagFor } from "@/data/universities";
@@ -40,11 +41,12 @@ export function UniversityCard({ university }: { university: University }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)]">
       <div className="relative h-40 bg-primary-container/10">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="h-full w-full object-cover"
+        <Image
+          className="object-cover"
           alt={`${university.name} campus`}
           src={university.bannerImage}
+          fill
+          sizes="(min-width: 1024px) 40vw, 100vw"
         />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur">
           <span className="text-lg leading-none">{flagFor(university.country)}</span>

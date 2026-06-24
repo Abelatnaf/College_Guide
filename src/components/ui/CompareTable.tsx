@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { University } from "@/types";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
@@ -60,11 +61,12 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
             {universities.map((u, i) => (
               <th key={i} className="bg-surface-container-low p-md align-top">
                 <div className="flex flex-col items-center gap-sm text-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     className="h-16 w-16 rounded-lg border border-outline-variant object-cover"
                     alt={u.name}
                     src={u.logoImage}
+                    width={120}
+                    height={120}
                   />
                   <select
                     value={u.slug}

@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 
 const EXPLORE_LINKS = [
@@ -18,18 +15,9 @@ const COMPANY_LINKS = [
 ];
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-
-  const onSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: wire to a real newsletter endpoint.
-    console.log("Newsletter signup:", email);
-    setEmail("");
-  };
-
   return (
     <footer className="no-print w-full border-t border-outline-variant bg-surface-container-low py-xl">
-      <div className="mx-auto grid max-w-container-max grid-cols-1 gap-md px-md md:grid-cols-3 md:px-lg">
+      <div className="mx-auto grid max-w-container-max grid-cols-1 gap-md px-md md:grid-cols-2 md:px-lg">
         {/* Brand */}
         <div className="space-y-4">
           <Link href="/" className="flex items-center gap-base">
@@ -109,36 +97,12 @@ export function Footer() {
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Newsletter */}
-        <div className="space-y-4">
-          <h4 className="font-label-md text-label-md uppercase tracking-wider text-primary">
-            Stay Updated
-          </h4>
-          <p className="font-caption text-caption text-on-surface-variant">
-            Get the latest admission tips and deadlines.
-          </p>
-          <form onSubmit={onSubscribe} className="flex gap-2">
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 rounded-lg border border-outline-variant bg-white px-4 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary"
-              placeholder="Email address"
-              type="email"
-              required
-            />
-            <button
-              type="submit"
-              aria-label="Subscribe"
-              className="rounded-lg bg-primary px-4 py-2 text-on-primary transition-colors hover:bg-primary-container"
-            >
-              <span className="material-symbols-outlined">send</span>
-            </button>
-          </form>
-          <p className="pt-4 font-caption text-caption text-on-surface-variant">
-            © 2024 UniPath. Empowering future scholars.
-          </p>
-        </div>
+      <div className="mx-auto mt-xl max-w-container-max border-t border-outline-variant px-md pt-md md:px-lg">
+        <p className="font-caption text-caption text-on-surface-variant">
+          © 2024 UniPath. Empowering future scholars.
+        </p>
       </div>
     </footer>
   );

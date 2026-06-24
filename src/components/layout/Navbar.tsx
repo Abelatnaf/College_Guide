@@ -111,10 +111,6 @@ export function Navbar() {
             />
           </form>
 
-          <button className="rounded-lg bg-primary px-6 py-2.5 font-label-md text-label-md text-on-primary transition-all hover:bg-primary-container active:scale-95">
-            Sign In
-          </button>
-
           <button
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"

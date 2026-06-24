@@ -1,0 +1,447 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { universities, flagFor } from "@/data/universities";
+import { majors } from "@/data/majors";
+import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
+import type { QuizMatch } from "@/types";
+import { formatCurrency } from "@/lib/utils";
+
+const OTHER_VALUE = "__other__";
+
+// Flatten every sub-major across all 13 categories into one rich list (54 majors),
+// each tagged with its parent category for scoring, plus a trailing "Other".
+const FIELD_OPTIONS: (QuizOption & { category: string })[] = majors.flatMap((m) =>
+  m.subMajors.map((sm) => ({
+    value: sm.name,
+    label: sm.name,
+    sub: `${sm.avgStartingSalary} avg starting salary · ${sm.jobGrowth} job growth`,
+    category: m.name,
+  })),
+);
+
+const FIELD_TO_CATEGORY: Record<string, string> = Object.fromEntries(
+  FIELD_OPTIONS.map((f) => [f.value, f.category]),
+);
+
+const REGION_OPTIONS: QuizOption[] = [
+  { value: "USA", label: "United States" },
+  { value: "Europe", label: "Europe" },
+  { value: "Canada", label: "Canada" },
+  { value: "China", label: "China" },
+  { value: "UAE", label: "United Arab Emirates" },
+  { value: "No preference", label: "No preference", sub: "I'm open to anywhere" },
+];
+
+const BUDGET_OPTIONS: QuizOption[] = [
+  { value: "Under $15k", label: "Under $15,000" },
+  { value: "$15k-$30k", label: "$15,000 – $30,000" },
+  { value: "$30k-$50k", label: "$30,000 – $50,000" },
+  { value: "$50k+", label: "$50,000+" },
+];
+
+const GPA_OPTIONS: QuizOption[] = [
+  { value: "3.5+", label: "3.5 and above", sub: "Strong academic record" },
+  { value: "3.0-3.5", label: "3.0 – 3.5", sub: "Above average" },
+  { value: "2.5-3.0", label: "2.5 – 3.0", sub: "Average" },
+  { value: "Below 2.5", label: "Below 2.5", sub: "Building up" },
+];
+
+const CAMPUS_OPTIONS: QuizOption[] = [
+  { value: "Small", label: "Small", sub: "Under 5,000 students" },
+  { value: "Medium", label: "Medium", sub: "5,000 – 20,000 students" },
+  { value: "Large", label: "Large", sub: "20,000+ students" },
+];
+
+const BUDGET_MAX: Record<string, number> = {
+  "Under $15k": 15000,
+  "$15k-$30k": 30000,
+  "$30k-$50k": 50000,
+  "$50k+": Number.POSITIVE_INFINITY,
+};
+
+// Minimum acceptance rate a GPA band can realistically target.
+const GPA_MIN_ACCEPT: Record<string, number> = {
+  "3.5+": 0,
+  "3.0-3.5": 10,
+  "2.5-3.0": 25,
+  "Below 2.5": 45,
+};
+
+const sizeBucket = (pop: number) =>
+  pop < 5000 ? "Small" : pop <= 20000 ? "Medium" : "Large";
+
+interface Answers {
+  region: string[];
+  budget: string;
+  field: string;
+  fieldOtherText: string;
+  gpa: string;
+  campusSize: string;
+}
+
+const EMPTY_ANSWERS: Answers = {
+  region: [],
+  budget: "",
+  field: "",
+  fieldOtherText: "",
+  gpa: "",
+  campusSize: "",
+};
+
+/** Loosely resolve a freeform "Other" field entry to a known major category, if any. */
+function fuzzyCategoryMatch(text: string): string | null {
+  const q = text.trim().toLowerCase();
+  if (!q) return null;
+  for (const major of majors) {
+    if (major.name.toLowerCase().includes(q) || q.includes(major.name.toLowerCase())) {
+      return major.name;
+    }
+    for (const sm of major.subMajors) {
+      if (sm.name.toLowerCase().includes(q) || q.includes(sm.name.toLowerCase())) {
+        return major.name;
+      }
+    }
+  }
+  return null;
+}
+
+function computeMatches(answers: Answers): QuizMatch[] {
+  const budgetMax = BUDGET_MAX[answers.budget] ?? Number.POSITIVE_INFINITY;
+  const gpaMinAccept = GPA_MIN_ACCEPT[answers.gpa] ?? 0;
+  const maxScore = 30 + 25 + 20 + 20 + 10;
+
+  const noPreference = answers.region.includes("No preference") || answers.region.length === 0;
+  const isOther = answers.field === OTHER_VALUE;
+  const fieldLabel = isOther ? answers.fieldOtherText.trim() || "your field" : answers.field;
+  const category = isOther
+    ? fuzzyCategoryMatch(answers.fieldOtherText)
+    : FIELD_TO_CATEGORY[answers.field] ?? null;
+
+  const scored = universities.map((u) => {
+    let score = 0;
+    const reasons: string[] = [];
+
+    if (noPreference) {
+      score += 8;
+    } else if (answers.region.includes(u.region)) {
+      score += 30;
+      reasons.push(`In your preferred region (${u.region})`);
+    }
+
+    if (u.annualTuition <= budgetMax) {
+      score += 25;
+      reasons.push("Within your tuition budget");
+    } else {
+      score -= 15;
+    }
+
+    if (u.acceptanceRate >= gpaMinAccept) {
+      score += 20;
+      reasons.push("Realistic admission odds for your GPA");
+    } else {
+      score += 5;
+    }
+
+    if (category && u.majorsOffered.includes(category)) {
+      score += 20;
+      reasons.push(`Offers ${category}${isOther ? ` (matches "${fieldLabel}")` : ""}`);
+    }
+
+    if (sizeBucket(u.studentPopulation) === answers.campusSize) {
+      score += 10;
+      reasons.push(`${answers.campusSize} campus size`);
+    }
+
+    // Light tiebreaker favoring stronger global rank.
+    score += Math.max(0, 10 - u.globalRanking / 25);
+
+    return { u, score, reasons };
+  });
+
+  return scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((t) => ({
+      university: t.u,
+      matchPercent: Math.min(99, Math.max(70, Math.round((t.score / maxScore) * 100))),
+      reasons: t.reasons.slice(0, 3),
+    }));
+}
+
+const STEP_LABELS = ["Region", "Budget", "Field of Study", "GPA", "Campus Size"];
+
+export default function QuizPage() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
+  const [status, setStatus] = useState<"quiz" | "loading" | "results">("quiz");
+  const [matches, setMatches] = useState<QuizMatch[]>([]);
+
+  const progress = Math.round(((step + 1) / STEP_LABELS.length) * 100);
+  const isLast = step === STEP_LABELS.length - 1;
+
+  const isAnswered = useMemo(() => {
+    if (step === 0) return answers.region.length > 0;
+    if (step === 1) return Boolean(answers.budget);
+    if (step === 2)
+      return answers.field === OTHER_VALUE
+        ? answers.fieldOtherText.trim().length > 0
+        : Boolean(answers.field);
+    if (step === 3) return Boolean(answers.gpa);
+    return Boolean(answers.campusSize);
+  }, [step, answers]);
+
+  const toggleRegion = (value: string) => {
+    setAnswers((a) => {
+      if (value === "No preference") {
+        return { ...a, region: ["No preference"] };
+      }
+      const withoutNoPreference = a.region.filter((r) => r !== "No preference");
+      if (withoutNoPreference.includes(value)) {
+        return { ...a, region: withoutNoPreference.filter((r) => r !== value) };
+      }
+      if (withoutNoPreference.length >= 2) return a; // capped at 2
+      return { ...a, region: [...withoutNoPreference, value] };
+    });
+  };
+
+  const handleContinue = () => {
+    if (!isAnswered) return;
+    if (!isLast) {
+      setStep((s) => s + 1);
+      return;
+    }
+    setStatus("loading");
+    setTimeout(() => {
+      setMatches(computeMatches(answers));
+      setStatus("results");
+    }, 1400);
+  };
+
+  const reset = () => {
+    setStep(0);
+    setAnswers(EMPTY_ANSWERS);
+    setMatches([]);
+    setStatus("quiz");
+  };
+
+  return (
+    <main className="flex flex-grow flex-col items-center justify-center px-md py-xl">
+      <div className="relative z-10 w-full max-w-2xl">
+        {status !== "results" && (
+          <div className="mb-lg">
+            <div className="mb-sm flex items-end justify-between">
+              <span className="font-label-md uppercase tracking-wider text-primary">
+                Step {step + 1} of {STEP_LABELS.length}: {STEP_LABELS[step]}
+              </span>
+              <span className="font-label-md text-on-surface-variant">
+                {progress}% Complete
+              </span>
+            </div>
+            <div className="h-3 w-full overflow-hidden rounded-full bg-surface-container-high">
+              <div
+                className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {status === "quiz" && (
+          <>
+            {step === 0 && (
+              <QuizCard
+                mode="multi"
+                question="Which regions would you like to study in?"
+                helperText="Pick up to 2 — we'll match you against schools in either."
+                options={REGION_OPTIONS}
+                selected={answers.region}
+                maxSelections={2}
+                onSelect={toggleRegion}
+              />
+            )}
+            {step === 1 && (
+              <QuizCard
+                mode="single"
+                question="What is your annual tuition budget?"
+                options={BUDGET_OPTIONS}
+                selected={answers.budget || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, budget: value }))}
+              />
+            )}
+            {step === 2 && (
+              <div>
+                <QuizCard
+                  mode="single"
+                  question="Which field do you want to study?"
+                  helperText="Choose the closest match from 54 majors, or tell us in your own words."
+                  options={[
+                    ...FIELD_OPTIONS,
+                    { value: OTHER_VALUE, label: "Other", sub: "Type your own interest" },
+                  ]}
+                  selected={answers.field || undefined}
+                  onSelect={(value) => setAnswers((a) => ({ ...a, field: value }))}
+                />
+                {answers.field === OTHER_VALUE && (
+                  <div className="mt-md animate-fade-in">
+                    <label className="mb-xs block font-label-md text-label-md text-on-surface-variant">
+                      Tell us what you&apos;re interested in
+                    </label>
+                    <input
+                      autoFocus
+                      type="text"
+                      value={answers.fieldOtherText}
+                      onChange={(e) =>
+                        setAnswers((a) => ({ ...a, fieldOtherText: e.target.value }))
+                      }
+                      placeholder="e.g. Marine Biology, Game Design, Architecture…"
+                      className="w-full rounded-xl border-2 border-outline-variant bg-surface p-md font-body-lg text-body-lg focus:border-primary focus:ring-0"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+            {step === 3 && (
+              <QuizCard
+                mode="single"
+                question="What is your GPA range?"
+                options={GPA_OPTIONS}
+                selected={answers.gpa || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, gpa: value }))}
+              />
+            )}
+            {step === 4 && (
+              <QuizCard
+                mode="single"
+                question="What campus size do you prefer?"
+                options={CAMPUS_OPTIONS}
+                selected={answers.campusSize || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, campusSize: value }))}
+              />
+            )}
+
+            <div className="mt-lg flex items-center justify-between">
+              <button
+                onClick={() => setStep((s) => Math.max(0, s - 1))}
+                disabled={step === 0}
+                className="flex items-center gap-xs font-label-md text-on-surface-variant transition-colors hover:text-primary disabled:opacity-40"
+              >
+                <span className="material-symbols-outlined text-[20px]">arrow_back</span>
+                Back
+              </button>
+              <button
+                onClick={handleContinue}
+                disabled={!isAnswered}
+                className="rounded-lg bg-primary px-lg py-3 font-label-md text-white shadow-lg transition-all hover:-translate-y-0.5 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
+              >
+                {isLast ? "See My Matches" : "Continue"}
+              </button>
+            </div>
+          </>
+        )}
+
+        {status === "loading" && (
+          <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant bg-surface-container-lowest p-xl text-center">
+            <div className="mb-md h-12 w-12 animate-spin rounded-full border-4 border-secondary-container border-t-primary" />
+            <h2 className="font-headline-md text-headline-md text-on-surface">
+              Finding your best-fit schools…
+            </h2>
+            <p className="mt-xs font-body-md text-body-md text-on-surface-variant">
+              Scoring {universities.length} universities against your answers.
+            </p>
+          </div>
+        )}
+
+        {status === "results" && (
+          <section>
+            <div className="mb-lg text-center">
+              <span className="material-symbols-outlined text-[40px] text-primary">
+                celebration
+              </span>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface">
+                Your Top 3 Matches
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant">
+                Based on your region, budget, field, GPA, and campus preferences.
+              </p>
+            </div>
+
+            <div className="space-y-md">
+              {matches.map((m, i) => (
+                <div
+                  key={m.university.id}
+                  className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm"
+                >
+                  <div className="flex flex-col sm:flex-row">
+                    <div className="relative h-32 w-full sm:h-auto sm:w-40 sm:shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        className="h-full w-full object-cover"
+                        alt={m.university.name}
+                        src={m.university.bannerImage}
+                      />
+                      <div className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 font-label-md text-caption text-primary shadow-sm backdrop-blur">
+                        #{i + 1}
+                      </div>
+                    </div>
+                    <div className="flex-1 p-md">
+                      <div className="mb-1 flex items-start justify-between gap-sm">
+                        <h3 className="font-headline-md text-headline-md text-on-surface">
+                          {m.university.name}
+                        </h3>
+                        <span className="shrink-0 rounded-full bg-primary px-3 py-1 font-label-md text-caption text-on-primary">
+                          {m.matchPercent}% Match
+                        </span>
+                      </div>
+                      <p className="mb-sm font-caption text-caption text-on-surface-variant">
+                        {flagFor(m.university.country)} {m.university.city},{" "}
+                        {m.university.country}
+                      </p>
+                      <div className="mb-sm flex flex-wrap gap-x-md gap-y-1 font-caption text-caption text-on-surface-variant">
+                        <span>Rank #{m.university.globalRanking}</span>
+                        <span>{formatCurrency(m.university.annualTuition, m.university.currency)}/yr</span>
+                        <span>{m.university.acceptanceRate}% acceptance</span>
+                      </div>
+                      <div className="mb-md flex flex-wrap gap-1">
+                        {m.reasons.map((r) => (
+                          <span
+                            key={r}
+                            className="rounded-full bg-secondary-container px-2 py-0.5 font-caption text-caption text-on-secondary-container"
+                          >
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/universities/${m.university.slug}`}
+                        className="inline-block rounded-lg border-2 border-primary px-md py-1.5 font-label-md text-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-lg flex flex-col justify-center gap-sm sm:flex-row">
+              <button
+                onClick={reset}
+                className="rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
+              >
+                Retake Quiz
+              </button>
+              <Link
+                href="/universities"
+                className="rounded-lg bg-primary px-lg py-3 text-center font-label-md text-on-primary transition-colors hover:bg-primary-container"
+              >
+                Browse All Universities
+              </Link>
+            </div>
+          </section>
+        )}
+      </div>
+    </main>
+  );
+}

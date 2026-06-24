@@ -1,0 +1,104 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import type { University } from "@/types";
+import { flagFor } from "@/data/universities";
+import { formatCurrency } from "@/lib/utils";
+
+const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
+
+function Stat({
+  icon,
+  label,
+  value,
+}: {
+  icon: string;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-low">
+        <span className="material-symbols-outlined text-primary" style={FILL_1}>
+          {icon}
+        </span>
+      </div>
+      <div>
+        <p className="mb-1 font-caption text-caption leading-none text-on-surface-variant">
+          {label}
+        </p>
+        <p className="font-label-md text-on-surface">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+export function UniversityCard({ university }: { university: University }) {
+  const [bookmarked, setBookmarked] = useState(false);
+
+  return (
+    <div className="flex flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)]">
+      <div className="relative h-40 bg-primary-container/10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="h-full w-full object-cover"
+          alt={`${university.name} campus`}
+          src={university.bannerImage}
+        />
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur">
+          <span className="text-lg leading-none">{flagFor(university.country)}</span>
+          <span className="font-caption text-caption font-bold text-on-surface">
+            {university.country}
+          </span>
+        </div>
+        <button
+          onClick={() => setBookmarked((v) => !v)}
+          aria-label={bookmarked ? "Remove bookmark" : "Bookmark"}
+          aria-pressed={bookmarked}
+          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:text-primary"
+        >
+          <span
+            className="material-symbols-outlined"
+            style={bookmarked ? FILL_1 : undefined}
+          >
+            {bookmarked ? "bookmark" : "bookmark_border"}
+          </span>
+        </button>
+      </div>
+
+      <div className="flex-1 p-md">
+        <h3 className="mb-4 font-headline-md text-xl font-bold text-on-background">
+          {university.name}
+        </h3>
+        <div className="grid grid-cols-2 gap-y-4">
+          <Stat icon="military_tech" label="Global Rank" value={`#${university.globalRanking}`} />
+          <Stat
+            icon="payments"
+            label="Annual Tuition"
+            value={formatCurrency(university.annualTuition, university.currency)}
+          />
+          <Stat
+            icon="task_alt"
+            label="Acceptance Rate"
+            value={`${university.acceptanceRate}%`}
+          />
+          <Stat
+            icon="calendar_month"
+            label="Application Due"
+            value={university.applicationDeadline}
+          />
+        </div>
+      </div>
+
+      <div className="p-md pt-0">
+        <Link
+          href={`/universities/${university.slug}`}
+          className="block w-full rounded-lg bg-secondary-container py-3 text-center font-label-md text-label-md text-primary transition-all duration-200 hover:bg-primary hover:text-on-primary"
+        >
+          View Full Profile
+        </Link>
+      </div>
+    </div>
+  );
+}

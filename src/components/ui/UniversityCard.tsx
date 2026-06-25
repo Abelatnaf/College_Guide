@@ -44,6 +44,8 @@ export function UniversityCard({ university }: { university: University }) {
           src={university.bannerImage}
           fill
           sizes="(min-width: 1024px) 40vw, 100vw"
+          quality={60}
+          loading="lazy"
         />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur">
           <span className="text-lg leading-none">{flagFor(university.country)}</span>

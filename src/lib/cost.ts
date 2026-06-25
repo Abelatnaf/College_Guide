@@ -49,6 +49,10 @@ const REGION_LIVING_COST: Record<Region, number> = {
   Canada: 15000,
   China: 8000,
   UAE: 16000,
+  Australia: 18000,
+  Japan: 12000,
+  "South Korea": 10000,
+  India: 5000,
 };
 
 /** Parse a salary label like "$92,000" into a number, or null if unparseable. */

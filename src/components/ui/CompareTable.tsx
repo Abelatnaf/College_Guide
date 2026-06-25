@@ -3,6 +3,9 @@
 import Image from "next/image";
 import type { University } from "@/types";
 import { formatCurrency, formatNumber } from "@/lib/utils";
+import { getCostBreakdown } from "@/lib/universityInsights";
+import { estimateChance, TIER_META } from "@/lib/chances";
+import { useAcademicProfile } from "@/components/providers/StorageProvider";
 
 interface Row {
   label: string;
@@ -22,6 +25,8 @@ const ROWS: Row[] = [
   { label: "Student Population", icon: "groups", format: (u) => formatNumber(u.studentPopulation) },
   { label: "Established", icon: "history_edu", format: (u) => String(u.established) },
   { label: "Faculty Ratio", icon: "diversity_3", format: (u) => u.facultyRatio, value: (u) => parseInt(u.facultyRatio, 10), mode: "min", winLabel: "Best Faculty Ratio" },
+  { label: "Est. Net Price/yr", icon: "savings", format: (u) => { const c = getCostBreakdown(u); return formatCurrency(c.estimatedNetPrice, u.currency); }, value: (u) => getCostBreakdown(u).estimatedNetPrice, mode: "min", winLabel: "Best Net Price" },
+  { label: "4-Year Total", icon: "account_balance_wallet", format: (u) => { const c = getCostBreakdown(u); return formatCurrency(c.fourYearTotal, u.currency); }, value: (u) => getCostBreakdown(u).fourYearTotal, mode: "min", winLabel: "Lowest 4-Year Cost" },
 ];
 
 function bestIndex(row: Row, list: University[]): number {
@@ -49,7 +54,15 @@ interface CompareTableProps {
   onChange: (slotIndex: number, slug: string) => void;
 }
 
+const CHANCE_COLORS: Record<string, string> = {
+  safety: "bg-green-100 text-green-800",
+  target: "bg-blue-100 text-blue-800",
+  reach: "bg-amber-100 text-amber-800",
+  "high-reach": "bg-red-100 text-red-800",
+};
+
 export function CompareTable({ universities, allUniversities, onChange }: CompareTableProps) {
+  const { profile } = useAcademicProfile();
   return (
     <div className="overflow-x-auto rounded-xl border border-outline-variant bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
       <table className="w-full border-collapse text-left">
@@ -65,8 +78,10 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
                     className="h-16 w-16 rounded-lg border border-outline-variant object-cover"
                     alt={u.name}
                     src={u.logoImage}
-                    width={120}
-                    height={120}
+                    width={80}
+                    height={80}
+                    quality={60}
+                    loading="lazy"
                   />
                   <select
                     value={u.slug}
@@ -117,6 +132,24 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
               </tr>
             );
           })}
+          <tr className="border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+            <td className="p-md font-label-md text-on-surface-variant">
+              <div className="flex items-center gap-sm">
+                <span className="material-symbols-outlined text-primary">target</span>
+                Your Chances
+              </div>
+            </td>
+            {universities.map((u, i) => {
+              const chance = estimateChance(u, profile);
+              return (
+                <td key={i} className="p-md">
+                  <span className={`inline-block rounded-full px-3 py-1 font-label-md text-caption ${CHANCE_COLORS[chance.tier] ?? ""}`}>
+                    {TIER_META[chance.tier].label} ~{chance.estimate}%
+                  </span>
+                </td>
+              );
+            })}
+          </tr>
         </tbody>
       </table>
     </div>

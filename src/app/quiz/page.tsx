@@ -44,6 +44,10 @@ const REGION_OPTIONS: QuizOption[] = [
   { value: "Canada", label: "Canada" },
   { value: "China", label: "China" },
   { value: "UAE", label: "United Arab Emirates" },
+  { value: "Australia", label: "Australia" },
+  { value: "Japan", label: "Japan" },
+  { value: "South Korea", label: "South Korea" },
+  { value: "India", label: "India" },
   { value: "No preference", label: "No preference", sub: "I'm open to anywhere" },
 ];
 

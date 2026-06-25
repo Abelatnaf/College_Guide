@@ -2,16 +2,18 @@
 
 export interface UniversityFilters {
   country: string; // "All" or a country name
+  region: string; // "All" or a Region value
   maxTuition: number; // 0 – 100000
   acceptance: string[]; // subset of ["elite", "competitive", "accessible"]
   scholarshipOnly: boolean;
   ranking: string; // "all" | "top50" | "top100" | "top500"
   search: string;
-  sort: string; // "ranking" | "tuition" | "alpha"
+  sort: string; // "ranking" | "tuition" | "alpha" | "acceptance"
 }
 
 export const DEFAULT_FILTERS: UniversityFilters = {
   country: "All",
+  region: "All",
   maxTuition: 100000,
   acceptance: [],
   scholarshipOnly: false,
@@ -19,6 +21,19 @@ export const DEFAULT_FILTERS: UniversityFilters = {
   search: "",
   sort: "ranking",
 };
+
+const REGION_OPTIONS = [
+  { value: "All", label: "All Regions" },
+  { value: "USA", label: "United States" },
+  { value: "Europe", label: "Europe" },
+  { value: "Canada", label: "Canada" },
+  { value: "China", label: "China" },
+  { value: "UAE", label: "UAE" },
+  { value: "Australia", label: "Australia" },
+  { value: "Japan", label: "Japan" },
+  { value: "South Korea", label: "South Korea" },
+  { value: "India", label: "India" },
+];
 
 const ACCEPTANCE_OPTIONS = [
   { value: "elite", label: "Elite (< 10%)" },
@@ -75,6 +90,29 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
             {countries.map((c) => (
               <option key={c} value={c}>
                 {c}
+              </option>
+            ))}
+          </select>
+          <span className="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
+            expand_more
+          </span>
+        </div>
+      </div>
+
+      {/* Region */}
+      <div className="mb-8">
+        <label className="mb-3 block font-label-md text-label-md text-on-surface-variant">
+          Region
+        </label>
+        <div className="relative">
+          <select
+            value={filters.region}
+            onChange={(e) => onChange({ region: e.target.value })}
+            className="w-full appearance-none rounded-lg border-none bg-surface-container-low px-4 py-3 text-body-md focus:ring-2 focus:ring-primary/20"
+          >
+            {REGION_OPTIONS.map((r) => (
+              <option key={r.value} value={r.value}>
+                {r.label}
               </option>
             ))}
           </select>

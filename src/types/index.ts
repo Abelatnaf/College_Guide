@@ -1,5 +1,5 @@
 /** Geographic region buckets used by filters and the match quiz. */
-export type Region = "USA" | "Europe" | "Canada" | "China" | "UAE";
+export type Region = "USA" | "Europe" | "Canada" | "China" | "UAE" | "Australia" | "Japan" | "South Korea" | "India";
 
 export interface Scholarship {
   available: boolean;

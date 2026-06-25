@@ -107,6 +107,7 @@ export function UniversityDetail({
             fill
             sizes="100vw"
             priority
+            quality={60}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
@@ -123,8 +124,9 @@ export function UniversityDetail({
               className="h-20 w-20 rounded-lg object-cover md:h-28 md:w-28"
               alt={`${u.name} logo`}
               src={u.logoImage}
-              width={112}
-              height={112}
+              width={80}
+              height={80}
+              quality={60}
             />
           </div>
           <div className="flex-1 pb-1">

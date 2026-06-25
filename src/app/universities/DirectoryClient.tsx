@@ -17,6 +17,7 @@ const PER_PAGE = 8;
 const SORT_OPTIONS = [
   { value: "ranking", label: "Ranking (Best First)" },
   { value: "tuition", label: "Tuition (Low to High)" },
+  { value: "acceptance", label: "Acceptance Rate (High to Low)" },
   { value: "alpha", label: "Alphabetical" },
 ];
 
@@ -26,6 +27,7 @@ function parseFilters(sp: URLSearchParams): UniversityFilters {
   return {
     search: sp.get("search") ?? "",
     country: sp.get("country") ?? "All",
+    region: sp.get("region") ?? "All",
     sort: sp.get("sort") ?? "ranking",
     ranking: sp.get("ranking") ?? "all",
     scholarshipOnly: sp.get("scholarship") === "1",
@@ -64,6 +66,7 @@ export function DirectoryClient() {
     const p = new URLSearchParams();
     if (filters.search) p.set("search", filters.search);
     if (filters.country !== "All") p.set("country", filters.country);
+    if (filters.region !== "All") p.set("region", filters.region);
     if (filters.sort !== "ranking") p.set("sort", filters.sort);
     if (filters.ranking !== "all") p.set("ranking", filters.ranking);
     if (filters.scholarshipOnly) p.set("scholarship", "1");
@@ -86,6 +89,7 @@ export function DirectoryClient() {
   const filtered = useMemo(() => {
     const list = universities.filter((u) => {
       if (filters.country !== "All" && u.country !== filters.country) return false;
+      if (filters.region !== "All" && u.region !== filters.region) return false;
       if (u.annualTuition > filters.maxTuition) return false;
       if (filters.scholarshipOnly && !u.scholarships.available) return false;
       if (filters.ranking === "top50" && u.globalRanking > 50) return false;
@@ -106,6 +110,7 @@ export function DirectoryClient() {
 
     return list.sort((a, b) => {
       if (filters.sort === "tuition") return a.annualTuition - b.annualTuition;
+      if (filters.sort === "acceptance") return b.acceptanceRate - a.acceptanceRate;
       if (filters.sort === "alpha") return a.name.localeCompare(b.name);
       return a.globalRanking - b.globalRanking;
     });

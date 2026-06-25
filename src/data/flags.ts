@@ -26,6 +26,11 @@ const COUNTRY_FLAGS: Record<string, string> = {
   Norway: "🇳🇴",
   Portugal: "🇵🇹",
   "Czech Republic": "🇨🇿",
+  Australia: "🇦🇺",
+  Japan: "🇯🇵",
+  "South Korea": "🇰🇷",
+  India: "🇮🇳",
+  Singapore: "🇸🇬",
 };
 
 /** Country flag emoji for a university's country (falls back to a globe). */

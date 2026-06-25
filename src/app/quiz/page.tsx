@@ -10,8 +10,18 @@ import { majors } from "@/data/majors";
 import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
 import type { QuizMatch } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { ChanceBadge } from "@/components/ui/ChanceBadge";
 
 const OTHER_VALUE = "__other__";
+
+/** Representative numeric GPA for each quiz band, used to seed the profile. */
+const GPA_BAND_TO_GPA: Record<string, number> = {
+  "3.5+": 3.7,
+  "3.0-3.5": 3.25,
+  "2.5-3.0": 2.75,
+  "Below 2.5": 2.2,
+};
 
 // Flatten every sub-major across all 13 categories into one rich list (54 majors),
 // each tagged with its parent category for scoring, plus a trailing "Other".
@@ -181,6 +191,7 @@ function QuizPageInner() {
   const initialField =
     prefilledField && FIELD_TO_CATEGORY[prefilledField] ? prefilledField : "";
 
+  const { saveProfile } = useAcademicProfile();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({
     ...EMPTY_ANSWERS,
@@ -188,6 +199,22 @@ function QuizPageInner() {
   });
   const [status, setStatus] = useState<"quiz" | "loading" | "results">("quiz");
   const [matches, setMatches] = useState<QuizMatch[]>([]);
+  const [profileSaved, setProfileSaved] = useState(false);
+
+  const saveAnswersToProfile = () => {
+    const isOther = answers.field === OTHER_VALUE;
+    const intendedMajor = isOther
+      ? answers.fieldOtherText.trim() || null
+      : (FIELD_TO_CATEGORY[answers.field] ?? answers.field) || null;
+    saveProfile({
+      gpa: GPA_BAND_TO_GPA[answers.gpa] ?? null,
+      intendedMajor,
+      preferredRegions: answers.region.filter((r) => r !== "No preference"),
+      budgetBand: answers.budget || null,
+      campusSize: answers.campusSize || null,
+    });
+    setProfileSaved(true);
+  };
 
   const progress = Math.round(((step + 1) / STEP_LABELS.length) * 100);
   const isLast = step === STEP_LABELS.length - 1;
@@ -410,10 +437,11 @@ function QuizPageInner() {
                         {flagFor(m.university.country)} {m.university.city},{" "}
                         {m.university.country}
                       </p>
-                      <div className="mb-sm flex flex-wrap gap-x-md gap-y-1 font-caption text-caption text-on-surface-variant">
+                      <div className="mb-sm flex flex-wrap items-center gap-x-md gap-y-1 font-caption text-caption text-on-surface-variant">
                         <span>Rank #{m.university.globalRanking}</span>
                         <span>{formatCurrency(m.university.annualTuition, m.university.currency)}/yr</span>
                         <span>{m.university.acceptanceRate}% acceptance</span>
+                        <ChanceBadge slug={m.university.slug} showEstimate />
                       </div>
                       <div className="mb-md flex flex-wrap gap-1">
                         {m.reasons.map((r) => (
@@ -443,6 +471,16 @@ function QuizPageInner() {
                 className="rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
               >
                 Retake Quiz
+              </button>
+              <button
+                onClick={saveAnswersToProfile}
+                disabled={profileSaved}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary px-lg py-3 font-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-primary"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {profileSaved ? "check_circle" : "save"}
+                </span>
+                {profileSaved ? "Saved to profile" : "Save answers to my profile"}
               </button>
               <Link
                 href="/universities"

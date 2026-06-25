@@ -16,6 +16,10 @@ import {
   type PercentileContext,
 } from "@/lib/universityInsights";
 import { UniversityPrintDocument } from "./UniversityPrintDocument";
+import { ShortlistButton } from "@/components/ui/ShortlistButton";
+import { ChanceBadge } from "@/components/ui/ChanceBadge";
+import { CostRoiPanel } from "@/components/ui/CostRoiPanel";
+import { TrackApplicationButton } from "@/components/ui/TrackApplicationButton";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -23,6 +27,7 @@ const TABS = [
   { id: "overview", label: "Overview" },
   { id: "majors", label: "Majors Offered" },
   { id: "tuition", label: "Tuition & Fees" },
+  { id: "roi", label: "Cost & ROI" },
   { id: "scholarships", label: "Scholarships" },
   { id: "admissions", label: "Admissions" },
   { id: "campus", label: "Campus Life" },
@@ -126,13 +131,14 @@ export function UniversityDetail({
             <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-white md:font-headline-xl md:text-headline-xl">
               {u.name}
             </h1>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-primary px-3 py-1 font-label-md text-caption text-on-primary">
                 #{u.globalRanking} Worldwide
               </span>
               <span className="rounded-full bg-white/20 px-3 py-1 font-label-md text-caption text-white backdrop-blur-md">
                 {flagFor(u.country)} {u.city}, {u.country}
               </span>
+              <ChanceBadge slug={u.slug} showWithoutProfile showEstimate />
             </div>
           </div>
         </div>
@@ -261,8 +267,10 @@ export function UniversityDetail({
             <div className="rounded-xl border-2 border-primary bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
               <h3 className="mb-sm font-headline-md text-headline-md">Ready to start?</h3>
               <p className="mb-md text-body-md text-on-surface-variant">
-                Get personalized guidance and full details on requirements in your inbox.
+                Save this school, track your application, or request full requirements by email.
               </p>
+              <ShortlistButton slug={u.slug} variant="full" className="mb-3" />
+              <TrackApplicationButton slug={u.slug} className="mb-3" />
               <a
                 href={mailto}
                 className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 font-bold text-on-primary transition-all hover:bg-primary-container"
@@ -430,6 +438,8 @@ export function UniversityDetail({
           </div>
         </div>
       )}
+
+      {tab === "roi" && <CostRoiPanel university={u} />}
 
       {tab === "scholarships" && (
         <div>

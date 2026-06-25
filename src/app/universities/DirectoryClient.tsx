@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { universities, universityCountries } from "@/data/universities";
 import { UniversityCard } from "@/components/ui/UniversityCard";
+import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import {
   FilterSidebar,
   DEFAULT_FILTERS,
@@ -44,6 +46,7 @@ export function DirectoryClient() {
   const searchParams = useSearchParams();
   const countries = useMemo(() => universityCountries(), []);
   const topRef = useRef<HTMLDivElement>(null);
+  const { hasProfile, hydrated: profileHydrated } = useAcademicProfile();
 
   const [filters, setFilters] = useState<UniversityFilters>(() =>
     parseFilters(searchParams),
@@ -134,6 +137,18 @@ export function DirectoryClient() {
 
       {/* Results */}
       <section className="flex-1" ref={topRef}>
+        {profileHydrated && !hasProfile && (
+          <Link
+            href="/profile"
+            className="mb-md flex items-center justify-between gap-sm rounded-xl border border-primary/30 bg-secondary-container/40 p-md transition-colors hover:border-primary"
+          >
+            <span className="flex items-center gap-sm font-body-md text-body-md text-on-surface">
+              <span className="material-symbols-outlined text-primary">target</span>
+              Add your GPA &amp; test scores to see your admission chances on every school.
+            </span>
+            <span className="material-symbols-outlined text-primary">arrow_forward</span>
+          </Link>
+        )}
         <div className="mb-8 flex flex-col gap-sm sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="font-headline-lg text-headline-lg text-on-background">

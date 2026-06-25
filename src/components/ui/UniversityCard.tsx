@@ -1,11 +1,10 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { University } from "@/types";
 import { flagFor } from "@/data/flags";
 import { formatCurrency } from "@/lib/utils";
+import { ShortlistButton } from "@/components/ui/ShortlistButton";
+import { ChanceBadge } from "@/components/ui/ChanceBadge";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -36,8 +35,6 @@ function Stat({
 }
 
 export function UniversityCard({ university }: { university: University }) {
-  const [bookmarked, setBookmarked] = useState(false);
-
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)]">
       <div className="relative h-40 bg-primary-container/10">
@@ -54,19 +51,12 @@ export function UniversityCard({ university }: { university: University }) {
             {university.country}
           </span>
         </div>
-        <button
-          onClick={() => setBookmarked((v) => !v)}
-          aria-label={bookmarked ? "Remove bookmark" : "Bookmark"}
-          aria-pressed={bookmarked}
-          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:text-primary"
-        >
-          <span
-            className="material-symbols-outlined"
-            style={bookmarked ? FILL_1 : undefined}
-          >
-            {bookmarked ? "bookmark" : "bookmark_border"}
-          </span>
-        </button>
+        <ShortlistButton
+          slug={university.slug}
+          variant="icon"
+          className="absolute right-4 top-4"
+        />
+        <ChanceBadge slug={university.slug} className="absolute bottom-3 left-4" />
       </div>
 
       <div className="flex-1 p-md">

@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { NavActions } from "@/components/layout/NavActions";
 
 const NAV_LINKS = [
   { label: "Majors", href: "/majors" },
   { label: "Universities", href: "/universities" },
   { label: "Compare", href: "/compare" },
+  { label: "Calculator", href: "/calculator" },
 ];
 
 export function Navbar() {
@@ -111,6 +113,8 @@ export function Navbar() {
             />
           </form>
 
+          <NavActions />
+
           <button
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
@@ -152,6 +156,7 @@ export function Navbar() {
               </Link>
             ))}
           </nav>
+          <NavActions mobile />
         </div>
       )}
     </header>

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Providers } from "@/components/providers/Providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,11 +38,13 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-screen flex-col bg-surface font-sans text-on-surface antialiased">
-        <Suspense fallback={<div className="h-20 border-b border-outline-variant bg-surface" />}>
-          <Navbar />
-        </Suspense>
-        <div className="flex-grow">{children}</div>
-        <Footer />
+        <Providers>
+          <Suspense fallback={<div className="h-20 border-b border-outline-variant bg-surface" />}>
+            <Navbar />
+          </Suspense>
+          <div className="flex-grow">{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

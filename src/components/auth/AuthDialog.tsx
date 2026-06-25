@@ -14,18 +14,33 @@ function GoogleLogo({ className }: { className?: string }) {
   );
 }
 
+type Mode = "signin" | "signup";
+type Status = "idle" | "sending" | "sent" | "error" | "google-loading";
+
 export function AuthDialog() {
-  const { enabled, authOpen, closeAuth, signInWithEmail, signInWithGoogle } = useAuth();
+  const {
+    enabled, authOpen, closeAuth,
+    signInWithEmail, signInWithPassword, signUpWithPassword, signInWithGoogle,
+  } = useAuth();
+  const [mode, setMode] = useState<Mode>("signin");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error" | "google-loading">("idle");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [useMagicLink, setUseMagicLink] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!authOpen) {
       setStatus("idle");
       setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setName("");
       setMessage("");
+      setUseMagicLink(false);
     }
   }, [authOpen]);
 
@@ -46,11 +61,58 @@ export function AuthDialog() {
 
   if (!enabled || !authOpen) return null;
 
-  const submitEmail = async (e: React.FormEvent) => {
+  const switchMode = (m: Mode) => {
+    setMode(m);
+    setStatus("idle");
+    setMessage("");
+    setPassword("");
+    setConfirmPassword("");
+    setName("");
+    setUseMagicLink(false);
+  };
+
+  const submitMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
     setStatus("sending");
     const { error } = await signInWithEmail(email.trim());
+    if (error) {
+      setStatus("error");
+      setMessage(error);
+    } else {
+      setStatus("sent");
+      setMessage(email.trim());
+    }
+  };
+
+  const submitSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password) return;
+    setStatus("sending");
+    const { error } = await signInWithPassword(email.trim(), password);
+    if (error) {
+      setStatus("error");
+      setMessage(error);
+    } else {
+      setStatus("idle");
+    }
+  };
+
+  const submitSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password || !name.trim()) return;
+    if (password !== confirmPassword) {
+      setStatus("error");
+      setMessage("Passwords don't match.");
+      return;
+    }
+    if (password.length < 6) {
+      setStatus("error");
+      setMessage("Password must be at least 6 characters.");
+      return;
+    }
+    setStatus("sending");
+    const { error } = await signUpWithPassword(email.trim(), password, name.trim());
     if (error) {
       setStatus("error");
       setMessage(error);
@@ -68,6 +130,36 @@ export function AuthDialog() {
       setMessage(error);
     }
   };
+
+  const sentView = (
+    <div className="text-center">
+      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+        <span className="material-symbols-outlined text-[32px] text-primary">mark_email_read</span>
+      </div>
+      <h3 className="mb-2 text-lg font-bold text-on-surface">Check your inbox</h3>
+      <p className="mb-1 text-sm text-on-surface-variant">
+        {mode === "signup" ? "We sent a confirmation link to" : "We sent a sign-in link to"}
+      </p>
+      <p className="mb-4 text-sm font-semibold text-on-surface">{message}</p>
+      <p className="text-xs text-on-surface-variant">
+        {mode === "signup"
+          ? "Click the link to confirm your account. It expires in 1 hour."
+          : "Click the link in the email to sign in. It expires in 1 hour."}
+      </p>
+      <button
+        onClick={() => { setStatus("idle"); setUseMagicLink(false); }}
+        className="mt-5 text-sm font-medium text-primary hover:underline"
+      >
+        Use a different method
+      </button>
+    </div>
+  );
+
+  const inputClass =
+    "w-full rounded-xl border-2 border-outline-variant/60 bg-surface py-3 pl-12 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0";
+
+  const iconClass =
+    "material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant/50";
 
   return (
     <div
@@ -102,40 +194,46 @@ export function AuthDialog() {
             </div>
             <div>
               <h2 className="text-lg font-bold text-on-primary">Welcome to CollegeGuide</h2>
-              <p className="text-sm text-on-primary/70">Sign in to save your progress</p>
+              <p className="text-sm text-on-primary/70">
+                {mode === "signin" ? "Sign in to save your progress" : "Create your account"}
+              </p>
             </div>
           </div>
         </div>
 
+        {/* Tab toggle */}
+        <div className="flex border-b border-outline-variant/40">
+          <button
+            onClick={() => switchMode("signin")}
+            className={`flex-1 py-3 text-sm font-semibold transition-colors ${
+              mode === "signin"
+                ? "border-b-2 border-primary text-primary"
+                : "text-on-surface-variant hover:text-on-surface"
+            }`}
+          >
+            Sign In
+          </button>
+          <button
+            onClick={() => switchMode("signup")}
+            className={`flex-1 py-3 text-sm font-semibold transition-colors ${
+              mode === "signup"
+                ? "border-b-2 border-primary text-primary"
+                : "text-on-surface-variant hover:text-on-surface"
+            }`}
+          >
+            Create Account
+          </button>
+        </div>
+
         {/* Body */}
         <div className="px-8 pb-8 pt-6">
-          {status === "sent" ? (
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <span className="material-symbols-outlined text-[32px] text-primary">mark_email_read</span>
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-on-surface">Check your inbox</h3>
-              <p className="mb-1 text-sm text-on-surface-variant">
-                We sent a sign-in link to
-              </p>
-              <p className="mb-4 text-sm font-semibold text-on-surface">{message}</p>
-              <p className="text-xs text-on-surface-variant">
-                Click the link in the email to sign in. It expires in 1 hour.
-              </p>
-              <button
-                onClick={() => setStatus("idle")}
-                className="mt-5 text-sm font-medium text-primary hover:underline"
-              >
-                Use a different method
-              </button>
-            </div>
-          ) : (
+          {status === "sent" ? sentView : (
             <>
               {/* Google — primary action */}
               <button
                 onClick={handleGoogle}
                 disabled={status === "google-loading"}
-                className="group flex w-full items-center justify-center gap-3 rounded-xl border-2 border-outline-variant/60 bg-white px-4 py-3.5 font-medium text-on-surface shadow-sm transition-all hover:border-[#4285F4] hover:shadow-md disabled:opacity-60"
+                className="group flex w-full items-center justify-center gap-3 rounded-xl border-2 border-outline-variant/60 bg-white px-4 py-3 font-medium text-on-surface shadow-sm transition-all hover:border-[#4285F4] hover:shadow-md disabled:opacity-60"
               >
                 {status === "google-loading" ? (
                   <span className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
@@ -147,44 +245,166 @@ export function AuthDialog() {
 
               <div className="my-5 flex items-center gap-3">
                 <span className="h-px flex-1 bg-outline-variant/60" />
-                <span className="text-xs font-medium uppercase tracking-wider text-on-surface-variant/60">or use email</span>
+                <span className="text-xs font-medium uppercase tracking-wider text-on-surface-variant/60">or</span>
                 <span className="h-px flex-1 bg-outline-variant/60" />
               </div>
 
-              {/* Email magic link */}
-              <form onSubmit={submitEmail} className="space-y-3">
-                <div className="relative">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant/50">
-                    mail
-                  </span>
-                  <input
-                    ref={inputRef}
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@email.com"
-                    className="w-full rounded-xl border-2 border-outline-variant/60 bg-surface py-3.5 pl-12 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-60"
-                >
-                  {status === "sending" ? (
-                    <>
-                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent" />
-                      Sending link…
-                    </>
-                  ) : (
-                    <>
-                      <span className="material-symbols-outlined text-[18px]">send</span>
-                      Send me a sign-in link
-                    </>
-                  )}
-                </button>
-              </form>
+              {mode === "signin" && !useMagicLink ? (
+                <form onSubmit={submitSignIn} className="space-y-3">
+                  <div className="relative">
+                    <span className={iconClass}>mail</span>
+                    <input
+                      ref={inputRef}
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@email.com"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className={iconClass}>lock</span>
+                    <input
+                      type="password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Password"
+                      className={inputClass}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent" />
+                        Signing in…
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[18px]">login</span>
+                        Sign In
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUseMagicLink(true)}
+                    className="w-full text-center text-xs font-medium text-primary hover:underline"
+                  >
+                    Use a magic link instead
+                  </button>
+                </form>
+              ) : mode === "signin" && useMagicLink ? (
+                <form onSubmit={submitMagicLink} className="space-y-3">
+                  <div className="relative">
+                    <span className={iconClass}>mail</span>
+                    <input
+                      ref={inputRef}
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@email.com"
+                      className={inputClass}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent" />
+                        Sending link…
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[18px]">send</span>
+                        Send me a sign-in link
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUseMagicLink(false)}
+                    className="w-full text-center text-xs font-medium text-primary hover:underline"
+                  >
+                    Use password instead
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={submitSignUp} className="space-y-3">
+                  <div className="relative">
+                    <span className={iconClass}>person</span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Full name"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className={iconClass}>mail</span>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@email.com"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className={iconClass}>lock</span>
+                    <input
+                      type="password"
+                      required
+                      minLength={6}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Password (min 6 characters)"
+                      className={inputClass}
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className={iconClass}>lock</span>
+                    <input
+                      type="password"
+                      required
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Confirm password"
+                      className={inputClass}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent" />
+                        Creating account…
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[18px]">person_add</span>
+                        Create Account
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
 
               {status === "error" && (
                 <div className="mt-3 flex items-start gap-2 rounded-lg bg-error/10 px-3 py-2.5">
@@ -193,7 +413,6 @@ export function AuthDialog() {
                 </div>
               )}
 
-              {/* Fine print */}
               <p className="mt-5 text-center text-[11px] leading-relaxed text-on-surface-variant/50">
                 Signing in is optional. Your shortlist, profile, and applications
                 always work locally on this device — an account just syncs them across devices.

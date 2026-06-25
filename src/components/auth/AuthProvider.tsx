@@ -21,6 +21,8 @@ interface AuthContextValue {
   openAuth: () => void;
   closeAuth: () => void;
   signInWithEmail: (email: string) => Promise<{ error?: string }>;
+  signInWithPassword: (email: string, password: string) => Promise<{ error?: string }>;
+  signUpWithPassword: (email: string, password: string, name: string) => Promise<{ error?: string }>;
   signInWithGoogle: () => Promise<{ error?: string }>;
   signOut: () => Promise<void>;
 }
@@ -79,6 +81,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return error ? { error: error.message } : {};
   }, []);
 
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    const supabase = getSupabase();
+    if (!supabase) return { error: "Accounts are not enabled." };
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    return error ? { error: error.message } : {};
+  }, []);
+
+  const signUpWithPassword = useCallback(async (email: string, password: string, name: string) => {
+    const supabase = getSupabase();
+    if (!supabase) return { error: "Accounts are not enabled." };
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: redirectTo(),
+        data: { full_name: name },
+      },
+    });
+    return error ? { error: error.message } : {};
+  }, []);
+
   const signInWithGoogle = useCallback(async () => {
     const supabase = getSupabase();
     if (!supabase) return { error: "Accounts are not enabled." };
@@ -107,10 +130,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openAuth,
       closeAuth,
       signInWithEmail,
+      signInWithPassword,
+      signUpWithPassword,
       signInWithGoogle,
       signOut,
     }),
-    [user, session, loading, authOpen, openAuth, closeAuth, signInWithEmail, signInWithGoogle, signOut],
+    [user, session, loading, authOpen, openAuth, closeAuth, signInWithEmail, signInWithPassword, signUpWithPassword, signInWithGoogle, signOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import type { Major } from "@/types";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
@@ -11,6 +13,8 @@ interface MajorCardProps {
 }
 
 export function MajorCard({ major, expanded, onToggle }: MajorCardProps) {
+  const [openSub, setOpenSub] = useState<string | null>(null);
+
   if (!expanded) {
     return (
       <button
@@ -63,24 +67,63 @@ export function MajorCard({ major, expanded, onToggle }: MajorCardProps) {
             Sub-Majors
           </h3>
           <div className="flex flex-col gap-sm">
-            {major.subMajors.map((sm) => (
-              <div
-                key={sm.name}
-                className="group flex cursor-pointer items-center justify-between rounded-lg bg-surface-container-low p-sm transition-colors hover:bg-secondary-container"
-              >
-                <div>
-                  <span className="font-body-md text-body-md font-semibold text-on-surface">
-                    {sm.name}
-                  </span>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    {sm.avgStartingSalary} avg · {sm.jobGrowth} job growth
-                  </p>
+            {major.subMajors.map((sm) => {
+              const open = openSub === sm.name;
+              return (
+                <div
+                  key={sm.name}
+                  className="overflow-hidden rounded-lg bg-surface-container-low"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenSub(open ? null : sm.name)}
+                    aria-expanded={open}
+                    className="group flex w-full items-center justify-between p-sm text-left transition-colors hover:bg-secondary-container"
+                  >
+                    <div>
+                      <span className="font-body-md text-body-md font-semibold text-on-surface">
+                        {sm.name}
+                      </span>
+                      <p className="font-caption text-caption text-on-surface-variant">
+                        {sm.avgStartingSalary} avg · {sm.jobGrowth} job growth
+                      </p>
+                    </div>
+                    <span
+                      className={`material-symbols-outlined text-on-surface-variant transition-transform ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    >
+                      expand_more
+                    </span>
+                  </button>
+
+                  {open && (
+                    <div className="border-t border-outline-variant/40 px-sm pb-sm pt-sm">
+                      <p className="font-body-md text-body-md text-on-surface-variant">
+                        {sm.description}
+                      </p>
+                      <div className="mt-sm flex flex-wrap gap-xs">
+                        <span className="inline-flex items-center gap-xs rounded-full bg-primary-container/15 px-sm py-0.5 font-caption text-caption text-primary">
+                          <span className="material-symbols-outlined text-sm">payments</span>
+                          {sm.avgStartingSalary} avg starting
+                        </span>
+                        <span className="inline-flex items-center gap-xs rounded-full bg-primary-container/15 px-sm py-0.5 font-caption text-caption text-primary">
+                          <span className="material-symbols-outlined text-sm">trending_up</span>
+                          {sm.jobGrowth} job growth
+                        </span>
+                      </div>
+                      <Link
+                        href={`/quiz?field=${encodeURIComponent(sm.name)}`}
+                        className="mt-sm inline-flex items-center gap-xs font-label-md text-label-md text-primary transition-colors hover:underline"
+                      >
+                        Match me with universities for this
+                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
-                <span className="material-symbols-outlined text-on-surface-variant transition-transform group-hover:translate-x-1">
-                  chevron_right
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

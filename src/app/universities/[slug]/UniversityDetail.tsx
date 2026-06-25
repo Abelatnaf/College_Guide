@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { University } from "@/types";
-import { flagFor } from "@/data/universities";
+import type { Major, University } from "@/types";
+import { flagFor } from "@/data/flags";
 import { majors } from "@/data/majors";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import {
@@ -12,9 +12,8 @@ import {
   getApplicationTimeline,
   getCostBreakdown,
   getFAQs,
-  getPercentileContext,
-  getSimilarUniversities,
   getWhyChooseBullets,
+  type PercentileContext,
 } from "@/lib/universityInsights";
 import { UniversityPrintDocument } from "./UniversityPrintDocument";
 
@@ -58,7 +57,17 @@ function Bar({ label, percent }: { label: string; percent: number }) {
   );
 }
 
-export function UniversityDetail({ university: u }: { university: University }) {
+export function UniversityDetail({
+  university: u,
+  similar,
+  percentile,
+  majorDetails,
+}: {
+  university: University;
+  similar: University[];
+  percentile: PercentileContext;
+  majorDetails: Major[];
+}) {
   const [tab, setTab] = useState<TabId>("overview");
 
   const domain = (() => {
@@ -75,8 +84,6 @@ export function UniversityDetail({ university: u }: { university: University }) 
   )}`;
 
   const whyChoose = getWhyChooseBullets(u);
-  const percentile = getPercentileContext(u);
-  const similar = getSimilarUniversities(u);
   const faqs = getFAQs(u);
   const admissions = getAdmissionsTier(u);
   const cost = getCostBreakdown(u);
@@ -614,7 +621,12 @@ export function UniversityDetail({ university: u }: { university: University }) 
         </div>
       )}
     </main>
-    <UniversityPrintDocument university={u} />
+    <UniversityPrintDocument
+      university={u}
+      similar={similar}
+      percentile={percentile}
+      majorDetails={majorDetails}
+    />
     </>
   );
 }

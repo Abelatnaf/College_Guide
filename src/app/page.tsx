@@ -60,9 +60,12 @@ export default function HomePage() {
                   Get Started
                   <span className="material-symbols-outlined">arrow_forward</span>
                 </Link>
-                <button className="flex h-14 w-full items-center justify-center rounded-lg bg-surface-container-low px-lg font-label-md text-body-md text-primary transition-all hover:bg-surface-container sm:w-auto">
+                <a
+                  href="#how-it-works"
+                  className="flex h-14 w-full items-center justify-center rounded-lg bg-surface-container-low px-lg font-label-md text-body-md text-primary transition-all hover:bg-surface-container sm:w-auto"
+                >
                   Watch How it Works
-                </button>
+                </a>
               </div>
               <div className="flex items-center justify-center gap-md pt-sm lg:justify-start">
                 <div className="flex -space-x-2">
@@ -236,8 +239,11 @@ export default function HomePage() {
               </div>
             </Link>
 
-            <div className="flex flex-col justify-between rounded-[24px] bg-secondary-container p-lg">
-              <span className="material-symbols-outlined text-[40px] text-primary">
+            <Link
+              href="#how-it-works"
+              className="group flex flex-col justify-between rounded-[24px] bg-secondary-container p-lg transition-all hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-[40px] text-primary transition-transform group-hover:scale-110">
                 history_edu
               </span>
               <div>
@@ -246,10 +252,13 @@ export default function HomePage() {
                   Stay on top of every deadline.
                 </p>
               </div>
-            </div>
+            </Link>
 
-            <div className="flex flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg">
-              <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant">
+            <Link
+              href="/contact"
+              className="group flex flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg transition-all hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant transition-transform group-hover:scale-110">
                 forum
               </span>
               <div>
@@ -258,13 +267,16 @@ export default function HomePage() {
                   1-on-1 counselor chat.
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Checklist Section */}
-      <section className="border-y border-outline-variant/20 bg-surface-bright py-xl">
+      <section
+        id="how-it-works"
+        className="border-y border-outline-variant/20 bg-surface-bright py-xl scroll-mt-20"
+      >
         <div className="mx-auto max-w-container-max px-md md:px-lg">
           <div className="grid grid-cols-1 items-center gap-xl rounded-[24px] border border-outline-variant/30 bg-white p-lg shadow-lg md:p-xl lg:grid-cols-2">
             <div>

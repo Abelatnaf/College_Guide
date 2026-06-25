@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 const EXPLORE_LINKS = [
@@ -8,13 +11,36 @@ const EXPLORE_LINKS = [
 ];
 
 const COMPANY_LINKS = [
-  { label: "About Us", href: "#" },
-  { label: "Contact", href: "#" },
-  { label: "Terms of Service", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 export function Footer() {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title: "UniPath", url });
+        return;
+      } catch {
+        // user cancelled the native share sheet, fall through to clipboard
+      }
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        // clipboard blocked (no focus / permission / insecure context) — fail quietly
+      }
+    }
+  };
+
   return (
     <footer className="no-print w-full border-t border-outline-variant bg-surface-container-low py-xl">
       <div className="mx-auto grid max-w-container-max grid-cols-1 gap-md px-md md:grid-cols-2 md:px-lg">
@@ -35,28 +61,32 @@ export function Footer() {
             Helping students find their perfect academic home through data-driven
             insights and mentorship.
           </p>
-          <div className="flex gap-4">
-            <a
-              href="#"
-              aria-label="Website"
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              aria-label="Homepage"
               className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container text-primary transition-all hover:bg-primary hover:text-on-primary"
             >
               <span className="material-symbols-outlined text-lg">language</span>
-            </a>
-            <a
-              href="#"
-              aria-label="Share"
+            </Link>
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Share this page"
               className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container text-primary transition-all hover:bg-primary hover:text-on-primary"
             >
               <span className="material-symbols-outlined text-lg">share</span>
-            </a>
-            <a
-              href="#"
-              aria-label="Email"
+            </button>
+            <Link
+              href="/contact"
+              aria-label="Email us"
               className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container text-primary transition-all hover:bg-primary hover:text-on-primary"
             >
               <span className="material-symbols-outlined text-lg">alternate_email</span>
-            </a>
+            </Link>
+            {copied && (
+              <span className="font-caption text-caption text-primary">Link copied!</span>
+            )}
           </div>
         </div>
 
@@ -86,12 +116,12 @@ export function Footer() {
             <ul className="space-y-2">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="font-caption text-caption text-on-surface-variant transition-colors hover:text-primary"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

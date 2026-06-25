@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { universities, getUniversityBySlug } from "@/data/universities";
+import {
+  getMajorDetails,
+  getPercentileContext,
+  getSimilarUniversities,
+} from "@/lib/universityComparisons";
 import { UniversityDetail } from "./UniversityDetail";
 
 export function generateStaticParams() {
@@ -27,5 +32,14 @@ export default function UniversityDetailPage({
 }) {
   const university = getUniversityBySlug(params.slug);
   if (!university) notFound();
-  return <UniversityDetail university={university} />;
+  // Computed at build time on the server so the client profile bundle never
+  // imports the full universities/majors data arrays.
+  return (
+    <UniversityDetail
+      university={university}
+      similar={getSimilarUniversities(university)}
+      percentile={getPercentileContext(university)}
+      majorDetails={getMajorDetails(university)}
+    />
+  );
 }

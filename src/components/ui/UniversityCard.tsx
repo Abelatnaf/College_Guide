@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { University } from "@/types";
-import { flagFor } from "@/data/universities";
+import { flagFor } from "@/data/flags";
 import { formatCurrency } from "@/lib/utils";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;

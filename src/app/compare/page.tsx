@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { universities, getUniversityBySlug, flagFor } from "@/data/universities";
+import { universities, getUniversityBySlug } from "@/data/universities";
+import { flagFor } from "@/data/flags";
 import { CompareTable, computeWins } from "@/components/ui/CompareTable";
 
 const DEFAULT_SLUGS = ["harvard", "cambridge", "university-of-toronto"];

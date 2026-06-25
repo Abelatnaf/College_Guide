@@ -1,15 +1,14 @@
-import type { Major, University } from "@/types";
-import { universities } from "@/data/universities";
-import { majors } from "@/data/majors";
+import type { University } from "@/types";
 
 /**
- * Derived-content helpers for university profiles.
+ * Per-university derived-content helpers for university profiles.
  *
- * Everything here is computed from the existing `University` fields (ranking,
- * acceptance rate, tuition, tags, etc.) rather than hand-authored per school,
- * so every one of the 100+ entries in the directory gets genuinely tailored
- * detail — admissions guidance, cost breakdowns, similar schools, FAQs — for
- * free, and new universities automatically get the same depth.
+ * Everything here is computed PURELY from the single `University` passed in
+ * (ranking, acceptance rate, tuition, tags, etc.) — no imports of the full
+ * `universities`/`majors` data arrays — so this module is safe to import from
+ * client components without bloating their bundle. Cross-directory helpers that
+ * need the whole dataset (similar schools, percentile ranking, major details)
+ * live in `universityComparisons.ts` and are computed server-side instead.
  */
 
 export type SelectivityTone = "elite" | "selective" | "moderate" | "accessible";
@@ -217,26 +216,6 @@ export interface PercentileContext {
   totalCompared: number;
 }
 
-/** Where this school sits relative to every other school in the directory. */
-export function getPercentileContext(
-  u: University,
-  all: University[] = universities,
-): PercentileContext {
-  const total = all.length;
-  const denom = Math.max(1, total - 1);
-  const moreSelectiveThan = all.filter((x) => x.acceptanceRate > u.acceptanceRate).length;
-  const cheaperThan = all.filter((x) => x.annualTuition > u.annualTuition).length;
-  const rankedBetterThan = all.filter((x) => x.globalRanking > u.globalRanking).length;
-  const pct = (n: number) => Math.round((n / denom) * 100);
-
-  return {
-    selectivityPercentile: pct(moreSelectiveThan),
-    affordabilityPercentile: pct(cheaperThan),
-    rankPercentile: pct(rankedBetterThan),
-    totalCompared: total,
-  };
-}
-
 export interface TimelineStage {
   stage: string;
   action: string;
@@ -266,25 +245,6 @@ export function getApplicationTimeline(u: University): TimelineStage[] {
       action: "Track your applicant portal and respond promptly to any requests for more information.",
     },
   ];
-}
-
-/** The most comparable schools in the directory — same region first, then closest in rank/tuition. */
-export function getSimilarUniversities(
-  u: University,
-  all: University[] = universities,
-  count = 3,
-): University[] {
-  return all
-    .filter((x) => x.slug !== u.slug)
-    .map((x) => {
-      const regionPenalty = x.region === u.region ? 0 : 1000;
-      const rankDiff = Math.abs(x.globalRanking - u.globalRanking);
-      const tuitionDiff = Math.abs(x.annualTuition - u.annualTuition) / 1000;
-      return { x, score: regionPenalty + rankDiff + tuitionDiff * 0.1 };
-    })
-    .sort((a, b) => a.score - b.score)
-    .slice(0, count)
-    .map((s) => s.x);
 }
 
 export interface FAQItem {
@@ -323,11 +283,4 @@ export function getFAQs(u: University): FAQItem[] {
       a: `The average class size is ${u.avgClassSize} students, with a student-to-faculty ratio of ${u.facultyRatio}, across a ${campusSizeLabel(u.studentPopulation).toLowerCase()} campus of about ${u.studentPopulation.toLocaleString()} students.`,
     },
   ];
-}
-
-/** Cross-references this school's `majorsOffered` names to the full Major records. */
-export function getMajorDetails(u: University): Major[] {
-  return u.majorsOffered
-    .map((name) => majors.find((m) => m.name === name))
-    .filter((m): m is Major => Boolean(m));
 }

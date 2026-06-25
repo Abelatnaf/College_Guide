@@ -1,15 +1,13 @@
-import type { University } from "@/types";
-import { flagFor } from "@/data/universities";
+import type { Major, University } from "@/types";
+import { flagFor } from "@/data/flags";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import {
   getAdmissionsTier,
   getApplicationTimeline,
   getCostBreakdown,
   getFAQs,
-  getMajorDetails,
-  getPercentileContext,
-  getSimilarUniversities,
   getWhyChooseBullets,
+  type PercentileContext,
 } from "@/lib/universityInsights";
 
 function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
@@ -51,15 +49,22 @@ function Section({
  * stays in lockstep with the on-screen profile since both read from the same
  * `university` object and the same derived-insight helpers.
  */
-export function UniversityPrintDocument({ university: u }: { university: University }) {
+export function UniversityPrintDocument({
+  university: u,
+  similar,
+  percentile,
+  majorDetails,
+}: {
+  university: University;
+  similar: University[];
+  percentile: PercentileContext;
+  majorDetails: Major[];
+}) {
   const admissions = getAdmissionsTier(u);
   const cost = getCostBreakdown(u);
   const bullets = getWhyChooseBullets(u);
-  const percentile = getPercentileContext(u);
   const timeline = getApplicationTimeline(u);
-  const similar = getSimilarUniversities(u);
   const faqs = getFAQs(u);
-  const majorDetails = getMajorDetails(u);
   const generatedOn = new Date().toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",

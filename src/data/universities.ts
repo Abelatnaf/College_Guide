@@ -2542,32 +2542,222 @@ export const universities: University[] = [
     description: "A compact private college in Sharjah offering career-focused degrees in business, IT, and media at an accessible price.",
     campusLife: "A small, friendly campus in University City Sharjah.", established: 1990, website: "https://www.skylineuniversity.ac.ae", bannerImage: banner("Skyline"), logoImage: logo("SUC"),
   },
+
+  // ---------- USA (expansion 3) ----------
+  {
+    id: "u173", slug: "university-of-chicago", name: "University of Chicago", country: "United States", city: "Chicago, IL", region: "USA",
+    globalRanking: 11, annualTuition: 64000, currency: "USD", acceptanceRate: 5, studentPopulation: 18000, facultyRatio: "5:1", avgClassSize: 14, financialAid: 56,
+    scholarships: { available: true, types: ["UChicago Empower Initiative", "Need-based Grants"] }, applicationDeadline: "Jan 02",
+    majorsOffered: ["Economics", "Social Sciences", "Natural Sciences", "Business"].length ? ["Social Sciences", "Natural Sciences", "Business", "Law"] : [], tags: ["Private", "Research", "Rigorous"],
+    description: "Famed for its rigorous, discussion-driven core curriculum, UChicago is a powerhouse in economics, the social sciences, and the natural sciences.",
+    campusLife: "An intellectually intense Hyde Park campus known for its love of ideas and Scav Hunt tradition.", established: 1890, website: "https://www.uchicago.edu", bannerImage: banner("UChicago"), logoImage: logo("UChicago"),
+  },
+  {
+    id: "u174", slug: "case-western-reserve", name: "Case Western Reserve University", country: "United States", city: "Cleveland, OH", region: "USA",
+    globalRanking: 168, annualTuition: 58000, currency: "USD", acceptanceRate: 32, studentPopulation: 12000, facultyRatio: "10:1", avgClassSize: 22, financialAid: 48,
+    scholarships: { available: true, types: ["CWRU Merit Scholarship"] }, applicationDeadline: "Jan 15",
+    majorsOffered: ["Engineering", "Medicine", "Natural Sciences", "Business"], tags: ["Private", "Research", "STEM"],
+    description: "A research-intensive university known for biomedical engineering, medicine, and a flexible interdisciplinary curriculum.",
+    campusLife: "A compact campus anchoring Cleveland's University Circle arts and medical district.", established: 1826, website: "https://case.edu", bannerImage: banner("Case Western"), logoImage: logo("CWRU"),
+  },
+  {
+    id: "u175", slug: "university-of-rochester", name: "University of Rochester", country: "United States", city: "Rochester, NY", region: "USA",
+    globalRanking: 190, annualTuition: 62000, currency: "USD", acceptanceRate: 38, studentPopulation: 12200, facultyRatio: "9:1", avgClassSize: 20, financialAid: 50,
+    scholarships: { available: true, types: ["Rochester Renaissance Scholarship"] }, applicationDeadline: "Jan 05",
+    majorsOffered: ["Medicine", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Research", "Music"],
+    description: "Home to the renowned Eastman School of Music alongside strong medicine, optics, and engineering programs.",
+    campusLife: "A self-contained River Campus along the Genesee River with a famously flexible curriculum.", established: 1850, website: "https://www.rochester.edu", bannerImage: banner("Rochester"), logoImage: logo("UR"),
+  },
+  {
+    id: "u176", slug: "brandeis-university", name: "Brandeis University", country: "United States", city: "Waltham, MA", region: "USA",
+    globalRanking: 230, annualTuition: 60000, currency: "USD", acceptanceRate: 40, studentPopulation: 5800, facultyRatio: "9:1", avgClassSize: 17, financialAid: 52,
+    scholarships: { available: true, types: ["Justice Brandeis Scholarship"] }, applicationDeadline: "Jan 15",
+    majorsOffered: ["Social Sciences", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Liberal Arts", "Small"],
+    description: "A small, research-active liberal arts university with a strong social-justice tradition and tight-knit community.",
+    campusLife: "A hilly New England campus 9 miles from Boston with a strong sense of community.", established: 1948, website: "https://www.brandeis.edu", bannerImage: banner("Brandeis"), logoImage: logo("Brandeis"),
+  },
+  {
+    id: "u177", slug: "university-of-miami", name: "University of Miami", country: "United States", city: "Coral Gables, FL", region: "USA",
+    globalRanking: 245, annualTuition: 58000, currency: "USD", acceptanceRate: 19, studentPopulation: 19000, facultyRatio: "11:1", avgClassSize: 24, financialAid: 44,
+    scholarships: { available: true, types: ["Singer Family Scholarship"] }, applicationDeadline: "Jan 15",
+    majorsOffered: ["Business", "Communications & Media", "Medicine", "Engineering"], tags: ["Private", "Research", "Coastal"],
+    description: "A research university known for marine science, business, and communications, with a sunny coastal campus.",
+    campusLife: "A palm-lined Coral Gables campus minutes from Miami's beaches and nightlife.", established: 1925, website: "https://welcome.miami.edu", bannerImage: banner("Miami"), logoImage: logo("UM"),
+  },
+
+  // ---------- Europe (expansion 3) ----------
+  {
+    id: "u178", slug: "fu-berlin", name: "Freie Universität Berlin", country: "Germany", city: "Berlin", region: "Europe",
+    globalRanking: 130, annualTuition: 300, currency: "USD", acceptanceRate: 25, studentPopulation: 33000, facultyRatio: "14:1", avgClassSize: 26, financialAid: 20,
+    scholarships: { available: true, types: ["Deutschlandstipendium"] }, applicationDeadline: "Jul 15",
+    majorsOffered: ["Social Sciences", "Natural Sciences", "Communications & Media", "Law"], tags: ["Public", "Research", "Tuition-free"],
+    description: "One of Berlin's leading public universities, strong in the social sciences, political science, and area studies.",
+    campusLife: "A green, leafy Dahlem campus with a politically engaged student body.", established: 1948, website: "https://www.fu-berlin.de", bannerImage: banner("FU Berlin"), logoImage: logo("FU Berlin"),
+  },
+  {
+    id: "u179", slug: "university-of-geneva", name: "University of Geneva", country: "Switzerland", city: "Geneva", region: "Europe",
+    globalRanking: 110, annualTuition: 1500, currency: "USD", acceptanceRate: 30, studentPopulation: 17000, facultyRatio: "12:1", avgClassSize: 24, financialAid: 22,
+    scholarships: { available: true, types: ["University of Geneva Excellence Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Social Sciences", "Natural Sciences", "Medicine", "Business"], tags: ["Public", "Research", "International"],
+    description: "A leading research university in international Geneva, with deep ties to the UN and global institutions nearby.",
+    campusLife: "A multilingual, internationally minded campus in the heart of diplomatic Geneva.", established: 1559, website: "https://www.unige.ch", bannerImage: banner("Geneva"), logoImage: logo("UNIGE"),
+  },
+  {
+    id: "u180", slug: "aarhus-university", name: "Aarhus University", country: "Denmark", city: "Aarhus", region: "Europe",
+    globalRanking: 145, annualTuition: 16000, currency: "USD", acceptanceRate: 35, studentPopulation: 38000, facultyRatio: "13:1", avgClassSize: 26, financialAid: 24,
+    scholarships: { available: true, types: ["Aarhus University Scholarship"] }, applicationDeadline: "Mar 15",
+    majorsOffered: ["Business", "Natural Sciences", "Social Sciences", "Engineering"], tags: ["Public", "Research", "Scandinavian"],
+    description: "Denmark's second-largest university, known for business, natural sciences, and a strong international student community.",
+    campusLife: "A park-like yellow-brick campus in Denmark's youthful 'City of Smiles.'", established: 1928, website: "https://www.au.dk", bannerImage: banner("Aarhus"), logoImage: logo("AU"),
+  },
+  {
+    id: "u181", slug: "university-of-porto", name: "University of Porto", country: "Portugal", city: "Porto", region: "Europe",
+    globalRanking: 280, annualTuition: 9000, currency: "USD", acceptanceRate: 35, studentPopulation: 30000, facultyRatio: "14:1", avgClassSize: 28, financialAid: 22,
+    scholarships: { available: true, types: ["U.Porto Merit Scholarship"] }, applicationDeadline: "Jun 30",
+    majorsOffered: ["Engineering", "Medicine", "Business", "Natural Sciences"], tags: ["Public", "Research", "Affordable"],
+    description: "Portugal's top-ranked university, with strong engineering, medicine, and economics faculties at an affordable cost.",
+    campusLife: "A historic riverside city campus in one of Europe's most affordable student destinations.", established: 1911, website: "https://www.up.pt", bannerImage: banner("Porto"), logoImage: logo("U.Porto"),
+  },
+  {
+    id: "u182", slug: "charles-university", name: "Charles University", country: "Czech Republic", city: "Prague", region: "Europe",
+    globalRanking: 250, annualTuition: 7000, currency: "USD", acceptanceRate: 40, studentPopulation: 48000, facultyRatio: "15:1", avgClassSize: 28, financialAid: 18,
+    scholarships: { available: true, types: ["Charles University Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Medicine", "Social Sciences", "Natural Sciences", "Law"], tags: ["Public", "Historic", "Affordable"],
+    description: "Central Europe's oldest university, with renowned medical and law faculties in the heart of Prague.",
+    campusLife: "A storied campus woven through Prague's historic city center.", established: 1348, website: "https://cuni.cz", bannerImage: banner("Charles University"), logoImage: logo("CUNI"),
+  },
+
+  // ---------- Canada (expansion 3) ----------
+  {
+    id: "u183", slug: "trent-university", name: "Trent University", country: "Canada", city: "Peterborough, ON", region: "Canada",
+    globalRanking: 1100, annualTuition: 28000, currency: "USD", acceptanceRate: 65, studentPopulation: 9000, facultyRatio: "16:1", avgClassSize: 24, financialAid: 36,
+    scholarships: { available: true, types: ["Trent Excellence Scholarship"] }, applicationDeadline: "Jun 01",
+    majorsOffered: ["Natural Sciences", "Social Sciences", "Education"], tags: ["Public", "Small", "Riverside"],
+    description: "A small, riverside Ontario university known for environmental science and a close-knit, college-style structure.",
+    campusLife: "A scenic campus along the Otonabee River with a strong canoeing and outdoors culture.", established: 1964, website: "https://www.trentu.ca", bannerImage: banner("Trent"), logoImage: logo("Trent"),
+  },
+  {
+    id: "u184", slug: "lakehead-university", name: "Lakehead University", country: "Canada", city: "Thunder Bay, ON", region: "Canada",
+    globalRanking: 1250, annualTuition: 26000, currency: "USD", acceptanceRate: 68, studentPopulation: 9700, facultyRatio: "17:1", avgClassSize: 25, financialAid: 34,
+    scholarships: { available: true, types: ["Lakehead Entrance Scholarship"] }, applicationDeadline: "Jun 01",
+    majorsOffered: ["Engineering", "Education", "Natural Sciences", "Business"], tags: ["Public", "Small", "Northern"],
+    description: "A northern Ontario university with growing engineering and natural resources programs and a low student-to-faculty ratio.",
+    campusLife: "A forested campus on the shore of Lake Superior with a close, outdoorsy community.", established: 1965, website: "https://www.lakeheadu.ca", bannerImage: banner("Lakehead"), logoImage: logo("Lakehead"),
+  },
+  {
+    id: "u185", slug: "upei", name: "University of Prince Edward Island", country: "Canada", city: "Charlottetown, PE", region: "Canada",
+    globalRanking: 1350, annualTuition: 24000, currency: "USD", acceptanceRate: 70, studentPopulation: 5000, facultyRatio: "18:1", avgClassSize: 24, financialAid: 32,
+    scholarships: { available: true, types: ["UPEI Entrance Scholarship"] }, applicationDeadline: "May 01",
+    majorsOffered: ["Business", "Natural Sciences", "Education", "Human & Social Services"], tags: ["Public", "Small", "Maritime"],
+    description: "A small Maritime university with Canada's only veterinary college and a friendly, walkable campus.",
+    campusLife: "A compact campus in Canada's smallest provincial capital, known for its tight community feel.", established: 1969, website: "https://www.upei.ca", bannerImage: banner("UPEI"), logoImage: logo("UPEI"),
+  },
+  {
+    id: "u186", slug: "mount-allison", name: "Mount Allison University", country: "Canada", city: "Sackville, NB", region: "Canada",
+    globalRanking: 1400, annualTuition: 25000, currency: "USD", acceptanceRate: 72, studentPopulation: 2300, facultyRatio: "14:1", avgClassSize: 18, financialAid: 38,
+    scholarships: { available: true, types: ["Mount Allison Entrance Award"] }, applicationDeadline: "May 01",
+    majorsOffered: ["Arts & Design", "Social Sciences", "Natural Sciences"], tags: ["Public", "Liberal Arts", "Small"],
+    description: "A small undergraduate-focused liberal arts university consistently ranked Canada's top primarily-undergraduate school.",
+    campusLife: "A picturesque New Brunswick campus famous for its fine arts program and tight residence community.", established: 1839, website: "https://www.mta.ca", bannerImage: banner("Mount Allison"), logoImage: logo("MTA"),
+  },
+  {
+    id: "u187", slug: "acadia-university", name: "Acadia University", country: "Canada", city: "Wolfville, NS", region: "Canada",
+    globalRanking: 1450, annualTuition: 24500, currency: "USD", acceptanceRate: 73, studentPopulation: 3700, facultyRatio: "15:1", avgClassSize: 19, financialAid: 36,
+    scholarships: { available: true, types: ["Acadia Entrance Scholarship"] }, applicationDeadline: "May 01",
+    majorsOffered: ["Business", "Education", "Natural Sciences", "Social Sciences"], tags: ["Public", "Small", "Scenic"],
+    description: "A small Nova Scotia university in the Annapolis Valley wine country, known for a personalized undergraduate experience.",
+    campusLife: "A historic campus surrounded by vineyards and the Bay of Fundy's tides.", established: 1838, website: "https://acadiau.ca", bannerImage: banner("Acadia"), logoImage: logo("Acadia"),
+  },
+
+  // ---------- China (expansion 3) ----------
+  {
+    id: "u188", slug: "china-agricultural-university", name: "China Agricultural University", country: "China", city: "Beijing", region: "China",
+    globalRanking: 450, annualTuition: 5500, currency: "USD", acceptanceRate: 20, studentPopulation: 20000, facultyRatio: "12:1", avgClassSize: 30, financialAid: 26,
+    scholarships: { available: true, types: ["CAU International Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Natural Sciences", "Engineering", "Business"], tags: ["Public", "Research", "Agriculture"],
+    description: "China's leading agricultural sciences university, with strong programs in biology, environmental science, and food technology.",
+    campusLife: "A spacious Beijing campus with extensive research farms and labs.", established: 1905, website: "https://www.cau.edu.cn", bannerImage: banner("CAU"), logoImage: logo("CAU"),
+  },
+  {
+    id: "u189", slug: "nwpu", name: "Northwestern Polytechnical University", country: "China", city: "Xi'an", region: "China",
+    globalRanking: 350, annualTuition: 6000, currency: "USD", acceptanceRate: 18, studentPopulation: 33000, facultyRatio: "13:1", avgClassSize: 30, financialAid: 24,
+    scholarships: { available: true, types: ["NWPU Presidential Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Public", "STEM", "Aerospace"],
+    description: "A top Chinese university for aerospace, materials science, and mechanical engineering, with deep defense-industry ties.",
+    campusLife: "A research-driven campus in historic Xi'an with strong industry partnerships.", established: 1938, website: "https://www.nwpu.edu.cn", bannerImage: banner("NWPU"), logoImage: logo("NWPU"),
+  },
+  {
+    id: "u190", slug: "beijing-institute-of-technology", name: "Beijing Institute of Technology", country: "China", city: "Beijing", region: "China",
+    globalRanking: 280, annualTuition: 6200, currency: "USD", acceptanceRate: 15, studentPopulation: 29000, facultyRatio: "12:1", avgClassSize: 28, financialAid: 28,
+    scholarships: { available: true, types: ["BIT Merit Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Public", "Research", "STEM"],
+    description: "One of China's oldest and most prestigious engineering universities, with strengths in defense technology and robotics.",
+    campusLife: "A central Beijing campus with strong ties to national research institutes.", established: 1940, website: "https://www.bit.edu.cn", bannerImage: banner("BIT"), logoImage: logo("BIT"),
+  },
+  {
+    id: "u191", slug: "soochow-university", name: "Soochow University", country: "China", city: "Suzhou", region: "China",
+    globalRanking: 500, annualTuition: 5000, currency: "USD", acceptanceRate: 25, studentPopulation: 36000, facultyRatio: "14:1", avgClassSize: 30, financialAid: 22,
+    scholarships: { available: true, types: ["Soochow University Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Law", "Business", "Natural Sciences", "Communications & Media"], tags: ["Public", "Comprehensive"],
+    description: "A comprehensive university in the canal city of Suzhou, with respected law, textile science, and business programs.",
+    campusLife: "Multiple campuses across the garden city of Suzhou, near Shanghai.", established: 1900, website: "https://www.suda.edu.cn", bannerImage: banner("Soochow"), logoImage: logo("Soochow"),
+  },
+  {
+    id: "u192", slug: "ocean-university-of-china", name: "Ocean University of China", country: "China", city: "Qingdao", region: "China",
+    globalRanking: 480, annualTuition: 5200, currency: "USD", acceptanceRate: 22, studentPopulation: 21000, facultyRatio: "13:1", avgClassSize: 28, financialAid: 24,
+    scholarships: { available: true, types: ["OUC International Scholarship"] }, applicationDeadline: "Apr 30",
+    majorsOffered: ["Natural Sciences", "Engineering", "Business"], tags: ["Public", "Marine Science", "Coastal"],
+    description: "China's leading institution for oceanography and marine science, on the coast of Qingdao.",
+    campusLife: "A seaside campus blending German colonial architecture with modern research facilities.", established: 1924, website: "https://www.ouc.edu.cn", bannerImage: banner("Ocean University"), logoImage: logo("OUC"),
+  },
+
+  // ---------- UAE (expansion 3) ----------
+  {
+    id: "u193", slug: "hbmsu", name: "Hamdan Bin Mohammed Smart University", country: "United Arab Emirates", city: "Dubai", region: "UAE",
+    globalRanking: 1600, annualTuition: 14000, currency: "USD", acceptanceRate: 78, studentPopulation: 4000, facultyRatio: "16:1", avgClassSize: 24, financialAid: 34,
+    scholarships: { available: true, types: ["HBMSU Smart Scholarship"] }, applicationDeadline: "Aug 15",
+    majorsOffered: ["Business", "Computer Science", "Education"], tags: ["Public", "Online-Hybrid", "Smart Learning"],
+    description: "The Middle East's first smart-learning university, blending online delivery with business and IT degrees.",
+    campusLife: "A flexible, tech-forward learning model based in Dubai Knowledge Park.", established: 2002, website: "https://www.hbmsu.ac.ae", bannerImage: banner("HBMSU"), logoImage: logo("HBMSU"),
+  },
+  {
+    id: "u194", slug: "manipal-dubai", name: "Manipal University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
+    globalRanking: 1450, annualTuition: 16000, currency: "USD", acceptanceRate: 72, studentPopulation: 3200, facultyRatio: "15:1", avgClassSize: 23, financialAid: 38,
+    scholarships: { available: true, types: ["Manipal Merit Scholarship"] }, applicationDeadline: "Aug 01",
+    majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Private", "Branch Campus", "Diverse"],
+    description: "The Dubai campus of India's Manipal Academy, offering engineering, business, and IT degrees to a diverse student body.",
+    campusLife: "A vibrant, multicultural campus in Dubai International Academic City.", established: 2000, website: "https://manipaldubai.com", bannerImage: banner("Manipal Dubai"), logoImage: logo("MUD"),
+  },
+  {
+    id: "u195", slug: "gulf-medical-university", name: "Gulf Medical University", country: "United Arab Emirates", city: "Ajman", region: "UAE",
+    globalRanking: 1700, annualTuition: 22000, currency: "USD", acceptanceRate: 60, studentPopulation: 2500, facultyRatio: "10:1", avgClassSize: 18, financialAid: 30,
+    scholarships: { available: true, types: ["GMU Merit Scholarship"] }, applicationDeadline: "Jul 15",
+    majorsOffered: ["Medicine"], tags: ["Private", "Medical", "Small"],
+    description: "A specialized medical and health-sciences university producing doctors, dentists, and pharmacists for the Gulf region.",
+    campusLife: "A focused medical-campus community in Ajman with hands-on clinical training.", established: 1998, website: "https://gmu.ac.ae", bannerImage: banner("Gulf Medical"), logoImage: logo("GMU"),
+  },
+  {
+    id: "u196", slug: "curtin-dubai", name: "Curtin University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
+    globalRanking: 1380, annualTuition: 18500, currency: "USD", acceptanceRate: 70, studentPopulation: 2000, facultyRatio: "14:1", avgClassSize: 22, financialAid: 36,
+    scholarships: { available: true, types: ["Curtin Dubai Scholarship"] }, applicationDeadline: "Aug 01",
+    majorsOffered: ["Business", "Engineering", "Computer Science"], tags: ["Private", "Branch Campus"],
+    description: "The Dubai campus of Australia's Curtin University, awarding Australian-accredited degrees in business and engineering.",
+    campusLife: "A modern campus in Dubai International Academic City with strong industry partnerships.", established: 2008, website: "https://www.curtindubai.ac.ae", bannerImage: banner("Curtin Dubai"), logoImage: logo("Curtin"),
+  },
+  {
+    id: "u197", slug: "al-khawarizmi-international-college", name: "Al Khawarizmi International College", country: "United Arab Emirates", city: "Abu Dhabi", region: "UAE",
+    globalRanking: 1800, annualTuition: 11000, currency: "USD", acceptanceRate: 80, studentPopulation: 1500, facultyRatio: "17:1", avgClassSize: 25, financialAid: 32,
+    scholarships: { available: true, types: ["AKIC Merit Award"] }, applicationDeadline: "Sep 01",
+    majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Private", "Affordable", "Small"],
+    description: "A compact Abu Dhabi college offering affordable applied-engineering and business degrees with small class sizes.",
+    campusLife: "A small, supportive campus in Abu Dhabi's academic district.", established: 1996, website: "https://www.akic.ac.ae", bannerImage: banner("AKIC"), logoImage: logo("AKIC"),
+  },
 ];
 
-const COUNTRY_FLAGS: Record<string, string> = {
-  "United States": "🇺🇸",
-  "United Kingdom": "🇬🇧",
-  Switzerland: "🇨🇭",
-  Germany: "🇩🇪",
-  Belgium: "🇧🇪",
-  France: "🇫🇷",
-  Netherlands: "🇳🇱",
-  Italy: "🇮🇹",
-  Ireland: "🇮🇪",
-  Sweden: "🇸🇪",
-  Spain: "🇪🇸",
-  Canada: "🇨🇦",
-  China: "🇨🇳",
-  "United Arab Emirates": "🇦🇪",
-  Denmark: "🇩🇰",
-  Austria: "🇦🇹",
-  Finland: "🇫🇮",
-  Poland: "🇵🇱",
-  Norway: "🇳🇴",
-};
-
-/** Country flag emoji for a university's country (falls back to a globe). */
-export const flagFor = (country: string): string => COUNTRY_FLAGS[country] ?? "🏳️";
+// `flagFor` lives in its own module (./flags) so client components that only
+// need the flag lookup don't transitively bundle this large data array.
+// Re-exported here for backwards compatibility with existing call sites.
+export { flagFor } from "./flags";
 
 export const getUniversityBySlug = (slug: string): University | undefined =>
   universities.find((u) => u.slug === slug);

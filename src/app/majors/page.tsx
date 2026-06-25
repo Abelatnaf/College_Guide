@@ -10,9 +10,21 @@ const FILTERS = ["Most Popular", "High Salary", "Fast Growth"] as const;
 type Filter = (typeof FILTERS)[number];
 
 const CHECKLIST = [
-  { title: "Assess your strengths", body: "Take our 10-minute aptitude test." },
-  { title: "Review market trends", body: "See which jobs will be in demand by 2030." },
-  { title: "Shadow a professional", body: "Connect with alumni for a day of work-shadowing." },
+  {
+    title: "Assess your strengths",
+    body: "Take our 10-minute aptitude test.",
+    href: "/quiz",
+  },
+  {
+    title: "Review market trends",
+    body: "See which jobs will be in demand by 2030.",
+    filter: "Fast Growth" as Filter,
+  },
+  {
+    title: "Shadow a professional",
+    body: "Connect with alumni for a day of work-shadowing.",
+    href: "/contact",
+  },
 ];
 
 export default function MajorsPage() {
@@ -35,6 +47,11 @@ export default function MajorsPage() {
       }
       return next;
     });
+  };
+
+  const jumpToFilter = (f: Filter) => {
+    toggleFilter(f);
+    document.getElementById("major-grid")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -70,7 +87,7 @@ export default function MajorsPage() {
       </section>
 
       {/* Major cards */}
-      <div className="grid grid-cols-1 gap-gutter md:grid-cols-3">
+      <div id="major-grid" className="grid grid-cols-1 gap-gutter md:grid-cols-3 scroll-mt-20">
         {filtered.map((m) => (
           <div key={m.id} className={expandedId === m.id ? "md:col-span-3" : ""}>
             <MajorCard
@@ -93,21 +110,44 @@ export default function MajorsPage() {
         <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-lg">
           <h2 className="mb-lg font-headline-md text-headline-md">Choosing Your Major</h2>
           <div className="space-y-md">
-            {CHECKLIST.map((item) => (
-              <div key={item.title} className="group flex cursor-pointer items-start gap-md">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary transition-colors group-hover:bg-primary">
-                  <span className="material-symbols-outlined text-sm text-primary group-hover:text-white">
-                    check
-                  </span>
-                </div>
-                <div>
-                  <h4 className="font-body-md text-body-md font-bold">{item.title}</h4>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    {item.body}
-                  </p>
-                </div>
-              </div>
-            ))}
+            {CHECKLIST.map((item) => {
+              const inner = (
+                <>
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary transition-colors group-hover:bg-primary">
+                    <span className="material-symbols-outlined text-sm text-primary group-hover:text-white">
+                      check
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-body-md text-body-md font-bold">{item.title}</h4>
+                    <p className="font-caption text-caption text-on-surface-variant">
+                      {item.body}
+                    </p>
+                  </div>
+                </>
+              );
+              if (item.href) {
+                return (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="group flex items-start gap-md text-left"
+                  >
+                    {inner}
+                  </Link>
+                );
+              }
+              return (
+                <button
+                  key={item.title}
+                  type="button"
+                  onClick={() => jumpToFilter(item.filter!)}
+                  className="group flex w-full items-start gap-md text-left"
+                >
+                  {inner}
+                </button>
+              );
+            })}
           </div>
         </div>
 

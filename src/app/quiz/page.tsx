@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { universities, flagFor } from "@/data/universities";
+import { useSearchParams } from "next/navigation";
+import { universities } from "@/data/universities";
+import { flagFor } from "@/data/flags";
 import { majors } from "@/data/majors";
 import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
 import type { QuizMatch } from "@/types";
@@ -173,9 +175,17 @@ function computeMatches(answers: Answers): QuizMatch[] {
 
 const STEP_LABELS = ["Region", "Budget", "Field of Study", "GPA", "Campus Size"];
 
-export default function QuizPage() {
+function QuizPageInner() {
+  const searchParams = useSearchParams();
+  const prefilledField = searchParams.get("field");
+  const initialField =
+    prefilledField && FIELD_TO_CATEGORY[prefilledField] ? prefilledField : "";
+
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
+  const [answers, setAnswers] = useState<Answers>({
+    ...EMPTY_ANSWERS,
+    field: initialField,
+  });
   const [status, setStatus] = useState<"quiz" | "loading" | "results">("quiz");
   const [matches, setMatches] = useState<QuizMatch[]>([]);
 
@@ -445,5 +455,19 @@ export default function QuizPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex flex-grow items-center justify-center py-xl">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-secondary-container border-t-primary" />
+        </main>
+      }
+    >
+      <QuizPageInner />
+    </Suspense>
   );
 }

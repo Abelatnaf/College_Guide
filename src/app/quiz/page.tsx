@@ -8,10 +8,15 @@ import { universities } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { majors } from "@/data/majors";
 import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
-import type { QuizMatch } from "@/types";
+import type { QuizAnswers, QuizMatch } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
+import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
+import { estimateChance } from "@/lib/chances";
+import { buildInsightsRequest, requestQuizInsights } from "@/lib/ai/quizInsights";
+import type { QuizInsightsResult } from "@/types/ai";
+import { readLocal, writeLocal } from "@/lib/storage/localStore";
 
 const OTHER_VALUE = "__other__";
 
@@ -71,6 +76,12 @@ const CAMPUS_OPTIONS: QuizOption[] = [
   { value: "Large", label: "Large", sub: "20,000+ students" },
 ];
 
+const TEST_SCORE_OPTIONS: QuizOption[] = [
+  { value: "SAT", label: "SAT", sub: "I have an SAT score" },
+  { value: "ACT", label: "ACT", sub: "I have an ACT score" },
+  { value: "None", label: "Skip this", sub: "I don't have a test score yet" },
+];
+
 const BUDGET_MAX: Record<string, number> = {
   "Under $15k": 15000,
   "$15k-$30k": 30000,
@@ -96,6 +107,9 @@ interface Answers {
   fieldOtherText: string;
   gpa: string;
   campusSize: string;
+  /** "SAT" | "ACT" | "None" | "" (unanswered). */
+  testScoreType: string;
+  testScoreValue: string;
 }
 
 const EMPTY_ANSWERS: Answers = {
@@ -105,7 +119,20 @@ const EMPTY_ANSWERS: Answers = {
   fieldOtherText: "",
   gpa: "",
   campusSize: "",
+  testScoreType: "",
+  testScoreValue: "",
 };
+
+const TEST_SCORE_RANGE: Record<"SAT" | "ACT", { min: number; max: number }> = {
+  SAT: { min: 400, max: 1600 },
+  ACT: { min: 1, max: 36 },
+};
+
+/** Normalize a SAT/ACT score (0–100ish) against the GPA-derived minimum acceptance bar. */
+function testScoreStrength(type: "SAT" | "ACT", value: number): number {
+  const { min, max } = TEST_SCORE_RANGE[type];
+  return Math.max(0, Math.min(1, (value - min) / (max - min)));
+}
 
 /** Loosely resolve a freeform "Other" field entry to a known major category, if any. */
 function fuzzyCategoryMatch(text: string): string | null {
@@ -127,7 +154,18 @@ function fuzzyCategoryMatch(text: string): string | null {
 function computeMatches(answers: Answers): QuizMatch[] {
   const budgetMax = BUDGET_MAX[answers.budget] ?? Number.POSITIVE_INFINITY;
   const gpaMinAccept = GPA_MIN_ACCEPT[answers.gpa] ?? 0;
-  const maxScore = 30 + 25 + 20 + 20 + 10;
+
+  const testType = answers.testScoreType === "SAT" || answers.testScoreType === "ACT"
+    ? answers.testScoreType
+    : null;
+  const testValue = Number(answers.testScoreValue);
+  const hasTestScore = Boolean(testType) && Number.isFinite(testValue) && testValue > 0;
+  // Minimum acceptance rate this test score can realistically target, mirroring GPA_MIN_ACCEPT.
+  const testMinAccept = hasTestScore && testType
+    ? Math.max(0, 90 - testScoreStrength(testType, testValue) * 90)
+    : 0;
+
+  const maxScore = 30 + 25 + 20 + 20 + 10 + (hasTestScore ? 15 : 0);
 
   const noPreference = answers.region.includes("No preference") || answers.region.length === 0;
   const isOther = answers.field === OTHER_VALUE;
@@ -171,6 +209,15 @@ function computeMatches(answers: Answers): QuizMatch[] {
       reasons.push(`${answers.campusSize} campus size`);
     }
 
+    if (hasTestScore) {
+      if (u.acceptanceRate >= testMinAccept) {
+        score += 15;
+        reasons.push(`Your ${testType} score aligns with this school's range`);
+      } else {
+        score += 5;
+      }
+    }
+
     // Light tiebreaker favoring stronger global rank.
     score += Math.max(0, 10 - u.globalRanking / 25);
 
@@ -187,7 +234,37 @@ function computeMatches(answers: Answers): QuizMatch[] {
     }));
 }
 
-const STEP_LABELS = ["Region", "Budget", "Field of Study", "GPA", "Campus Size"];
+/** Convert the page's internal answer shape to the public `QuizAnswers` type used by lib code. */
+function toQuizAnswers(answers: Answers): QuizAnswers {
+  const isOther = answers.field === OTHER_VALUE;
+  const testValue = Number(answers.testScoreValue);
+  const hasTestValue = Number.isFinite(testValue) && testValue > 0;
+  let testScore: QuizAnswers["testScore"];
+  if (answers.testScoreType === "SAT" || answers.testScoreType === "ACT") {
+    testScore = { type: answers.testScoreType, ...(hasTestValue ? { value: testValue } : {}) };
+  } else if (answers.testScoreType === "None") {
+    testScore = { type: "None" };
+  }
+
+  return {
+    region: answers.region as QuizAnswers["region"],
+    budget: answers.budget as QuizAnswers["budget"],
+    field: isOther ? answers.fieldOtherText.trim() : answers.field,
+    fieldIsOther: isOther,
+    gpa: answers.gpa as QuizAnswers["gpa"],
+    campusSize: answers.campusSize as QuizAnswers["campusSize"],
+    testScore,
+  };
+}
+
+const STEP_LABELS = [
+  "Region",
+  "Budget",
+  "Field of Study",
+  "GPA",
+  "Campus Size",
+  "Test Score",
+];
 
 function QuizPageInner() {
   const searchParams = useSearchParams();
@@ -195,7 +272,7 @@ function QuizPageInner() {
   const initialField =
     prefilledField && FIELD_TO_CATEGORY[prefilledField] ? prefilledField : "";
 
-  const { saveProfile } = useAcademicProfile();
+  const { profile, hasProfile, saveProfile } = useAcademicProfile();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({
     ...EMPTY_ANSWERS,
@@ -204,18 +281,46 @@ function QuizPageInner() {
   const [status, setStatus] = useState<"quiz" | "loading" | "results">("quiz");
   const [matches, setMatches] = useState<QuizMatch[]>([]);
   const [profileSaved, setProfileSaved] = useState(false);
+  const [insights, setInsights] = useState<QuizInsightsResult | null>(null);
+  const [insightsLoading, setInsightsLoading] = useState(false);
+
+  const fetchInsights = async (computed: QuizMatch[], rawAnswers: Answers) => {
+    const quizAnswers = toQuizAnswers(rawAnswers);
+    const chances = computed.map((m) =>
+      estimateChance(m.university, hasProfile ? profile : null),
+    );
+    const cacheKey = `quizInsights:${JSON.stringify(quizAnswers)}`;
+    const cached = readLocal<QuizInsightsResult | null>(cacheKey, null);
+    if (cached) {
+      setInsights(cached);
+      return;
+    }
+
+    setInsightsLoading(true);
+    const payload = buildInsightsRequest(quizAnswers, computed, chances);
+    const result = await requestQuizInsights(payload);
+    setInsightsLoading(false);
+    setInsights(result);
+    if (result.available) {
+      writeLocal(cacheKey, result);
+    }
+  };
 
   const saveAnswersToProfile = () => {
     const isOther = answers.field === OTHER_VALUE;
     const intendedMajor = isOther
       ? answers.fieldOtherText.trim() || null
       : (FIELD_TO_CATEGORY[answers.field] ?? answers.field) || null;
+    const testValue = Number(answers.testScoreValue);
+    const hasTestValue = Number.isFinite(testValue) && testValue > 0;
     saveProfile({
       gpa: GPA_BAND_TO_GPA[answers.gpa] ?? null,
       intendedMajor,
       preferredRegions: answers.region.filter((r) => r !== "No preference"),
       budgetBand: answers.budget || null,
       campusSize: answers.campusSize || null,
+      ...(answers.testScoreType === "SAT" && hasTestValue ? { sat: testValue } : {}),
+      ...(answers.testScoreType === "ACT" && hasTestValue ? { act: testValue } : {}),
     });
     setProfileSaved(true);
   };
@@ -231,7 +336,9 @@ function QuizPageInner() {
         ? answers.fieldOtherText.trim().length > 0
         : Boolean(answers.field);
     if (step === 3) return Boolean(answers.gpa);
-    return Boolean(answers.campusSize);
+    if (step === 4) return Boolean(answers.campusSize);
+    // Step 5 (test score) is optional/skippable — always considered answered.
+    return true;
   }, [step, answers]);
 
   const toggleRegion = (value: string) => {
@@ -256,12 +363,16 @@ function QuizPageInner() {
     }
     setStatus("loading");
     setTimeout(() => {
-      setMatches(computeMatches(answers));
+      const computed = computeMatches(answers);
+      setMatches(computed);
       setStatus("results");
+      void fetchInsights(computed, answers);
     }, 1400);
   };
 
   const reset = () => {
+    setInsights(null);
+    setInsightsLoading(false);
     setStep(0);
     setAnswers(EMPTY_ANSWERS);
     setMatches([]);
@@ -362,6 +473,42 @@ function QuizPageInner() {
                 onSelect={(value) => setAnswers((a) => ({ ...a, campusSize: value }))}
               />
             )}
+            {step === 5 && (
+              <div>
+                <QuizCard
+                  mode="single"
+                  question="Do you have a standardized test score?"
+                  helperText="Optional — sharpens your admission chance estimates. Skip if you don't have one yet."
+                  options={TEST_SCORE_OPTIONS}
+                  selected={answers.testScoreType || undefined}
+                  onSelect={(value) =>
+                    setAnswers((a) => ({ ...a, testScoreType: value, testScoreValue: "" }))
+                  }
+                />
+                {(answers.testScoreType === "SAT" || answers.testScoreType === "ACT") && (
+                  <div className="mt-md animate-fade-in">
+                    <label className="mb-xs block font-label-md text-label-md text-on-surface-variant">
+                      Your {answers.testScoreType} score
+                    </label>
+                    <input
+                      autoFocus
+                      type="number"
+                      inputMode="numeric"
+                      min={TEST_SCORE_RANGE[answers.testScoreType].min}
+                      max={TEST_SCORE_RANGE[answers.testScoreType].max}
+                      value={answers.testScoreValue}
+                      onChange={(e) =>
+                        setAnswers((a) => ({ ...a, testScoreValue: e.target.value }))
+                      }
+                      placeholder={
+                        answers.testScoreType === "SAT" ? "e.g. 1350" : "e.g. 29"
+                      }
+                      className="w-full rounded-xl border-2 border-outline-variant bg-surface p-md font-body-lg text-body-lg focus:border-primary focus:ring-0"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="mt-lg flex items-center justify-between">
               <button
@@ -457,9 +604,15 @@ function QuizPageInner() {
                           </span>
                         ))}
                       </div>
+                      <AIInsightPanel
+                        insight={insights?.insights?.find(
+                          (ins) => ins.universitySlug === m.university.slug,
+                        )}
+                        loading={insightsLoading}
+                      />
                       <Link
                         href={`/universities/${m.university.slug}`}
-                        className="inline-block rounded-lg border-2 border-primary px-md py-1.5 font-label-md text-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
+                        className="mt-md inline-block rounded-lg border-2 border-primary px-md py-1.5 font-label-md text-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
                       >
                         View Profile
                       </Link>

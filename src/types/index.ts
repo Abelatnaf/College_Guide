@@ -75,6 +75,8 @@ export interface QuizAnswers {
   fieldIsOther?: boolean;
   gpa: "3.5+" | "3.0-3.5" | "2.5-3.0" | "Below 2.5";
   campusSize: "Small" | "Medium" | "Large";
+  /** Optional standardized test score, collected to sharpen chance estimates. */
+  testScore?: { type: "SAT" | "ACT" | "None"; value?: number };
 }
 
 export interface QuizMatch {

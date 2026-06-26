@@ -25,26 +25,26 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
       <div className="flex flex-col gap-sm border-t border-outline-variant pt-md">
         <Link
           href="/shortlist"
-          className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary"
+          className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
         >
           <span className="flex items-center gap-sm">
             <span className="material-symbols-outlined">bookmark</span> Shortlist
           </span>
           {count > 0 && (
-            <span className="rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary">
+            <span className="animate-fade-in rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary shadow-sm">
               {count}
             </span>
           )}
         </Link>
         <Link
           href="/applications"
-          className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary"
+          className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
         >
           <span className="flex items-center gap-sm">
             <span className="material-symbols-outlined">assignment</span> Applications
           </span>
           {appCount > 0 && (
-            <span className="rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary">
+            <span className="animate-fade-in rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary shadow-sm">
               {appCount}
             </span>
           )}
@@ -53,14 +53,14 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
           (user ? (
             <button
               onClick={() => signOut()}
-              className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary"
+              className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
             >
               <span className="material-symbols-outlined">logout</span> Sign out
             </button>
           ) : (
             <button
               onClick={openAuth}
-              className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low hover:text-primary"
+              className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
             >
               <span className="material-symbols-outlined">login</span> Sign in to sync
             </button>
@@ -79,7 +79,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
             <button
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Account"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container font-label-md text-label-md text-primary"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/70 font-label-md text-label-md text-primary shadow-sm transition-all duration-200 hover:scale-110 hover:shadow-md active:scale-95"
             >
               {(user.email?.[0] ?? "U").toUpperCase()}
             </button>
@@ -111,7 +111,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
         ) : (
           <button
             onClick={openAuth}
-            className="ml-1 rounded-full border border-outline-variant px-4 py-1.5 font-label-md text-label-md text-primary transition-colors hover:border-primary"
+            className="ml-1 rounded-full border border-outline-variant px-4 py-1.5 font-label-md text-label-md text-primary transition-all duration-200 hover:border-primary hover:bg-primary/5 hover:shadow-sm active:scale-95"
           >
             Sign in
           </button>
@@ -137,12 +137,12 @@ function NavIcon({
       aria-label={label}
       title={label}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-primary",
+        "relative flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary hover:shadow-[0_0_0_4px_rgba(0,105,72,0.08)] active:scale-95",
       )}
     >
       <span className="material-symbols-outlined">{icon}</span>
       {badge > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-primary px-1 font-label-md text-[10px] text-on-primary">
+        <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] animate-fade-in items-center justify-center rounded-full bg-primary px-1 font-label-md text-[10px] text-on-primary shadow-sm">
           {badge}
         </span>
       )}

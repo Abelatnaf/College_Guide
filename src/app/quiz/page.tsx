@@ -8,10 +8,15 @@ import { universities } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { majors } from "@/data/majors";
 import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
-import type { QuizMatch } from "@/types";
+import type { QuizAnswers, QuizMatch } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
+import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
+import { estimateChance } from "@/lib/chances";
+import { buildInsightsRequest, requestQuizInsights } from "@/lib/ai/quizInsights";
+import type { QuizInsightsResult } from "@/types/ai";
+import { readLocal, writeLocal } from "@/lib/storage/localStore";
 
 const OTHER_VALUE = "__other__";
 
@@ -229,6 +234,29 @@ function computeMatches(answers: Answers): QuizMatch[] {
     }));
 }
 
+/** Convert the page's internal answer shape to the public `QuizAnswers` type used by lib code. */
+function toQuizAnswers(answers: Answers): QuizAnswers {
+  const isOther = answers.field === OTHER_VALUE;
+  const testValue = Number(answers.testScoreValue);
+  const hasTestValue = Number.isFinite(testValue) && testValue > 0;
+  let testScore: QuizAnswers["testScore"];
+  if (answers.testScoreType === "SAT" || answers.testScoreType === "ACT") {
+    testScore = { type: answers.testScoreType, ...(hasTestValue ? { value: testValue } : {}) };
+  } else if (answers.testScoreType === "None") {
+    testScore = { type: "None" };
+  }
+
+  return {
+    region: answers.region as QuizAnswers["region"],
+    budget: answers.budget as QuizAnswers["budget"],
+    field: isOther ? answers.fieldOtherText.trim() : answers.field,
+    fieldIsOther: isOther,
+    gpa: answers.gpa as QuizAnswers["gpa"],
+    campusSize: answers.campusSize as QuizAnswers["campusSize"],
+    testScore,
+  };
+}
+
 const STEP_LABELS = [
   "Region",
   "Budget",
@@ -244,7 +272,7 @@ function QuizPageInner() {
   const initialField =
     prefilledField && FIELD_TO_CATEGORY[prefilledField] ? prefilledField : "";
 
-  const { saveProfile } = useAcademicProfile();
+  const { profile, hasProfile, saveProfile } = useAcademicProfile();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({
     ...EMPTY_ANSWERS,
@@ -253,6 +281,30 @@ function QuizPageInner() {
   const [status, setStatus] = useState<"quiz" | "loading" | "results">("quiz");
   const [matches, setMatches] = useState<QuizMatch[]>([]);
   const [profileSaved, setProfileSaved] = useState(false);
+  const [insights, setInsights] = useState<QuizInsightsResult | null>(null);
+  const [insightsLoading, setInsightsLoading] = useState(false);
+
+  const fetchInsights = async (computed: QuizMatch[], rawAnswers: Answers) => {
+    const quizAnswers = toQuizAnswers(rawAnswers);
+    const chances = computed.map((m) =>
+      estimateChance(m.university, hasProfile ? profile : null),
+    );
+    const cacheKey = `quizInsights:${JSON.stringify(quizAnswers)}`;
+    const cached = readLocal<QuizInsightsResult | null>(cacheKey, null);
+    if (cached) {
+      setInsights(cached);
+      return;
+    }
+
+    setInsightsLoading(true);
+    const payload = buildInsightsRequest(quizAnswers, computed, chances);
+    const result = await requestQuizInsights(payload);
+    setInsightsLoading(false);
+    setInsights(result);
+    if (result.available) {
+      writeLocal(cacheKey, result);
+    }
+  };
 
   const saveAnswersToProfile = () => {
     const isOther = answers.field === OTHER_VALUE;
@@ -311,12 +363,16 @@ function QuizPageInner() {
     }
     setStatus("loading");
     setTimeout(() => {
-      setMatches(computeMatches(answers));
+      const computed = computeMatches(answers);
+      setMatches(computed);
       setStatus("results");
+      void fetchInsights(computed, answers);
     }, 1400);
   };
 
   const reset = () => {
+    setInsights(null);
+    setInsightsLoading(false);
     setStep(0);
     setAnswers(EMPTY_ANSWERS);
     setMatches([]);
@@ -548,9 +604,15 @@ function QuizPageInner() {
                           </span>
                         ))}
                       </div>
+                      <AIInsightPanel
+                        insight={insights?.insights?.find(
+                          (ins) => ins.universitySlug === m.university.slug,
+                        )}
+                        loading={insightsLoading}
+                      />
                       <Link
                         href={`/universities/${m.university.slug}`}
-                        className="inline-block rounded-lg border-2 border-primary px-md py-1.5 font-label-md text-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
+                        className="mt-md inline-block rounded-lg border-2 border-primary px-md py-1.5 font-label-md text-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
                       >
                         View Profile
                       </Link>

@@ -35,8 +35,6 @@ export interface University {
   campusLife: string;
   established: number;
   website: string;
-  bannerImage: string;
-  logoImage: string;
 }
 
 export interface SubMajor {

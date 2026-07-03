@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { majors } from "@/data/majors";
 import { MajorCard } from "@/components/ui/MajorCard";
@@ -152,13 +151,14 @@ export default function MajorsPage() {
         </div>
 
         <div className="group relative min-h-[300px] overflow-hidden rounded-2xl">
-          <Image
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            alt="Students collaborating on campus"
-            src="https://placehold.co/800x600/006948/f5fff7?text=Find+Your+Match"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-tertiary-container transition-transform duration-700 group-hover:scale-105">
+            <span
+              className="material-symbols-outlined absolute -bottom-10 -right-10 select-none text-white/15"
+              style={{ fontSize: 220 }}
+            >
+              travel_explore
+            </span>
+          </div>
           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-primary/80 to-transparent p-lg">
             <h3 className="mb-xs font-headline-md text-headline-md text-white">
               University Matchmaker

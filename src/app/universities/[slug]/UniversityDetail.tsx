@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import type { Major, University } from "@/types";
 import { flagFor } from "@/data/flags";
@@ -20,6 +19,10 @@ import { ShortlistButton } from "@/components/ui/ShortlistButton";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { CostRoiPanel } from "@/components/ui/CostRoiPanel";
 import { TrackApplicationButton } from "@/components/ui/TrackApplicationButton";
+import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { UniversityLogo } from "@/components/ui/UniversityLogo";
+import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { estimateChance } from "@/lib/chances";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -45,6 +48,16 @@ function StatBlock({ label, value }: { label: string; value: string }) {
       <p className="font-caption text-caption opacity-80">{label}</p>
       <p className="font-headline-md text-headline-md">{value}</p>
     </div>
+  );
+}
+
+/** Always-visible caption surfacing the chance estimate's rationale (not hover-only). */
+function ChanceRationale({ university }: { university: University }) {
+  const { profile, hasProfile, hydrated } = useAcademicProfile();
+  if (!hydrated) return null;
+  const chance = estimateChance(university, hasProfile ? profile : null);
+  return (
+    <p className="mt-2 max-w-xl font-caption text-caption text-white/80">{chance.rationale}</p>
   );
 }
 
@@ -100,15 +113,7 @@ export function UniversityDetail({
       {/* Hero */}
       <section className="relative mb-lg overflow-hidden rounded-xl">
         <div className="relative h-64 w-full md:h-[400px]">
-          <Image
-            className="object-cover"
-            alt={`${u.name} campus`}
-            src={u.bannerImage}
-            fill
-            sizes="100vw"
-            priority
-            quality={60}
-          />
+          <CampusGraphic name={u.name} className="absolute inset-0" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
         <button
@@ -120,14 +125,7 @@ export function UniversityDetail({
         </button>
         <div className="absolute bottom-0 left-0 flex w-full flex-col items-start gap-md p-lg md:flex-row md:items-end">
           <div className="rounded-xl border border-outline-variant bg-white p-2 shadow-lg">
-            <Image
-              className="h-20 w-20 rounded-lg object-cover md:h-28 md:w-28"
-              alt={`${u.name} logo`}
-              src={u.logoImage}
-              width={80}
-              height={80}
-              quality={60}
-            />
+            <UniversityLogo name={u.name} website={u.website} size={80} className="md:h-28 md:w-28" />
           </div>
           <div className="flex-1 pb-1">
             <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-white md:font-headline-xl md:text-headline-xl">
@@ -142,6 +140,7 @@ export function UniversityDetail({
               </span>
               <ChanceBadge slug={u.slug} showWithoutProfile showEstimate />
             </div>
+            <ChanceRationale university={u} />
           </div>
         </div>
       </section>
@@ -556,13 +555,7 @@ export function UniversityDetail({
       {tab === "campus" && (
         <div className="grid grid-cols-1 gap-gutter lg:grid-cols-2">
           <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
-            <Image
-              className="object-cover"
-              alt={`${u.name} student life`}
-              src={u.bannerImage}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
+            <CampusGraphic name={u.name} icon="diversity_3" className="absolute inset-0" />
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="mb-md font-headline-md text-headline-md">Campus Life</h2>

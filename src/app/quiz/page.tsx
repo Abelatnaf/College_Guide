@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { universities } from "@/data/universities";
@@ -14,6 +13,7 @@ import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
 import { estimateChance } from "@/lib/chances";
+import { CampusGraphic } from "@/components/ui/CampusGraphic";
 import { buildInsightsRequest, requestQuizInsights } from "@/lib/ai/quizInsights";
 import type { QuizInsightsResult } from "@/types/ai";
 import { readLocal, writeLocal } from "@/lib/storage/localStore";
@@ -564,13 +564,7 @@ function QuizPageInner() {
                 >
                   <div className="flex flex-col sm:flex-row">
                     <div className="relative h-32 w-full sm:h-auto sm:w-40 sm:shrink-0">
-                      <Image
-                        className="object-cover"
-                        alt={m.university.name}
-                        src={m.university.bannerImage}
-                        fill
-                        sizes="160px"
-                      />
+                      <CampusGraphic name={m.university.name} className="absolute inset-0" />
                       <div className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 font-label-md text-caption text-primary shadow-sm backdrop-blur">
                         #{i + 1}
                       </div>
@@ -594,6 +588,9 @@ function QuizPageInner() {
                         <span>{m.university.acceptanceRate}% acceptance</span>
                         <ChanceBadge slug={m.university.slug} showEstimate />
                       </div>
+                      <p className="mb-sm font-caption text-caption text-on-surface-variant">
+                        {estimateChance(m.university, hasProfile ? profile : null).rationale}
+                      </p>
                       <div className="mb-md flex flex-wrap gap-1">
                         {m.reasons.map((r) => (
                           <span

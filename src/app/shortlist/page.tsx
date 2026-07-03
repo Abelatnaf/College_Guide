@@ -35,15 +35,26 @@ export default function ShortlistPage() {
               : "Loading…"}
           </p>
         </div>
-        {items.length >= 2 && (
-          <Link
-            href="/compare"
-            className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
-          >
-            <span className="material-symbols-outlined">compare_arrows</span>
-            Compare schools
-          </Link>
-        )}
+        <div className="flex flex-wrap gap-sm">
+          {items.length > 0 && (
+            <Link
+              href="/cost-to-apply"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-lg py-3 font-label-md text-on-primary transition-colors hover:bg-primary-container"
+            >
+              <span className="material-symbols-outlined">payments</span>
+              See what it costs to apply
+            </Link>
+          )}
+          {items.length >= 2 && (
+            <Link
+              href="/compare"
+              className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
+            >
+              <span className="material-symbols-outlined">compare_arrows</span>
+              Compare schools
+            </Link>
+          )}
+        </div>
       </div>
 
       {enabled && !user && items.length > 0 && (

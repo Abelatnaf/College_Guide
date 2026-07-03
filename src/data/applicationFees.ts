@@ -1,0 +1,347 @@
+/**
+ * Verified undergraduate application fee data, keyed by university slug.
+ *
+ * Only schools that were explicitly web-verified during the Week 2 research
+ * pass appear here. A university slug NOT present in this lookup means the
+ * fee was never confirmed (either not attempted, or attempted but the
+ * official source didn't state a number) — the UI must treat that as
+ * "not yet verified", never as a fee of $0.
+ *
+ * Do not add, guess, or "fill in" entries here without a real sourceUrl.
+ */
+
+export interface ApplicationFeeEntry {
+  slug: string;
+  /** Fee amount in the school's native currency — never converted. */
+  amount: number;
+  /** ISO 4217-ish currency code as sourced, e.g. "USD", "GBP", "CAD". */
+  currency: string;
+  /** Who this fee applies to, as stated by the source (e.g. "all applicants"). */
+  appliesTo: string;
+  /** Whether the school requires the CSS Profile (null = not stated by source). */
+  requiresCSSProfile: boolean | null;
+  sourceUrl: string;
+  /** Placeholder — we don't fabricate a real verification date. */
+  verifiedDate: string;
+  note: string;
+}
+
+const VERIFIED_DATE_PLACEHOLDER = "verified via official source, see sourceUrl";
+
+export const applicationFees: Record<string, ApplicationFeeEntry> = {
+  mit: {
+    slug: "mit",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://mitadmissions.org/help/faq/how-much-is-the-application-fee/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Page states first-year application fee is $75, same for domestic and international applicants; CSS Profile required for financial aid.",
+  },
+  harvard: {
+    slug: "harvard",
+    amount: 90,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://college.harvard.edu/resources/faq/how-do-i-pay-my-admissions-application-fee",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Page states the $90 admissions application processing fee applies to both domestic and international applicants; CSS Profile required for international financial aid.",
+  },
+  stanford: {
+    slug: "stanford",
+    amount: 100,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admission.stanford.edu/apply/first-year/fee.html",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "First-year application fee is $100, nonrefundable, same for all applicants; international applicants use CSS Profile (or free ISFAA alternative) for aid.",
+  },
+  princeton: {
+    slug: "princeton",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admission.princeton.edu/apply/counselors",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Application fee is $75; Princeton does NOT require/accept CSS Profile, using its own free Princeton Financial Aid Application (PFAA) even for international students.",
+  },
+  columbia: {
+    slug: "columbia",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://undergrad.admissions.columbia.edu/apply/process/application-fees",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "An $85 nonrefundable fee applies to all applicants including international first-year applicants; CSS Profile used for institutional aid determination.",
+  },
+  "uc-berkeley": {
+    slug: "uc-berkeley",
+    amount: 95,
+    currency: "USD",
+    appliesTo: "international applicants (via UC systemwide application)",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admission.universityofcalifornia.edu/admission-requirements/international-applicants/applying-for-admission/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Berkeley uses the UC systemwide application; international applicants pay a $95 fee per campus. International students are not eligible for UC institutional/state/federal aid, so CSS Profile is not part of the process.",
+  },
+  ucla: {
+    slug: "ucla",
+    amount: 95,
+    currency: "USD",
+    appliesTo: "international applicants (via UC systemwide application)",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admission.universityofcalifornia.edu/admission-requirements/international-applicants/applying-for-admission/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "UCLA uses the same UC systemwide application/fee as all UC campuses ($95 for international applicants); international students are not eligible for institutional/state/federal financial aid, so CSS Profile is not applicable.",
+  },
+  "university-of-michigan": {
+    slug: "university-of-michigan",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admissions.umich.edu/apply/international-applicants",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "International applicants apply via Common Application with a $75 fee; Michigan states international students on temporary visas are not eligible for financial aid, so CSS Profile is not used.",
+  },
+  nyu: {
+    slug: "nyu",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://www.nyu.edu/admissions/undergraduate-admissions/how-to-apply/application-fee-information.html",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Nonrefundable $85.00 fee paid via Common Application, same for all applicants; CSS Profile explicitly required for international students seeking NYU aid.",
+  },
+  "carnegie-mellon": {
+    slug: "carnegie-mellon",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: false,
+    sourceUrl: "https://www.cmu.edu/admission/admission/undergraduate-admission-requirements",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$75 application fee, applies to all applicants; CMU does not award institutional financial aid to undergraduate international students, so CSS Profile is not applicable to them.",
+  },
+  "johns-hopkins": {
+    slug: "johns-hopkins",
+    amount: 70,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://apply.jhu.edu/how-to-apply/application-deadlines-requirements/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$70 application fee or fee waiver, applies to all applicants; JHU requires international financial aid applicants to submit CSS Profile (or free JHU ISFAA alternative).",
+  },
+  caltech: {
+    slug: "caltech",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://www.admissions.caltech.edu/apply/first-year-applicants/first-year-application-fee-and-waiver",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "One-time non-refundable $75 fee applying universally to all first-year applicants; international financial aid applicants must submit CSS Profile.",
+  },
+  cornell: {
+    slug: "cornell",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "all applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.cornell.edu/how-to-apply/first-year-international-applicants",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official Cornell admissions page states $85 application fee; CSS Profile required for international financial aid.",
+  },
+  cambridge: {
+    slug: "cambridge",
+    amount: 60,
+    currency: "GBP",
+    appliesTo: "most international applicants",
+    requiresCSSProfile: null,
+    sourceUrl: "https://www.undergraduate.study.cam.ac.uk/international-students/international-applications",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official Cambridge page states most international applicants pay a £60 application fee; some countries qualify for automatic waiver. No CSS Profile mention found.",
+  },
+  "university-of-toronto": {
+    slug: "university-of-toronto",
+    amount: 192,
+    currency: "CAD",
+    appliesTo: "international applicants (University of Toronto International Application)",
+    requiresCSSProfile: null,
+    sourceUrl: "https://future.utoronto.ca/applications",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official U of T Future Students page states $192 CAD for the University of Toronto International Application for full-time undergraduate studies.",
+  },
+  ubc: {
+    slug: "ubc",
+    amount: 173.25,
+    currency: "CAD",
+    appliesTo: "international first-year applicants (Study Permit)",
+    requiresCSSProfile: null,
+    sourceUrl: "https://vancouver.calendar.ubc.ca/fees/application-and-administrative-fees",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official UBC Academic Calendar states $173.25 CAD for applicants studying on a Study Permit, versus $78.50 CAD for Canadian citizens/PRs.",
+  },
+  mcgill: {
+    slug: "mcgill",
+    amount: 140.16,
+    currency: "CAD",
+    appliesTo: "all applicants (first application)",
+    requiresCSSProfile: null,
+    sourceUrl: "https://www.mcgill.ca/undergraduate-admissions/apply",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official McGill undergraduate admissions apply page states $140.16 CAD non-refundable fee for first application; not differentiated by citizenship.",
+  },
+  waterloo: {
+    slug: "waterloo",
+    amount: 166,
+    currency: "CAD",
+    appliesTo: "international applicants (OUAC base fee $156 + $10 international service fee)",
+    requiresCSSProfile: null,
+    sourceUrl: "https://uwaterloo.ca/future-students/missing-manual/money/what-does-university-cost",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "OUAC application fee is $156 CAD for initial three choices, with international students paying an additional $10 service fee ($166 total).",
+  },
+  upenn: {
+    slug: "upenn",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all first-year applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.upenn.edu/how-to-apply/first-year-applicants/application-requirements",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$75 fee for all first-year applicants regardless of citizenship; CSS Profile required for international financial aid.",
+  },
+  brown: {
+    slug: "brown",
+    amount: 80,
+    currency: "USD",
+    appliesTo: "all first-year applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admission.brown.edu/first-year/application-checklist",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$80 non-refundable application fee for all first-year applicants; CSS Profile confirmed required for international financial aid applicants.",
+  },
+  dartmouth: {
+    slug: "dartmouth",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "all applicants (no separate international rate)",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.dartmouth.edu/glossary-term/application-fee",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$85 nonrefundable fee, same for all first-year applicants; CSS Profile (code 3351) required for international aid applicants, with ISFAA as hardship alternative.",
+  },
+  duke: {
+    slug: "duke",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "all applicants (no separate international rate)",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.duke.edu/apply/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$85 nonrefundable fee for first-year applicants, waivers available; CSS Profile required for international financial aid consideration.",
+  },
+  northwestern: {
+    slug: "northwestern",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "all applicants (no separate international rate)",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.northwestern.edu/apply/index.html",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Non-refundable $75 fee (or fee waiver) uniformly for first-year/transfer applicants; CSS Profile required for international aid applicants (ISAFA as alternative).",
+  },
+  "georgia-tech": {
+    slug: "georgia-tech",
+    amount: 85,
+    currency: "USD",
+    appliesTo: "international applicants",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admission.gatech.edu/first-year/application-fees",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Domestic fee is $75, international applicants pay $85; no fee waivers for international. Internationals largely ineligible for need-based institutional aid.",
+  },
+  "ut-austin": {
+    slug: "ut-austin",
+    amount: 90,
+    currency: "USD",
+    appliesTo: "international applicants",
+    requiresCSSProfile: false,
+    sourceUrl: "https://admissions.utexas.edu/apply/international-students/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$90 nonrefundable fee, fee waivers not available for international students. No CSS Profile requirement found; UT Austin uses FAFSA/TASFA framework.",
+  },
+  lse: {
+    slug: "lse",
+    amount: 0,
+    currency: "GBP",
+    appliesTo: "all applicants (no LSE-specific fee)",
+    requiresCSSProfile: false,
+    sourceUrl: "https://www.lse.ac.uk/study-at-lse/Undergraduate/Prospective-Students/How-to-Apply",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "LSE undergraduate applications go through UCAS; no LSE-specific application fee charged on top of the UCAS fee. UK institutions do not use CSS Profile.",
+  },
+  "kings-college-london": {
+    slug: "kings-college-london",
+    amount: 0,
+    currency: "GBP",
+    appliesTo: "all applicants (no KCL-specific fee)",
+    requiresCSSProfile: false,
+    sourceUrl: "https://www.kcl.ac.uk/study/undergraduate/how-to-apply/important-information-for-applying",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "Official KCL page states: 'King's will not charge UCAS applicants an additional application fee.' Only the external UCAS fee applies. No CSS Profile (UK institution).",
+  },
+  warwick: {
+    slug: "warwick",
+    amount: 0,
+    currency: "GBP",
+    appliesTo: "all applicants (no Warwick-specific fee)",
+    requiresCSSProfile: false,
+    sourceUrl: "https://warwick.ac.uk/study/undergraduate/applying/faqs/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "No mention of Warwick charging its own undergraduate application fee beyond the external UCAS fee. No CSS Profile (UK institution).",
+  },
+  rice: {
+    slug: "rice",
+    amount: 75,
+    currency: "USD",
+    appliesTo: "international applicants",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admission.rice.edu/apply/first-year-international-applicants",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$75 nonrefundable fee, explicitly not eligible for fee waiver; Rice explicitly states it uses the CSS Profile for international students applying for financial aid.",
+  },
+  vanderbilt: {
+    slug: "vanderbilt",
+    amount: 50,
+    currency: "USD",
+    appliesTo: "all applicants (no separate international rate)",
+    requiresCSSProfile: true,
+    sourceUrl: "https://admissions.vanderbilt.edu/apply/first-year-process/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$50 nonrefundable fee for all applicants (third-party sites incorrectly cite $75). CSS Profile or ISFAA required for need-based aid.",
+  },
+  georgetown: {
+    slug: "georgetown",
+    amount: 80,
+    currency: "USD",
+    appliesTo: "all applicants (no separate international rate)",
+    requiresCSSProfile: true,
+    sourceUrl: "https://uadmissions.georgetown.edu/applying/first-year-application/",
+    verifiedDate: VERIFIED_DATE_PLACEHOLDER,
+    note: "$80.00 application fee. International applicants should submit a CSS/Financial Aid Profile to be considered for need-based aid.",
+  },
+};
+
+/** Look up a verified fee entry, or undefined if this school hasn't been verified yet. */
+export function getApplicationFee(slug: string): ApplicationFeeEntry | undefined {
+  return applicationFees[slug];
+}

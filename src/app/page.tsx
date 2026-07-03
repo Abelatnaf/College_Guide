@@ -220,16 +220,16 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="/universities"
+              href="/affordability-finder"
               className="group flex items-center justify-between overflow-hidden rounded-[24px] bg-surface-container-highest p-lg md:col-span-2"
             >
               <div className="max-w-[60%]">
                 <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
-                  Compare Scholarships
+                  Affordability Finder
                 </h4>
                 <p className="text-body-md text-on-surface-variant">
-                  See which schools in our directory offer scholarships, and what kinds,
-                  before you apply.
+                  See which universities are need-blind and meet full demonstrated need for
+                  international students, verified against official aid policies — with sources.
                 </p>
               </div>
               <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-white shadow-md transition-transform group-hover:scale-110">

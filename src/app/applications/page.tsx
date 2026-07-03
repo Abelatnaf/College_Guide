@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
+import { getApplicationFee } from "@/data/applicationFees";
+import { getAidPolicy } from "@/data/aidPolicy";
 import {
   useApplications,
   useShortlist,
@@ -167,6 +169,18 @@ export default function ApplicationsPage() {
   );
 }
 
+/** One-line, boolean-driven summary of an aid policy — avoids truncating the sourced note mid-sentence. */
+function aidSummaryLine(entry: NonNullable<ReturnType<typeof getAidPolicy>>): string {
+  const parts: string[] = [];
+  if (entry.needBlindForInternational === true) parts.push("Need-blind for international applicants");
+  else if (entry.needBlindForInternational === false) parts.push("Need-aware for international applicants");
+
+  if (entry.meetsFullDemonstratedNeed === true) parts.push("meets full demonstrated need");
+  else if (entry.meetsFullDemonstratedNeed === false) parts.push("does not meet full demonstrated need");
+
+  return parts.length > 0 ? `${parts.join(", ")}.` : entry.note;
+}
+
 function deadlineDate(app: Application): Date | null {
   const u = getUniversityBySlug(app.slug);
   if (!u) return null;
@@ -217,6 +231,9 @@ function ApplicationCard({
   const [notes, setNotesLocal] = useState(app.notes ?? "");
 
   if (!u) return null;
+
+  const feeEntry = getApplicationFee(app.slug);
+  const aidEntry = getAidPolicy(app.slug);
 
   const deadline = parseDeadline(u.applicationDeadline, app.deadline);
   const days = deadline ? daysUntil(deadline) : null;
@@ -385,6 +402,41 @@ function ApplicationCard({
               </button>
             </form>
           </div>
+
+          {(feeEntry || aidEntry) && (
+            <div className="mb-md rounded-lg border border-outline-variant/40 bg-surface-container-low p-sm">
+              <p className="mb-1 font-label-md text-label-md text-on-surface-variant">
+                Aid &amp; Fees
+              </p>
+              <ul className="space-y-1">
+                {feeEntry && (
+                  <li className="font-body-md text-body-md text-on-surface">
+                    {feeEntry.amount === 0 ? (
+                      <>No school application fee — external portal (e.g. UCAS) charged separately</>
+                    ) : (
+                      <>
+                        Application fee: {feeEntry.amount} {feeEntry.currency}
+                      </>
+                    )}
+                    {feeEntry.requiresCSSProfile === true && " · CSS Profile required"}
+                  </li>
+                )}
+                {aidEntry && (
+                  <li className="font-caption text-caption text-on-surface-variant">
+                    {aidSummaryLine(aidEntry)}{" "}
+                    <a
+                      href={aidEntry.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline hover:no-underline"
+                    >
+                      Source
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
 
           {/* Notes */}
           <textarea

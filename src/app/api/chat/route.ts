@@ -4,8 +4,12 @@ import { buildChatSystemPrompt, buildChatContents, type ChatMessage } from "@/li
 
 const MODEL = "gemini-2.5-flash";
 
+/**
+ * JSON shape returned ONLY on a pre-stream failure (missing key, bad request,
+ * or an error thrown before the first token). A successful call instead returns
+ * a `text/plain` stream — the client distinguishes the two by Content-Type.
+ */
 export interface ChatResult {
-  /** False when no API key is configured or the request/response failed. */
   available: boolean;
   reply?: string;
 }
@@ -27,26 +31,45 @@ export async function POST(request: Request) {
     return NextResponse.json<ChatResult>({ available: false }, { status: 400 });
   }
 
+  // Open the stream. If the SDK throws before yielding anything, fall back to the
+  // JSON { available: false } contract so the client shows the "unavailable" banner.
+  let iterator: AsyncGenerator<{ text?: string }>;
   try {
     const ai = new GoogleGenAI({ apiKey });
-    const contents = buildChatContents(body.messages);
-
-    const response = await ai.models.generateContent({
+    iterator = (await ai.models.generateContentStream({
       model: MODEL,
-      contents,
+      contents: buildChatContents(body.messages),
       config: {
         systemInstruction: buildChatSystemPrompt(),
-        // Generous enough headroom that a caveat/citation isn't truncated off a longer answer
-        // (the system prompt also instructs stating caveats first, as a second line of defense).
+        // Generous headroom so a trailing caveat/citation isn't truncated (the
+        // system prompt also instructs stating caveats first, as a backstop).
         maxOutputTokens: 800,
       },
-    });
-
-    const text = response.text;
-    if (!text) return NextResponse.json<ChatResult>({ available: false });
-
-    return NextResponse.json<ChatResult>({ available: true, reply: text });
+    })) as AsyncGenerator<{ text?: string }>;
   } catch {
     return NextResponse.json<ChatResult>({ available: false });
   }
+
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      try {
+        for await (const chunk of iterator) {
+          if (chunk.text) controller.enqueue(encoder.encode(chunk.text));
+        }
+      } catch {
+        // Mid-stream error: stop cleanly and let the client keep whatever
+        // text already arrived, rather than surfacing a hard failure.
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+    },
+  });
 }

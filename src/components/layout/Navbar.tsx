@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: "Universities", href: "/universities" },
   { label: "Compare", href: "/compare" },
   { label: "Calculator", href: "/calculator" },
+  { label: "Ask AI", href: "/chat" },
 ];
 
 export function Navbar() {

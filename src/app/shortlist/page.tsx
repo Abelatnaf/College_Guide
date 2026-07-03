@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
@@ -12,6 +11,7 @@ import {
 } from "@/components/providers/StorageProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
+import { CampusGraphic } from "@/components/ui/CampusGraphic";
 
 export default function ShortlistPage() {
   const { shortlist, toggleSave, setNote, hydrated } = useShortlist();
@@ -96,13 +96,7 @@ export default function ShortlistPage() {
               >
                 <div className="flex flex-col sm:flex-row">
                   <div className="relative h-32 w-full sm:h-auto sm:w-48 sm:shrink-0">
-                    <Image
-                      className="object-cover"
-                      alt={u.name}
-                      src={u.bannerImage}
-                      fill
-                      sizes="192px"
-                    />
+                    <CampusGraphic name={u.name} className="absolute inset-0" />
                   </div>
                   <div className="flex-1 p-md">
                     <div className="mb-1 flex flex-wrap items-start justify-between gap-sm">

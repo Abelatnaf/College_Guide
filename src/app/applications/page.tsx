@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
@@ -17,6 +16,7 @@ import {
 } from "@/lib/storage/types";
 import { STATUS_META, STATUS_ORDER } from "@/lib/applicationMeta";
 import { buildDeadlineIcs, daysUntil, downloadIcs, parseDeadline } from "@/lib/ics";
+import { CampusGraphic } from "@/components/ui/CampusGraphic";
 
 export default function ApplicationsPage() {
   const {
@@ -240,7 +240,7 @@ function ApplicationCard({
     <div className="overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
       <div className="flex flex-col gap-md p-md sm:flex-row">
         <div className="relative h-24 w-full overflow-hidden rounded-lg sm:h-24 sm:w-36 sm:shrink-0">
-          <Image className="object-cover" alt={u.name} src={u.bannerImage} fill sizes="144px" quality={60} loading="lazy" />
+          <CampusGraphic name={u.name} className="absolute inset-0" />
         </div>
 
         <div className="flex-1">

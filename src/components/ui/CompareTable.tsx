@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import type { University } from "@/types";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { getCostBreakdown } from "@/lib/universityInsights";
 import { estimateChance, TIER_META } from "@/lib/chances";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { UniversityLogo } from "@/components/ui/UniversityLogo";
 
 interface Row {
   label: string;
@@ -74,14 +74,11 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
             {universities.map((u, i) => (
               <th key={i} className="bg-surface-container-low p-md align-top">
                 <div className="flex flex-col items-center gap-sm text-center">
-                  <Image
-                    className="h-16 w-16 rounded-lg border border-outline-variant object-cover"
-                    alt={u.name}
-                    src={u.logoImage}
-                    width={80}
-                    height={80}
-                    quality={60}
-                    loading="lazy"
+                  <UniversityLogo
+                    name={u.name}
+                    website={u.website}
+                    size={64}
+                    className="border border-outline-variant"
                   />
                   <select
                     value={u.slug}

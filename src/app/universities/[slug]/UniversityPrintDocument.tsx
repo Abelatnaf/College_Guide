@@ -9,6 +9,7 @@ import {
   getWhyChooseBullets,
   type PercentileContext,
 } from "@/lib/universityInsights";
+import { avatarColorFor, initialsFor } from "@/lib/universityLogo";
 
 function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
   return (
@@ -75,12 +76,16 @@ export function UniversityPrintDocument({
     <div className="print-only mx-auto max-w-3xl px-8 py-6 text-on-surface">
       <header className="print-avoid-break mb-4 flex items-center justify-between border-b-2 border-primary pb-4">
         <div className="flex items-center gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={u.logoImage}
-            alt={`${u.name} logo`}
-            className="h-16 w-16 rounded-lg border border-outline-variant object-cover"
-          />
+          {/* Print contexts shouldn't depend on a third-party API being reachable, so this
+              always uses the deterministic initials avatar rather than a network logo fetch. */}
+          <div
+            className="flex h-16 w-16 items-center justify-center rounded-lg border border-outline-variant font-label-md font-bold text-white"
+            style={{ backgroundColor: avatarColorFor(u.name) }}
+            aria-label={`${u.name} logo`}
+            role="img"
+          >
+            <span style={{ fontSize: 20 }}>{initialsFor(u.name)}</span>
+          </div>
           <div>
             <h1 className="font-headline-lg text-headline-lg text-on-surface">{u.name}</h1>
             <p className="font-body-md text-body-md text-on-surface-variant">

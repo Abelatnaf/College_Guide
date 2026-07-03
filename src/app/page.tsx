@@ -1,5 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
+import { universities } from "@/data/universities";
+import { majors } from "@/data/majors";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -31,6 +32,8 @@ const FEATURES = [
 ];
 
 export default function HomePage() {
+  const universityCount = universities.length;
+  const majorCount = majors.length;
   return (
     <main>
       {/* Hero Section */}
@@ -42,15 +45,15 @@ export default function HomePage() {
             <div className="space-y-md text-center lg:text-left">
               <div className="inline-flex animate-fade-in items-center gap-xs rounded-full bg-secondary-container px-sm py-1 font-label-md text-[12px] text-on-secondary-container">
                 <span className="material-symbols-outlined text-[16px]">verified</span>
-                <span>Trusted by 50,000+ students worldwide</span>
+                <span>{universityCount}+ universities in our directory</span>
               </div>
               <h1 className="max-w-xl font-headline-xl-mobile text-headline-xl-mobile leading-tight text-on-background md:font-headline-xl md:text-headline-xl">
                 Find Your <span className="italic text-primary">Perfect</span> University
               </h1>
               <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant lg:mx-0">
-                Navigate your academic future with confidence. We provide the data,
-                insights, and tools you need to choose the best institution for your
-                career goals.
+                Take a short quiz to get matched with schools that fit your budget,
+                grades, and goals, see honest admission-chance estimates for each one,
+                and compare your shortlist side by side — all in one place.
               </p>
               <div className="flex flex-col items-center justify-center gap-md pt-md sm:flex-row lg:justify-start">
                 <Link
@@ -64,28 +67,26 @@ export default function HomePage() {
                   href="#how-it-works"
                   className="flex h-14 w-full items-center justify-center rounded-lg bg-surface-container-low px-lg font-label-md text-body-md text-primary transition-all hover:bg-surface-container sm:w-auto"
                 >
-                  Watch How it Works
+                  See How It Works
                 </a>
               </div>
               <div className="flex items-center justify-center gap-md pt-sm lg:justify-start">
                 <div className="flex -space-x-2">
-                  {["1", "2", "3"].map((n) => (
+                  {[
+                    { bg: "bg-primary-fixed text-on-primary-fixed-variant", icon: "school" },
+                    { bg: "bg-secondary-container text-primary", icon: "menu_book" },
+                    { bg: "bg-tertiary-fixed text-on-tertiary-fixed-variant", icon: "public" },
+                  ].map(({ bg, icon }) => (
                     <div
-                      key={n}
-                      className="h-8 w-8 overflow-hidden rounded-full border-2 border-white bg-slate-200"
+                      key={icon}
+                      className={`flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border-2 border-white ${bg}`}
                     >
-                      <Image
-                        className="h-full w-full object-cover"
-                        alt="Student"
-                        src={`https://placehold.co/64x64/d3e3dc/006948?text=${n}`}
-                        width={64}
-                        height={64}
-                      />
+                      <span className="material-symbols-outlined text-[16px]">{icon}</span>
                     </div>
                   ))}
                 </div>
                 <span className="font-caption text-caption text-on-surface-variant">
-                  Join a community of scholars
+                  {majorCount} fields of study, matched to your goals
                 </span>
               </div>
             </div>
@@ -93,21 +94,20 @@ export default function HomePage() {
             {/* Visual side */}
             <div className="relative hidden lg:block">
               <div className="relative aspect-square w-full overflow-hidden rounded-[32px] shadow-2xl">
-                <Image
-                  className="object-cover"
-                  alt="Modern university campus library"
-                  src="https://placehold.co/640x640/d3e3dc/006948?text=Campus+Library"
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  priority
-                />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-fixed via-primary-fixed-dim to-tertiary-fixed opacity-90" />
+                <span
+                  className="material-symbols-outlined absolute -bottom-10 -right-10 select-none text-on-primary-fixed-variant/20"
+                  style={{ fontSize: 260 }}
+                >
+                  school
+                </span>
                 <Link
                   href="/universities/stanford"
                   className="glass-panel absolute bottom-md left-md right-md rounded-xl border border-white/30 p-md shadow-lg transition-transform hover:-translate-y-1"
                 >
                   <div className="mb-sm flex items-center justify-between">
-                    <h4 className="font-label-md text-on-surface">Top Recommended</h4>
-                    <span className="font-bold text-primary">98% Match</span>
+                    <h4 className="font-label-md text-on-surface">Featured School</h4>
+                    <span className="font-bold text-primary">Explore Profile</span>
                   </div>
                   <div className="flex items-center gap-sm">
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-fixed">
@@ -132,10 +132,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-caption text-caption font-bold uppercase tracking-wider text-on-surface-variant">
-                    Success Rate
+                    Directory Size
                   </p>
                   <p className="font-headline-md text-headline-md font-bold text-on-surface">
-                    89%
+                    {universityCount}+
                   </p>
                 </div>
               </div>
@@ -192,30 +192,29 @@ export default function HomePage() {
           <div className="grid h-auto grid-cols-1 grid-rows-2 gap-md md:h-[600px] md:grid-cols-4">
             <div className="relative flex flex-col justify-end overflow-hidden rounded-[24px] bg-primary p-xl md:col-span-2 md:row-span-2">
               <div className="absolute inset-0 opacity-40">
-                <Image
-                  className="object-cover brightness-50 grayscale"
-                  alt="Students collaborating"
-                  src="https://placehold.co/600x600/141b2b/ffffff?text=Campus"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
+                <span
+                  className="material-symbols-outlined absolute -bottom-12 -right-12 select-none text-white"
+                  style={{ fontSize: 320 }}
+                >
+                  diversity_3
+                </span>
               </div>
               <div className="relative z-10 space-y-sm text-white">
                 <span className="rounded-full bg-white/20 px-sm py-1 font-label-md text-caption uppercase backdrop-blur-md">
-                  Featured Program
+                  How We&apos;re Different
                 </span>
                 <h2 className="font-headline-lg text-headline-lg">
-                  Global Leadership Scholars
+                  Know Your Real Chances
                 </h2>
                 <p className="max-w-sm font-body-md text-body-md opacity-90">
-                  An elite track for students aiming to impact international policy and
-                  sustainable business development.
+                  Every school gets a Safety, Target, Reach, or High Reach estimate with
+                  the reasoning shown right alongside it — not a black-box percentage.
                 </p>
                 <Link
-                  href="/majors"
+                  href="/quiz"
                   className="mt-md inline-block rounded-lg bg-white px-lg py-sm font-bold text-primary"
                 >
-                  Learn More
+                  Take the Quiz
                 </Link>
               </div>
             </div>
@@ -226,10 +225,11 @@ export default function HomePage() {
             >
               <div className="max-w-[60%]">
                 <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
-                  Scholarship Finder
+                  Compare Scholarships
                 </h4>
                 <p className="text-body-md text-on-surface-variant">
-                  Access $2M+ in exclusive student funding opportunities.
+                  See which schools in our directory offer scholarships, and what kinds,
+                  before you apply.
                 </p>
               </div>
               <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-white shadow-md transition-transform group-hover:scale-110">
@@ -262,9 +262,9 @@ export default function HomePage() {
                 forum
               </span>
               <div>
-                <p className="font-bold text-on-surface">Expert Advice</p>
+                <p className="font-bold text-on-surface">Have Questions?</p>
                 <p className="font-caption text-caption text-on-surface-variant">
-                  1-on-1 counselor chat.
+                  Reach out to our team.
                 </p>
               </div>
             </Link>
@@ -281,42 +281,36 @@ export default function HomePage() {
           <div className="grid grid-cols-1 items-center gap-xl rounded-[24px] border border-outline-variant/30 bg-white p-lg shadow-lg md:p-xl lg:grid-cols-2">
             <div>
               <h2 className="mb-md font-headline-lg text-headline-lg">
-                Your Path to Acceptance
+                How It Works
               </h2>
               <div className="space-y-md">
-                <div className="flex items-center gap-md">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                    <span className="material-symbols-outlined">check</span>
-                  </div>
-                  <div className="flex-grow">
-                    <h4 className="font-label-md text-on-surface">Create a Profile</h4>
-                    <div className="mt-xs h-1 w-full rounded-full bg-surface-container">
-                      <div className="h-full w-full rounded-full bg-primary" />
+                {[
+                  {
+                    step: "1",
+                    title: "Create a Profile",
+                    body: "Answer a few questions about your budget, grades, and goals.",
+                  },
+                  {
+                    step: "2",
+                    title: "Get Matched",
+                    body: "See a shortlist with honest, explained admission-chance estimates.",
+                  },
+                  {
+                    step: "3",
+                    title: "Track Your Applications",
+                    body: "Keep deadlines and statuses for every school in one place.",
+                  },
+                ].map(({ step, title, body }) => (
+                  <div key={step} className="flex items-center gap-md">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-white">
+                      {step}
+                    </div>
+                    <div className="flex-grow">
+                      <h4 className="font-label-md text-on-surface">{title}</h4>
+                      <p className="font-caption text-caption text-on-surface-variant">{body}</p>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-md">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary text-primary">
-                    <span className="material-symbols-outlined">radio_button_checked</span>
-                  </div>
-                  <div className="flex-grow">
-                    <h4 className="font-label-md text-on-surface">Find Top 5 Schools</h4>
-                    <div className="mt-xs h-1 w-full rounded-full bg-surface-container">
-                      <div className="h-full w-[60%] rounded-full bg-primary" />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-md opacity-50">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-outline-variant text-outline-variant">
-                    <span className="material-symbols-outlined">radio_button_unchecked</span>
-                  </div>
-                  <div className="flex-grow">
-                    <h4 className="font-label-md text-on-surface">Submit Applications</h4>
-                    <div className="mt-xs h-1 w-full rounded-full bg-surface-container">
-                      <div className="h-full w-0 rounded-full bg-primary" />
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
             <div className="flex flex-col items-center rounded-xl bg-primary-container/10 p-md text-center">
@@ -326,16 +320,16 @@ export default function HomePage() {
                 </span>
               </div>
               <p className="mb-xs font-headline-md text-headline-md text-primary">
-                Almost there!
+                Ready when you are
               </p>
               <p className="mb-md text-body-md text-on-surface-variant">
-                Complete your profile to unlock school matches tailored just for you.
+                Build your profile to unlock school matches tailored just for you.
               </p>
               <Link
                 href="/quiz"
                 className="rounded-lg bg-primary px-lg py-sm font-bold text-white"
               >
-                Finish My Profile
+                Start My Profile
               </Link>
             </div>
           </div>

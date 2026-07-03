@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const REASONS = [
   "General question",
-  "Talk to an advisor",
+  "Question about a school or match",
   "Report an issue",
   "Partnership / press",
 ];
@@ -28,8 +28,8 @@ export default function ContactPage() {
           Get in Touch
         </h1>
         <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant">
-          Questions about a school, your match results, or just want to talk to
-          an advisor? Send us a note and we&apos;ll get back to you.
+          Questions about a school, your match results, or the site itself?
+          Send us a note and we&apos;ll get back to you by email.
         </p>
       </section>
 

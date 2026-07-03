@@ -1,10 +1,5 @@
 import type { University } from "@/types";
 
-const banner = (label: string) =>
-  `https://placehold.co/400x140/006948/f5fff7?text=${encodeURIComponent(label)}`;
-const logo = (label: string) =>
-  `https://placehold.co/80x80/e9edff/006948?text=${encodeURIComponent(label)}`;
-
 export const universities: University[] = [
   {
     id: "u1",
@@ -30,8 +25,6 @@ export const universities: University[] = [
     campusLife: "Intense, collaborative, and famously quirky — home to 500+ student groups and legendary 'hacks'.",
     established: 1861,
     website: "https://web.mit.edu",
-    bannerImage: banner("MIT"),
-    logoImage: logo("MIT"),
   },
   {
     id: "u2",
@@ -57,8 +50,6 @@ export const universities: University[] = [
     campusLife: "Historic Cambridge campus with a rich house system, 450+ organizations, and Division I athletics.",
     established: 1636,
     website: "https://www.harvard.edu",
-    bannerImage: banner("Harvard"),
-    logoImage: logo("Harvard"),
   },
   {
     id: "u3",
@@ -84,8 +75,6 @@ export const universities: University[] = [
     campusLife: "Sun-soaked 8,000-acre campus with a strong sports tradition and deep entrepreneurial energy.",
     established: 1885,
     website: "https://www.stanford.edu",
-    bannerImage: banner("Stanford"),
-    logoImage: logo("Stanford"),
   },
   {
     id: "u4",
@@ -111,8 +100,6 @@ export const universities: University[] = [
     campusLife: "Tight-knit residential colleges, a celebrated a cappella and theater scene, and Gothic architecture.",
     established: 1701,
     website: "https://www.yale.edu",
-    bannerImage: banner("Yale"),
-    logoImage: logo("Yale"),
   },
   {
     id: "u5",
@@ -138,8 +125,6 @@ export const universities: University[] = [
     campusLife: "Leafy collegiate-Gothic campus with eating clubs, strong school spirit, and small seminar culture.",
     established: 1746,
     website: "https://www.princeton.edu",
-    bannerImage: banner("Princeton"),
-    logoImage: logo("Princeton"),
   },
   {
     id: "u6",
@@ -165,8 +150,6 @@ export const universities: University[] = [
     campusLife: "A classic urban campus in Morningside Heights, immersed in New York City life.",
     established: 1754,
     website: "https://www.columbia.edu",
-    bannerImage: banner("Columbia"),
-    logoImage: logo("Columbia"),
   },
   {
     id: "u7",
@@ -192,8 +175,6 @@ export const universities: University[] = [
     campusLife: "A vibrant, politically engaged campus beside a lively college town in the Bay Area.",
     established: 1868,
     website: "https://www.berkeley.edu",
-    bannerImage: banner("UC Berkeley"),
-    logoImage: logo("Berkeley"),
   },
   {
     id: "u8",
@@ -219,8 +200,6 @@ export const universities: University[] = [
     campusLife: "A large, spirited campus in Westwood with elite sports and a major presence in entertainment.",
     established: 1919,
     website: "https://www.ucla.edu",
-    bannerImage: banner("UCLA"),
-    logoImage: logo("UCLA"),
   },
   {
     id: "u9",
@@ -246,8 +225,6 @@ export const universities: University[] = [
     campusLife: "Quintessential Big Ten college town energy with passionate football culture and 1,500+ clubs.",
     established: 1817,
     website: "https://umich.edu",
-    bannerImage: banner("Michigan"),
-    logoImage: logo("UMich"),
   },
   {
     id: "u10",
@@ -273,8 +250,6 @@ export const universities: University[] = [
     campusLife: "A campus woven into New York City itself, with a global network of study-away sites.",
     established: 1831,
     website: "https://www.nyu.edu",
-    bannerImage: banner("NYU"),
-    logoImage: logo("NYU"),
   },
   {
     id: "u11",
@@ -300,8 +275,6 @@ export const universities: University[] = [
     campusLife: "An intense, maker-oriented community with strong traditions like the Spring Carnival buggy races.",
     established: 1900,
     website: "https://www.cmu.edu",
-    bannerImage: banner("Carnegie Mellon"),
-    logoImage: logo("CMU"),
   },
   {
     id: "u12",
@@ -327,8 +300,6 @@ export const universities: University[] = [
     campusLife: "A research-driven culture anchored by its world-famous medical campus and hospital.",
     established: 1876,
     website: "https://www.jhu.edu",
-    bannerImage: banner("Johns Hopkins"),
-    logoImage: logo("JHU"),
   },
   {
     id: "u13",
@@ -354,8 +325,6 @@ export const universities: University[] = [
     campusLife: "An intimate, intense STEM community known for elaborate pranks and an honor code.",
     established: 1891,
     website: "https://www.caltech.edu",
-    bannerImage: banner("Caltech"),
-    logoImage: logo("Caltech"),
   },
   {
     id: "u14",
@@ -381,8 +350,6 @@ export const universities: University[] = [
     campusLife: "A scenic hilltop campus above Ithaca's gorges, with a huge range of clubs and Greek life.",
     established: 1865,
     website: "https://www.cornell.edu",
-    bannerImage: banner("Cornell"),
-    logoImage: logo("Cornell"),
   },
   {
     id: "u15",
@@ -408,8 +375,6 @@ export const universities: University[] = [
     campusLife: "Centuries of tradition, a collegiate system, and storied societies in a historic English city.",
     established: 1096,
     website: "https://www.ox.ac.uk",
-    bannerImage: banner("Oxford"),
-    logoImage: logo("Oxford"),
   },
   {
     id: "u16",
@@ -435,8 +400,6 @@ export const universities: University[] = [
     campusLife: "Punting on the Cam, formal halls, and intense college rivalries amid medieval architecture.",
     established: 1209,
     website: "https://www.cam.ac.uk",
-    bannerImage: banner("Cambridge"),
-    logoImage: logo("Cambridge"),
   },
   {
     id: "u17",
@@ -462,8 +425,6 @@ export const universities: University[] = [
     campusLife: "A focused, international STEM community in South Kensington beside London's great museums.",
     established: 1907,
     website: "https://www.imperial.ac.uk",
-    bannerImage: banner("Imperial"),
-    logoImage: logo("Imperial"),
   },
   {
     id: "u18",
@@ -489,8 +450,6 @@ export const universities: University[] = [
     campusLife: "A diverse, cosmopolitan campus embedded in central London's Bloomsbury district.",
     established: 1826,
     website: "https://www.ucl.ac.uk",
-    bannerImage: banner("UCL"),
-    logoImage: logo("UCL"),
   },
   {
     id: "u19",
@@ -516,8 +475,6 @@ export const universities: University[] = [
     campusLife: "A historic campus spread through a vibrant festival city famous for the Fringe.",
     established: 1583,
     website: "https://www.ed.ac.uk",
-    bannerImage: banner("Edinburgh"),
-    logoImage: logo("Edinburgh"),
   },
   {
     id: "u20",
@@ -543,8 +500,6 @@ export const universities: University[] = [
     campusLife: "A buzzing campus in one of the UK's biggest student cities, rich in music and culture.",
     established: 1824,
     website: "https://www.manchester.ac.uk",
-    bannerImage: banner("Manchester"),
-    logoImage: logo("Manchester"),
   },
   {
     id: "u21",
@@ -570,8 +525,6 @@ export const universities: University[] = [
     campusLife: "A high-caliber, international STEM community in one of the world's most livable cities.",
     established: 1855,
     website: "https://ethz.ch",
-    bannerImage: banner("ETH Zurich"),
-    logoImage: logo("ETH"),
   },
   {
     id: "u22",
@@ -597,8 +550,6 @@ export const universities: University[] = [
     campusLife: "A modern lakeside campus blending Swiss precision with a lively innovation scene.",
     established: 1969,
     website: "https://www.epfl.ch",
-    bannerImage: banner("EPFL"),
-    logoImage: logo("EPFL"),
   },
   {
     id: "u23",
@@ -624,8 +575,6 @@ export const universities: University[] = [
     campusLife: "A large, internationally minded campus in one of Europe's most prosperous tech regions.",
     established: 1868,
     website: "https://www.tum.de",
-    bannerImage: banner("TU Munich"),
-    logoImage: logo("TUM"),
   },
   {
     id: "u24",
@@ -651,8 +600,6 @@ export const universities: University[] = [
     campusLife: "A classic European student town where the university and the city are deeply intertwined.",
     established: 1425,
     website: "https://www.kuleuven.be",
-    bannerImage: banner("KU Leuven"),
-    logoImage: logo("KU Leuven"),
   },
   {
     id: "u25",
@@ -678,8 +625,6 @@ export const universities: University[] = [
     campusLife: "An iconic presence in Paris's Latin Quarter, steeped in intellectual history.",
     established: 1257,
     website: "https://www.sorbonne-universite.fr",
-    bannerImage: banner("Sorbonne"),
-    logoImage: logo("Sorbonne"),
   },
   {
     id: "u26",
@@ -705,8 +650,6 @@ export const universities: University[] = [
     campusLife: "A design-and-build culture in a picturesque canal town near The Hague.",
     established: 1842,
     website: "https://www.tudelft.nl",
-    bannerImage: banner("TU Delft"),
-    logoImage: logo("Delft"),
   },
   {
     id: "u27",
@@ -732,8 +675,6 @@ export const universities: University[] = [
     campusLife: "A creative, design-forward community in Italy's fashion and finance capital.",
     established: 1863,
     website: "https://www.polimi.it",
-    bannerImage: banner("Politecnico Milano"),
-    logoImage: logo("PoliMi"),
   },
   {
     id: "u28",
@@ -759,8 +700,6 @@ export const universities: University[] = [
     campusLife: "A major downtown campus at the center of one of the world's most multicultural cities.",
     established: 1827,
     website: "https://www.utoronto.ca",
-    bannerImage: banner("U of Toronto"),
-    logoImage: logo("UofT"),
   },
   {
     id: "u29",
@@ -786,8 +725,6 @@ export const universities: University[] = [
     campusLife: "An ocean-and-mountain campus in Vancouver with a strong outdoor and sustainability culture.",
     established: 1908,
     website: "https://www.ubc.ca",
-    bannerImage: banner("UBC"),
-    logoImage: logo("UBC"),
   },
   {
     id: "u30",
@@ -813,8 +750,6 @@ export const universities: University[] = [
     campusLife: "A historic campus at the foot of Mount Royal in vibrant, bilingual Montreal.",
     established: 1821,
     website: "https://www.mcgill.ca",
-    bannerImage: banner("McGill"),
-    logoImage: logo("McGill"),
   },
   {
     id: "u31",
@@ -840,8 +775,6 @@ export const universities: University[] = [
     campusLife: "An entrepreneurial, co-op-driven culture that alternates study terms with paid work.",
     established: 1957,
     website: "https://uwaterloo.ca",
-    bannerImage: banner("Waterloo"),
-    logoImage: logo("Waterloo"),
   },
   {
     id: "u32",
@@ -867,8 +800,6 @@ export const universities: University[] = [
     campusLife: "A vast garden campus that is among the most selective and competitive in the world.",
     established: 1911,
     website: "https://www.tsinghua.edu.cn",
-    bannerImage: banner("Tsinghua"),
-    logoImage: logo("Tsinghua"),
   },
   {
     id: "u33",
@@ -894,8 +825,6 @@ export const universities: University[] = [
     campusLife: "A classical lake-and-pagoda campus that is a national symbol of academic excellence.",
     established: 1898,
     website: "https://english.pku.edu.cn",
-    bannerImage: banner("Peking University"),
-    logoImage: logo("PKU"),
   },
   {
     id: "u34",
@@ -921,8 +850,6 @@ export const universities: University[] = [
     campusLife: "A cosmopolitan campus in China's most international and business-driven city.",
     established: 1905,
     website: "https://www.fudan.edu.cn",
-    bannerImage: banner("Fudan"),
-    logoImage: logo("Fudan"),
   },
   {
     id: "u35",
@@ -948,8 +875,6 @@ export const universities: University[] = [
     campusLife: "A small, intensely international community on Saadiyat Island's cultural district.",
     established: 2010,
     website: "https://nyuad.nyu.edu",
-    bannerImage: banner("NYU Abu Dhabi"),
-    logoImage: logo("NYUAD"),
   },
   {
     id: "u36",
@@ -975,8 +900,6 @@ export const universities: University[] = [
     campusLife: "A modern, residential campus with a strikingly international student mix.",
     established: 1997,
     website: "https://www.aus.edu",
-    bannerImage: banner("AU Sharjah"),
-    logoImage: logo("AUS"),
   },
   {
     id: "u37",
@@ -1002,8 +925,6 @@ export const universities: University[] = [
     campusLife: "A compact, professionally oriented campus in one of the world's fastest-growing cities.",
     established: 1997,
     website: "https://www.ud.ac.ae",
-    bannerImage: banner("University of Dubai"),
-    logoImage: logo("UD"),
   },
   {
     id: "u38",
@@ -1029,8 +950,6 @@ export const universities: University[] = [
     campusLife: "A research-intensive STEM campus underpinning the UAE's innovation and energy ambitions.",
     established: 1989,
     website: "https://www.ku.ac.ae",
-    bannerImage: banner("Khalifa University"),
-    logoImage: logo("Khalifa"),
   },
   {
     id: "u39",
@@ -1056,8 +975,6 @@ export const universities: University[] = [
     campusLife: "A lively urban campus in West Philadelphia with strong Greek life and athletics.",
     established: 1740,
     website: "https://www.upenn.edu",
-    bannerImage: banner("UPenn"),
-    logoImage: logo("Penn"),
   },
   {
     id: "u40",
@@ -1083,8 +1000,6 @@ export const universities: University[] = [
     campusLife: "A spirited, progressive campus on College Hill above downtown Providence.",
     established: 1764,
     website: "https://www.brown.edu",
-    bannerImage: banner("Brown"),
-    logoImage: logo("Brown"),
   },
   {
     id: "u41",
@@ -1110,8 +1025,6 @@ export const universities: University[] = [
     campusLife: "A close-knit campus in the New Hampshire woods with legendary winter and outdoor clubs.",
     established: 1769,
     website: "https://www.dartmouth.edu",
-    bannerImage: banner("Dartmouth"),
-    logoImage: logo("Dartmouth"),
   },
   {
     id: "u42",
@@ -1137,8 +1050,6 @@ export const universities: University[] = [
     campusLife: "An energetic campus famous for Cameron Crazies and the Duke–UNC rivalry.",
     established: 1838,
     website: "https://www.duke.edu",
-    bannerImage: banner("Duke"),
-    logoImage: logo("Duke"),
   },
   {
     id: "u43",
@@ -1164,8 +1075,6 @@ export const universities: University[] = [
     campusLife: "A balanced campus on Lake Michigan with Big Ten athletics and strong arts.",
     established: 1851,
     website: "https://www.northwestern.edu",
-    bannerImage: banner("Northwestern"),
-    logoImage: logo("NU"),
   },
   {
     id: "u44",
@@ -1191,8 +1100,6 @@ export const universities: University[] = [
     campusLife: "A spirited, STEM-driven campus in midtown Atlanta with strong co-op and athletics.",
     established: 1885,
     website: "https://www.gatech.edu",
-    bannerImage: banner("Georgia Tech"),
-    logoImage: logo("GaTech"),
   },
   {
     id: "u45",
@@ -1218,8 +1125,6 @@ export const universities: University[] = [
     campusLife: "A huge, spirited campus in the heart of Austin's vibrant culture and tech boom.",
     established: 1883,
     website: "https://www.utexas.edu",
-    bannerImage: banner("UT Austin"),
-    logoImage: logo("UT"),
   },
   {
     id: "u46",
@@ -1245,8 +1150,6 @@ export const universities: University[] = [
     campusLife: "An intensely international, debate-driven campus in the heart of London.",
     established: 1895,
     website: "https://www.lse.ac.uk",
-    bannerImage: banner("LSE"),
-    logoImage: logo("LSE"),
   },
   {
     id: "u47",
@@ -1272,8 +1175,6 @@ export const universities: University[] = [
     campusLife: "A historic, multi-site campus woven into London's South Bank and Strand.",
     established: 1829,
     website: "https://www.kcl.ac.uk",
-    bannerImage: banner("Kings College London"),
-    logoImage: logo("KCL"),
   },
   {
     id: "u48",
@@ -1299,8 +1200,6 @@ export const universities: University[] = [
     campusLife: "A self-contained campus university with a strong arts centre and student union.",
     established: 1965,
     website: "https://www.warwick.ac.uk",
-    bannerImage: banner("Warwick"),
-    logoImage: logo("Warwick"),
   },
   {
     id: "u49",
@@ -1326,8 +1225,6 @@ export const universities: University[] = [
     campusLife: "A romantic riverside campus in one of Germany's most beautiful old towns.",
     established: 1386,
     website: "https://www.uni-heidelberg.de",
-    bannerImage: banner("Heidelberg"),
-    logoImage: logo("Heidelberg"),
   },
   {
     id: "u50",
@@ -1353,8 +1250,6 @@ export const universities: University[] = [
     campusLife: "A sleek, modern campus in Italy's fashion and finance capital.",
     established: 1902,
     website: "https://www.unibocconi.eu",
-    bannerImage: banner("Bocconi"),
-    logoImage: logo("Bocconi"),
   },
   {
     id: "u51",
@@ -1380,8 +1275,6 @@ export const universities: University[] = [
     campusLife: "A cobblestoned historic campus at the very center of Dublin city life.",
     established: 1592,
     website: "https://www.tcd.ie",
-    bannerImage: banner("Trinity Dublin"),
-    logoImage: logo("Trinity"),
   },
   {
     id: "u52",
@@ -1407,8 +1300,6 @@ export const universities: University[] = [
     campusLife: "A city-woven campus immersed in Amsterdam's famously open culture.",
     established: 1632,
     website: "https://www.uva.nl",
-    bannerImage: banner("U Amsterdam"),
-    logoImage: logo("UvA"),
   },
   {
     id: "u53",
@@ -1434,8 +1325,6 @@ export const universities: University[] = [
     campusLife: "A focused medical-research community across two Stockholm campuses.",
     established: 1810,
     website: "https://ki.se/en",
-    bannerImage: banner("Karolinska"),
-    logoImage: logo("KI"),
   },
   {
     id: "u54",
@@ -1461,8 +1350,6 @@ export const universities: University[] = [
     campusLife: "A green, research-driven campus near the shores of Lake Ontario.",
     established: 1887,
     website: "https://www.mcmaster.ca",
-    bannerImage: banner("McMaster"),
-    logoImage: logo("McMaster"),
   },
   {
     id: "u55",
@@ -1488,8 +1375,6 @@ export const universities: University[] = [
     campusLife: "A large, four-season campus on the river valley in Alberta's capital.",
     established: 1908,
     website: "https://www.ualberta.ca",
-    bannerImage: banner("U Alberta"),
-    logoImage: logo("UAlberta"),
   },
   {
     id: "u56",
@@ -1515,8 +1400,6 @@ export const universities: University[] = [
     campusLife: "A bustling Francophone campus on the slopes of Mount Royal in Montreal.",
     established: 1878,
     website: "https://www.umontreal.ca",
-    bannerImage: banner("U de Montreal"),
-    logoImage: logo("UdeM"),
   },
   {
     id: "u57",
@@ -1542,8 +1425,6 @@ export const universities: University[] = [
     campusLife: "A sprawling multi-campus university beside the scenic West Lake.",
     established: 1897,
     website: "https://www.zju.edu.cn",
-    bannerImage: banner("Zhejiang"),
-    logoImage: logo("ZJU"),
   },
   {
     id: "u58",
@@ -1569,8 +1450,6 @@ export const universities: University[] = [
     campusLife: "A modern, research-focused campus in China's commercial capital.",
     established: 1896,
     website: "https://en.sjtu.edu.cn",
-    bannerImage: banner("Shanghai Jiao Tong"),
-    logoImage: logo("SJTU"),
   },
   {
     id: "u59",
@@ -1596,8 +1475,6 @@ export const universities: University[] = [
     campusLife: "Modern campuses in Dubai and Abu Dhabi with a strong focus on student leadership.",
     established: 1998,
     website: "https://www.zu.ac.ae",
-    bannerImage: banner("Zayed University"),
-    logoImage: logo("Zayed"),
   },
   {
     id: "u60",
@@ -1623,8 +1500,6 @@ export const universities: University[] = [
     campusLife: "A contemporary, career-oriented campus in the UAE capital.",
     established: 2003,
     website: "https://www.adu.ac.ae",
-    bannerImage: banner("Abu Dhabi University"),
-    logoImage: logo("ADU"),
   },
 
   // ---------- USA (expansion) ----------
@@ -1634,7 +1509,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Trustee Scholarship", "Need-based Aid"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Business", "Arts & Design", "Engineering", "Computer Science"], tags: ["Private", "Research", "Film"],
     description: "A major private research university in Los Angeles, USC is especially renowned for its cinematic arts, business, and engineering programs.",
-    campusLife: "A spirited campus with powerhouse athletics and deep ties to the entertainment industry.", established: 1880, website: "https://www.usc.edu", bannerImage: banner("USC"), logoImage: logo("USC"),
+    campusLife: "A spirited campus with powerhouse athletics and deep ties to the entertainment industry.", established: 1880, website: "https://www.usc.edu",
   },
   {
     id: "u62", slug: "rice", name: "Rice University", country: "United States", city: "Houston, TX", region: "USA",
@@ -1642,7 +1517,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Rice Investment", "Need-based Aid"] }, applicationDeadline: "Jan 04",
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Social Sciences"], tags: ["Private", "Research", "STEM"],
     description: "A small, highly selective private research university known for strong science and engineering programs and a low student-to-faculty ratio.",
-    campusLife: "An intimate residential-college system on a leafy Houston campus.", established: 1912, website: "https://www.rice.edu", bannerImage: banner("Rice"), logoImage: logo("Rice"),
+    campusLife: "An intimate residential-college system on a leafy Houston campus.", established: 1912, website: "https://www.rice.edu",
   },
   {
     id: "u63", slug: "vanderbilt", name: "Vanderbilt University", country: "United States", city: "Nashville, TN", region: "USA",
@@ -1650,7 +1525,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Cornelius Vanderbilt Scholarship", "Need-based Aid"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Medicine", "Business", "Social Sciences", "Engineering"], tags: ["Private", "Research", "Medical"],
     description: "A leading private research university with top programs in medicine, education, and music, set in vibrant Nashville.",
-    campusLife: "A park-like campus (a national arboretum) with strong school spirit.", established: 1873, website: "https://www.vanderbilt.edu", bannerImage: banner("Vanderbilt"), logoImage: logo("Vandy"),
+    campusLife: "A park-like campus (a national arboretum) with strong school spirit.", established: 1873, website: "https://www.vanderbilt.edu",
   },
   {
     id: "u64", slug: "emory", name: "Emory University", country: "United States", city: "Atlanta, GA", region: "USA",
@@ -1658,7 +1533,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Emory Scholars", "Need-based Aid"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Medicine", "Business", "Natural Sciences", "Social Sciences"], tags: ["Private", "Research", "Medical"],
     description: "A private research university with a strong reputation in medicine, public health, and business, closely tied to the CDC.",
-    campusLife: "A green Atlanta campus with a health-and-research-focused community.", established: 1836, website: "https://www.emory.edu", bannerImage: banner("Emory"), logoImage: logo("Emory"),
+    campusLife: "A green Atlanta campus with a health-and-research-focused community.", established: 1836, website: "https://www.emory.edu",
   },
   {
     id: "u65", slug: "notre-dame", name: "University of Notre Dame", country: "United States", city: "Notre Dame, IN", region: "USA",
@@ -1666,7 +1541,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Notre Dame Scholarship", "Need-based Aid"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Business", "Engineering", "Social Sciences", "Law"], tags: ["Private", "Research", "Catholic"],
     description: "A renowned Catholic research university known for its Mendoza business school, strong alumni network, and football tradition.",
-    campusLife: "A close-knit, tradition-rich campus famed for game-day spirit.", established: 1842, website: "https://www.nd.edu", bannerImage: banner("Notre Dame"), logoImage: logo("ND"),
+    campusLife: "A close-knit, tradition-rich campus famed for game-day spirit.", established: 1842, website: "https://www.nd.edu",
   },
   {
     id: "u66", slug: "georgetown", name: "Georgetown University", country: "United States", city: "Washington, DC", region: "USA",
@@ -1674,7 +1549,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Georgetown Scholarship Program"] }, applicationDeadline: "Jan 10",
     majorsOffered: ["Law", "Social Sciences", "Business", "Medicine"], tags: ["Private", "Urban", "Politics"],
     description: "The oldest Catholic university in the US, Georgetown is a global leader in international affairs, law, and public policy.",
-    campusLife: "A historic campus in the heart of Washington's political world.", established: 1789, website: "https://www.georgetown.edu", bannerImage: banner("Georgetown"), logoImage: logo("GU"),
+    campusLife: "A historic campus in the heart of Washington's political world.", established: 1789, website: "https://www.georgetown.edu",
   },
   {
     id: "u67", slug: "boston-university", name: "Boston University", country: "United States", city: "Boston, MA", region: "USA",
@@ -1682,7 +1557,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Trustee Scholarship", "Presidential Scholarship"] }, applicationDeadline: "Jan 04",
     majorsOffered: ["Business", "Engineering", "Medicine", "Arts & Design"], tags: ["Private", "Urban", "Research"],
     description: "A large private research university spread along the Charles River, strong across business, communications, and the sciences.",
-    campusLife: "An urban, internationally diverse campus woven into the city of Boston.", established: 1839, website: "https://www.bu.edu", bannerImage: banner("Boston University"), logoImage: logo("BU"),
+    campusLife: "An urban, internationally diverse campus woven into the city of Boston.", established: 1839, website: "https://www.bu.edu",
   },
   {
     id: "u68", slug: "boston-college", name: "Boston College", country: "United States", city: "Chestnut Hill, MA", region: "USA",
@@ -1690,7 +1565,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Presidential Scholars Program", "Need-based Aid"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Business", "Social Sciences", "Law", "Natural Sciences"], tags: ["Private", "Catholic", "Liberal Arts"],
     description: "A Jesuit research university known for its Carroll School of Management and a strong liberal-arts core.",
-    campusLife: "A collegiate-Gothic campus just outside Boston with strong school spirit.", established: 1863, website: "https://www.bc.edu", bannerImage: banner("Boston College"), logoImage: logo("BC"),
+    campusLife: "A collegiate-Gothic campus just outside Boston with strong school spirit.", established: 1863, website: "https://www.bc.edu",
   },
   {
     id: "u69", slug: "tufts", name: "Tufts University", country: "United States", city: "Medford, MA", region: "USA",
@@ -1698,7 +1573,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Need-based Aid"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Social Sciences", "Engineering", "Medicine", "Arts & Design"], tags: ["Private", "Research", "Liberal Arts"],
     description: "A research university blending liberal arts with strengths in international relations, engineering, and the health sciences.",
-    campusLife: "An academically intense yet collaborative campus near Boston.", established: 1852, website: "https://www.tufts.edu", bannerImage: banner("Tufts"), logoImage: logo("Tufts"),
+    campusLife: "An academically intense yet collaborative campus near Boston.", established: 1852, website: "https://www.tufts.edu",
   },
   {
     id: "u70", slug: "washington-university-st-louis", name: "Washington University in St. Louis", country: "United States", city: "St. Louis, MO", region: "USA",
@@ -1706,7 +1581,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Danforth Scholars", "Need-based Aid"] }, applicationDeadline: "Jan 02",
     majorsOffered: ["Medicine", "Business", "Arts & Design", "Natural Sciences"], tags: ["Private", "Research", "Medical"],
     description: "A private research university with top-ranked medical and design schools and a strong commitment to financial aid.",
-    campusLife: "A collegiate-Gothic campus on the edge of Forest Park.", established: 1853, website: "https://www.wustl.edu", bannerImage: banner("WashU"), logoImage: logo("WashU"),
+    campusLife: "A collegiate-Gothic campus on the edge of Forest Park.", established: 1853, website: "https://www.wustl.edu",
   },
   {
     id: "u71", slug: "university-of-washington", name: "University of Washington", country: "United States", city: "Seattle, WA", region: "USA",
@@ -1714,7 +1589,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Husky Promise", "Purple & Gold Scholarship"] }, applicationDeadline: "Nov 15",
     majorsOffered: ["Computer Science", "Medicine", "Engineering", "Natural Sciences"], tags: ["Public", "Research", "Tech"],
     description: "A top public research university and a major hub for computer science, medicine, and global health in the Pacific Northwest.",
-    campusLife: "A scenic Seattle campus near the region's booming tech industry.", established: 1861, website: "https://www.washington.edu", bannerImage: banner("UW"), logoImage: logo("UW"),
+    campusLife: "A scenic Seattle campus near the region's booming tech industry.", established: 1861, website: "https://www.washington.edu",
   },
   {
     id: "u72", slug: "uc-san-diego", name: "University of California, San Diego", country: "United States", city: "San Diego, CA", region: "USA",
@@ -1722,7 +1597,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Regents' Scholarship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Medicine", "Computer Science"], tags: ["Public", "Research", "STEM"],
     description: "A leading public research university strong in the biological sciences, engineering, and oceanography.",
-    campusLife: "A coastal La Jolla campus organized into distinct residential colleges.", established: 1960, website: "https://www.ucsd.edu", bannerImage: banner("UC San Diego"), logoImage: logo("UCSD"),
+    campusLife: "A coastal La Jolla campus organized into distinct residential colleges.", established: 1960, website: "https://www.ucsd.edu",
   },
   {
     id: "u73", slug: "uc-davis", name: "University of California, Davis", country: "United States", city: "Davis, CA", region: "USA",
@@ -1730,7 +1605,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Regents' Scholarship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Business", "Social Sciences"], tags: ["Public", "Research", "Agriculture"],
     description: "A top public university world-renowned for agriculture, veterinary medicine, and environmental science.",
-    campusLife: "A bike-friendly campus in a classic California college town.", established: 1905, website: "https://www.ucdavis.edu", bannerImage: banner("UC Davis"), logoImage: logo("UCD"),
+    campusLife: "A bike-friendly campus in a classic California college town.", established: 1905, website: "https://www.ucdavis.edu",
   },
   {
     id: "u74", slug: "uc-irvine", name: "University of California, Irvine", country: "United States", city: "Irvine, CA", region: "USA",
@@ -1738,7 +1613,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Regents' Scholarship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Computer Science", "Business", "Natural Sciences", "Social Sciences"], tags: ["Public", "Research"],
     description: "A fast-rising public research university known for its strengths in computer science, biology, and the social sciences.",
-    campusLife: "A park-centered campus in safe, planned Orange County.", established: 1965, website: "https://www.uci.edu", bannerImage: banner("UC Irvine"), logoImage: logo("UCI"),
+    campusLife: "A park-centered campus in safe, planned Orange County.", established: 1965, website: "https://www.uci.edu",
   },
   {
     id: "u75", slug: "uiuc", name: "University of Illinois Urbana-Champaign", country: "United States", city: "Champaign, IL", region: "USA",
@@ -1746,7 +1621,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Illinois Commitment"] }, applicationDeadline: "Jan 05",
     majorsOffered: ["Engineering", "Computer Science", "Business", "Natural Sciences"], tags: ["Public", "STEM", "Big Ten"],
     description: "A flagship public university with a world-leading engineering and computer science program.",
-    campusLife: "A classic Big Ten campus with a vast range of student organizations.", established: 1867, website: "https://illinois.edu", bannerImage: banner("UIUC"), logoImage: logo("UIUC"),
+    campusLife: "A classic Big Ten campus with a vast range of student organizations.", established: 1867, website: "https://illinois.edu",
   },
   {
     id: "u76", slug: "wisconsin-madison", name: "University of Wisconsin–Madison", country: "United States", city: "Madison, WI", region: "USA",
@@ -1754,7 +1629,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Bucky's Tuition Promise"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Social Sciences"], tags: ["Public", "Research", "Big Ten"],
     description: "A major public research university with broad academic strength and a strong tradition of public service.",
-    campusLife: "A lakeside campus famed for its lively student life and traditions.", established: 1848, website: "https://www.wisc.edu", bannerImage: banner("Wisconsin"), logoImage: logo("UW-Mad"),
+    campusLife: "A lakeside campus famed for its lively student life and traditions.", established: 1848, website: "https://www.wisc.edu",
   },
   {
     id: "u77", slug: "unc-chapel-hill", name: "University of North Carolina at Chapel Hill", country: "United States", city: "Chapel Hill, NC", region: "USA",
@@ -1762,7 +1637,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Carolina Covenant", "Morehead-Cain Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Medicine", "Business", "Social Sciences", "Natural Sciences"], tags: ["Public", "Research"],
     description: "The oldest public university in the US, UNC is a leading research institution with strong medicine and journalism programs.",
-    campusLife: "A historic Southern campus with passionate basketball culture.", established: 1789, website: "https://www.unc.edu", bannerImage: banner("UNC"), logoImage: logo("UNC"),
+    campusLife: "A historic Southern campus with passionate basketball culture.", established: 1789, website: "https://www.unc.edu",
   },
   {
     id: "u78", slug: "university-of-virginia", name: "University of Virginia", country: "United States", city: "Charlottesville, VA", region: "USA",
@@ -1770,7 +1645,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Jefferson Scholars", "AccessUVa"] }, applicationDeadline: "Jan 01",
     majorsOffered: ["Business", "Law", "Social Sciences", "Engineering"], tags: ["Public", "Research", "Historic"],
     description: "Founded by Thomas Jefferson, UVA is a top public university with renowned business, law, and liberal-arts programs.",
-    campusLife: "A UNESCO-listed Jeffersonian campus steeped in tradition.", established: 1819, website: "https://www.virginia.edu", bannerImage: banner("UVA"), logoImage: logo("UVA"),
+    campusLife: "A UNESCO-listed Jeffersonian campus steeped in tradition.", established: 1819, website: "https://www.virginia.edu",
   },
   {
     id: "u79", slug: "purdue", name: "Purdue University", country: "United States", city: "West Lafayette, IN", region: "USA",
@@ -1778,7 +1653,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Purdue Trustees Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Engineering", "Computer Science", "Business", "Natural Sciences"], tags: ["Public", "STEM", "Big Ten"],
     description: "A leading public university for engineering and aviation, known for affordability and a frozen-tuition pledge.",
-    campusLife: "A spirited STEM-driven campus with a strong aerospace legacy.", established: 1869, website: "https://www.purdue.edu", bannerImage: banner("Purdue"), logoImage: logo("Purdue"),
+    campusLife: "A spirited STEM-driven campus with a strong aerospace legacy.", established: 1869, website: "https://www.purdue.edu",
   },
   {
     id: "u80", slug: "ohio-state", name: "Ohio State University", country: "United States", city: "Columbus, OH", region: "USA",
@@ -1786,7 +1661,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Land Grant Opportunity", "Maximus Scholarship"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Engineering", "Medicine", "Social Sciences"], tags: ["Public", "Research", "Big Ten"],
     description: "One of the largest universities in the US, Ohio State is a comprehensive research institution with broad academic offerings.",
-    campusLife: "A massive, energetic campus with legendary football Saturdays.", established: 1870, website: "https://www.osu.edu", bannerImage: banner("Ohio State"), logoImage: logo("OSU"),
+    campusLife: "A massive, energetic campus with legendary football Saturdays.", established: 1870, website: "https://www.osu.edu",
   },
 
   // ---------- Europe (expansion) ----------
@@ -1796,7 +1671,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Think Big Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Engineering", "Natural Sciences", "Social Sciences", "Medicine"], tags: ["Public", "Research"],
     description: "A leading research-intensive UK university known for engineering, the sciences, and a strong record of graduate employability.",
-    campusLife: "A lively campus in a creative, hilly harbour city.", established: 1876, website: "https://www.bristol.ac.uk", bannerImage: banner("Bristol"), logoImage: logo("Bristol"),
+    campusLife: "A lively campus in a creative, hilly harbour city.", established: 1876, website: "https://www.bristol.ac.uk",
   },
   {
     id: "u82", slug: "glasgow", name: "University of Glasgow", country: "United Kingdom", city: "Glasgow", region: "Europe",
@@ -1804,7 +1679,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Glasgow International Leadership Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Medicine", "Engineering", "Social Sciences", "Arts & Design"], tags: ["Public", "Historic", "Research"],
     description: "One of the UK's oldest universities, Glasgow combines historic prestige with strong research across medicine and the sciences.",
-    campusLife: "A Gothic-revival campus in Scotland's largest, liveliest city.", established: 1451, website: "https://www.gla.ac.uk", bannerImage: banner("Glasgow"), logoImage: logo("Glasgow"),
+    campusLife: "A Gothic-revival campus in Scotland's largest, liveliest city.", established: 1451, website: "https://www.gla.ac.uk",
   },
   {
     id: "u83", slug: "durham", name: "Durham University", country: "United Kingdom", city: "Durham", region: "Europe",
@@ -1812,7 +1687,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Durham Grant Scheme"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Business", "Arts & Design"], tags: ["Public", "Historic", "Collegiate"],
     description: "A collegiate research university with a strong reputation across the sciences and humanities, set around a medieval cathedral city.",
-    campusLife: "A traditional collegiate system with rowing and formal halls.", established: 1832, website: "https://www.durham.ac.uk", bannerImage: banner("Durham"), logoImage: logo("Durham"),
+    campusLife: "A traditional collegiate system with rowing and formal halls.", established: 1832, website: "https://www.durham.ac.uk",
   },
   {
     id: "u84", slug: "leeds", name: "University of Leeds", country: "United Kingdom", city: "Leeds", region: "Europe",
@@ -1820,7 +1695,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Leeds Excellence Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Business", "Engineering", "Arts & Design", "Social Sciences"], tags: ["Public", "Research", "Urban"],
     description: "A large, research-intensive civic university with broad strengths and a renowned business school.",
-    campusLife: "A buzzing campus in one of the UK's top student cities.", established: 1874, website: "https://www.leeds.ac.uk", bannerImage: banner("Leeds"), logoImage: logo("Leeds"),
+    campusLife: "A buzzing campus in one of the UK's top student cities.", established: 1874, website: "https://www.leeds.ac.uk",
   },
   {
     id: "u85", slug: "birmingham", name: "University of Birmingham", country: "United Kingdom", city: "Birmingham", region: "Europe",
@@ -1828,7 +1703,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Chamberlain Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Engineering", "Medicine", "Business", "Natural Sciences"], tags: ["Public", "Research"],
     description: "A founding 'redbrick' civic university with strong programs across engineering, medicine, and business.",
-    campusLife: "A green campus with its own clock tower landmark and station.", established: 1900, website: "https://www.birmingham.ac.uk", bannerImage: banner("Birmingham"), logoImage: logo("Bham"),
+    campusLife: "A green campus with its own clock tower landmark and station.", established: 1900, website: "https://www.birmingham.ac.uk",
   },
   {
     id: "u86", slug: "sheffield", name: "University of Sheffield", country: "United Kingdom", city: "Sheffield", region: "Europe",
@@ -1836,7 +1711,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Sheffield Undergraduate Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Engineering", "Natural Sciences", "Social Sciences", "Arts & Design"], tags: ["Public", "Research"],
     description: "A research-led university celebrated for its engineering and advanced manufacturing research.",
-    campusLife: "A friendly campus beside the Peak District national park.", established: 1905, website: "https://www.sheffield.ac.uk", bannerImage: banner("Sheffield"), logoImage: logo("Sheffield"),
+    campusLife: "A friendly campus beside the Peak District national park.", established: 1905, website: "https://www.sheffield.ac.uk",
   },
   {
     id: "u87", slug: "nottingham", name: "University of Nottingham", country: "United Kingdom", city: "Nottingham", region: "Europe",
@@ -1844,7 +1719,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Developing Solutions Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Engineering", "Business", "Medicine", "Natural Sciences"], tags: ["Public", "Research"],
     description: "A globally minded research university with campuses in the UK, China, and Malaysia and strong science programs.",
-    campusLife: "A landscaped parkland campus with lakes and woodland.", established: 1881, website: "https://www.nottingham.ac.uk", bannerImage: banner("Nottingham"), logoImage: logo("Notts"),
+    campusLife: "A landscaped parkland campus with lakes and woodland.", established: 1881, website: "https://www.nottingham.ac.uk",
   },
   {
     id: "u88", slug: "southampton", name: "University of Southampton", country: "United Kingdom", city: "Southampton", region: "Europe",
@@ -1852,7 +1727,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Vice-Chancellor's Award"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business"], tags: ["Public", "STEM", "Research"],
     description: "A research-intensive university known for electronics, computer science, and ocean and maritime engineering.",
-    campusLife: "A coastal-adjacent campus with strong sailing and sports.", established: 1862, website: "https://www.southampton.ac.uk", bannerImage: banner("Southampton"), logoImage: logo("Soton"),
+    campusLife: "A coastal-adjacent campus with strong sailing and sports.", established: 1862, website: "https://www.southampton.ac.uk",
   },
   {
     id: "u89", slug: "queen-mary-london", name: "Queen Mary University of London", country: "United Kingdom", city: "London", region: "Europe",
@@ -1860,7 +1735,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Queen Mary Bursary"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Medicine", "Law", "Social Sciences", "Engineering"], tags: ["Public", "Urban", "Research"],
     description: "A diverse research university and member of the Russell Group, with strong medicine, law, and the humanities.",
-    campusLife: "A self-contained campus in London's vibrant East End.", established: 1785, website: "https://www.qmul.ac.uk", bannerImage: banner("Queen Mary"), logoImage: logo("QMUL"),
+    campusLife: "A self-contained campus in London's vibrant East End.", established: 1785, website: "https://www.qmul.ac.uk",
   },
   {
     id: "u90", slug: "st-andrews", name: "University of St Andrews", country: "United Kingdom", city: "St Andrews", region: "Europe",
@@ -1868,7 +1743,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["St Andrews Scholarship"] }, applicationDeadline: "Jan 29",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Arts & Design", "Business"], tags: ["Public", "Historic", "Collegiate"],
     description: "Scotland's first university and one of the most prestigious in the UK, known for international relations and the sciences.",
-    campusLife: "A small, tradition-rich town beside the famous golf links.", established: 1413, website: "https://www.st-andrews.ac.uk", bannerImage: banner("St Andrews"), logoImage: logo("St And"),
+    campusLife: "A small, tradition-rich town beside the famous golf links.", established: 1413, website: "https://www.st-andrews.ac.uk",
   },
   {
     id: "u91", slug: "lmu-munich", name: "Ludwig Maximilian University of Munich", country: "Germany", city: "Munich", region: "Europe",
@@ -1876,7 +1751,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Deutschlandstipendium"] }, applicationDeadline: "Jul 15",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Law"], tags: ["Public", "Research", "Tuition-free"],
     description: "One of Germany's leading research universities, LMU is strong across the sciences, medicine, and the humanities.",
-    campusLife: "A historic city-integrated campus in prosperous Munich.", established: 1472, website: "https://www.lmu.de", bannerImage: banner("LMU Munich"), logoImage: logo("LMU"),
+    campusLife: "A historic city-integrated campus in prosperous Munich.", established: 1472, website: "https://www.lmu.de",
   },
   {
     id: "u92", slug: "humboldt-berlin", name: "Humboldt University of Berlin", country: "Germany", city: "Berlin", region: "Europe",
@@ -1884,7 +1759,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Deutschlandstipendium"] }, applicationDeadline: "Jul 15",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Arts & Design", "Law"], tags: ["Public", "Research", "Historic", "Tuition-free"],
     description: "A historic Berlin university that shaped the modern research model, with strengths in the humanities and sciences.",
-    campusLife: "An intellectual campus in the heart of Berlin's culture.", established: 1810, website: "https://www.hu-berlin.de", bannerImage: banner("Humboldt"), logoImage: logo("HU Berlin"),
+    campusLife: "An intellectual campus in the heart of Berlin's culture.", established: 1810, website: "https://www.hu-berlin.de",
   },
   {
     id: "u93", slug: "rwth-aachen", name: "RWTH Aachen University", country: "Germany", city: "Aachen", region: "Europe",
@@ -1892,7 +1767,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Deutschlandstipendium"] }, applicationDeadline: "Jul 15",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Public", "STEM", "Tuition-free"],
     description: "Germany's largest technical university and a powerhouse of engineering research with deep industry ties.",
-    campusLife: "An engineering-driven campus near the Dutch and Belgian borders.", established: 1870, website: "https://www.rwth-aachen.de", bannerImage: banner("RWTH Aachen"), logoImage: logo("RWTH"),
+    campusLife: "An engineering-driven campus near the Dutch and Belgian borders.", established: 1870, website: "https://www.rwth-aachen.de",
   },
   {
     id: "u94", slug: "sciences-po", name: "Sciences Po", country: "France", city: "Paris", region: "Europe",
@@ -1900,7 +1775,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Émile Boutmy Scholarship"] }, applicationDeadline: "Feb 22",
     majorsOffered: ["Social Sciences", "Law", "Business"], tags: ["Private", "Politics", "Urban"],
     description: "France's elite school for the social sciences, politics, and international affairs, training many of its leaders.",
-    campusLife: "A debate-driven community across central Paris and regional campuses.", established: 1872, website: "https://www.sciencespo.fr", bannerImage: banner("Sciences Po"), logoImage: logo("Sci Po"),
+    campusLife: "A debate-driven community across central Paris and regional campuses.", established: 1872, website: "https://www.sciencespo.fr",
   },
   {
     id: "u95", slug: "ecole-polytechnique", name: "École Polytechnique", country: "France", city: "Palaiseau", region: "Europe",
@@ -1908,7 +1783,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Bachelor Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Engineering", "Natural Sciences", "Computer Science"], tags: ["Public", "STEM", "Elite"],
     description: "France's most prestigious engineering grande école, blending rigorous science with a selective, elite tradition.",
-    campusLife: "A small, highly selective campus south of Paris.", established: 1794, website: "https://www.polytechnique.edu", bannerImage: banner("Polytechnique"), logoImage: logo("X"),
+    campusLife: "A small, highly selective campus south of Paris.", established: 1794, website: "https://www.polytechnique.edu",
   },
   {
     id: "u96", slug: "psl-university", name: "PSL University", country: "France", city: "Paris", region: "Europe",
@@ -1916,7 +1791,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["PSL Scholarship"] }, applicationDeadline: "Mar 15",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Arts & Design", "Business"], tags: ["Public", "Research", "Elite"],
     description: "A collegiate research university uniting several elite Paris institutions, ranked among Europe's very best.",
-    campusLife: "A network of historic schools across central Paris.", established: 2010, website: "https://www.psl.eu", bannerImage: banner("PSL"), logoImage: logo("PSL"),
+    campusLife: "A network of historic schools across central Paris.", established: 2010, website: "https://www.psl.eu",
   },
   {
     id: "u97", slug: "utrecht", name: "Utrecht University", country: "Netherlands", city: "Utrecht", region: "Europe",
@@ -1924,7 +1799,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Utrecht Excellence Scholarship"] }, applicationDeadline: "Apr 01",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Medicine", "Law"], tags: ["Public", "Research"],
     description: "One of Europe's leading research universities, strong across the life sciences, humanities, and geosciences.",
-    campusLife: "A historic city campus plus a modern science park.", established: 1636, website: "https://www.uu.nl", bannerImage: banner("Utrecht"), logoImage: logo("Utrecht"),
+    campusLife: "A historic city campus plus a modern science park.", established: 1636, website: "https://www.uu.nl",
   },
   {
     id: "u98", slug: "leiden", name: "Leiden University", country: "Netherlands", city: "Leiden", region: "Europe",
@@ -1932,7 +1807,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Leiden University Excellence Scholarship"] }, applicationDeadline: "Apr 01",
     majorsOffered: ["Law", "Social Sciences", "Natural Sciences", "Arts & Design"], tags: ["Public", "Historic", "Research"],
     description: "The oldest university in the Netherlands, Leiden is renowned for law, international relations, and the humanities.",
-    campusLife: "A classic Dutch university town threaded with canals.", established: 1575, website: "https://www.universiteitleiden.nl", bannerImage: banner("Leiden"), logoImage: logo("Leiden"),
+    campusLife: "A classic Dutch university town threaded with canals.", established: 1575, website: "https://www.universiteitleiden.nl",
   },
   {
     id: "u99", slug: "university-of-barcelona", name: "University of Barcelona", country: "Spain", city: "Barcelona", region: "Europe",
@@ -1940,7 +1815,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Santander Scholarship"] }, applicationDeadline: "Jun 30",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Arts & Design"], tags: ["Public", "Research", "Historic"],
     description: "Spain's top public university for research, with broad programs and a historic presence in central Barcelona.",
-    campusLife: "A vibrant city campus in one of Europe's most popular cities.", established: 1450, website: "https://www.ub.edu", bannerImage: banner("Barcelona"), logoImage: logo("UB"),
+    campusLife: "A vibrant city campus in one of Europe's most popular cities.", established: 1450, website: "https://www.ub.edu",
   },
   {
     id: "u100", slug: "university-of-zurich", name: "University of Zurich", country: "Switzerland", city: "Zurich", region: "Europe",
@@ -1948,7 +1823,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UZH Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Business"], tags: ["Public", "Research"],
     description: "Switzerland's largest university, strong in medicine, economics, and the natural sciences, with famously low tuition.",
-    campusLife: "A research-rich campus in one of the world's most livable cities.", established: 1833, website: "https://www.uzh.ch", bannerImage: banner("UZH"), logoImage: logo("UZH"),
+    campusLife: "A research-rich campus in one of the world's most livable cities.", established: 1833, website: "https://www.uzh.ch",
   },
 
   // ---------- Canada (expansion) ----------
@@ -1958,7 +1833,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["International Entrance Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Engineering", "Business", "Medicine", "Natural Sciences"], tags: ["Public", "Research", "Energy"],
     description: "A fast-growing research university strong in engineering, energy, and the health sciences.",
-    campusLife: "A modern campus near the Rockies in Canada's energy capital.", established: 1966, website: "https://www.ucalgary.ca", bannerImage: banner("Calgary"), logoImage: logo("UCalgary"),
+    campusLife: "A modern campus near the Rockies in Canada's energy capital.", established: 1966, website: "https://www.ucalgary.ca",
   },
   {
     id: "u102", slug: "university-of-ottawa", name: "University of Ottawa", country: "Canada", city: "Ottawa", region: "Canada",
@@ -1966,7 +1841,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["uOttawa Merit Scholarship"] }, applicationDeadline: "Apr 01",
     majorsOffered: ["Law", "Social Sciences", "Medicine", "Engineering"], tags: ["Public", "Bilingual", "Research"],
     description: "The world's largest bilingual (English-French) university, strong in law, medicine, and public policy.",
-    campusLife: "An urban campus steps from Canada's Parliament Hill.", established: 1848, website: "https://www.uottawa.ca", bannerImage: banner("Ottawa"), logoImage: logo("uOttawa"),
+    campusLife: "An urban campus steps from Canada's Parliament Hill.", established: 1848, website: "https://www.uottawa.ca",
   },
   {
     id: "u103", slug: "western-university", name: "Western University", country: "Canada", city: "London, ON", region: "Canada",
@@ -1974,7 +1849,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Western Scholarship of Excellence"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Medicine", "Engineering", "Social Sciences"], tags: ["Public", "Research"],
     description: "A research university famed for its Ivey Business School and a strong, traditional campus experience.",
-    campusLife: "A picturesque collegiate-Gothic campus with vibrant student life.", established: 1878, website: "https://www.uwo.ca", bannerImage: banner("Western"), logoImage: logo("Western"),
+    campusLife: "A picturesque collegiate-Gothic campus with vibrant student life.", established: 1878, website: "https://www.uwo.ca",
   },
   {
     id: "u104", slug: "queens-university", name: "Queen's University", country: "Canada", city: "Kingston, ON", region: "Canada",
@@ -1982,7 +1857,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Queen's Excellence Scholarship"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Engineering", "Social Sciences", "Medicine"], tags: ["Public", "Research", "Historic"],
     description: "A selective research university with strong business and engineering programs and a tight-knit community.",
-    campusLife: "A historic limestone campus with deep traditions and school spirit.", established: 1841, website: "https://www.queensu.ca", bannerImage: banner("Queens"), logoImage: logo("Queens"),
+    campusLife: "A historic limestone campus with deep traditions and school spirit.", established: 1841, website: "https://www.queensu.ca",
   },
   {
     id: "u105", slug: "dalhousie", name: "Dalhousie University", country: "Canada", city: "Halifax", region: "Canada",
@@ -1990,7 +1865,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Dalhousie Entrance Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Medicine", "Engineering", "Natural Sciences", "Law"], tags: ["Public", "Research", "Coastal"],
     description: "Atlantic Canada's leading research university, strong in medicine, ocean sciences, and law.",
-    campusLife: "A historic coastal campus in maritime Halifax.", established: 1818, website: "https://www.dal.ca", bannerImage: banner("Dalhousie"), logoImage: logo("Dal"),
+    campusLife: "A historic coastal campus in maritime Halifax.", established: 1818, website: "https://www.dal.ca",
   },
   {
     id: "u106", slug: "simon-fraser", name: "Simon Fraser University", country: "Canada", city: "Burnaby, BC", region: "Canada",
@@ -1998,7 +1873,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SFU Entrance Scholarship"] }, applicationDeadline: "Jan 31",
     majorsOffered: ["Computer Science", "Business", "Social Sciences", "Natural Sciences"], tags: ["Public", "Research", "Tech"],
     description: "An innovative public university known for co-op education, computing science, and interdisciplinary programs.",
-    campusLife: "A striking mountaintop campus above Vancouver.", established: 1965, website: "https://www.sfu.ca", bannerImage: banner("SFU"), logoImage: logo("SFU"),
+    campusLife: "A striking mountaintop campus above Vancouver.", established: 1965, website: "https://www.sfu.ca",
   },
   {
     id: "u107", slug: "university-of-victoria", name: "University of Victoria", country: "Canada", city: "Victoria, BC", region: "Canada",
@@ -2006,7 +1881,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UVic Excellence Scholarship"] }, applicationDeadline: "Feb 28",
     majorsOffered: ["Natural Sciences", "Engineering", "Law", "Social Sciences"], tags: ["Public", "Research", "Coastal"],
     description: "A research university known for co-op programs, ocean and climate science, and law.",
-    campusLife: "A garden-like campus on scenic Vancouver Island.", established: 1963, website: "https://www.uvic.ca", bannerImage: banner("UVic"), logoImage: logo("UVic"),
+    campusLife: "A garden-like campus on scenic Vancouver Island.", established: 1963, website: "https://www.uvic.ca",
   },
   {
     id: "u108", slug: "university-of-manitoba", name: "University of Manitoba", country: "Canada", city: "Winnipeg", region: "Canada",
@@ -2014,7 +1889,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["President's Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Engineering", "Medicine", "Business", "Natural Sciences"], tags: ["Public", "Research"],
     description: "Western Canada's first university, a comprehensive research institution with strong health and engineering programs.",
-    campusLife: "A large prairie campus along the Red River.", established: 1877, website: "https://umanitoba.ca", bannerImage: banner("Manitoba"), logoImage: logo("UM"),
+    campusLife: "A large prairie campus along the Red River.", established: 1877, website: "https://umanitoba.ca",
   },
   {
     id: "u109", slug: "university-of-saskatchewan", name: "University of Saskatchewan", country: "Canada", city: "Saskatoon", region: "Canada",
@@ -2022,7 +1897,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["U of S Entrance Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Medicine", "Engineering", "Natural Sciences", "Business"], tags: ["Public", "Research", "Agriculture"],
     description: "A research university with notable strengths in agriculture, veterinary medicine, and synchrotron science.",
-    campusLife: "A greystone campus on the banks of the South Saskatchewan River.", established: 1907, website: "https://www.usask.ca", bannerImage: banner("USask"), logoImage: logo("USask"),
+    campusLife: "A greystone campus on the banks of the South Saskatchewan River.", established: 1907, website: "https://www.usask.ca",
   },
   {
     id: "u110", slug: "university-of-guelph", name: "University of Guelph", country: "Canada", city: "Guelph, ON", region: "Canada",
@@ -2030,7 +1905,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Guelph Entrance Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Natural Sciences", "Business", "Social Sciences", "Arts & Design"], tags: ["Public", "Agriculture", "Research"],
     description: "A research university renowned for agriculture, veterinary medicine, and the environmental sciences.",
-    campusLife: "A friendly, community-focused campus in a leafy Ontario town.", established: 1964, website: "https://www.uoguelph.ca", bannerImage: banner("Guelph"), logoImage: logo("Guelph"),
+    campusLife: "A friendly, community-focused campus in a leafy Ontario town.", established: 1964, website: "https://www.uoguelph.ca",
   },
   {
     id: "u111", slug: "carleton", name: "Carleton University", country: "Canada", city: "Ottawa", region: "Canada",
@@ -2038,7 +1913,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Carleton Entrance Scholarship"] }, applicationDeadline: "Apr 01",
     majorsOffered: ["Engineering", "Computer Science", "Social Sciences", "Business"], tags: ["Public", "Research", "Tech"],
     description: "A research university strong in engineering, public affairs, and journalism, well connected to Canada's capital.",
-    campusLife: "A connected campus between two rivers in central Ottawa.", established: 1942, website: "https://carleton.ca", bannerImage: banner("Carleton"), logoImage: logo("Carleton"),
+    campusLife: "A connected campus between two rivers in central Ottawa.", established: 1942, website: "https://carleton.ca",
   },
   {
     id: "u112", slug: "concordia", name: "Concordia University", country: "Canada", city: "Montreal", region: "Canada",
@@ -2046,7 +1921,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Concordia Entrance Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Business", "Arts & Design", "Engineering", "Social Sciences"], tags: ["Public", "Urban", "Arts"],
     description: "A dynamic urban university known for fine arts, business, and a hands-on, experiential approach.",
-    campusLife: "A downtown campus embedded in multicultural Montreal.", established: 1974, website: "https://www.concordia.ca", bannerImage: banner("Concordia"), logoImage: logo("Concordia"),
+    campusLife: "A downtown campus embedded in multicultural Montreal.", established: 1974, website: "https://www.concordia.ca",
   },
   {
     id: "u113", slug: "york-university", name: "York University", country: "Canada", city: "Toronto", region: "Canada",
@@ -2054,7 +1929,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["York Automatic Entrance Scholarship"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Law", "Social Sciences", "Arts & Design"], tags: ["Public", "Urban", "Research"],
     description: "One of Canada's largest universities, known for its Schulich business school and strong law and liberal-arts programs.",
-    campusLife: "A large, diverse campus in Canada's biggest city.", established: 1959, website: "https://www.yorku.ca", bannerImage: banner("York"), logoImage: logo("York"),
+    campusLife: "A large, diverse campus in Canada's biggest city.", established: 1959, website: "https://www.yorku.ca",
   },
   {
     id: "u114", slug: "universite-laval", name: "Université Laval", country: "Canada", city: "Quebec City", region: "Canada",
@@ -2062,7 +1937,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Laval Excellence Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Law"], tags: ["Public", "Francophone", "Research"],
     description: "The oldest French-language university in the Americas, a comprehensive research institution in historic Quebec City.",
-    campusLife: "A spacious Francophone campus rich in tradition.", established: 1663, website: "https://www.ulaval.ca", bannerImage: banner("Laval"), logoImage: logo("Laval"),
+    campusLife: "A spacious Francophone campus rich in tradition.", established: 1663, website: "https://www.ulaval.ca",
   },
   {
     id: "u115", slug: "memorial-newfoundland", name: "Memorial University of Newfoundland", country: "Canada", city: "St. John's", region: "Canada",
@@ -2070,7 +1945,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MUN Entrance Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Engineering", "Medicine", "Natural Sciences", "Business"], tags: ["Public", "Affordable", "Coastal"],
     description: "Newfoundland's only university, notable for ocean and marine research and some of Canada's lowest tuition.",
-    campusLife: "A welcoming campus in a colourful Atlantic port city.", established: 1925, website: "https://www.mun.ca", bannerImage: banner("Memorial"), logoImage: logo("MUN"),
+    campusLife: "A welcoming campus in a colourful Atlantic port city.", established: 1925, website: "https://www.mun.ca",
   },
   {
     id: "u116", slug: "university-of-windsor", name: "University of Windsor", country: "Canada", city: "Windsor, ON", region: "Canada",
@@ -2078,7 +1953,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Windsor Entrance Scholarship"] }, applicationDeadline: "Jun 01",
     majorsOffered: ["Engineering", "Business", "Law", "Social Sciences"], tags: ["Public", "Urban"],
     description: "A career-focused university with strong co-op programs, located on the Canada-US border across from Detroit.",
-    campusLife: "A compact riverfront campus with cross-border industry links.", established: 1857, website: "https://www.uwindsor.ca", bannerImage: banner("Windsor"), logoImage: logo("Windsor"),
+    campusLife: "A compact riverfront campus with cross-border industry links.", established: 1857, website: "https://www.uwindsor.ca",
   },
 
   // ---------- China (expansion) ----------
@@ -2088,7 +1963,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["USTC Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Natural Sciences", "Engineering", "Computer Science"], tags: ["Research", "Public", "STEM", "Elite"],
     description: "An elite, highly selective science and technology university known for physics, quantum research, and AI.",
-    campusLife: "A focused, research-intensive STEM community.", established: 1958, website: "https://en.ustc.edu.cn", bannerImage: banner("USTC"), logoImage: logo("USTC"),
+    campusLife: "A focused, research-intensive STEM community.", established: 1958, website: "https://en.ustc.edu.cn",
   },
   {
     id: "u118", slug: "nanjing-university", name: "Nanjing University", country: "China", city: "Nanjing", region: "China",
@@ -2096,7 +1971,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Nanjing University Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Business", "Computer Science"], tags: ["Research", "Public", "Historic"],
     description: "One of China's oldest and most prestigious universities, strong in the natural and social sciences.",
-    campusLife: "A historic campus in the former imperial capital.", established: 1902, website: "https://www.nju.edu.cn", bannerImage: banner("Nanjing"), logoImage: logo("NJU"),
+    campusLife: "A historic campus in the former imperial capital.", established: 1902, website: "https://www.nju.edu.cn",
   },
   {
     id: "u119", slug: "wuhan-university", name: "Wuhan University", country: "China", city: "Wuhan", region: "China",
@@ -2104,7 +1979,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Wuhan University Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Natural Sciences", "Law", "Social Sciences"], tags: ["Research", "Public", "Scenic"],
     description: "A comprehensive research university famous for its cherry blossoms and strengths in surveying, law, and the sciences.",
-    campusLife: "One of China's most beautiful campuses, beside East Lake.", established: 1893, website: "https://en.whu.edu.cn", bannerImage: banner("Wuhan"), logoImage: logo("WHU"),
+    campusLife: "One of China's most beautiful campuses, beside East Lake.", established: 1893, website: "https://en.whu.edu.cn",
   },
   {
     id: "u120", slug: "sun-yat-sen", name: "Sun Yat-sen University", country: "China", city: "Guangzhou", region: "China",
@@ -2112,7 +1987,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SYSU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Medicine", "Business", "Natural Sciences", "Social Sciences"], tags: ["Research", "Public"],
     description: "A leading southern Chinese research university with particular strength in medicine and the life sciences.",
-    campusLife: "A multi-campus university across the Pearl River Delta.", established: 1924, website: "https://www.sysu.edu.cn", bannerImage: banner("Sun Yat-sen"), logoImage: logo("SYSU"),
+    campusLife: "A multi-campus university across the Pearl River Delta.", established: 1924, website: "https://www.sysu.edu.cn",
   },
   {
     id: "u121", slug: "harbin-institute-of-technology", name: "Harbin Institute of Technology", country: "China", city: "Harbin", region: "China",
@@ -2120,7 +1995,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["HIT Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Research", "Public", "STEM"],
     description: "A top engineering university with a strong reputation in aerospace, robotics, and materials science.",
-    campusLife: "A STEM-focused campus in China's frosty northeast.", established: 1920, website: "https://en.hit.edu.cn", bannerImage: banner("HIT"), logoImage: logo("HIT"),
+    campusLife: "A STEM-focused campus in China's frosty northeast.", established: 1920, website: "https://en.hit.edu.cn",
   },
   {
     id: "u122", slug: "tongji", name: "Tongji University", country: "China", city: "Shanghai", region: "China",
@@ -2128,7 +2003,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Tongji Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Arts & Design", "Natural Sciences"], tags: ["Research", "Public", "Design"],
     description: "A Shanghai research university especially renowned for architecture, civil engineering, and design.",
-    campusLife: "A design-forward campus with deep German academic ties.", established: 1907, website: "https://en.tongji.edu.cn", bannerImage: banner("Tongji"), logoImage: logo("Tongji"),
+    campusLife: "A design-forward campus with deep German academic ties.", established: 1907, website: "https://en.tongji.edu.cn",
   },
   {
     id: "u123", slug: "beihang", name: "Beihang University", country: "China", city: "Beijing", region: "China",
@@ -2136,7 +2011,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Beihang Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Research", "Public", "STEM", "Aerospace"],
     description: "A leading aeronautics and astronautics university and a key center for aerospace research in China.",
-    campusLife: "An aerospace-driven campus in northwest Beijing.", established: 1952, website: "https://ev.buaa.edu.cn", bannerImage: banner("Beihang"), logoImage: logo("BUAA"),
+    campusLife: "An aerospace-driven campus in northwest Beijing.", established: 1952, website: "https://ev.buaa.edu.cn",
   },
   {
     id: "u124", slug: "xian-jiaotong", name: "Xi'an Jiaotong University", country: "China", city: "Xi'an", region: "China",
@@ -2144,7 +2019,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["XJTU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Medicine"], tags: ["Research", "Public", "STEM"],
     description: "A historic engineering-focused research university and a founder of China's new Eurasian university alliance.",
-    campusLife: "A large campus in the ancient capital of Xi'an.", established: 1896, website: "http://en.xjtu.edu.cn", bannerImage: banner("Xian Jiaotong"), logoImage: logo("XJTU"),
+    campusLife: "A large campus in the ancient capital of Xi'an.", established: 1896, website: "http://en.xjtu.edu.cn",
   },
   {
     id: "u125", slug: "nankai", name: "Nankai University", country: "China", city: "Tianjin", region: "China",
@@ -2152,7 +2027,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Nankai Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Business", "Natural Sciences", "Social Sciences"], tags: ["Research", "Public"],
     description: "A prestigious research university known for economics, chemistry, and mathematics.",
-    campusLife: "A tradition-rich campus near Beijing in Tianjin.", established: 1919, website: "https://en.nankai.edu.cn", bannerImage: banner("Nankai"), logoImage: logo("Nankai"),
+    campusLife: "A tradition-rich campus near Beijing in Tianjin.", established: 1919, website: "https://en.nankai.edu.cn",
   },
   {
     id: "u126", slug: "tianjin-university", name: "Tianjin University", country: "China", city: "Tianjin", region: "China",
@@ -2160,7 +2035,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Tianjin University Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Natural Sciences", "Computer Science"], tags: ["Research", "Public", "STEM"],
     description: "China's first modern university, with enduring strength in engineering and the applied sciences.",
-    campusLife: "A historic engineering campus with lakeside grounds.", established: 1895, website: "https://www.tju.edu.cn/english", bannerImage: banner("Tianjin"), logoImage: logo("TJU"),
+    campusLife: "A historic engineering campus with lakeside grounds.", established: 1895, website: "https://www.tju.edu.cn/english",
   },
   {
     id: "u127", slug: "sichuan-university", name: "Sichuan University", country: "China", city: "Chengdu", region: "China",
@@ -2168,7 +2043,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SCU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Medicine", "Engineering", "Natural Sciences", "Social Sciences"], tags: ["Research", "Public"],
     description: "A large comprehensive research university with a noted medical school in southwestern China.",
-    campusLife: "A sprawling campus in laid-back, panda-famous Chengdu.", established: 1896, website: "https://en.scu.edu.cn", bannerImage: banner("Sichuan"), logoImage: logo("SCU"),
+    campusLife: "A sprawling campus in laid-back, panda-famous Chengdu.", established: 1896, website: "https://en.scu.edu.cn",
   },
   {
     id: "u128", slug: "xiamen-university", name: "Xiamen University", country: "China", city: "Xiamen", region: "China",
@@ -2176,7 +2051,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["XMU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Business", "Natural Sciences", "Social Sciences", "Arts & Design"], tags: ["Research", "Public", "Scenic"],
     description: "A coastal research university celebrated for economics, accounting, and one of China's prettiest campuses.",
-    campusLife: "A seaside campus often ranked China's most beautiful.", established: 1921, website: "https://en.xmu.edu.cn", bannerImage: banner("Xiamen"), logoImage: logo("XMU"),
+    campusLife: "A seaside campus often ranked China's most beautiful.", established: 1921, website: "https://en.xmu.edu.cn",
   },
   {
     id: "u129", slug: "shandong-university", name: "Shandong University", country: "China", city: "Jinan", region: "China",
@@ -2184,7 +2059,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SDU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Engineering"], tags: ["Research", "Public"],
     description: "One of China's oldest and largest comprehensive universities, strong in mathematics and the medical sciences.",
-    campusLife: "A multi-campus university across Shandong province.", established: 1901, website: "https://www.en.sdu.edu.cn", bannerImage: banner("Shandong"), logoImage: logo("SDU"),
+    campusLife: "A multi-campus university across Shandong province.", established: 1901, website: "https://www.en.sdu.edu.cn",
   },
   {
     id: "u130", slug: "southeast-university", name: "Southeast University", country: "China", city: "Nanjing", region: "China",
@@ -2192,7 +2067,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SEU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Engineering", "Computer Science", "Arts & Design", "Natural Sciences"], tags: ["Research", "Public", "STEM"],
     description: "A leading engineering university strong in architecture, electronics, and information technology.",
-    campusLife: "A historic Nanjing campus with renowned architecture.", established: 1902, website: "https://www.seu.edu.cn/english", bannerImage: banner("Southeast U"), logoImage: logo("SEU"),
+    campusLife: "A historic Nanjing campus with renowned architecture.", established: 1902, website: "https://www.seu.edu.cn/english",
   },
   {
     id: "u131", slug: "beijing-normal", name: "Beijing Normal University", country: "China", city: "Beijing", region: "China",
@@ -2200,7 +2075,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["BNU Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Arts & Design"], tags: ["Research", "Public", "Education"],
     description: "China's premier university for education and the humanities, with strong psychology and geography programs.",
-    campusLife: "A culturally rich campus at the heart of Beijing.", established: 1902, website: "https://english.bnu.edu.cn", bannerImage: banner("Beijing Normal"), logoImage: logo("BNU"),
+    campusLife: "A culturally rich campus at the heart of Beijing.", established: 1902, website: "https://english.bnu.edu.cn",
   },
   {
     id: "u132", slug: "renmin-university", name: "Renmin University of China", country: "China", city: "Beijing", region: "China",
@@ -2208,7 +2083,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Renmin Scholarship"] }, applicationDeadline: "Dec 31",
     majorsOffered: ["Business", "Social Sciences", "Law"], tags: ["Research", "Public", "Economics"],
     description: "A leading university for the humanities and social sciences, especially economics, law, and journalism.",
-    campusLife: "A policy-and-economics-focused campus in Beijing.", established: 1937, website: "http://en.ruc.edu.cn", bannerImage: banner("Renmin"), logoImage: logo("RUC"),
+    campusLife: "A policy-and-economics-focused campus in Beijing.", established: 1937, website: "http://en.ruc.edu.cn",
   },
 
   // ---------- UAE (expansion) ----------
@@ -2218,7 +2093,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UAEU Merit Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Engineering", "Business", "Medicine", "Natural Sciences"], tags: ["Public", "Research", "Flagship"],
     description: "The UAE's flagship national university and its oldest, with comprehensive programs and a strong research mission.",
-    campusLife: "A large, modern campus in the garden city of Al Ain.", established: 1976, website: "https://www.uaeu.ac.ae", bannerImage: banner("UAE University"), logoImage: logo("UAEU"),
+    campusLife: "A large, modern campus in the garden city of Al Ain.", established: 1976, website: "https://www.uaeu.ac.ae",
   },
   {
     id: "u134", slug: "higher-colleges-of-technology", name: "Higher Colleges of Technology", country: "United Arab Emirates", city: "Abu Dhabi", region: "UAE",
@@ -2226,7 +2101,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["HCT Scholarship"] }, applicationDeadline: "Jul 01",
     majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Public", "Applied", "Diverse"],
     description: "The UAE's largest applied higher-education institution, with campuses across the emirates and a career-focused model.",
-    campusLife: "A network of vocational campuses serving thousands of students.", established: 1988, website: "https://www.hct.ac.ae", bannerImage: banner("HCT"), logoImage: logo("HCT"),
+    campusLife: "A network of vocational campuses serving thousands of students.", established: 1988, website: "https://www.hct.ac.ae",
   },
   {
     id: "u135", slug: "university-of-sharjah", name: "University of Sharjah", country: "United Arab Emirates", city: "Sharjah", region: "UAE",
@@ -2234,7 +2109,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["University of Sharjah Scholarship"] }, applicationDeadline: "Jun 01",
     majorsOffered: ["Medicine", "Engineering", "Business", "Law"], tags: ["Public", "Research", "Diverse"],
     description: "A comprehensive research university in the cultural capital of the UAE, with strong health and engineering colleges.",
-    campusLife: "An architecturally striking campus in University City, Sharjah.", established: 1997, website: "https://www.sharjah.ac.ae", bannerImage: banner("U Sharjah"), logoImage: logo("UoS"),
+    campusLife: "An architecturally striking campus in University City, Sharjah.", established: 1997, website: "https://www.sharjah.ac.ae",
   },
   {
     id: "u136", slug: "ajman-university", name: "Ajman University", country: "United Arab Emirates", city: "Ajman", region: "UAE",
@@ -2242,7 +2117,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Ajman University Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Engineering", "Law"], tags: ["Private", "Diverse", "Urban"],
     description: "One of the UAE's oldest private universities, with an internationally diverse student body and accredited programs.",
-    campusLife: "A welcoming private campus with students from 75+ nationalities.", established: 1988, website: "https://www.ajman.ac.ae", bannerImage: banner("Ajman"), logoImage: logo("AU"),
+    campusLife: "A welcoming private campus with students from 75+ nationalities.", established: 1988, website: "https://www.ajman.ac.ae",
   },
   {
     id: "u137", slug: "american-university-in-dubai", name: "American University in Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2250,7 +2125,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["AUD Merit Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Arts & Design", "Engineering"], tags: ["Private", "Liberal Arts", "Urban"],
     description: "An American-curriculum private university in Dubai, strong in business, communication, and design.",
-    campusLife: "A cosmopolitan private campus in the heart of Dubai.", established: 1995, website: "https://www.aud.edu", bannerImage: banner("AU in Dubai"), logoImage: logo("AUD"),
+    campusLife: "A cosmopolitan private campus in the heart of Dubai.", established: 1995, website: "https://www.aud.edu",
   },
   {
     id: "u138", slug: "heriot-watt-dubai", name: "Heriot-Watt University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2258,7 +2133,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Heriot-Watt Dubai Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Private", "Branch Campus", "STEM"],
     description: "The Dubai campus of the UK's Heriot-Watt University, offering identical British degrees in engineering and business.",
-    campusLife: "A modern branch campus in Dubai's Knowledge Park.", established: 2005, website: "https://www.hw.ac.uk/dubai", bannerImage: banner("Heriot-Watt Dubai"), logoImage: logo("HWU"),
+    campusLife: "A modern branch campus in Dubai's Knowledge Park.", established: 2005, website: "https://www.hw.ac.uk/dubai",
   },
   {
     id: "u139", slug: "rit-dubai", name: "Rochester Institute of Technology Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2266,7 +2141,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["RIT Dubai Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Engineering", "Computer Science", "Business"], tags: ["Private", "Branch Campus", "STEM"],
     description: "The Dubai campus of America's RIT, awarding US-accredited degrees in engineering, computing, and business.",
-    campusLife: "A small, tech-focused American campus in Dubai Silicon Oasis.", established: 2008, website: "https://www.rit.edu/dubai", bannerImage: banner("RIT Dubai"), logoImage: logo("RIT"),
+    campusLife: "A small, tech-focused American campus in Dubai Silicon Oasis.", established: 2008, website: "https://www.rit.edu/dubai",
   },
   {
     id: "u140", slug: "mbzuai", name: "Mohammed bin Zayed University of Artificial Intelligence", country: "United Arab Emirates", city: "Abu Dhabi", region: "UAE",
@@ -2274,7 +2149,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Full Scholarship + Monthly Stipend"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Computer Science", "Engineering"], tags: ["Public", "AI", "Research", "Generous Aid"],
     description: "The world's first university dedicated entirely to artificial intelligence, offering fully funded graduate programs.",
-    campusLife: "A small, elite research community focused purely on AI.", established: 2019, website: "https://mbzuai.ac.ae", bannerImage: banner("MBZUAI"), logoImage: logo("MBZUAI"),
+    campusLife: "A small, elite research community focused purely on AI.", established: 2019, website: "https://mbzuai.ac.ae",
   },
   {
     id: "u141", slug: "canadian-university-dubai", name: "Canadian University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2282,7 +2157,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["CUD Merit Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Engineering", "Arts & Design"], tags: ["Private", "Branch Campus", "Diverse"],
     description: "A private university offering Canadian-inspired curricula in business, engineering, and communication.",
-    campusLife: "A central campus on Sheikh Zayed Road in downtown Dubai.", established: 2006, website: "https://www.cud.ac.ae", bannerImage: banner("Canadian U Dubai"), logoImage: logo("CUD"),
+    campusLife: "A central campus on Sheikh Zayed Road in downtown Dubai.", established: 2006, website: "https://www.cud.ac.ae",
   },
   {
     id: "u142", slug: "middlesex-dubai", name: "Middlesex University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2290,7 +2165,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Middlesex Dubai Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Computer Science", "Arts & Design"], tags: ["Private", "Branch Campus", "Urban"],
     description: "The Dubai campus of London's Middlesex University, awarding UK degrees across business, media, and computing.",
-    campusLife: "A diverse branch campus in Dubai International Academic City.", established: 2005, website: "https://www.mdx.ac.ae", bannerImage: banner("Middlesex Dubai"), logoImage: logo("MDX"),
+    campusLife: "A diverse branch campus in Dubai International Academic City.", established: 2005, website: "https://www.mdx.ac.ae",
   },
 
   // ---------- USA (expansion 2) ----------
@@ -2300,7 +2175,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Florida Opportunity Scholars", "Need-based Aid"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Communications & Media"], tags: ["Public", "Research", "Large"],
     description: "A top-ranked public research university with standout programs in engineering, business, and journalism, backed by major NIH and NSF funding.",
-    campusLife: "A massive, spirited campus built around Gator athletics, Greek life, and hundreds of student organizations.", established: 1853, website: "https://www.ufl.edu", bannerImage: banner("Florida"), logoImage: logo("UF"),
+    campusLife: "A massive, spirited campus built around Gator athletics, Greek life, and hundreds of student organizations.", established: 1853, website: "https://www.ufl.edu",
   },
   {
     id: "u144", slug: "penn-state", name: "Penn State University", country: "United States", city: "University Park, PA", region: "USA",
@@ -2308,7 +2183,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Presidential Leadership Academy", "Need-based Aid"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Engineering", "Business", "Communications & Media", "Education"], tags: ["Public", "Research", "Large"],
     description: "One of America's largest public research universities, with nationally recognized programs in engineering, business, and journalism.",
-    campusLife: "A classic Big Ten college town with legendary football Saturdays and a tight-knit alumni network.", established: 1855, website: "https://www.psu.edu", bannerImage: banner("Penn State"), logoImage: logo("PSU"),
+    campusLife: "A classic Big Ten college town with legendary football Saturdays and a tight-knit alumni network.", established: 1855, website: "https://www.psu.edu",
   },
   {
     id: "u145", slug: "university-of-maryland", name: "University of Maryland", country: "United States", city: "College Park, MD", region: "USA",
@@ -2316,7 +2191,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Banneker/Key Scholarship", "Need-based Aid"] }, applicationDeadline: "Jan 20",
     majorsOffered: ["Computer Science", "Engineering", "Business", "Social Sciences"], tags: ["Public", "Research", "STEM"],
     description: "A flagship public university just outside Washington, D.C., with nationally ranked computer science, engineering, and public policy programs.",
-    campusLife: "A lively campus minutes from the nation's capital, with deep pipelines into government, policy, and tech internships.", established: 1856, website: "https://www.umd.edu", bannerImage: banner("Maryland"), logoImage: logo("UMD"),
+    campusLife: "A lively campus minutes from the nation's capital, with deep pipelines into government, policy, and tech internships.", established: 1856, website: "https://www.umd.edu",
   },
   {
     id: "u146", slug: "texas-am", name: "Texas A&M University", country: "United States", city: "College Station, TX", region: "USA",
@@ -2324,7 +2199,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["President's Endowed Scholarship", "Need-based Aid"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Architecture & Urban Planning"], tags: ["Public", "Research", "Large"],
     description: "One of the largest universities in the US, famed for engineering, agriculture, and architecture, with an unusually loyal Aggie alumni network.",
-    campusLife: "A tradition-soaked campus where school spirit and Corps of Cadets history run deep.", established: 1876, website: "https://www.tamu.edu", bannerImage: banner("Texas A&M"), logoImage: logo("TAMU"),
+    campusLife: "A tradition-soaked campus where school spirit and Corps of Cadets history run deep.", established: 1876, website: "https://www.tamu.edu",
   },
   {
     id: "u147", slug: "university-of-minnesota", name: "University of Minnesota", country: "United States", city: "Minneapolis, MN", region: "USA",
@@ -2332,7 +2207,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["President's Distinguished Scholarship", "Need-based Aid"] }, applicationDeadline: "Dec 15",
     majorsOffered: ["Medicine", "Business", "Natural Sciences", "Mathematics & Statistics"], tags: ["Public", "Research", "Urban"],
     description: "A major public research university in the Twin Cities, with renowned medical, statistics, and business programs and deep industry ties.",
-    campusLife: "An urban, river-split campus with a famously resilient community through long winters.", established: 1851, website: "https://twin-cities.umn.edu", bannerImage: banner("Minnesota"), logoImage: logo("UMN"),
+    campusLife: "An urban, river-split campus with a famously resilient community through long winters.", established: 1851, website: "https://twin-cities.umn.edu",
   },
   {
     id: "u148", slug: "arizona-state", name: "Arizona State University", country: "United States", city: "Tempe, AZ", region: "USA",
@@ -2340,7 +2215,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["New American University Scholarship", "Need-based Aid"] }, applicationDeadline: "Jun 01",
     majorsOffered: ["Business", "Communications & Media", "Arts & Design", "Social Sciences"], tags: ["Public", "Innovative", "Accessible"],
     description: "Recognized as one of the most innovative universities in the US, ASU pairs broad accessibility with strong programs in business, journalism, and design.",
-    campusLife: "A huge, sun-soaked campus with a fast-growing reputation for flexible online and hybrid study.", established: 1885, website: "https://www.asu.edu", bannerImage: banner("Arizona State"), logoImage: logo("ASU"),
+    campusLife: "A huge, sun-soaked campus with a fast-growing reputation for flexible online and hybrid study.", established: 1885, website: "https://www.asu.edu",
   },
 
   // ---------- Europe (expansion 2) ----------
@@ -2350,7 +2225,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Danish Government Scholarship"] }, applicationDeadline: "Mar 15",
     majorsOffered: ["Medicine", "Natural Sciences", "Social Sciences", "Law"], tags: ["Public", "Research", "Historic"],
     description: "Denmark's oldest and largest university, with world-class research in medicine, natural sciences, and law at the heart of Copenhagen.",
-    campusLife: "A bike-friendly, design-conscious city campus consistently ranked among the world's most livable.", established: 1479, website: "https://www.ku.dk", bannerImage: banner("Copenhagen"), logoImage: logo("UCPH"),
+    campusLife: "A bike-friendly, design-conscious city campus consistently ranked among the world's most livable.", established: 1479, website: "https://www.ku.dk",
   },
   {
     id: "u150", slug: "university-of-vienna", name: "University of Vienna", country: "Austria", city: "Vienna", region: "Europe",
@@ -2358,7 +2233,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Austrian Government Scholarship"] }, applicationDeadline: "Sep 05",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Law", "Arts & Design"], tags: ["Public", "Research", "Historic"],
     description: "One of the oldest universities in the German-speaking world, with deep strength in the natural sciences, law, and the humanities.",
-    campusLife: "A grand, historic campus woven into one of Europe's most musical and architecturally rich capitals.", established: 1365, website: "https://www.univie.ac.at", bannerImage: banner("Vienna"), logoImage: logo("UniVie"),
+    campusLife: "A grand, historic campus woven into one of Europe's most musical and architecturally rich capitals.", established: 1365, website: "https://www.univie.ac.at",
   },
   {
     id: "u151", slug: "university-of-helsinki", name: "University of Helsinki", country: "Finland", city: "Helsinki", region: "Europe",
@@ -2366,7 +2241,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["University of Helsinki Scholarship"] }, applicationDeadline: "Jan 10",
     majorsOffered: ["Natural Sciences", "Medicine", "Social Sciences", "Education"], tags: ["Public", "Research", "Innovative"],
     description: "Finland's leading research university, with globally respected programs in education, natural sciences, and medicine.",
-    campusLife: "A calm, design-forward city campus reflecting Finland's emphasis on wellbeing and equity.", established: 1640, website: "https://www.helsinki.fi", bannerImage: banner("Helsinki"), logoImage: logo("UH"),
+    campusLife: "A calm, design-forward city campus reflecting Finland's emphasis on wellbeing and equity.", established: 1640, website: "https://www.helsinki.fi",
   },
   {
     id: "u152", slug: "university-of-warsaw", name: "University of Warsaw", country: "Poland", city: "Warsaw", region: "Europe",
@@ -2374,7 +2249,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["University of Warsaw Scholarship"] }, applicationDeadline: "Jun 15",
     majorsOffered: ["Law", "Social Sciences", "Mathematics & Statistics", "Natural Sciences"], tags: ["Public", "Research", "Historic"],
     description: "Poland's top-ranked university, with standout programs in law, mathematics, and the social sciences in the heart of Warsaw.",
-    campusLife: "A historic campus in a rapidly modernizing capital with a growing international student community.", established: 1816, website: "https://www.uw.edu.pl", bannerImage: banner("Warsaw"), logoImage: logo("UW"),
+    campusLife: "A historic campus in a rapidly modernizing capital with a growing international student community.", established: 1816, website: "https://www.uw.edu.pl",
   },
   {
     id: "u153", slug: "university-of-bologna", name: "University of Bologna", country: "Italy", city: "Bologna", region: "Europe",
@@ -2382,7 +2257,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Study Grants for International Students"] }, applicationDeadline: "Jul 31",
     majorsOffered: ["Law", "Arts & Design", "Social Sciences", "Architecture & Urban Planning"], tags: ["Public", "Historic", "Research"],
     description: "Founded in 1088, the oldest university in the Western world, with enduring strength in law, the arts, and architecture.",
-    campusLife: "A lively, student-dominated medieval city where the university and town are inseparable.", established: 1088, website: "https://www.unibo.it", bannerImage: banner("Bologna"), logoImage: logo("UniBo"),
+    campusLife: "A lively, student-dominated medieval city where the university and town are inseparable.", established: 1088, website: "https://www.unibo.it",
   },
   {
     id: "u154", slug: "university-of-oslo", name: "University of Oslo", country: "Norway", city: "Oslo", region: "Europe",
@@ -2390,7 +2265,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Norwegian State Educational Loan Fund"] }, applicationDeadline: "Apr 15",
     majorsOffered: ["Natural Sciences", "Law", "Social Sciences", "Medicine"], tags: ["Public", "Research", "Affordable"],
     description: "Norway's oldest university, internationally known for its famously tuition-free model and strength in law, medicine, and the natural sciences.",
-    campusLife: "A green, low-key campus in one of the world's safest and most liveable capitals.", established: 1811, website: "https://www.uio.no", bannerImage: banner("Oslo"), logoImage: logo("UiO"),
+    campusLife: "A green, low-key campus in one of the world's safest and most liveable capitals.", established: 1811, website: "https://www.uio.no",
   },
 
   // ---------- Canada (expansion 2) ----------
@@ -2400,7 +2275,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["TMU Excellence Scholarship"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Communications & Media", "Engineering", "Arts & Design"], tags: ["Public", "Urban", "Career-Focused"],
     description: "A career-focused downtown Toronto university known for its journalism, media, and applied business programs.",
-    campusLife: "A fully urban campus woven into downtown Toronto, with a strong co-op and industry placement culture.", established: 1948, website: "https://www.torontomu.ca", bannerImage: banner("Toronto Metropolitan"), logoImage: logo("TMU"),
+    campusLife: "A fully urban campus woven into downtown Toronto, with a strong co-op and industry placement culture.", established: 1948, website: "https://www.torontomu.ca",
   },
   {
     id: "u156", slug: "university-of-new-brunswick", name: "University of New Brunswick", country: "Canada", city: "Fredericton, NB", region: "Canada",
@@ -2408,7 +2283,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UNB Merit Scholarship"] }, applicationDeadline: "Mar 01",
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Education"], tags: ["Public", "Affordable", "Research"],
     description: "Canada's oldest English-language public university, with strong engineering and forestry programs at an affordable price point.",
-    campusLife: "A small-city campus experience with close faculty relationships and a tight student community.", established: 1785, website: "https://www.unb.ca", bannerImage: banner("New Brunswick"), logoImage: logo("UNB"),
+    campusLife: "A small-city campus experience with close faculty relationships and a tight student community.", established: 1785, website: "https://www.unb.ca",
   },
   {
     id: "u157", slug: "brock-university", name: "Brock University", country: "Canada", city: "St. Catharines, ON", region: "Canada",
@@ -2416,7 +2291,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Brock Scholar Award"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Social Sciences", "Education", "Natural Sciences"], tags: ["Public", "Mid-Size", "Research"],
     description: "A mid-size Ontario university known for its business co-op program and research partnerships across Niagara's wine region.",
-    campusLife: "A scenic escarpment-top campus a short drive from Niagara Falls.", established: 1964, website: "https://brocku.ca", bannerImage: banner("Brock"), logoImage: logo("Brock"),
+    campusLife: "A scenic escarpment-top campus a short drive from Niagara Falls.", established: 1964, website: "https://brocku.ca",
   },
   {
     id: "u158", slug: "university-of-regina", name: "University of Regina", country: "Canada", city: "Regina, SK", region: "Canada",
@@ -2424,7 +2299,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["President's Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Business", "Education", "Social Sciences", "Engineering"], tags: ["Public", "Affordable", "Career-Focused"],
     description: "A welcoming Prairie university known for co-operative education placements and a strong teacher-education tradition.",
-    campusLife: "A compact, friendly campus on the Saskatchewan prairies with a close-knit student body.", established: 1974, website: "https://www.uregina.ca", bannerImage: banner("Regina"), logoImage: logo("UofR"),
+    campusLife: "A compact, friendly campus on the Saskatchewan prairies with a close-knit student body.", established: 1974, website: "https://www.uregina.ca",
   },
   {
     id: "u159", slug: "wilfrid-laurier", name: "Wilfrid Laurier University", country: "Canada", city: "Waterloo, ON", region: "Canada",
@@ -2432,7 +2307,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Laurier Entrance Scholarship"] }, applicationDeadline: "Feb 01",
     majorsOffered: ["Business", "Social Sciences", "Arts & Design", "Communications & Media"], tags: ["Public", "Business", "Mid-Size"],
     description: "Home to one of Canada's top-ranked undergraduate business schools, with a close-knit campus culture in Waterloo's tech corridor.",
-    campusLife: "A pedestrian-friendly campus tightly linked to the Waterloo tech and startup ecosystem.", established: 1911, website: "https://www.wlu.ca", bannerImage: banner("Laurier"), logoImage: logo("WLU"),
+    campusLife: "A pedestrian-friendly campus tightly linked to the Waterloo tech and startup ecosystem.", established: 1911, website: "https://www.wlu.ca",
   },
   {
     id: "u160", slug: "university-of-lethbridge", name: "University of Lethbridge", country: "Canada", city: "Lethbridge, AB", region: "Canada",
@@ -2440,7 +2315,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Board of Governors Entrance Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Education", "Arts & Design"], tags: ["Public", "Small", "Research"],
     description: "A small, research-active Albertan university known for personalized attention and strong neuroscience and education programs.",
-    campusLife: "A close, supportive campus overlooking the Oldman River valley.", established: 1967, website: "https://www.ulethbridge.ca", bannerImage: banner("Lethbridge"), logoImage: logo("ULeth"),
+    campusLife: "A close, supportive campus overlooking the Oldman River valley.", established: 1967, website: "https://www.ulethbridge.ca",
   },
 
   // ---------- China (expansion 2) ----------
@@ -2450,7 +2325,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Chinese Government Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Engineering", "Medicine", "Computer Science", "Natural Sciences"], tags: ["Public", "Research", "STEM"],
     description: "A top-tier Chinese research university renowned for engineering, optoelectronics, and medicine.",
-    campusLife: "One of China's largest campuses, known for its scenic East Lake views and strong engineering culture.", established: 1952, website: "https://www.hust.edu.cn", bannerImage: banner("HUST"), logoImage: logo("HUST"),
+    campusLife: "One of China's largest campuses, known for its scenic East Lake views and strong engineering culture.", established: 1952, website: "https://www.hust.edu.cn",
   },
   {
     id: "u162", slug: "south-china-university-of-technology", name: "South China University of Technology", country: "China", city: "Guangzhou", region: "China",
@@ -2458,7 +2333,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SCUT International Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Engineering", "Architecture & Urban Planning", "Business", "Natural Sciences"], tags: ["Public", "Research", "STEM"],
     description: "One of China's leading engineering universities, with nationally top-ranked architecture and materials science programs.",
-    campusLife: "A modern campus in tech-driven Guangzhou with close industry ties to the Pearl River Delta.", established: 1952, website: "https://www.scut.edu.cn", bannerImage: banner("SCUT"), logoImage: logo("SCUT"),
+    campusLife: "A modern campus in tech-driven Guangzhou with close industry ties to the Pearl River Delta.", established: 1952, website: "https://www.scut.edu.cn",
   },
   {
     id: "u163", slug: "dalian-university-of-technology", name: "Dalian University of Technology", country: "China", city: "Dalian", region: "China",
@@ -2466,7 +2341,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["DUT Presidential Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Engineering", "Natural Sciences", "Architecture & Urban Planning", "Business"], tags: ["Public", "Research", "Coastal"],
     description: "A premier engineering-focused university in the coastal city of Dalian, strong in mechanical and chemical engineering.",
-    campusLife: "A seaside campus blending heavy-industry research with a relaxed coastal city lifestyle.", established: 1949, website: "https://www.dlut.edu.cn", bannerImage: banner("Dalian Tech"), logoImage: logo("DUT"),
+    campusLife: "A seaside campus blending heavy-industry research with a relaxed coastal city lifestyle.", established: 1949, website: "https://www.dlut.edu.cn",
   },
   {
     id: "u164", slug: "jilin-university", name: "Jilin University", country: "China", city: "Changchun", region: "China",
@@ -2474,7 +2349,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Jilin University Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Medicine", "Law", "Natural Sciences", "Engineering"], tags: ["Public", "Research", "Comprehensive"],
     description: "One of China's largest comprehensive universities, with especially strong programs in medicine, law, and earth sciences.",
-    campusLife: "A sprawling multi-campus university across China's northeastern industrial heartland.", established: 1946, website: "https://www.jlu.edu.cn", bannerImage: banner("Jilin"), logoImage: logo("JLU"),
+    campusLife: "A sprawling multi-campus university across China's northeastern industrial heartland.", established: 1946, website: "https://www.jlu.edu.cn",
   },
   {
     id: "u165", slug: "lanzhou-university", name: "Lanzhou University", country: "China", city: "Lanzhou", region: "China",
@@ -2482,7 +2357,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Lanzhou University Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Medicine", "Mathematics & Statistics"], tags: ["Public", "Research", "Western China"],
     description: "A leading research university in western China, recognized nationally for grassland ecology, atmospheric science, and chemistry.",
-    campusLife: "A close-knit campus on the Yellow River, known for tight-knit research teams.", established: 1909, website: "https://www.lzu.edu.cn", bannerImage: banner("Lanzhou"), logoImage: logo("LZU"),
+    campusLife: "A close-knit campus on the Yellow River, known for tight-knit research teams.", established: 1909, website: "https://www.lzu.edu.cn",
   },
   {
     id: "u166", slug: "east-china-normal-university", name: "East China Normal University", country: "China", city: "Shanghai", region: "China",
@@ -2490,7 +2365,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["ECNU International Scholarship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Education", "Social Sciences", "Natural Sciences", "Mathematics & Statistics"], tags: ["Public", "Research", "Education"],
     description: "One of China's foremost universities for teacher education and the social sciences, based in central Shanghai.",
-    campusLife: "A leafy Shanghai campus with a strong international exchange culture.", established: 1951, website: "https://www.ecnu.edu.cn", bannerImage: banner("ECNU"), logoImage: logo("ECNU"),
+    campusLife: "A leafy Shanghai campus with a strong international exchange culture.", established: 1951, website: "https://www.ecnu.edu.cn",
   },
 
   // ---------- UAE (expansion 2) ----------
@@ -2500,7 +2375,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["AURAK Merit Scholarship"] }, applicationDeadline: "Aug 15",
     majorsOffered: ["Engineering", "Business", "Computer Science", "Arts & Design"], tags: ["Public", "Branch-Style", "Small"],
     description: "A small American-style public university in Ras Al Khaimah, offering US-modeled degrees in engineering and business at an accessible cost.",
-    campusLife: "A quiet, scenic campus near the Hajar Mountains with a close-knit student body.", established: 2009, website: "https://www.aurak.ac.ae", bannerImage: banner("AURAK"), logoImage: logo("AURAK"),
+    campusLife: "A quiet, scenic campus near the Hajar Mountains with a close-knit student body.", established: 2009, website: "https://www.aurak.ac.ae",
   },
   {
     id: "u168", slug: "uow-dubai", name: "University of Wollongong in Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2508,7 +2383,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UOWD Academic Excellence Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Computer Science", "Engineering", "Social Sciences"], tags: ["Private", "Branch Campus", "Diverse"],
     description: "The Dubai campus of Australia's University of Wollongong, awarding Australian-accredited degrees in business, IT, and engineering.",
-    campusLife: "A diverse, internationally minded campus in Dubai Knowledge Park.", established: 1993, website: "https://www.uowdubai.ac.ae", bannerImage: banner("UOW Dubai"), logoImage: logo("UOWD"),
+    campusLife: "A diverse, internationally minded campus in Dubai Knowledge Park.", established: 1993, website: "https://www.uowdubai.ac.ae",
   },
   {
     id: "u169", slug: "murdoch-dubai", name: "Murdoch University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2516,7 +2391,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Murdoch Dubai Scholarship"] }, applicationDeadline: "Aug 15",
     majorsOffered: ["Business", "Communications & Media", "Social Sciences", "Computer Science"], tags: ["Private", "Branch Campus", "Small"],
     description: "The Dubai campus of Australia's Murdoch University, known for media, psychology, and business programs.",
-    campusLife: "A small, supportive campus in Dubai Knowledge Park with low student-faculty ratios.", established: 2008, website: "https://www.murdochdubai.ac.ae", bannerImage: banner("Murdoch Dubai"), logoImage: logo("Murdoch"),
+    campusLife: "A small, supportive campus in Dubai Knowledge Park with low student-faculty ratios.", established: 2008, website: "https://www.murdochdubai.ac.ae",
   },
   {
     id: "u170", slug: "amity-dubai", name: "Amity University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2524,7 +2399,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Amity Merit Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Engineering", "Arts & Design", "Law"], tags: ["Private", "Branch Campus", "Affordable"],
     description: "The Dubai campus of India's Amity University, offering affordable degrees across business, engineering, and law.",
-    campusLife: "A vibrant, diverse campus in Dubai International Academic City.", established: 2010, website: "https://www.amityuniversity.ae", bannerImage: banner("Amity Dubai"), logoImage: logo("Amity"),
+    campusLife: "A vibrant, diverse campus in Dubai International Academic City.", established: 2010, website: "https://www.amityuniversity.ae",
   },
   {
     id: "u171", slug: "al-ain-university", name: "Al Ain University", country: "United Arab Emirates", city: "Al Ain", region: "UAE",
@@ -2532,7 +2407,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Al Ain University Scholarship"] }, applicationDeadline: "Sep 01",
     majorsOffered: ["Business", "Law", "Education", "Human & Social Services"], tags: ["Private", "Affordable", "Local"],
     description: "A private Emirati university focused on business, law, and education, with deep roots in the Al Ain community.",
-    campusLife: "A calm campus in the garden city of Al Ain, close to the Omani border.", established: 2004, website: "https://www.aau.ac.ae", bannerImage: banner("Al Ain University"), logoImage: logo("AAU"),
+    campusLife: "A calm campus in the garden city of Al Ain, close to the Omani border.", established: 2004, website: "https://www.aau.ac.ae",
   },
   {
     id: "u172", slug: "skyline-university-college", name: "Skyline University College", country: "United Arab Emirates", city: "Sharjah", region: "UAE",
@@ -2540,7 +2415,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Skyline Merit Award"] }, applicationDeadline: "Sep 01",
     majorsOffered: ["Business", "Computer Science", "Communications & Media"], tags: ["Private", "Small", "Affordable"],
     description: "A compact private college in Sharjah offering career-focused degrees in business, IT, and media at an accessible price.",
-    campusLife: "A small, friendly campus in University City Sharjah.", established: 1990, website: "https://www.skylineuniversity.ac.ae", bannerImage: banner("Skyline"), logoImage: logo("SUC"),
+    campusLife: "A small, friendly campus in University City Sharjah.", established: 1990, website: "https://www.skylineuniversity.ac.ae",
   },
 
   // ---------- USA (expansion 3) ----------
@@ -2550,7 +2425,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UChicago Empower Initiative", "Need-based Grants"] }, applicationDeadline: "Jan 02",
     majorsOffered: ["Economics", "Social Sciences", "Natural Sciences", "Business"].length ? ["Social Sciences", "Natural Sciences", "Business", "Law"] : [], tags: ["Private", "Research", "Rigorous"],
     description: "Famed for its rigorous, discussion-driven core curriculum, UChicago is a powerhouse in economics, the social sciences, and the natural sciences.",
-    campusLife: "An intellectually intense Hyde Park campus known for its love of ideas and Scav Hunt tradition.", established: 1890, website: "https://www.uchicago.edu", bannerImage: banner("UChicago"), logoImage: logo("UChicago"),
+    campusLife: "An intellectually intense Hyde Park campus known for its love of ideas and Scav Hunt tradition.", established: 1890, website: "https://www.uchicago.edu",
   },
   {
     id: "u174", slug: "case-western-reserve", name: "Case Western Reserve University", country: "United States", city: "Cleveland, OH", region: "USA",
@@ -2558,7 +2433,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["CWRU Merit Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Engineering", "Medicine", "Natural Sciences", "Business"], tags: ["Private", "Research", "STEM"],
     description: "A research-intensive university known for biomedical engineering, medicine, and a flexible interdisciplinary curriculum.",
-    campusLife: "A compact campus anchoring Cleveland's University Circle arts and medical district.", established: 1826, website: "https://case.edu", bannerImage: banner("Case Western"), logoImage: logo("CWRU"),
+    campusLife: "A compact campus anchoring Cleveland's University Circle arts and medical district.", established: 1826, website: "https://case.edu",
   },
   {
     id: "u175", slug: "university-of-rochester", name: "University of Rochester", country: "United States", city: "Rochester, NY", region: "USA",
@@ -2566,7 +2441,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Rochester Renaissance Scholarship"] }, applicationDeadline: "Jan 05",
     majorsOffered: ["Medicine", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Research", "Music"],
     description: "Home to the renowned Eastman School of Music alongside strong medicine, optics, and engineering programs.",
-    campusLife: "A self-contained River Campus along the Genesee River with a famously flexible curriculum.", established: 1850, website: "https://www.rochester.edu", bannerImage: banner("Rochester"), logoImage: logo("UR"),
+    campusLife: "A self-contained River Campus along the Genesee River with a famously flexible curriculum.", established: 1850, website: "https://www.rochester.edu",
   },
   {
     id: "u176", slug: "brandeis-university", name: "Brandeis University", country: "United States", city: "Waltham, MA", region: "USA",
@@ -2574,7 +2449,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Justice Brandeis Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Liberal Arts", "Small"],
     description: "A small, research-active liberal arts university with a strong social-justice tradition and tight-knit community.",
-    campusLife: "A hilly New England campus 9 miles from Boston with a strong sense of community.", established: 1948, website: "https://www.brandeis.edu", bannerImage: banner("Brandeis"), logoImage: logo("Brandeis"),
+    campusLife: "A hilly New England campus 9 miles from Boston with a strong sense of community.", established: 1948, website: "https://www.brandeis.edu",
   },
   {
     id: "u177", slug: "university-of-miami", name: "University of Miami", country: "United States", city: "Coral Gables, FL", region: "USA",
@@ -2582,7 +2457,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Singer Family Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Business", "Communications & Media", "Medicine", "Engineering"], tags: ["Private", "Research", "Coastal"],
     description: "A research university known for marine science, business, and communications, with a sunny coastal campus.",
-    campusLife: "A palm-lined Coral Gables campus minutes from Miami's beaches and nightlife.", established: 1925, website: "https://welcome.miami.edu", bannerImage: banner("Miami"), logoImage: logo("UM"),
+    campusLife: "A palm-lined Coral Gables campus minutes from Miami's beaches and nightlife.", established: 1925, website: "https://welcome.miami.edu",
   },
 
   // ---------- Europe (expansion 3) ----------
@@ -2592,7 +2467,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Deutschlandstipendium"] }, applicationDeadline: "Jul 15",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Communications & Media", "Law"], tags: ["Public", "Research", "Tuition-free"],
     description: "One of Berlin's leading public universities, strong in the social sciences, political science, and area studies.",
-    campusLife: "A green, leafy Dahlem campus with a politically engaged student body.", established: 1948, website: "https://www.fu-berlin.de", bannerImage: banner("FU Berlin"), logoImage: logo("FU Berlin"),
+    campusLife: "A green, leafy Dahlem campus with a politically engaged student body.", established: 1948, website: "https://www.fu-berlin.de",
   },
   {
     id: "u179", slug: "university-of-geneva", name: "University of Geneva", country: "Switzerland", city: "Geneva", region: "Europe",
@@ -2600,7 +2475,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["University of Geneva Excellence Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Social Sciences", "Natural Sciences", "Medicine", "Business"], tags: ["Public", "Research", "International"],
     description: "A leading research university in international Geneva, with deep ties to the UN and global institutions nearby.",
-    campusLife: "A multilingual, internationally minded campus in the heart of diplomatic Geneva.", established: 1559, website: "https://www.unige.ch", bannerImage: banner("Geneva"), logoImage: logo("UNIGE"),
+    campusLife: "A multilingual, internationally minded campus in the heart of diplomatic Geneva.", established: 1559, website: "https://www.unige.ch",
   },
   {
     id: "u180", slug: "aarhus-university", name: "Aarhus University", country: "Denmark", city: "Aarhus", region: "Europe",
@@ -2608,7 +2483,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Aarhus University Scholarship"] }, applicationDeadline: "Mar 15",
     majorsOffered: ["Business", "Natural Sciences", "Social Sciences", "Engineering"], tags: ["Public", "Research", "Scandinavian"],
     description: "Denmark's second-largest university, known for business, natural sciences, and a strong international student community.",
-    campusLife: "A park-like yellow-brick campus in Denmark's youthful 'City of Smiles.'", established: 1928, website: "https://www.au.dk", bannerImage: banner("Aarhus"), logoImage: logo("AU"),
+    campusLife: "A park-like yellow-brick campus in Denmark's youthful 'City of Smiles.'", established: 1928, website: "https://www.au.dk",
   },
   {
     id: "u181", slug: "university-of-porto", name: "University of Porto", country: "Portugal", city: "Porto", region: "Europe",
@@ -2616,7 +2491,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["U.Porto Merit Scholarship"] }, applicationDeadline: "Jun 30",
     majorsOffered: ["Engineering", "Medicine", "Business", "Natural Sciences"], tags: ["Public", "Research", "Affordable"],
     description: "Portugal's top-ranked university, with strong engineering, medicine, and economics faculties at an affordable cost.",
-    campusLife: "A historic riverside city campus in one of Europe's most affordable student destinations.", established: 1911, website: "https://www.up.pt", bannerImage: banner("Porto"), logoImage: logo("U.Porto"),
+    campusLife: "A historic riverside city campus in one of Europe's most affordable student destinations.", established: 1911, website: "https://www.up.pt",
   },
   {
     id: "u182", slug: "charles-university", name: "Charles University", country: "Czech Republic", city: "Prague", region: "Europe",
@@ -2624,7 +2499,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Charles University Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Medicine", "Social Sciences", "Natural Sciences", "Law"], tags: ["Public", "Historic", "Affordable"],
     description: "Central Europe's oldest university, with renowned medical and law faculties in the heart of Prague.",
-    campusLife: "A storied campus woven through Prague's historic city center.", established: 1348, website: "https://cuni.cz", bannerImage: banner("Charles University"), logoImage: logo("CUNI"),
+    campusLife: "A storied campus woven through Prague's historic city center.", established: 1348, website: "https://cuni.cz",
   },
 
   // ---------- Canada (expansion 3) ----------
@@ -2634,7 +2509,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Trent Excellence Scholarship"] }, applicationDeadline: "Jun 01",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Education"], tags: ["Public", "Small", "Riverside"],
     description: "A small, riverside Ontario university known for environmental science and a close-knit, college-style structure.",
-    campusLife: "A scenic campus along the Otonabee River with a strong canoeing and outdoors culture.", established: 1964, website: "https://www.trentu.ca", bannerImage: banner("Trent"), logoImage: logo("Trent"),
+    campusLife: "A scenic campus along the Otonabee River with a strong canoeing and outdoors culture.", established: 1964, website: "https://www.trentu.ca",
   },
   {
     id: "u184", slug: "lakehead-university", name: "Lakehead University", country: "Canada", city: "Thunder Bay, ON", region: "Canada",
@@ -2642,7 +2517,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Lakehead Entrance Scholarship"] }, applicationDeadline: "Jun 01",
     majorsOffered: ["Engineering", "Education", "Natural Sciences", "Business"], tags: ["Public", "Small", "Northern"],
     description: "A northern Ontario university with growing engineering and natural resources programs and a low student-to-faculty ratio.",
-    campusLife: "A forested campus on the shore of Lake Superior with a close, outdoorsy community.", established: 1965, website: "https://www.lakeheadu.ca", bannerImage: banner("Lakehead"), logoImage: logo("Lakehead"),
+    campusLife: "A forested campus on the shore of Lake Superior with a close, outdoorsy community.", established: 1965, website: "https://www.lakeheadu.ca",
   },
   {
     id: "u185", slug: "upei", name: "University of Prince Edward Island", country: "Canada", city: "Charlottetown, PE", region: "Canada",
@@ -2650,7 +2525,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UPEI Entrance Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Business", "Natural Sciences", "Education", "Human & Social Services"], tags: ["Public", "Small", "Maritime"],
     description: "A small Maritime university with Canada's only veterinary college and a friendly, walkable campus.",
-    campusLife: "A compact campus in Canada's smallest provincial capital, known for its tight community feel.", established: 1969, website: "https://www.upei.ca", bannerImage: banner("UPEI"), logoImage: logo("UPEI"),
+    campusLife: "A compact campus in Canada's smallest provincial capital, known for its tight community feel.", established: 1969, website: "https://www.upei.ca",
   },
   {
     id: "u186", slug: "mount-allison", name: "Mount Allison University", country: "Canada", city: "Sackville, NB", region: "Canada",
@@ -2658,7 +2533,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Mount Allison Entrance Award"] }, applicationDeadline: "May 01",
     majorsOffered: ["Arts & Design", "Social Sciences", "Natural Sciences"], tags: ["Public", "Liberal Arts", "Small"],
     description: "A small undergraduate-focused liberal arts university consistently ranked Canada's top primarily-undergraduate school.",
-    campusLife: "A picturesque New Brunswick campus famous for its fine arts program and tight residence community.", established: 1839, website: "https://www.mta.ca", bannerImage: banner("Mount Allison"), logoImage: logo("MTA"),
+    campusLife: "A picturesque New Brunswick campus famous for its fine arts program and tight residence community.", established: 1839, website: "https://www.mta.ca",
   },
   {
     id: "u187", slug: "acadia-university", name: "Acadia University", country: "Canada", city: "Wolfville, NS", region: "Canada",
@@ -2666,7 +2541,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Acadia Entrance Scholarship"] }, applicationDeadline: "May 01",
     majorsOffered: ["Business", "Education", "Natural Sciences", "Social Sciences"], tags: ["Public", "Small", "Scenic"],
     description: "A small Nova Scotia university in the Annapolis Valley wine country, known for a personalized undergraduate experience.",
-    campusLife: "A historic campus surrounded by vineyards and the Bay of Fundy's tides.", established: 1838, website: "https://acadiau.ca", bannerImage: banner("Acadia"), logoImage: logo("Acadia"),
+    campusLife: "A historic campus surrounded by vineyards and the Bay of Fundy's tides.", established: 1838, website: "https://acadiau.ca",
   },
 
   // ---------- China (expansion 3) ----------
@@ -2676,7 +2551,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["CAU International Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Business"], tags: ["Public", "Research", "Agriculture"],
     description: "China's leading agricultural sciences university, with strong programs in biology, environmental science, and food technology.",
-    campusLife: "A spacious Beijing campus with extensive research farms and labs.", established: 1905, website: "https://www.cau.edu.cn", bannerImage: banner("CAU"), logoImage: logo("CAU"),
+    campusLife: "A spacious Beijing campus with extensive research farms and labs.", established: 1905, website: "https://www.cau.edu.cn",
   },
   {
     id: "u189", slug: "nwpu", name: "Northwestern Polytechnical University", country: "China", city: "Xi'an", region: "China",
@@ -2684,7 +2559,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["NWPU Presidential Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Public", "STEM", "Aerospace"],
     description: "A top Chinese university for aerospace, materials science, and mechanical engineering, with deep defense-industry ties.",
-    campusLife: "A research-driven campus in historic Xi'an with strong industry partnerships.", established: 1938, website: "https://www.nwpu.edu.cn", bannerImage: banner("NWPU"), logoImage: logo("NWPU"),
+    campusLife: "A research-driven campus in historic Xi'an with strong industry partnerships.", established: 1938, website: "https://www.nwpu.edu.cn",
   },
   {
     id: "u190", slug: "beijing-institute-of-technology", name: "Beijing Institute of Technology", country: "China", city: "Beijing", region: "China",
@@ -2692,7 +2567,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["BIT Merit Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Public", "Research", "STEM"],
     description: "One of China's oldest and most prestigious engineering universities, with strengths in defense technology and robotics.",
-    campusLife: "A central Beijing campus with strong ties to national research institutes.", established: 1940, website: "https://www.bit.edu.cn", bannerImage: banner("BIT"), logoImage: logo("BIT"),
+    campusLife: "A central Beijing campus with strong ties to national research institutes.", established: 1940, website: "https://www.bit.edu.cn",
   },
   {
     id: "u191", slug: "soochow-university", name: "Soochow University", country: "China", city: "Suzhou", region: "China",
@@ -2700,7 +2575,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Soochow University Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Law", "Business", "Natural Sciences", "Communications & Media"], tags: ["Public", "Comprehensive"],
     description: "A comprehensive university in the canal city of Suzhou, with respected law, textile science, and business programs.",
-    campusLife: "Multiple campuses across the garden city of Suzhou, near Shanghai.", established: 1900, website: "https://www.suda.edu.cn", bannerImage: banner("Soochow"), logoImage: logo("Soochow"),
+    campusLife: "Multiple campuses across the garden city of Suzhou, near Shanghai.", established: 1900, website: "https://www.suda.edu.cn",
   },
   {
     id: "u192", slug: "ocean-university-of-china", name: "Ocean University of China", country: "China", city: "Qingdao", region: "China",
@@ -2708,7 +2583,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["OUC International Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Business"], tags: ["Public", "Marine Science", "Coastal"],
     description: "China's leading institution for oceanography and marine science, on the coast of Qingdao.",
-    campusLife: "A seaside campus blending German colonial architecture with modern research facilities.", established: 1924, website: "https://www.ouc.edu.cn", bannerImage: banner("Ocean University"), logoImage: logo("OUC"),
+    campusLife: "A seaside campus blending German colonial architecture with modern research facilities.", established: 1924, website: "https://www.ouc.edu.cn",
   },
 
   // ---------- UAE (expansion 3) ----------
@@ -2718,7 +2593,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["HBMSU Smart Scholarship"] }, applicationDeadline: "Aug 15",
     majorsOffered: ["Business", "Computer Science", "Education"], tags: ["Public", "Online-Hybrid", "Smart Learning"],
     description: "The Middle East's first smart-learning university, blending online delivery with business and IT degrees.",
-    campusLife: "A flexible, tech-forward learning model based in Dubai Knowledge Park.", established: 2002, website: "https://www.hbmsu.ac.ae", bannerImage: banner("HBMSU"), logoImage: logo("HBMSU"),
+    campusLife: "A flexible, tech-forward learning model based in Dubai Knowledge Park.", established: 2002, website: "https://www.hbmsu.ac.ae",
   },
   {
     id: "u194", slug: "manipal-dubai", name: "Manipal University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2726,7 +2601,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Manipal Merit Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Private", "Branch Campus", "Diverse"],
     description: "The Dubai campus of India's Manipal Academy, offering engineering, business, and IT degrees to a diverse student body.",
-    campusLife: "A vibrant, multicultural campus in Dubai International Academic City.", established: 2000, website: "https://manipaldubai.com", bannerImage: banner("Manipal Dubai"), logoImage: logo("MUD"),
+    campusLife: "A vibrant, multicultural campus in Dubai International Academic City.", established: 2000, website: "https://manipaldubai.com",
   },
   {
     id: "u195", slug: "gulf-medical-university", name: "Gulf Medical University", country: "United Arab Emirates", city: "Ajman", region: "UAE",
@@ -2734,7 +2609,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["GMU Merit Scholarship"] }, applicationDeadline: "Jul 15",
     majorsOffered: ["Medicine"], tags: ["Private", "Medical", "Small"],
     description: "A specialized medical and health-sciences university producing doctors, dentists, and pharmacists for the Gulf region.",
-    campusLife: "A focused medical-campus community in Ajman with hands-on clinical training.", established: 1998, website: "https://gmu.ac.ae", bannerImage: banner("Gulf Medical"), logoImage: logo("GMU"),
+    campusLife: "A focused medical-campus community in Ajman with hands-on clinical training.", established: 1998, website: "https://gmu.ac.ae",
   },
   {
     id: "u196", slug: "curtin-dubai", name: "Curtin University Dubai", country: "United Arab Emirates", city: "Dubai", region: "UAE",
@@ -2742,7 +2617,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Curtin Dubai Scholarship"] }, applicationDeadline: "Aug 01",
     majorsOffered: ["Business", "Engineering", "Computer Science"], tags: ["Private", "Branch Campus"],
     description: "The Dubai campus of Australia's Curtin University, awarding Australian-accredited degrees in business and engineering.",
-    campusLife: "A modern campus in Dubai International Academic City with strong industry partnerships.", established: 2008, website: "https://www.curtindubai.ac.ae", bannerImage: banner("Curtin Dubai"), logoImage: logo("Curtin"),
+    campusLife: "A modern campus in Dubai International Academic City with strong industry partnerships.", established: 2008, website: "https://www.curtindubai.ac.ae",
   },
   {
     id: "u197", slug: "al-khawarizmi-international-college", name: "Al Khawarizmi International College", country: "United Arab Emirates", city: "Abu Dhabi", region: "UAE",
@@ -2750,7 +2625,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["AKIC Merit Award"] }, applicationDeadline: "Sep 01",
     majorsOffered: ["Engineering", "Business", "Computer Science"], tags: ["Private", "Affordable", "Small"],
     description: "A compact Abu Dhabi college offering affordable applied-engineering and business degrees with small class sizes.",
-    campusLife: "A small, supportive campus in Abu Dhabi's academic district.", established: 1996, website: "https://www.akic.ac.ae", bannerImage: banner("AKIC"), logoImage: logo("AKIC"),
+    campusLife: "A small, supportive campus in Abu Dhabi's academic district.", established: 1996, website: "https://www.akic.ac.ae",
   },
 
   // ---------- Australia ----------
@@ -2760,7 +2635,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Melbourne International Scholarship"] }, applicationDeadline: "Oct 31",
     majorsOffered: ["Medicine", "Law", "Business", "Engineering", "Arts & Humanities"], tags: ["Research", "Public", "Group of Eight"],
     description: "Australia's top-ranked university, renowned for research excellence across medicine, law, and the liberal arts.",
-    campusLife: "A vibrant campus in the heart of Melbourne with a thriving student culture and world-class facilities.", established: 1853, website: "https://www.unimelb.edu.au", bannerImage: banner("Melbourne"), logoImage: logo("UoM"),
+    campusLife: "A vibrant campus in the heart of Melbourne with a thriving student culture and world-class facilities.", established: 1853, website: "https://www.unimelb.edu.au",
   },
   {
     id: "u199", slug: "university-of-sydney", name: "University of Sydney", country: "Australia", city: "Sydney", region: "Australia",
@@ -2768,7 +2643,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Sydney Scholars Award"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Medicine", "Law", "Engineering", "Business", "Natural Sciences"], tags: ["Research", "Public", "Group of Eight"],
     description: "Australia's first university, with globally recognized programs in health sciences, engineering, and the humanities.",
-    campusLife: "Historic sandstone campus near the CBD with over 200 student clubs and societies.", established: 1850, website: "https://www.sydney.edu.au", bannerImage: banner("Sydney"), logoImage: logo("USYD"),
+    campusLife: "Historic sandstone campus near the CBD with over 200 student clubs and societies.", established: 1850, website: "https://www.sydney.edu.au",
   },
   {
     id: "u200", slug: "australian-national-university", name: "Australian National University", country: "Australia", city: "Canberra", region: "Australia",
@@ -2776,7 +2651,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["ANU Chancellor's International Scholarship"] }, applicationDeadline: "Dec 15",
     majorsOffered: ["Natural Sciences", "Social Sciences", "Law", "Engineering", "Arts & Humanities"], tags: ["Research", "Public", "Group of Eight"],
     description: "Australia's national research university in the capital, consistently ranked among the world's top 30 with strengths in policy, science, and Asia-Pacific studies.",
-    campusLife: "A leafy campus in Canberra with extensive on-campus residential colleges.", established: 1946, website: "https://www.anu.edu.au", bannerImage: banner("ANU"), logoImage: logo("ANU"),
+    campusLife: "A leafy campus in Canberra with extensive on-campus residential colleges.", established: 1946, website: "https://www.anu.edu.au",
   },
   {
     id: "u201", slug: "university-of-queensland", name: "University of Queensland", country: "Australia", city: "Brisbane", region: "Australia",
@@ -2784,7 +2659,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UQ International Scholarship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Business", "Medicine", "Social Sciences"], tags: ["Research", "Public", "Group of Eight"],
     description: "A leading research-intensive university in subtropical Brisbane, strong in biosciences, engineering, and mineral resources.",
-    campusLife: "Scenic riverside campus with a subtropical climate and extensive sports facilities.", established: 1909, website: "https://www.uq.edu.au", bannerImage: banner("UQ"), logoImage: logo("UQ"),
+    campusLife: "Scenic riverside campus with a subtropical climate and extensive sports facilities.", established: 1909, website: "https://www.uq.edu.au",
   },
   {
     id: "u202", slug: "unsw-sydney", name: "UNSW Sydney", country: "Australia", city: "Sydney", region: "Australia",
@@ -2792,7 +2667,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UNSW International Scientia Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Engineering", "Computer Science", "Business", "Law", "Natural Sciences"], tags: ["Research", "Public", "STEM", "Group of Eight"],
     description: "A powerhouse in engineering, technology, and business with deep ties to Australian industry and startups.",
-    campusLife: "A modern campus near Sydney's beaches with a strong entrepreneurial and engineering culture.", established: 1949, website: "https://www.unsw.edu.au", bannerImage: banner("UNSW"), logoImage: logo("UNSW"),
+    campusLife: "A modern campus near Sydney's beaches with a strong entrepreneurial and engineering culture.", established: 1949, website: "https://www.unsw.edu.au",
   },
   {
     id: "u203", slug: "monash-university", name: "Monash University", country: "Australia", city: "Melbourne", region: "Australia",
@@ -2800,7 +2675,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Monash International Merit Scholarship"] }, applicationDeadline: "Jan 31",
     majorsOffered: ["Medicine", "Engineering", "Business", "Natural Sciences", "Education"], tags: ["Research", "Public", "Group of Eight"],
     description: "Australia's largest university by enrollment, with global campuses and top-tier pharmacy and clinical medicine programs.",
-    campusLife: "Multiple campuses across Melbourne with a diverse international student community.", established: 1958, website: "https://www.monash.edu", bannerImage: banner("Monash"), logoImage: logo("Monash"),
+    campusLife: "Multiple campuses across Melbourne with a diverse international student community.", established: 1958, website: "https://www.monash.edu",
   },
   {
     id: "u204", slug: "university-of-western-australia", name: "University of Western Australia", country: "Australia", city: "Perth", region: "Australia",
@@ -2808,7 +2683,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UWA Global Excellence Scholarship"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Natural Sciences", "Engineering", "Business", "Medicine", "Arts & Humanities"], tags: ["Research", "Public", "Group of Eight"],
     description: "Perth's premier research university, strong in marine biology, mining engineering, and agricultural science.",
-    campusLife: "A beautiful riverside campus in Perth with Mediterranean climate and relaxed lifestyle.", established: 1911, website: "https://www.uwa.edu.au", bannerImage: banner("UWA"), logoImage: logo("UWA"),
+    campusLife: "A beautiful riverside campus in Perth with Mediterranean climate and relaxed lifestyle.", established: 1911, website: "https://www.uwa.edu.au",
   },
   {
     id: "u205", slug: "university-of-adelaide", name: "University of Adelaide", country: "Australia", city: "Adelaide", region: "Australia",
@@ -2816,7 +2691,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Adelaide Global Academic Excellence Scholarship"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Engineering", "Natural Sciences", "Medicine", "Arts & Humanities", "Business"], tags: ["Research", "Public", "Group of Eight"],
     description: "A member of Australia's Group of Eight in South Australia, with strength in winemaking science, engineering, and health.",
-    campusLife: "A compact city-centre campus in one of the world's most liveable cities.", established: 1874, website: "https://www.adelaide.edu.au", bannerImage: banner("Adelaide"), logoImage: logo("UoA"),
+    campusLife: "A compact city-centre campus in one of the world's most liveable cities.", established: 1874, website: "https://www.adelaide.edu.au",
   },
   {
     id: "u206", slug: "uts-sydney", name: "University of Technology Sydney", country: "Australia", city: "Sydney", region: "Australia",
@@ -2824,7 +2699,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["UTS International Scholarship"] }, applicationDeadline: "Jan 15",
     majorsOffered: ["Computer Science", "Engineering", "Business", "Communications & Media", "Natural Sciences"], tags: ["Public", "STEM", "Industry-Connected"],
     description: "A practice-oriented technology university in central Sydney, known for design, IT, and strong industry partnerships.",
-    campusLife: "A striking modern campus in the heart of Sydney's creative tech district.", established: 1988, website: "https://www.uts.edu.au", bannerImage: banner("UTS"), logoImage: logo("UTS"),
+    campusLife: "A striking modern campus in the heart of Sydney's creative tech district.", established: 1988, website: "https://www.uts.edu.au",
   },
   {
     id: "u207", slug: "macquarie-university", name: "Macquarie University", country: "Australia", city: "Sydney", region: "Australia",
@@ -2832,7 +2707,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Macquarie Vice-Chancellor's International Scholarship"] }, applicationDeadline: "Jan 31",
     majorsOffered: ["Business", "Natural Sciences", "Arts & Humanities", "Engineering", "Medicine"], tags: ["Public", "Innovation", "Tech Precinct"],
     description: "Set within Sydney's largest business and technology precinct, with strengths in linguistics, finance, and environmental science.",
-    campusLife: "A self-contained campus surrounded by parkland and a thriving tech hub.", established: 1964, website: "https://www.mq.edu.au", bannerImage: banner("Macquarie"), logoImage: logo("MQ"),
+    campusLife: "A self-contained campus surrounded by parkland and a thriving tech hub.", established: 1964, website: "https://www.mq.edu.au",
   },
 
   // ---------- Japan ----------
@@ -2842,7 +2717,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "UTokyo Fellowship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Engineering", "Natural Sciences", "Medicine", "Law", "Social Sciences"], tags: ["Research", "Public", "STEM", "National"],
     description: "Japan's most prestigious university, producing numerous Nobel laureates and leaders across science, policy, and industry.",
-    campusLife: "Historic Hongo campus in central Tokyo blending Meiji-era architecture with cutting-edge labs.", established: 1877, website: "https://www.u-tokyo.ac.jp", bannerImage: banner("UTokyo"), logoImage: logo("UTokyo"),
+    campusLife: "Historic Hongo campus in central Tokyo blending Meiji-era architecture with cutting-edge labs.", established: 1877, website: "https://www.u-tokyo.ac.jp",
   },
   {
     id: "u209", slug: "kyoto-university", name: "Kyoto University", country: "Japan", city: "Kyoto", region: "Japan",
@@ -2850,7 +2725,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Kyoto iUP Scholarship"] }, applicationDeadline: "Nov 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Medicine", "Arts & Humanities", "Social Sciences"], tags: ["Research", "Public", "National"],
     description: "Japan's second-oldest imperial university, renowned for its free academic culture and Nobel Prize winners in physics and chemistry.",
-    campusLife: "A campus in historic Kyoto surrounded by temples, offering an intellectually independent atmosphere.", established: 1897, website: "https://www.kyoto-u.ac.jp", bannerImage: banner("Kyoto"), logoImage: logo("KyotoU"),
+    campusLife: "A campus in historic Kyoto surrounded by temples, offering an intellectually independent atmosphere.", established: 1897, website: "https://www.kyoto-u.ac.jp",
   },
   {
     id: "u210", slug: "osaka-university", name: "Osaka University", country: "Japan", city: "Osaka", region: "Japan",
@@ -2858,7 +2733,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Osaka University Scholarship"] }, applicationDeadline: "Dec 15",
     majorsOffered: ["Engineering", "Medicine", "Natural Sciences", "Social Sciences", "Business"], tags: ["Research", "Public", "National"],
     description: "A top research university in Japan's commercial capital, strong in immunology, robotics, and laser science.",
-    campusLife: "Multiple campuses across vibrant Osaka, a city famous for its food culture and energy.", established: 1931, website: "https://www.osaka-u.ac.jp", bannerImage: banner("OsakaU"), logoImage: logo("OsakaU"),
+    campusLife: "Multiple campuses across vibrant Osaka, a city famous for its food culture and energy.", established: 1931, website: "https://www.osaka-u.ac.jp",
   },
   {
     id: "u211", slug: "tokyo-institute-of-technology", name: "Tokyo Institute of Technology", country: "Japan", city: "Tokyo", region: "Japan",
@@ -2866,7 +2741,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Tokyo Tech ASGSP"] }, applicationDeadline: "Nov 15",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences"], tags: ["Research", "Public", "STEM", "National"],
     description: "Japan's premier science and technology university, comparable to MIT, with world-class materials science and computing programs.",
-    campusLife: "A focused STEM campus in Tokyo's Meguro district with a tight-knit academic community.", established: 1881, website: "https://www.titech.ac.jp", bannerImage: banner("Tokyo Tech"), logoImage: logo("TITech"),
+    campusLife: "A focused STEM campus in Tokyo's Meguro district with a tight-knit academic community.", established: 1881, website: "https://www.titech.ac.jp",
   },
   {
     id: "u212", slug: "tohoku-university", name: "Tohoku University", country: "Japan", city: "Sendai", region: "Japan",
@@ -2874,7 +2749,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Tohoku University Scholarship"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Engineering", "Natural Sciences", "Medicine", "Arts & Humanities"], tags: ["Research", "Public", "National"],
     description: "Japan's third imperial university, a pioneer in materials science and the first in Japan to admit female students.",
-    campusLife: "A leafy campus in the city of trees, Sendai, known for its warm community spirit.", established: 1907, website: "https://www.tohoku.ac.jp", bannerImage: banner("Tohoku"), logoImage: logo("Tohoku"),
+    campusLife: "A leafy campus in the city of trees, Sendai, known for its warm community spirit.", established: 1907, website: "https://www.tohoku.ac.jp",
   },
   {
     id: "u213", slug: "nagoya-university", name: "Nagoya University", country: "Japan", city: "Nagoya", region: "Japan",
@@ -2882,7 +2757,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Nagoya University NUFSA"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Natural Sciences", "Engineering", "Medicine", "Law", "Social Sciences"], tags: ["Research", "Public", "National"],
     description: "Home to six Nobel laureates in physics and chemistry, located in Japan's manufacturing heartland.",
-    campusLife: "A spacious campus in central Japan with easy access to Toyota City and the auto industry.", established: 1939, website: "https://www.nagoya-u.ac.jp", bannerImage: banner("NagoyaU"), logoImage: logo("NagoyaU"),
+    campusLife: "A spacious campus in central Japan with easy access to Toyota City and the auto industry.", established: 1939, website: "https://www.nagoya-u.ac.jp",
   },
   {
     id: "u214", slug: "hokkaido-university", name: "Hokkaido University", country: "Japan", city: "Sapporo", region: "Japan",
@@ -2890,7 +2765,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Hokkaido University Scholarship"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Natural Sciences", "Engineering", "Medicine", "Arts & Humanities", "Social Sciences"], tags: ["Research", "Public", "National"],
     description: "Japan's northernmost imperial university, known for environmental science, agriculture, and a stunning ginkgo-lined campus.",
-    campusLife: "One of Japan's most beautiful campuses with vast green spaces and snowy winters in Sapporo.", established: 1876, website: "https://www.hokudai.ac.jp", bannerImage: banner("Hokkaido"), logoImage: logo("HokkU"),
+    campusLife: "One of Japan's most beautiful campuses with vast green spaces and snowy winters in Sapporo.", established: 1876, website: "https://www.hokudai.ac.jp",
   },
   {
     id: "u215", slug: "kyushu-university", name: "Kyushu University", country: "Japan", city: "Fukuoka", region: "Japan",
@@ -2898,7 +2773,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["MEXT Scholarship", "Kyushu University Scholarship"] }, applicationDeadline: "Dec 01",
     majorsOffered: ["Engineering", "Natural Sciences", "Medicine", "Social Sciences", "Arts & Humanities"], tags: ["Research", "Public", "National"],
     description: "A leading imperial university in southern Japan, with a brand-new Ito campus and strengths in hydrogen energy and aerospace.",
-    campusLife: "A modern new campus in Fukuoka, one of Japan's most liveable and affordable cities.", established: 1911, website: "https://www.kyushu-u.ac.jp", bannerImage: banner("KyushuU"), logoImage: logo("KyushuU"),
+    campusLife: "A modern new campus in Fukuoka, one of Japan's most liveable and affordable cities.", established: 1911, website: "https://www.kyushu-u.ac.jp",
   },
   {
     id: "u216", slug: "waseda-university", name: "Waseda University", country: "Japan", city: "Tokyo", region: "Japan",
@@ -2906,7 +2781,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Waseda International Scholarship"] }, applicationDeadline: "Sep 01",
     majorsOffered: ["Business", "Social Sciences", "Engineering", "Arts & Humanities", "Communications & Media"], tags: ["Private", "Liberal Arts", "International"],
     description: "One of Japan's most prestigious private universities, famous for producing prime ministers, writers, and business leaders.",
-    campusLife: "An energetic Shinjuku-area campus with a legendary student festival and competitive sports teams.", established: 1882, website: "https://www.waseda.jp", bannerImage: banner("Waseda"), logoImage: logo("Waseda"),
+    campusLife: "An energetic Shinjuku-area campus with a legendary student festival and competitive sports teams.", established: 1882, website: "https://www.waseda.jp",
   },
   {
     id: "u217", slug: "keio-university", name: "Keio University", country: "Japan", city: "Tokyo", region: "Japan",
@@ -2914,7 +2789,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Keio International Scholarship"] }, applicationDeadline: "Sep 01",
     majorsOffered: ["Business", "Medicine", "Law", "Engineering", "Social Sciences"], tags: ["Private", "Elite", "International"],
     description: "Japan's oldest private university, rivalling Waseda with elite programs in medicine, economics, and business.",
-    campusLife: "Multiple campuses across Tokyo and Yokohama with a strong alumni network in Japanese industry.", established: 1858, website: "https://www.keio.ac.jp", bannerImage: banner("Keio"), logoImage: logo("Keio"),
+    campusLife: "Multiple campuses across Tokyo and Yokohama with a strong alumni network in Japanese industry.", established: 1858, website: "https://www.keio.ac.jp",
   },
 
   // ---------- South Korea ----------
@@ -2924,7 +2799,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SNU Global Scholarship", "Korean Government Scholarship"] }, applicationDeadline: "Sep 15",
     majorsOffered: ["Engineering", "Natural Sciences", "Medicine", "Business", "Social Sciences"], tags: ["Research", "Public", "National", "STEM"],
     description: "South Korea's top university, a national flagship producing leaders in technology, government, and business.",
-    campusLife: "A sprawling mountainside campus in southern Seoul with a vibrant student culture.", established: 1946, website: "https://www.snu.ac.kr", bannerImage: banner("SNU"), logoImage: logo("SNU"),
+    campusLife: "A sprawling mountainside campus in southern Seoul with a vibrant student culture.", established: 1946, website: "https://www.snu.ac.kr",
   },
   {
     id: "u219", slug: "kaist", name: "KAIST", country: "South Korea", city: "Daejeon", region: "South Korea",
@@ -2932,7 +2807,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["KAIST International Student Scholarship"] }, applicationDeadline: "Sep 15",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business"], tags: ["Research", "Public", "STEM", "National"],
     description: "Korea's MIT equivalent, a world-class science and technology institute that fully funds most international students.",
-    campusLife: "A tech-focused campus in Daejeon's science city with a startup-friendly environment.", established: 1971, website: "https://www.kaist.ac.kr", bannerImage: banner("KAIST"), logoImage: logo("KAIST"),
+    campusLife: "A tech-focused campus in Daejeon's science city with a startup-friendly environment.", established: 1971, website: "https://www.kaist.ac.kr",
   },
   {
     id: "u220", slug: "yonsei-university", name: "Yonsei University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2940,7 +2815,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Yonsei Global Leader Scholarship"] }, applicationDeadline: "Oct 15",
     majorsOffered: ["Business", "Engineering", "Medicine", "Social Sciences", "Arts & Humanities"], tags: ["Private", "Research", "SKY"],
     description: "One of Korea's elite 'SKY' universities, with a strong international focus and top-ranked business school.",
-    campusLife: "A beautiful hilltop campus in Seoul's Sinchon district, known for the legendary Yon-Ko rivalry.", established: 1885, website: "https://www.yonsei.ac.kr", bannerImage: banner("Yonsei"), logoImage: logo("Yonsei"),
+    campusLife: "A beautiful hilltop campus in Seoul's Sinchon district, known for the legendary Yon-Ko rivalry.", established: 1885, website: "https://www.yonsei.ac.kr",
   },
   {
     id: "u221", slug: "korea-university", name: "Korea University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2948,7 +2823,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Korea University Global KU Scholarship"] }, applicationDeadline: "Oct 15",
     majorsOffered: ["Law", "Business", "Engineering", "Social Sciences", "Medicine"], tags: ["Private", "Research", "SKY"],
     description: "The third pillar of Korea's 'SKY' trio, with elite law, business, and political science programs.",
-    campusLife: "A spirited campus in Anam, Seoul, with fierce athletic traditions and a strong alumni network.", established: 1905, website: "https://www.korea.ac.kr", bannerImage: banner("KoreaU"), logoImage: logo("KU"),
+    campusLife: "A spirited campus in Anam, Seoul, with fierce athletic traditions and a strong alumni network.", established: 1905, website: "https://www.korea.ac.kr",
   },
   {
     id: "u222", slug: "postech", name: "POSTECH", country: "South Korea", city: "Pohang", region: "South Korea",
@@ -2956,7 +2831,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["POSTECH Full Scholarship"] }, applicationDeadline: "Sep 15",
     majorsOffered: ["Engineering", "Natural Sciences", "Computer Science"], tags: ["Research", "Private", "STEM", "Small"],
     description: "A small, elite science and engineering institute founded by steelmaker POSCO, with one of Asia's lowest student-to-faculty ratios.",
-    campusLife: "A compact coastal campus in Pohang with intense academic focus and full financial support.", established: 1986, website: "https://www.postech.ac.kr", bannerImage: banner("POSTECH"), logoImage: logo("POSTECH"),
+    campusLife: "A compact coastal campus in Pohang with intense academic focus and full financial support.", established: 1986, website: "https://www.postech.ac.kr",
   },
   {
     id: "u223", slug: "sungkyunkwan-university", name: "Sungkyunkwan University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2964,7 +2839,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["SKKU Global Scholarship"] }, applicationDeadline: "Oct 30",
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Social Sciences", "Medicine"], tags: ["Private", "Research", "Samsung-affiliated"],
     description: "Korea's oldest educational institution (founded 1398), now backed by Samsung with top-tier engineering and business programs.",
-    campusLife: "Two campuses in Seoul and Suwon, with deep Samsung industry connections and modern facilities.", established: 1398, website: "https://www.skku.edu", bannerImage: banner("SKKU"), logoImage: logo("SKKU"),
+    campusLife: "Two campuses in Seoul and Suwon, with deep Samsung industry connections and modern facilities.", established: 1398, website: "https://www.skku.edu",
   },
   {
     id: "u224", slug: "hanyang-university", name: "Hanyang University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2972,7 +2847,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Hanyang International Scholarship"] }, applicationDeadline: "Oct 15",
     majorsOffered: ["Engineering", "Business", "Medicine", "Arts & Humanities", "Natural Sciences"], tags: ["Private", "Engineering", "Industry-Connected"],
     description: "A leading private university famous for engineering and architecture, with the strongest industry-placement record in Korea.",
-    campusLife: "A large urban campus near Seoul's Wangsimni area with vibrant student life and arts programs.", established: 1939, website: "https://www.hanyang.ac.kr", bannerImage: banner("Hanyang"), logoImage: logo("HYU"),
+    campusLife: "A large urban campus near Seoul's Wangsimni area with vibrant student life and arts programs.", established: 1939, website: "https://www.hanyang.ac.kr",
   },
   {
     id: "u225", slug: "kyung-hee-university", name: "Kyung Hee University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2980,7 +2855,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["KHU Global Scholarship"] }, applicationDeadline: "Oct 30",
     majorsOffered: ["Medicine", "Business", "Social Sciences", "Arts & Humanities", "Natural Sciences"], tags: ["Private", "Comprehensive", "Korean Medicine"],
     description: "Known for traditional Korean medicine, hospitality, and international studies, with a grand neo-Gothic campus.",
-    campusLife: "A picturesque campus in Seoul's Dongdaemun district, popular for its grand Peace Hall and cherry blossoms.", established: 1949, website: "https://www.khu.ac.kr", bannerImage: banner("KyungHee"), logoImage: logo("KHU"),
+    campusLife: "A picturesque campus in Seoul's Dongdaemun district, popular for its grand Peace Hall and cherry blossoms.", established: 1949, website: "https://www.khu.ac.kr",
   },
   {
     id: "u226", slug: "ewha-womans-university", name: "Ewha Womans University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2988,7 +2863,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Ewha Global Scholarship"] }, applicationDeadline: "Oct 15",
     majorsOffered: ["Social Sciences", "Business", "Law", "Natural Sciences", "Arts & Humanities"], tags: ["Private", "Women's University", "Liberal Arts"],
     description: "The world's largest women's university, a pioneer in women's education in Korea with strong law and international studies programs.",
-    campusLife: "A stunning campus in Sinchon, Seoul, featuring the famous underground ECC complex by Dominique Perrault.", established: 1886, website: "https://www.ewha.ac.kr", bannerImage: banner("Ewha"), logoImage: logo("Ewha"),
+    campusLife: "A stunning campus in Sinchon, Seoul, featuring the famous underground ECC complex by Dominique Perrault.", established: 1886, website: "https://www.ewha.ac.kr",
   },
   {
     id: "u227", slug: "sogang-university", name: "Sogang University", country: "South Korea", city: "Seoul", region: "South Korea",
@@ -2996,7 +2871,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Sogang International Scholarship"] }, applicationDeadline: "Oct 15",
     majorsOffered: ["Business", "Social Sciences", "Engineering", "Arts & Humanities", "Natural Sciences"], tags: ["Private", "Jesuit", "Small", "Liberal Arts"],
     description: "A respected Jesuit university in Seoul known for its rigorous economics and business programs and small class sizes.",
-    campusLife: "A compact, tight-knit campus near Sinchon with a strong humanities and critical-thinking tradition.", established: 1960, website: "https://www.sogang.ac.kr", bannerImage: banner("Sogang"), logoImage: logo("Sogang"),
+    campusLife: "A compact, tight-knit campus near Sinchon with a strong humanities and critical-thinking tradition.", established: 1960, website: "https://www.sogang.ac.kr",
   },
 
   // ---------- India ----------
@@ -3006,7 +2881,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IITB Merit Scholarship", "MCM Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business"], tags: ["Public", "STEM", "Research", "Elite"],
     description: "India's flagship engineering institute, a Silicon Valley talent pipeline with world-class computer science and electrical engineering.",
-    campusLife: "A self-contained hillside campus overlooking Powai Lake in Mumbai with a legendary tech fest (Techfest).", established: 1958, website: "https://www.iitb.ac.in", bannerImage: banner("IIT Bombay"), logoImage: logo("IITB"),
+    campusLife: "A self-contained hillside campus overlooking Powai Lake in Mumbai with a legendary tech fest (Techfest).", established: 1958, website: "https://www.iitb.ac.in",
   },
   {
     id: "u229", slug: "iit-delhi", name: "IIT Delhi", country: "India", city: "New Delhi", region: "India",
@@ -3014,7 +2889,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IITD Merit Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Social Sciences"], tags: ["Public", "STEM", "Research", "Elite"],
     description: "One of India's oldest and most selective IITs, excelling in textile technology, chemical engineering, and computer science.",
-    campusLife: "A green oasis in South Delhi's Hauz Khas area with a strong entrepreneurial ecosystem.", established: 1961, website: "https://home.iitd.ac.in", bannerImage: banner("IIT Delhi"), logoImage: logo("IITD"),
+    campusLife: "A green oasis in South Delhi's Hauz Khas area with a strong entrepreneurial ecosystem.", established: 1961, website: "https://home.iitd.ac.in",
   },
   {
     id: "u230", slug: "iit-madras", name: "IIT Madras", country: "India", city: "Chennai", region: "India",
@@ -3022,7 +2897,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IITM Merit Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Arts & Humanities"], tags: ["Public", "STEM", "Research", "Elite"],
     description: "Consistently ranked India's top engineering school, with pioneering research in data science and a thriving startup incubator.",
-    campusLife: "A 600-acre forested campus inside IIT Madras Research Park, home to deer and monkeys.", established: 1959, website: "https://www.iitm.ac.in", bannerImage: banner("IIT Madras"), logoImage: logo("IITM"),
+    campusLife: "A 600-acre forested campus inside IIT Madras Research Park, home to deer and monkeys.", established: 1959, website: "https://www.iitm.ac.in",
   },
   {
     id: "u231", slug: "iit-kanpur", name: "IIT Kanpur", country: "India", city: "Kanpur", region: "India",
@@ -3030,7 +2905,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IITK Merit Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business"], tags: ["Public", "STEM", "Research", "Elite"],
     description: "A pioneer of computer science education in India, with the country's first CS department and strong aerospace engineering.",
-    campusLife: "A large residential campus along the Ganges with a close-knit academic community.", established: 1959, website: "https://www.iitk.ac.in", bannerImage: banner("IIT Kanpur"), logoImage: logo("IITK"),
+    campusLife: "A large residential campus along the Ganges with a close-knit academic community.", established: 1959, website: "https://www.iitk.ac.in",
   },
   {
     id: "u232", slug: "iisc-bangalore", name: "IISc Bangalore", country: "India", city: "Bangalore", region: "India",
@@ -3038,7 +2913,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IISc Fellowship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Natural Sciences", "Engineering", "Computer Science"], tags: ["Public", "Research", "STEM", "Graduate-Focused"],
     description: "India's premier research-only institution, focused on graduate studies in science and engineering with exceptional per-capita research output.",
-    campusLife: "A serene 400-acre campus in Bangalore's tech corridor, primarily for graduate researchers.", established: 1909, website: "https://www.iisc.ac.in", bannerImage: banner("IISc"), logoImage: logo("IISc"),
+    campusLife: "A serene 400-acre campus in Bangalore's tech corridor, primarily for graduate researchers.", established: 1909, website: "https://www.iisc.ac.in",
   },
   {
     id: "u233", slug: "iit-kharagpur", name: "IIT Kharagpur", country: "India", city: "Kharagpur", region: "India",
@@ -3046,7 +2921,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["IIT KGP Merit Scholarship"] }, applicationDeadline: "Apr 30",
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Law", "Arts & Humanities"], tags: ["Public", "STEM", "Research", "Elite"],
     description: "India's first IIT, with the largest campus and broadest range of programs among the IITs, including law and architecture.",
-    campusLife: "A massive self-contained campus in West Bengal, often called a city in itself.", established: 1951, website: "https://www.iitkgp.ac.in", bannerImage: banner("IIT KGP"), logoImage: logo("IITKGP"),
+    campusLife: "A massive self-contained campus in West Bengal, often called a city in itself.", established: 1951, website: "https://www.iitkgp.ac.in",
   },
   {
     id: "u234", slug: "university-of-delhi", name: "University of Delhi", country: "India", city: "New Delhi", region: "India",
@@ -3054,7 +2929,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["DU Merit Scholarship"] }, applicationDeadline: "Jun 30",
     majorsOffered: ["Arts & Humanities", "Social Sciences", "Natural Sciences", "Law", "Business"], tags: ["Public", "Liberal Arts", "Large"],
     description: "India's most prestigious liberal arts university, with celebrated programs in economics, English literature, and political science.",
-    campusLife: "A sprawling multi-college system across North and South Delhi with a vibrant intellectual culture.", established: 1922, website: "https://www.du.ac.in", bannerImage: banner("DU"), logoImage: logo("DU"),
+    campusLife: "A sprawling multi-college system across North and South Delhi with a vibrant intellectual culture.", established: 1922, website: "https://www.du.ac.in",
   },
   {
     id: "u235", slug: "jawaharlal-nehru-university", name: "Jawaharlal Nehru University", country: "India", city: "New Delhi", region: "India",
@@ -3062,7 +2937,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["JNU Fellowship"] }, applicationDeadline: "Mar 31",
     majorsOffered: ["Social Sciences", "Arts & Humanities", "Natural Sciences", "Law"], tags: ["Public", "Research", "Social Sciences"],
     description: "India's foremost institution for social sciences and area studies, known for rigorous debate, activism, and international relations programs.",
-    campusLife: "A forested campus in South Delhi with intense political and intellectual discourse.", established: 1969, website: "https://www.jnu.ac.in", bannerImage: banner("JNU"), logoImage: logo("JNU"),
+    campusLife: "A forested campus in South Delhi with intense political and intellectual discourse.", established: 1969, website: "https://www.jnu.ac.in",
   },
   {
     id: "u236", slug: "bits-pilani", name: "BITS Pilani", country: "India", city: "Pilani", region: "India",
@@ -3070,7 +2945,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["BITS Merit Scholarship"] }, applicationDeadline: "May 15",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business"], tags: ["Private", "STEM", "Industry-Connected"],
     description: "India's top private engineering university, known for its unique practice school industry-internship model and strong alumni network.",
-    campusLife: "A desert campus in Rajasthan with satellite campuses in Goa, Hyderabad, and Dubai.", established: 1964, website: "https://www.bits-pilani.ac.in", bannerImage: banner("BITS"), logoImage: logo("BITS"),
+    campusLife: "A desert campus in Rajasthan with satellite campuses in Goa, Hyderabad, and Dubai.", established: 1964, website: "https://www.bits-pilani.ac.in",
   },
   {
     id: "u237", slug: "anna-university", name: "Anna University", country: "India", city: "Chennai", region: "India",
@@ -3078,7 +2953,7 @@ export const universities: University[] = [
     scholarships: { available: true, types: ["Anna University Merit Scholarship"] }, applicationDeadline: "Jun 30",
     majorsOffered: ["Engineering", "Computer Science", "Natural Sciences", "Business", "Arts & Humanities"], tags: ["Public", "Engineering", "Affiliated Colleges"],
     description: "Tamil Nadu's premier technical university, affiliating hundreds of engineering colleges with strong programs in IT and manufacturing.",
-    campusLife: "A large campus in Chennai's Guindy area, well-connected to India's IT hub.", established: 1978, website: "https://www.annauniv.edu", bannerImage: banner("Anna"), logoImage: logo("Anna"),
+    campusLife: "A large campus in Chennai's Guindy area, well-connected to India's IT hub.", established: 1978, website: "https://www.annauniv.edu",
   },
 ];
 

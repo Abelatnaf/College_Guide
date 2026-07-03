@@ -13,6 +13,7 @@ import { getSupabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { getUniversityBySlug } from "@/data/universities";
 import { getAdmissionsTier } from "@/lib/universityInsights";
+import { getApplicationFee } from "@/data/applicationFees";
 import {
   newId,
   nowIso,
@@ -273,6 +274,31 @@ export function StorageProvider({ children }: { children: React.ReactNode }) {
               done: false,
             }))
           : [];
+        // Append verified, school-specific requirements (fee + CSS Profile) on top of
+        // the generic tier-based checklist, only when real sourced data exists.
+        const feeEntry = getApplicationFee(slug);
+        if (feeEntry) {
+          // A verified 0 means the school charges no fee of its own — but several
+          // such schools (UK/UCAS, Canada/OUAC) still route applications through a
+          // paid external portal, so a bare "Pay application fee: 0" read in isolation
+          // would understate real cost. Surface that caveat inline.
+          const feeLabel =
+            feeEntry.amount === 0
+              ? `No ${feeEntry.currency} application fee charged by the school — but you still pay the external application portal (e.g. UCAS/OUAC) separately (see Cost to Apply)`
+              : `Pay application fee: ${feeEntry.amount} ${feeEntry.currency} (see Cost to Apply for source)`;
+          seededChecklist.push({
+            id: newId(),
+            label: feeLabel,
+            done: false,
+          });
+          if (feeEntry.requiresCSSProfile === true) {
+            seededChecklist.push({
+              id: newId(),
+              label: "Submit the CSS Profile for financial aid consideration",
+              done: false,
+            });
+          }
+        }
         const app: Application = {
           slug,
           status: "considering",

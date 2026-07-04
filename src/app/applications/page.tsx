@@ -64,21 +64,30 @@ export default function ApplicationsPage() {
         }
         actions={
           applications.length > 0 && (
-            <div className="flex rounded-lg border border-outline-variant p-0.5">
-              <button
-                onClick={() => setView("cards")}
-                className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "cards" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
+            <div className="flex items-center gap-sm">
+              <Link
+                href="/calendar"
+                className="flex items-center gap-1 rounded-lg border border-outline-variant px-3 py-1.5 font-label-md text-label-md text-on-surface-variant transition-colors hover:border-primary hover:text-primary"
               >
-                <span className="material-symbols-outlined text-[18px]">view_agenda</span>
-                Cards
-              </button>
-              <button
-                onClick={() => setView("timeline")}
-                className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "timeline" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
-              >
-                <span className="material-symbols-outlined text-[18px]">timeline</span>
-                Deadlines
-              </button>
+                <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                Calendar
+              </Link>
+              <div className="flex rounded-lg border border-outline-variant p-0.5">
+                <button
+                  onClick={() => setView("cards")}
+                  className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "cards" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
+                >
+                  <span className="material-symbols-outlined text-[18px]">view_agenda</span>
+                  Cards
+                </button>
+                <button
+                  onClick={() => setView("timeline")}
+                  className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "timeline" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
+                >
+                  <span className="material-symbols-outlined text-[18px]">timeline</span>
+                  Deadlines
+                </button>
+              </div>
             </div>
           )
         }

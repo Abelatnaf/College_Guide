@@ -48,13 +48,15 @@ function toIcsDate(d: Date): string {
   return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
 }
 
-/** Build an all-day VEVENT .ics string for a single deadline. */
-export function buildDeadlineIcs(opts: {
+interface IcsEvent {
   uid: string;
   title: string;
   date: Date;
   description?: string;
-}): string {
+}
+
+/** Build a single all-day VEVENT block (no VCALENDAR envelope) — shared by the single- and multi-event builders below. */
+function buildVeventBlock(opts: IcsEvent): string {
   const start = toIcsDate(opts.date);
   const endDate = new Date(opts.date);
   endDate.setDate(endDate.getDate() + 1);
@@ -62,10 +64,6 @@ export function buildDeadlineIcs(opts: {
   const stamp = toIcsDate(new Date());
 
   return [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//UniPath//Application Tracker//EN",
-    "CALSCALE:GREGORIAN",
     "BEGIN:VEVENT",
     `UID:${opts.uid}`,
     `DTSTAMP:${stamp}T000000Z`,
@@ -79,10 +77,33 @@ export function buildDeadlineIcs(opts: {
     `DESCRIPTION:${escapeIcs(opts.title)}`,
     "END:VALARM",
     "END:VEVENT",
-    "END:VCALENDAR",
   ]
     .filter(Boolean)
     .join("\r\n");
+}
+
+/** Build an all-day VEVENT .ics string for a single deadline. */
+export function buildDeadlineIcs(opts: IcsEvent): string {
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//UniPath//Application Tracker//EN",
+    "CALSCALE:GREGORIAN",
+    buildVeventBlock(opts),
+    "END:VCALENDAR",
+  ].join("\r\n");
+}
+
+/** Build one combined .ics file covering several deadlines — the "add all to my calendar" export. */
+export function buildCombinedIcs(events: IcsEvent[]): string {
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//UniPath//Application Tracker//EN",
+    "CALSCALE:GREGORIAN",
+    ...events.map(buildVeventBlock),
+    "END:VCALENDAR",
+  ].join("\r\n");
 }
 
 function escapeIcs(s: string): string {

@@ -141,9 +141,14 @@ export default function PathPage() {
             <div className="mb-md flex items-center justify-between">
               <h2 className="font-headline-md text-headline-md text-on-surface">Next deadlines</h2>
               {applications.length > 0 && (
-                <Link href="/applications" className="font-label-md text-primary hover:underline">
-                  View all
-                </Link>
+                <div className="flex items-center gap-md">
+                  <Link href="/calendar" className="font-label-md text-primary hover:underline">
+                    Calendar
+                  </Link>
+                  <Link href="/applications" className="font-label-md text-primary hover:underline">
+                    View all
+                  </Link>
+                </div>
               )}
             </div>
             {!hydrated ? (

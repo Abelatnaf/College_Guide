@@ -101,6 +101,35 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "CC BY-SA 4.0",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Washington_Square_Arch_03.JPG",
   },
+  "carnegie-mellon": {
+    src: "/images/universities/carnegie-mellon.jpg",
+    alt: "Hamerschlag Hall, Carnegie Mellon University",
+    photographer: "-cpt-",
+    license: "CC BY 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:CMU_Hamerschlag_Hall.jpg",
+  },
+  "johns-hopkins": {
+    src: "/images/universities/johns-hopkins.jpg",
+    alt: "Gilman Hall at the head of the Upper Quad, Johns Hopkins University",
+    photographer: "Ottawa80",
+    license: "Public domain",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Gilman_Hall_at_the_head_of_the_Upper_Quad,_Johns_Hopkins_University.jpg",
+  },
+  caltech: {
+    src: "/images/universities/caltech.jpg",
+    alt: "Millikan Library, California Institute of Technology",
+    photographer: "en:User:Geographer",
+    license: "CC BY 1.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Millikan_Library,_Caltech.jpg",
+  },
+  cornell: {
+    src: "/images/universities/cornell.jpg",
+    alt: "McGraw Tower, Cornell University",
+    photographer: "Herbert Lanks",
+    license: "Public domain",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Cornell_University_-_McGraw_Tower.jpg",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

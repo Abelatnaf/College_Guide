@@ -80,6 +80,38 @@
       "photographer": "Elisa.rolle",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Washington_Square_Arch_03.JPG"
+    },
+    {
+      "file": "carnegie-mellon.jpg",
+      "university": "Carnegie Mellon University",
+      "description": "Hamerschlag Hall",
+      "photographer": "-cpt-",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CMU_Hamerschlag_Hall.jpg"
+    },
+    {
+      "file": "johns-hopkins.jpg",
+      "university": "Johns Hopkins University",
+      "description": "Gilman Hall at the head of the Upper Quad",
+      "photographer": "Ottawa80",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gilman_Hall_at_the_head_of_the_Upper_Quad,_Johns_Hopkins_University.jpg"
+    },
+    {
+      "file": "caltech.jpg",
+      "university": "California Institute of Technology",
+      "description": "Millikan Library",
+      "photographer": "en:User:Geographer",
+      "license": "CC BY 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Millikan_Library,_Caltech.jpg"
+    },
+    {
+      "file": "cornell.jpg",
+      "university": "Cornell University",
+      "description": "McGraw Tower",
+      "photographer": "Herbert Lanks",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornell_University_-_McGraw_Tower.jpg"
     }
   ]
 }

@@ -112,6 +112,54 @@
       "photographer": "Herbert Lanks",
       "license": "Public domain",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornell_University_-_McGraw_Tower.jpg"
+    },
+    {
+      "file": "oxford.jpg",
+      "university": "University of Oxford",
+      "description": "The Radcliffe Camera",
+      "photographer": "Zhushenje",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Radcliffe_Camera,_Oxford,_UK.jpg"
+    },
+    {
+      "file": "cambridge.jpg",
+      "university": "University of Cambridge",
+      "description": "King's College Chapel",
+      "photographer": "Martinvl",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kings_College_Cambridge_Chapel_from_the_river.jpg"
+    },
+    {
+      "file": "imperial-college.jpg",
+      "university": "Imperial College London",
+      "description": "Queen's Tower",
+      "photographer": "Chris Sampson",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Queen's_Tower,_Imperial_College_London.jpg"
+    },
+    {
+      "file": "ucl.jpg",
+      "university": "University College London",
+      "description": "The Wilkins Building portico",
+      "photographer": "LordHarris",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UCL_Portico_Building.jpg"
+    },
+    {
+      "file": "edinburgh.jpg",
+      "university": "University of Edinburgh",
+      "description": "Old College quad",
+      "photographer": "Su Hongjia",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_College,_University_of_Edinburgh.JPG"
+    },
+    {
+      "file": "manchester.jpg",
+      "university": "University of Manchester",
+      "description": "Whitworth Building",
+      "photographer": "Mike Peel (www.mikepeel.net)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:University_of_Manchester_-_Whitworth_Building.jpg"
     }
   ]
 }

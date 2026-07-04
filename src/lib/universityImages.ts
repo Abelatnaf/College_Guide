@@ -130,6 +130,48 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Cornell_University_-_McGraw_Tower.jpg",
   },
+  oxford: {
+    src: "/images/universities/oxford.jpg",
+    alt: "The Radcliffe Camera, University of Oxford",
+    photographer: "Zhushenje",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Radcliffe_Camera,_Oxford,_UK.jpg",
+  },
+  cambridge: {
+    src: "/images/universities/cambridge.jpg",
+    alt: "King's College Chapel, University of Cambridge",
+    photographer: "Martinvl",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kings_College_Cambridge_Chapel_from_the_river.jpg",
+  },
+  "imperial-college": {
+    src: "/images/universities/imperial-college.jpg",
+    alt: "Queen's Tower, Imperial College London",
+    photographer: "Chris Sampson",
+    license: "CC BY 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Queen's_Tower,_Imperial_College_London.jpg",
+  },
+  ucl: {
+    src: "/images/universities/ucl.jpg",
+    alt: "The Wilkins Building portico, University College London",
+    photographer: "LordHarris",
+    license: "CC BY-SA 3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:UCL_Portico_Building.jpg",
+  },
+  edinburgh: {
+    src: "/images/universities/edinburgh.jpg",
+    alt: "Old College quad, University of Edinburgh",
+    photographer: "Su Hongjia",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Old_College,_University_of_Edinburgh.JPG",
+  },
+  manchester: {
+    src: "/images/universities/manchester.jpg",
+    alt: "Whitworth Building, University of Manchester",
+    photographer: "Mike Peel (www.mikepeel.net)",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:University_of_Manchester_-_Whitworth_Building.jpg",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

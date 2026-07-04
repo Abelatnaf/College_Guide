@@ -177,7 +177,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
             onChange={(e) => onChange({ scholarshipOnly: e.target.checked })}
             className="peer sr-only"
           />
-          <div className="peer h-6 w-11 rounded-full bg-secondary-container after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none" />
+          <div className="peer h-6 w-11 rounded-full bg-secondary-container after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-outline-variant after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none" />
         </label>
       </div>
 

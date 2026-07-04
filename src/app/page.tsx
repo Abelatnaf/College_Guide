@@ -124,7 +124,7 @@ export default function HomePage() {
                   </div>
                 </Link>
               </div>
-              <div className="absolute -top-6 -right-6 flex items-center gap-sm rounded-xl border border-outline-variant bg-white p-md shadow-xl">
+              <div className="absolute -top-6 -right-6 flex items-center gap-sm rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-xl">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
                   <span className="material-symbols-outlined text-white">
                     workspace_premium
@@ -232,7 +232,7 @@ export default function HomePage() {
                   international students, verified against official aid policies — with sources.
                 </p>
               </div>
-              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-white shadow-md transition-transform group-hover:scale-110">
+              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest shadow-md transition-transform group-hover:scale-110">
                 <span className="material-symbols-outlined text-[48px] text-primary">
                   payments
                 </span>
@@ -278,7 +278,7 @@ export default function HomePage() {
         className="border-y border-outline-variant/20 bg-surface-bright py-xl scroll-mt-20"
       >
         <div className="mx-auto max-w-container-max px-md md:px-lg">
-          <div className="grid grid-cols-1 items-center gap-xl rounded-[24px] border border-outline-variant/30 bg-white p-lg shadow-lg md:p-xl lg:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-xl rounded-[24px] border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-lg md:p-xl lg:grid-cols-2">
             <div>
               <h2 className="mb-md font-headline-lg text-headline-lg">
                 How It Works

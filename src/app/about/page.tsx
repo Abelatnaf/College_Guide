@@ -1,4 +1,5 @@
 import Link from "next/link";
+import imageCredits from "../../../public/images/credits.json";
 
 export const metadata = {
   title: "About — UniPath",
@@ -65,6 +66,46 @@ export default function AboutPage() {
         >
           Take the Match Quiz
         </Link>
+      </section>
+
+      <section className="mx-auto mt-xl max-w-3xl">
+        <details className="rounded-2xl border border-outline-variant/40 bg-surface-container-lowest p-lg">
+          <summary className="cursor-pointer font-label-md text-label-md text-on-surface-variant">
+            Photo credits
+          </summary>
+          <p className="mb-md mt-sm font-caption text-caption text-on-surface-variant">
+            Location photography is real, free-license city/region photography — never a photo of
+            a specific university&apos;s campus (see our{" "}
+            <Link href="/universities" className="text-primary underline hover:no-underline">
+              directory
+            </Link>{" "}
+            for each school&apos;s own logo instead). All photos via{" "}
+            <a
+              href="https://www.pexels.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline hover:no-underline"
+            >
+              Pexels
+            </a>
+            .
+          </p>
+          <ul className="grid grid-cols-1 gap-xs font-caption text-caption text-on-surface-variant sm:grid-cols-2">
+            {imageCredits.photos.map((p) => (
+              <li key={p.file}>
+                {p.description} —{" "}
+                <a
+                  href={p.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline hover:no-underline"
+                >
+                  {p.photographer}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
       </section>
     </main>
   );

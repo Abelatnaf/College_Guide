@@ -2,10 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Design tokens as RGB channel triplets (e.g. "0 105 72") so Tailwind's
+ * opacity modifiers (bg-primary/70, border-outline-variant/30, …) keep
+ * working — tailwind.config.ts maps each color to
+ * `rgb(var(--token) / <alpha-value>)`.
+ *
+ * :root  = light theme (the original Stitch palette, unchanged values)
+ * .dark  = Material-3-style green-tinted dark theme
+ */
+:root {
+  --surface: 249 249 255;
+  --surface-dim: 211 218 239;
+  --surface-bright: 249 249 255;
+  --surface-container-lowest: 255 255 255;
+  --surface-container-low: 241 243 255;
+  --surface-container: 233 237 255;
+  --surface-container-high: 225 232 253;
+  --surface-container-highest: 220 226 247;
+  --surface-variant: 220 226 247;
+  --surface-tint: 0 108 74;
+  --background: 249 249 255;
+  --on-background: 20 27 43;
+  --on-surface: 20 27 43;
+  --on-surface-variant: 61 74 66;
+  --inverse-surface: 41 48 64;
+  --inverse-on-surface: 237 240 255;
+  --inverse-primary: 104 219 169;
+
+  --primary: 0 105 72;
+  --on-primary: 255 255 255;
+  --primary-container: 0 133 93;
+  --on-primary-container: 245 255 247;
+  --primary-fixed: 133 248 196;
+  --primary-fixed-dim: 104 219 169;
+  --on-primary-fixed: 0 33 20;
+  --on-primary-fixed-variant: 0 81 55;
+
+  --secondary: 82 98 92;
+  --on-secondary: 255 255 255;
+  --secondary-container: 211 227 220;
+  --on-secondary-container: 86 102 96;
+  --secondary-fixed: 213 230 223;
+  --secondary-fixed-dim: 186 202 195;
+  --on-secondary-fixed: 16 30 26;
+  --on-secondary-fixed-variant: 59 74 68;
+
+  --tertiary: 0 105 71;
+  --on-tertiary: 255 255 255;
+  --tertiary-container: 0 133 91;
+  --on-tertiary-container: 245 255 246;
+  --tertiary-fixed: 111 251 190;
+  --tertiary-fixed-dim: 78 222 163;
+  --on-tertiary-fixed: 0 33 19;
+  --on-tertiary-fixed-variant: 0 82 54;
+
+  --error: 186 26 26;
+  --on-error: 255 255 255;
+  --error-container: 255 218 214;
+  --on-error-container: 147 0 10;
+
+  --outline: 109 122 114;
+  --outline-variant: 188 202 192;
+
+  /* Component-level tokens (glass panels, ambient shadows) */
+  --glass-bg: 255 255 255;
+  --shadow-ambient: 0 0 0;
+}
+
+.dark {
+  --surface: 15 21 18;
+  --surface-dim: 15 21 18;
+  --surface-bright: 53 59 55;
+  --surface-container-lowest: 10 15 12;
+  --surface-container-low: 23 29 26;
+  --surface-container: 27 33 30;
+  --surface-container-high: 37 43 40;
+  --surface-container-highest: 48 54 51;
+  --surface-variant: 61 74 66;
+  --surface-tint: 104 219 169;
+  --background: 15 21 18;
+  --on-background: 221 228 224;
+  --on-surface: 221 228 224;
+  --on-surface-variant: 188 202 192;
+  --inverse-surface: 221 228 224;
+  --inverse-on-surface: 42 49 45;
+  --inverse-primary: 0 105 72;
+
+  --primary: 104 219 169;
+  --on-primary: 0 56 36;
+  --primary-container: 0 82 55;
+  --on-primary-container: 133 248 196;
+  /* -fixed roles are theme-invariant in Material 3 — same values as :root */
+  --primary-fixed: 133 248 196;
+  --primary-fixed-dim: 104 219 169;
+  --on-primary-fixed: 0 33 20;
+  --on-primary-fixed-variant: 0 81 55;
+
+  --secondary: 186 202 195;
+  --on-secondary: 37 52 48;
+  --secondary-container: 59 74 68;
+  --on-secondary-container: 213 230 223;
+  --secondary-fixed: 213 230 223;
+  --secondary-fixed-dim: 186 202 195;
+  --on-secondary-fixed: 16 30 26;
+  --on-secondary-fixed-variant: 59 74 68;
+
+  --tertiary: 78 222 163;
+  --on-tertiary: 0 56 35;
+  --tertiary-container: 0 82 54;
+  --on-tertiary-container: 111 251 190;
+  --tertiary-fixed: 111 251 190;
+  --tertiary-fixed-dim: 78 222 163;
+  --on-tertiary-fixed: 0 33 19;
+  --on-tertiary-fixed-variant: 0 82 54;
+
+  --error: 255 180 171;
+  --on-error: 105 0 5;
+  --error-container: 147 0 10;
+  --on-error-container: 255 218 214;
+
+  --outline: 134 147 137;
+  --outline-variant: 61 74 66;
+
+  --glass-bg: 23 29 26;
+  --shadow-ambient: 0 0 0;
+}
+
 html,
 body {
-  background-color: #f9f9ff;
-  color: #141b2b;
+  background-color: rgb(var(--surface));
+  color: rgb(var(--on-surface));
 }
 
 body {
@@ -18,17 +145,25 @@ body {
   /* Stitch design utility: lift + shadow on hover */
   .card-hover-shadow {
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgb(var(--shadow-ambient) / 0.05);
   }
 
   .card-hover-shadow:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 30px rgb(var(--shadow-ambient) / 0.12);
+  }
+
+  .dark .card-hover-shadow {
+    box-shadow: 0 4px 15px rgb(var(--shadow-ambient) / 0.35);
+  }
+
+  .dark .card-hover-shadow:hover {
+    box-shadow: 0 12px 30px rgb(var(--shadow-ambient) / 0.55);
   }
 
   /* Stitch design utility: frosted glass panel */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgb(var(--glass-bg) / 0.7);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
@@ -45,13 +180,13 @@ body {
 .slider-emerald::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
-  background: #d3e3dc;
+  background: rgb(var(--secondary-container));
   border-radius: 2px;
 }
 .slider-emerald::-moz-range-track {
   width: 100%;
   height: 4px;
-  background: #d3e3dc;
+  background: rgb(var(--secondary-container));
   border-radius: 2px;
 }
 .slider-emerald::-webkit-slider-thumb {
@@ -61,16 +196,16 @@ body {
   width: 18px;
   margin-top: -7px;
   border-radius: 9999px;
-  background: #006948;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgb(var(--primary));
+  box-shadow: 0 2px 4px rgb(var(--shadow-ambient) / 0.2);
 }
 .slider-emerald::-moz-range-thumb {
   height: 18px;
   width: 18px;
   border: none;
   border-radius: 9999px;
-  background: #006948;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgb(var(--primary));
+  box-shadow: 0 2px 4px rgb(var(--shadow-ambient) / 0.2);
 }
 
 /* Material Symbols Outlined base styling */
@@ -116,6 +251,46 @@ body {
 
   body {
     background: #ffffff;
+  }
+
+  /* Always print in light theme, even when dark mode is active on screen. */
+  .dark {
+    --surface: 249 249 255;
+    --surface-dim: 211 218 239;
+    --surface-bright: 249 249 255;
+    --surface-container-lowest: 255 255 255;
+    --surface-container-low: 241 243 255;
+    --surface-container: 233 237 255;
+    --surface-container-high: 225 232 253;
+    --surface-container-highest: 220 226 247;
+    --surface-variant: 220 226 247;
+    --surface-tint: 0 108 74;
+    --background: 249 249 255;
+    --on-background: 20 27 43;
+    --on-surface: 20 27 43;
+    --on-surface-variant: 61 74 66;
+    --inverse-surface: 41 48 64;
+    --inverse-on-surface: 237 240 255;
+    --inverse-primary: 104 219 169;
+    --primary: 0 105 72;
+    --on-primary: 255 255 255;
+    --primary-container: 0 133 93;
+    --on-primary-container: 245 255 247;
+    --secondary: 82 98 92;
+    --on-secondary: 255 255 255;
+    --secondary-container: 211 227 220;
+    --on-secondary-container: 86 102 96;
+    --tertiary: 0 105 71;
+    --on-tertiary: 255 255 255;
+    --tertiary-container: 0 133 91;
+    --on-tertiary-container: 245 255 246;
+    --error: 186 26 26;
+    --on-error: 255 255 255;
+    --error-container: 255 218 214;
+    --on-error-container: 147 0 10;
+    --outline: 109 122 114;
+    --outline-variant: 188 202 192;
+    --glass-bg: 255 255 255;
   }
 
   .print-avoid-break {

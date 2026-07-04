@@ -6,10 +6,14 @@ import { estimateChance, type ChanceTier } from "@/lib/chances";
 import { cn } from "@/lib/utils";
 
 const TIER_CLASSES: Record<ChanceTier, string> = {
-  safety: "bg-[#e3f4ea] text-[#0f7a4e] border-[#bfe6d1]",
-  target: "bg-[#e5eefb] text-[#21588f] border-[#c5dbf5]",
-  reach: "bg-[#fdf0dd] text-[#9a6b15] border-[#f3dcae]",
-  "high-reach": "bg-[#fde3e1] text-[#b3261e] border-[#f6c5c1]",
+  safety:
+    "bg-[#e3f4ea] text-[#0f7a4e] border-[#bfe6d1] dark:bg-[#0f7a4e]/20 dark:text-[#7fe0b2] dark:border-[#0f7a4e]/50",
+  target:
+    "bg-[#e5eefb] text-[#21588f] border-[#c5dbf5] dark:bg-[#21588f]/25 dark:text-[#a9c9f0] dark:border-[#21588f]/60",
+  reach:
+    "bg-[#fdf0dd] text-[#9a6b15] border-[#f3dcae] dark:bg-[#9a6b15]/25 dark:text-[#eccb87] dark:border-[#9a6b15]/60",
+  "high-reach":
+    "bg-[#fde3e1] text-[#b3261e] border-[#f6c5c1] dark:bg-[#b3261e]/25 dark:text-[#f5b4ae] dark:border-[#b3261e]/60",
 };
 
 /**

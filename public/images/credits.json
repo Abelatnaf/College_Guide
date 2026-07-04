@@ -1,0 +1,83 @@
+{
+  "license": "All photos sourced from Pexels (pexels.com), whose license permits free use for commercial and non-commercial purposes without attribution required. Credits are listed anyway, out of courtesy to the photographers.",
+  "photos": [
+    {
+      "file": "hero-students.jpg",
+      "description": "Students studying together indoors",
+      "photographer": "Ivan Samkov",
+      "sourceUrl": "https://www.pexels.com/photo/group-of-people-studying-together-5676744/"
+    },
+    {
+      "file": "hero-graduation.jpg",
+      "description": "Graduates throwing caps in the air",
+      "photographer": "Pixabay",
+      "sourceUrl": "https://www.pexels.com/photo/accomplishment-ceremony-education-graduation-267885/"
+    },
+    {
+      "file": "hero-campus-life.jpg",
+      "description": "Students walking together outdoors, generic academic building (no identifiable school)",
+      "photographer": "George Pak",
+      "sourceUrl": "https://www.pexels.com/photo/university-students-walking-together-7973039/"
+    },
+    {
+      "file": "hero-journey.jpg",
+      "description": "Airplane wing view through a window, above the clouds",
+      "photographer": "Chait Goli",
+      "sourceUrl": "https://www.pexels.com/photo/airplane-window-view-of-airplane-wing-and-clouds-3646733/"
+    },
+    {
+      "file": "region-usa.jpg",
+      "description": "Lower Manhattan skyline, New York City, USA",
+      "photographer": "Following NYC",
+      "sourceUrl": "https://www.pexels.com/photo/downtown-manhattan-skyline-new-york-city-new-york-usa-16042188/"
+    },
+    {
+      "file": "region-europe.jpg",
+      "description": "Big Ben and the Houses of Parliament over the Thames, London, UK",
+      "photographer": "@nomundodejr Jr.",
+      "sourceUrl": "https://www.pexels.com/photo/thames-river-panorama-with-big-ben-and-westminster-bridge-london-england-17487791/"
+    },
+    {
+      "file": "region-canada.jpg",
+      "description": "Toronto skyline with the CN Tower at dusk, Canada",
+      "photographer": "Burst",
+      "sourceUrl": "https://www.pexels.com/photo/cn-tower-in-toronto-374870/"
+    },
+    {
+      "file": "region-china.jpg",
+      "description": "Shanghai skyline viewed from the Bund, China",
+      "photographer": "Neil Ni",
+      "sourceUrl": "https://www.pexels.com/photo/shanghai-pudong-skyline-from-the-bund-31772150/"
+    },
+    {
+      "file": "region-uae.jpg",
+      "description": "Dubai skyline with the Burj Khalifa at sunset, UAE",
+      "photographer": "Yassen Kounchev",
+      "sourceUrl": "https://www.pexels.com/photo/skyline-of-dubai-with-burj-khalifa-at-golden-hour-19894545/"
+    },
+    {
+      "file": "region-australia.jpg",
+      "description": "Sydney Opera House on the harbour, Australia",
+      "photographer": "Ben Mack",
+      "sourceUrl": "https://www.pexels.com/photo/famous-sydney-opera-house-on-city-harbor-5707651/"
+    },
+    {
+      "file": "region-japan.jpg",
+      "description": "Tokyo skyline at night with Tokyo Tower, Japan",
+      "photographer": "miyou_77",
+      "sourceUrl": "https://www.pexels.com/photo/tokyo-skyline-at-night-with-tokyo-tower-31558042/"
+    },
+    {
+      "file": "region-south-korea.jpg",
+      "description": "Seoul cityscape at dusk, South Korea",
+      "photographer": "Ethan Brooke",
+      "sourceUrl": "https://www.pexels.com/photo/evening-panorama-of-illuminated-seoul-cityscape-12640885/"
+    },
+    {
+      "file": "region-india.jpg",
+      "description": "India Gate silhouette at dawn, New Delhi, India",
+      "photographer": "Pramod Tiwari",
+      "sourceUrl": "https://www.pexels.com/photo/the-india-gate-in-new-delhi-at-dawn-13602922/"
+    }
+  ]
+}

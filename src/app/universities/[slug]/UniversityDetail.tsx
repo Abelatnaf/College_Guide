@@ -19,10 +19,11 @@ import { ShortlistButton } from "@/components/ui/ShortlistButton";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { CostRoiPanel } from "@/components/ui/CostRoiPanel";
 import { TrackApplicationButton } from "@/components/ui/TrackApplicationButton";
-import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { LocationImage } from "@/components/ui/LocationImage";
 import { UniversityLogo } from "@/components/ui/UniversityLogo";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { estimateChance } from "@/lib/chances";
+import { getAidPolicy } from "@/data/aidPolicy";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -113,18 +114,26 @@ export function UniversityDetail({
       {/* Hero */}
       <section className="relative mb-lg overflow-hidden rounded-xl">
         <div className="relative h-64 w-full md:h-[400px]">
-          <CampusGraphic name={u.name} className="absolute inset-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <LocationImage
+            name={u.name}
+            region={u.region}
+            city={`${u.city}, ${u.country}`}
+            showLabel={false}
+            priority
+            sizes="100vw"
+            className="absolute inset-0 h-full w-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         </div>
         <button
           onClick={() => window.print()}
-          className="absolute right-lg top-lg flex items-center gap-2 rounded-lg bg-white/95 px-lg py-sm font-label-md text-label-md font-semibold text-primary shadow-lg transition-all hover:bg-primary hover:text-on-primary"
+          className="absolute right-lg top-lg flex items-center gap-2 rounded-lg bg-surface-container-lowest/95 px-lg py-sm font-label-md text-label-md font-semibold text-primary shadow-lg transition-all hover:bg-primary hover:text-on-primary"
         >
           <span className="material-symbols-outlined">download</span>
           Download Detailed Profile
         </button>
         <div className="absolute bottom-0 left-0 flex w-full flex-col items-start gap-md p-lg md:flex-row md:items-end">
-          <div className="rounded-xl border border-outline-variant bg-white p-2 shadow-lg">
+          <div className="rounded-xl border border-outline-variant bg-surface-container-lowest p-2 shadow-lg">
             <UniversityLogo name={u.name} website={u.website} size={80} className="md:h-28 md:w-28" />
           </div>
           <div className="flex-1 pb-1">
@@ -145,9 +154,29 @@ export function UniversityDetail({
         </div>
       </section>
 
-      {/* Sticky tabs */}
-      <div className="sticky top-20 z-30 mb-lg overflow-x-auto border-b border-outline-variant bg-surface">
-        <nav className="flex min-w-max gap-lg">
+      {/* Glass stat pills — quick-glance numbers, always the ones already shown in tabs below */}
+      <div className="mb-lg grid grid-cols-3 gap-sm">
+        {[
+          { icon: "payments", label: "Tuition", value: formatCurrency(u.annualTuition, u.currency) },
+          { icon: "task_alt", label: "Acceptance", value: `${u.acceptanceRate}%` },
+          { icon: "groups", label: "Students", value: formatNumber(u.studentPopulation) },
+        ].map((s) => (
+          <div
+            key={s.label}
+            className="glass-panel flex items-center gap-sm rounded-xl border border-outline-variant/30 px-md py-sm shadow-sm"
+          >
+            <span className="material-symbols-outlined text-primary">{s.icon}</span>
+            <div>
+              <p className="font-caption text-caption text-on-surface-variant">{s.label}</p>
+              <p className="font-label-md text-on-surface">{s.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Sticky tabs + quick actions */}
+      <div className="sticky top-20 z-30 mb-lg flex items-center justify-between gap-md border-b border-outline-variant bg-surface/95 backdrop-blur-sm">
+        <nav className="flex min-w-max gap-lg overflow-x-auto">
           {TABS.map((t) => (
             <button
               key={t.id}
@@ -162,6 +191,24 @@ export function UniversityDetail({
             </button>
           ))}
         </nav>
+        <div className="hidden shrink-0 items-center gap-xs pb-2 md:flex">
+          <ShortlistButton slug={u.slug} variant="icon" />
+          <TrackApplicationButton slug={u.slug} variant="icon" />
+          <Link
+            href="/cost-to-apply"
+            aria-label="Cost to apply"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
+          >
+            <span className="material-symbols-outlined">request_quote</span>
+          </Link>
+          <Link
+            href="/compare"
+            aria-label="Compare schools"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
+          >
+            <span className="material-symbols-outlined">compare_arrows</span>
+          </Link>
+        </div>
       </div>
 
       {/* Panels */}
@@ -285,6 +332,45 @@ export function UniversityDetail({
                 Compare Schools
               </Link>
             </div>
+
+            {(() => {
+              const aid = getAidPolicy(u.slug);
+              if (!aid) return null;
+              return (
+                <div className="rounded-xl border border-primary/25 bg-gradient-to-br from-secondary-container/50 to-secondary-container/10 p-lg">
+                  <div className="mb-sm flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary">verified</span>
+                    <h3 className="font-headline-md text-headline-md">Verified Aid Policy</h3>
+                  </div>
+                  <div className="mb-sm flex flex-wrap gap-2">
+                    <span className="rounded-full bg-surface-container-lowest px-3 py-1 font-caption text-caption font-semibold text-on-surface">
+                      {aid.needBlindForInternational === true
+                        ? "Need-blind for international"
+                        : aid.needBlindForInternational === false
+                          ? "Need-aware for international"
+                          : "Need-blind status not verified"}
+                    </span>
+                    <span className="rounded-full bg-surface-container-lowest px-3 py-1 font-caption text-caption font-semibold text-on-surface">
+                      {aid.meetsFullDemonstratedNeed === true
+                        ? "Meets full demonstrated need"
+                        : aid.meetsFullDemonstratedNeed === false
+                          ? "Does not meet full need"
+                          : "Full-need status not verified"}
+                    </span>
+                  </div>
+                  <p className="mb-sm font-caption text-caption text-on-surface-variant">{aid.note}</p>
+                  <a
+                    href={aid.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-caption text-caption text-primary underline hover:no-underline"
+                  >
+                    Source
+                  </a>
+                </div>
+              );
+            })()}
+
             <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
               <h3 className="mb-md font-headline-md text-headline-md">Similar Universities</h3>
               <div className="space-y-sm">
@@ -555,7 +641,12 @@ export function UniversityDetail({
       {tab === "campus" && (
         <div className="grid grid-cols-1 gap-gutter lg:grid-cols-2">
           <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
-            <CampusGraphic name={u.name} icon="diversity_3" className="absolute inset-0" />
+            <LocationImage
+              name={u.name}
+              region={u.region}
+              city={`${u.city}, ${u.country}`}
+              className="h-full w-full"
+            />
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="mb-md font-headline-md text-headline-md">Campus Life</h2>

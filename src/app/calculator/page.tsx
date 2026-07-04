@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { universities } from "@/data/universities";
 import { CostRoiPanel } from "@/components/ui/CostRoiPanel";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { formatCurrency } from "@/lib/utils";
 
 export default function CalculatorPage() {
@@ -18,13 +19,11 @@ export default function CalculatorPage() {
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
-      <div className="mb-lg">
-        <h1 className="font-headline-lg text-headline-lg text-on-background">Cost &amp; ROI Calculator</h1>
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          Estimate the real cost of a degree — net of aid — and how long it takes your future
-          salary to pay it back. Pick a school to begin.
-        </p>
-      </div>
+      <PageHeader
+        icon="calculate"
+        title="Cost & ROI Calculator"
+        description="Estimate the real cost of a degree — net of aid — and how long it takes your future salary to pay it back. Pick a school to begin."
+      />
 
       <div className="mb-lg rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
         <label className="mb-xs block font-label-md text-label-md text-on-surface-variant">

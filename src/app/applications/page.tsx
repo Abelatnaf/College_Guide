@@ -19,6 +19,7 @@ import {
 import { STATUS_META, STATUS_ORDER } from "@/lib/applicationMeta";
 import { buildDeadlineIcs, daysUntil, downloadIcs, parseDeadline } from "@/lib/ics";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function ApplicationsPage() {
   const {
@@ -51,34 +52,35 @@ export default function ApplicationsPage() {
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
-      <div className="mb-lg flex flex-col gap-sm sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="font-headline-lg text-headline-lg text-on-background">Application Tracker</h1>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            {hydrated
-              ? `${applications.length} ${applications.length === 1 ? "application" : "applications"} tracked`
-              : "Loading…"}
-          </p>
-        </div>
-        {applications.length > 0 && (
-          <div className="flex rounded-lg border border-outline-variant p-0.5">
-            <button
-              onClick={() => setView("cards")}
-              className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "cards" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
-            >
-              <span className="material-symbols-outlined text-[18px]">view_agenda</span>
-              Cards
-            </button>
-            <button
-              onClick={() => setView("timeline")}
-              className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "timeline" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
-            >
-              <span className="material-symbols-outlined text-[18px]">timeline</span>
-              Deadlines
-            </button>
-          </div>
-        )}
-      </div>
+      <PageHeader
+        icon="assignment"
+        title="Application Tracker"
+        description={
+          hydrated
+            ? `${applications.length} ${applications.length === 1 ? "application" : "applications"} tracked`
+            : "Loading…"
+        }
+        actions={
+          applications.length > 0 && (
+            <div className="flex rounded-lg border border-outline-variant p-0.5">
+              <button
+                onClick={() => setView("cards")}
+                className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "cards" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
+              >
+                <span className="material-symbols-outlined text-[18px]">view_agenda</span>
+                Cards
+              </button>
+              <button
+                onClick={() => setView("timeline")}
+                className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "timeline" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
+              >
+                <span className="material-symbols-outlined text-[18px]">timeline</span>
+                Deadlines
+              </button>
+            </div>
+          )
+        }
+      />
 
       {applications.length > 0 && <StatusSummary applications={applications} />}
 

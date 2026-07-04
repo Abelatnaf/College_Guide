@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { universities } from "@/data/universities";
 import { majors } from "@/data/majors";
-
-const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
+import { applicationFees } from "@/data/applicationFees";
+import { Reveal } from "@/components/ui/Reveal";
+import { CountUpStat } from "@/components/ui/CountUpStat";
 
 const FEATURES = [
   {
@@ -34,6 +36,8 @@ const FEATURES = [
 export default function HomePage() {
   const universityCount = universities.length;
   const majorCount = majors.length;
+  const verifiedFeeCount = Object.keys(applicationFees).length;
+
   return (
     <main>
       {/* Hero Section */}
@@ -70,37 +74,40 @@ export default function HomePage() {
                   See How It Works
                 </a>
               </div>
-              <div className="flex items-center justify-center gap-md pt-sm lg:justify-start">
-                <div className="flex -space-x-2">
-                  {[
-                    { bg: "bg-primary-fixed text-on-primary-fixed-variant", icon: "school" },
-                    { bg: "bg-secondary-container text-primary", icon: "menu_book" },
-                    { bg: "bg-tertiary-fixed text-on-tertiary-fixed-variant", icon: "public" },
-                  ].map(({ bg, icon }) => (
-                    <div
-                      key={icon}
-                      className={`flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border-2 border-white ${bg}`}
-                    >
-                      <span className="material-symbols-outlined text-[16px]">{icon}</span>
-                    </div>
-                  ))}
+              <div className="flex items-center justify-center gap-lg pt-sm lg:justify-start">
+                <div className="text-center lg:text-left">
+                  <p className="font-headline-md text-headline-md font-bold text-primary">
+                    <CountUpStat value={universityCount} suffix="+" />
+                  </p>
+                  <p className="font-caption text-caption text-on-surface-variant">Universities</p>
                 </div>
-                <span className="font-caption text-caption text-on-surface-variant">
-                  {majorCount} fields of study, matched to your goals
-                </span>
+                <div className="text-center lg:text-left">
+                  <p className="font-headline-md text-headline-md font-bold text-primary">
+                    <CountUpStat value={majorCount} />
+                  </p>
+                  <p className="font-caption text-caption text-on-surface-variant">Fields of study</p>
+                </div>
+                <div className="text-center lg:text-left">
+                  <p className="font-headline-md text-headline-md font-bold text-primary">
+                    <CountUpStat value={verifiedFeeCount} />
+                  </p>
+                  <p className="font-caption text-caption text-on-surface-variant">Verified fees</p>
+                </div>
               </div>
             </div>
 
-            {/* Visual side */}
+            {/* Visual side — real photo, honest overlay */}
             <div className="relative hidden lg:block">
               <div className="relative aspect-square w-full overflow-hidden rounded-[32px] shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-fixed via-primary-fixed-dim to-tertiary-fixed opacity-90" />
-                <span
-                  className="material-symbols-outlined absolute -bottom-10 -right-10 select-none text-on-primary-fixed-variant/20"
-                  style={{ fontSize: 260 }}
-                >
-                  school
-                </span>
+                <Image
+                  src="/images/hero-students.jpg"
+                  alt="Students studying together"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  priority
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
                 <Link
                   href="/universities/stanford"
                   className="glass-panel absolute bottom-md left-md right-md rounded-xl border border-white/30 p-md shadow-lg transition-transform hover:-translate-y-1"
@@ -147,7 +154,7 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="bg-surface-container-low/30 py-xl">
         <div className="mx-auto max-w-container-max px-md md:px-lg">
-          <div className="mb-xl space-y-sm text-center">
+          <Reveal className="mb-xl space-y-sm text-center">
             <h2 className="font-headline-lg text-headline-lg text-on-surface">
               Tools for Your Journey
             </h2>
@@ -155,32 +162,33 @@ export default function HomePage() {
               Everything you need to move from &quot;where should I go?&quot; to
               &quot;I&apos;m enrolled.&quot;
             </p>
-          </div>
+          </Reveal>
           <div className="grid grid-cols-1 gap-md md:grid-cols-3">
-            {FEATURES.map((f) => (
-              <Link
-                key={f.href}
-                href={f.href}
-                className="card-hover-shadow group flex flex-col rounded-[16px] border border-outline-variant/30 bg-surface-container-lowest p-xl"
-              >
-                <div
-                  className={`mb-md flex h-16 w-16 items-center justify-center rounded-[12px] ${f.iconWrap}`}
+            {FEATURES.map((f, i) => (
+              <Reveal key={f.href} delayMs={i * 100}>
+                <Link
+                  href={f.href}
+                  className="card-hover-shadow group flex h-full flex-col rounded-[16px] border border-outline-variant/30 bg-surface-container-lowest p-xl"
                 >
-                  <span className="material-symbols-outlined text-[32px] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-                    {f.icon}
+                  <div
+                    className={`mb-md flex h-16 w-16 items-center justify-center rounded-[12px] ${f.iconWrap}`}
+                  >
+                    <span className="material-symbols-outlined text-[32px] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+                      {f.icon}
+                    </span>
+                  </div>
+                  <h3 className="mb-sm font-headline-md text-headline-md text-on-surface">
+                    {f.title}
+                  </h3>
+                  <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
+                    {f.body}
+                  </p>
+                  <span className="flex items-center gap-xs font-label-md text-primary transition-all group-hover:gap-base">
+                    {f.cta}
+                    <span className="material-symbols-outlined text-[18px]">chevron_right</span>
                   </span>
-                </div>
-                <h3 className="mb-sm font-headline-md text-headline-md text-on-surface">
-                  {f.title}
-                </h3>
-                <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
-                  {f.body}
-                </p>
-                <span className="flex items-center gap-xs font-label-md text-primary transition-all group-hover:gap-base">
-                  {f.cta}
-                  <span className="material-symbols-outlined text-[18px]">chevron_right</span>
-                </span>
-              </Link>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -190,15 +198,15 @@ export default function HomePage() {
       <section className="py-xl">
         <div className="mx-auto max-w-container-max px-md md:px-lg">
           <div className="grid h-auto grid-cols-1 grid-rows-2 gap-md md:h-[600px] md:grid-cols-4">
-            <div className="relative flex flex-col justify-end overflow-hidden rounded-[24px] bg-primary p-xl md:col-span-2 md:row-span-2">
-              <div className="absolute inset-0 opacity-40">
-                <span
-                  className="material-symbols-outlined absolute -bottom-12 -right-12 select-none text-white"
-                  style={{ fontSize: 320 }}
-                >
-                  diversity_3
-                </span>
-              </div>
+            <Reveal className="relative flex flex-col justify-end overflow-hidden rounded-[24px] p-xl md:col-span-2 md:row-span-2">
+              <Image
+                src="/images/hero-graduation.jpg"
+                alt="Graduates celebrating"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/20" />
               <div className="relative z-10 space-y-sm text-white">
                 <span className="rounded-full bg-white/20 px-sm py-1 font-label-md text-caption uppercase backdrop-blur-md">
                   How We&apos;re Different
@@ -217,57 +225,63 @@ export default function HomePage() {
                   Take the Quiz
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
-            <Link
-              href="/affordability-finder"
-              className="group flex items-center justify-between overflow-hidden rounded-[24px] bg-surface-container-highest p-lg md:col-span-2"
-            >
-              <div className="max-w-[60%]">
-                <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
-                  Affordability Finder
-                </h4>
-                <p className="text-body-md text-on-surface-variant">
-                  See which universities are need-blind and meet full demonstrated need for
-                  international students, verified against official aid policies — with sources.
-                </p>
-              </div>
-              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest shadow-md transition-transform group-hover:scale-110">
-                <span className="material-symbols-outlined text-[48px] text-primary">
-                  payments
+            <Reveal delayMs={100} className="md:col-span-2">
+              <Link
+                href="/affordability-finder"
+                className="group flex h-full items-center justify-between overflow-hidden rounded-[24px] bg-surface-container-highest p-lg"
+              >
+                <div className="max-w-[60%]">
+                  <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
+                    Affordability Finder
+                  </h4>
+                  <p className="text-body-md text-on-surface-variant">
+                    See which universities are need-blind and meet full demonstrated need for
+                    international students, verified against official aid policies — with sources.
+                  </p>
+                </div>
+                <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest shadow-md transition-transform group-hover:scale-110">
+                  <span className="material-symbols-outlined text-[48px] text-primary">
+                    payments
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+
+            <Reveal delayMs={150}>
+              <Link
+                href="#how-it-works"
+                className="group flex h-full flex-col justify-between rounded-[24px] bg-secondary-container p-lg transition-all hover:-translate-y-0.5"
+              >
+                <span className="material-symbols-outlined text-[40px] text-primary transition-transform group-hover:scale-110">
+                  history_edu
                 </span>
-              </div>
-            </Link>
+                <div>
+                  <p className="font-bold text-on-surface">Application Tracker</p>
+                  <p className="font-caption text-caption text-on-surface-variant">
+                    Stay on top of every deadline.
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
 
-            <Link
-              href="#how-it-works"
-              className="group flex flex-col justify-between rounded-[24px] bg-secondary-container p-lg transition-all hover:-translate-y-0.5"
-            >
-              <span className="material-symbols-outlined text-[40px] text-primary transition-transform group-hover:scale-110">
-                history_edu
-              </span>
-              <div>
-                <p className="font-bold text-on-surface">Application Tracker</p>
-                <p className="font-caption text-caption text-on-surface-variant">
-                  Stay on top of every deadline.
-                </p>
-              </div>
-            </Link>
-
-            <Link
-              href="/contact"
-              className="group flex flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg transition-all hover:-translate-y-0.5"
-            >
-              <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant transition-transform group-hover:scale-110">
-                forum
-              </span>
-              <div>
-                <p className="font-bold text-on-surface">Have Questions?</p>
-                <p className="font-caption text-caption text-on-surface-variant">
-                  Reach out to our team.
-                </p>
-              </div>
-            </Link>
+            <Reveal delayMs={200}>
+              <Link
+                href="/contact"
+                className="group flex h-full flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg transition-all hover:-translate-y-0.5"
+              >
+                <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant transition-transform group-hover:scale-110">
+                  forum
+                </span>
+                <div>
+                  <p className="font-bold text-on-surface">Have Questions?</p>
+                  <p className="font-caption text-caption text-on-surface-variant">
+                    Reach out to our team.
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -278,8 +292,8 @@ export default function HomePage() {
         className="border-y border-outline-variant/20 bg-surface-bright py-xl scroll-mt-20"
       >
         <div className="mx-auto max-w-container-max px-md md:px-lg">
-          <div className="grid grid-cols-1 items-center gap-xl rounded-[24px] border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-lg md:p-xl lg:grid-cols-2">
-            <div>
+          <Reveal className="grid grid-cols-1 items-center gap-xl overflow-hidden rounded-[24px] border border-outline-variant/30 bg-surface-container-lowest shadow-lg lg:grid-cols-2">
+            <div className="p-lg md:p-xl">
               <h2 className="mb-md font-headline-lg text-headline-lg">
                 How It Works
               </h2>
@@ -313,26 +327,36 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col items-center rounded-xl bg-primary-container/10 p-md text-center">
-              <div className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-primary-container shadow-xl">
-                <span className="material-symbols-outlined text-[40px] text-white">
-                  rocket_launch
-                </span>
+            <div className="relative flex h-full min-h-[280px] flex-col items-center justify-center p-md text-center">
+              <Image
+                src="/images/hero-journey.jpg"
+                alt="Airplane window view above the clouds"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-container/95 via-primary-container/50 to-transparent" />
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-xl">
+                  <span className="material-symbols-outlined text-[40px] text-primary">
+                    rocket_launch
+                  </span>
+                </div>
+                <p className="mb-xs font-headline-md text-headline-md text-white">
+                  Ready when you are
+                </p>
+                <p className="mb-md max-w-xs text-body-md text-white/90">
+                  Build your profile to unlock school matches tailored just for you.
+                </p>
+                <Link
+                  href="/quiz"
+                  className="rounded-lg bg-white px-lg py-sm font-bold text-primary"
+                >
+                  Start My Profile
+                </Link>
               </div>
-              <p className="mb-xs font-headline-md text-headline-md text-primary">
-                Ready when you are
-              </p>
-              <p className="mb-md text-body-md text-on-surface-variant">
-                Build your profile to unlock school matches tailored just for you.
-              </p>
-              <Link
-                href="/quiz"
-                className="rounded-lg bg-primary px-lg py-sm font-bold text-white"
-              >
-                Start My Profile
-              </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </main>

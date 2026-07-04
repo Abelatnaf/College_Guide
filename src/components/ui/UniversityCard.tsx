@@ -4,7 +4,8 @@ import { flagFor } from "@/data/flags";
 import { formatCurrency } from "@/lib/utils";
 import { ShortlistButton } from "@/components/ui/ShortlistButton";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
-import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { LocationImage } from "@/components/ui/LocationImage";
+import { UniversityLogo } from "@/components/ui/UniversityLogo";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -34,12 +35,27 @@ function Stat({
   );
 }
 
-export function UniversityCard({ university }: { university: University }) {
+export function UniversityCard({
+  university,
+  revealDelayMs = 0,
+}: {
+  university: University;
+  /** Stagger delay for the card's entrance animation (paired with animate-fade-up). */
+  revealDelayMs?: number;
+}) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)]">
+    <div
+      className="flex animate-fade-up flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest opacity-0 shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgb(var(--shadow-ambient)/0.08)] dark:shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.3)] dark:hover:shadow-[0_8px_25px_rgb(var(--shadow-ambient)/0.45)]"
+      style={{ animationDelay: `${revealDelayMs}ms` }}
+    >
       <div className="relative h-40 bg-primary-container/10">
-        <CampusGraphic name={university.name} className="absolute inset-0" />
-        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 shadow-sm backdrop-blur">
+        <LocationImage
+          name={university.name}
+          region={university.region}
+          city={university.city}
+          className="absolute inset-0 h-full w-full"
+        />
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-surface-container-lowest/90 px-3 py-1.5 shadow-sm backdrop-blur">
           <span className="text-lg leading-none">{flagFor(university.country)}</span>
           <span className="font-caption text-caption font-bold text-on-surface">
             {university.country}
@@ -54,9 +70,17 @@ export function UniversityCard({ university }: { university: University }) {
       </div>
 
       <div className="flex-1 p-md">
-        <h3 className="mb-4 font-headline-md text-xl font-bold text-on-background">
-          {university.name}
-        </h3>
+        <div className="mb-4 flex items-center gap-3">
+          <UniversityLogo
+            name={university.name}
+            website={university.website}
+            size={40}
+            className="-mt-8 border-4 border-surface-container-lowest shadow-md"
+          />
+          <h3 className="font-headline-md text-xl font-bold text-on-background">
+            {university.name}
+          </h3>
+        </div>
         <div className="grid grid-cols-2 gap-y-4">
           <Stat icon="military_tech" label="Global Rank" value={`#${university.globalRanking}`} />
           <Stat

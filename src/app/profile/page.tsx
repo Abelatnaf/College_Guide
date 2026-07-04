@@ -7,6 +7,7 @@ import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { strengthIndex } from "@/lib/chances";
 import type { AcademicProfile } from "@/lib/storage/types";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 type NumericField = "gpa" | "sat" | "act" | "toefl" | "ielts";
 
@@ -60,13 +61,11 @@ export default function ProfilePage() {
 
   return (
     <main className="mx-auto max-w-3xl px-md py-xl md:px-lg">
-      <div className="mb-lg">
-        <h1 className="font-headline-lg text-headline-lg text-on-background">Your Academic Profile</h1>
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          Enter your scores once. We use them to estimate your admission chances across every
-          university — shown as Reach / Target / Safety badges.
-        </p>
-      </div>
+      <PageHeader
+        icon="person"
+        title="Your Academic Profile"
+        description="Enter your scores once. We use them to estimate your admission chances across every university — shown as Reach / Target / Safety badges."
+      />
 
       <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
         <div className="grid grid-cols-2 gap-md sm:grid-cols-3">

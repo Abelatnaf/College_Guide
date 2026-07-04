@@ -5,18 +5,50 @@ import { useApplications } from "@/components/providers/StorageProvider";
 import { cn } from "@/lib/utils";
 
 /**
- * Full-width button for the university detail page. Adds the school to the
- * application tracker, or links to the tracker once it's already there.
+ * Adds the school to the application tracker, or links to the tracker once
+ * it's already there. `full` is the labelled button used on the detail
+ * page's sidebar; `icon` is a compact round button for the sticky action bar.
  */
 export function TrackApplicationButton({
   slug,
+  variant = "full",
   className,
 }: {
   slug: string;
+  variant?: "full" | "icon";
   className?: string;
 }) {
   const { getApplication, addApplication } = useApplications();
   const tracked = Boolean(getApplication(slug));
+
+  if (variant === "icon") {
+    if (tracked) {
+      return (
+        <Link
+          href="/applications"
+          aria-label="View in application tracker"
+          className={cn(
+            "flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-surface-container-low",
+            className,
+          )}
+        >
+          <span className="material-symbols-outlined">assignment_turned_in</span>
+        </Link>
+      );
+    }
+    return (
+      <button
+        onClick={() => addApplication(slug)}
+        aria-label="Track application"
+        className={cn(
+          "flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary",
+          className,
+        )}
+      >
+        <span className="material-symbols-outlined">add_task</span>
+      </button>
+    );
+  }
 
   if (tracked) {
     return (

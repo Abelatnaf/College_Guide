@@ -26,7 +26,15 @@ export default function ComparePage() {
   return (
     <main className="mx-auto max-w-container-max px-md py-xl">
       <section className="mb-xl text-center md:text-left">
-        <h1 className="mb-base font-headline-xl text-headline-xl-mobile md:text-headline-xl">
+        <span
+          className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
+          aria-hidden="true"
+        >
+          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            compare_arrows
+          </span>
+        </span>
+        <h1 className="mb-base bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-xl text-headline-xl-mobile font-bold text-transparent md:text-headline-xl">
           Compare Universities
         </h1>
         <p className="max-w-2xl font-body-lg text-body-lg text-on-surface-variant">

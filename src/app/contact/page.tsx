@@ -24,7 +24,15 @@ export default function ContactPage() {
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
       <section className="mx-auto max-w-2xl text-center">
-        <h1 className="mb-md font-headline-xl text-headline-xl-mobile md:text-headline-xl">
+        <span
+          className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
+          aria-hidden="true"
+        >
+          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            mail
+          </span>
+        </span>
+        <h1 className="mb-md bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-xl text-headline-xl-mobile font-bold text-transparent md:text-headline-xl">
           Get in Touch
         </h1>
         <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant">

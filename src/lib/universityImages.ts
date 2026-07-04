@@ -80,6 +80,27 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "CC BY 2.0",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:UC_Berkeley_Sather_Tower_-_Jan_16,_2022.jpg",
   },
+  ucla: {
+    src: "/images/universities/ucla.jpg",
+    alt: "Royce Hall, UCLA",
+    photographer: "Beyond My Ken",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:2019_UCLA_Royce_Hall_2.jpg",
+  },
+  "university-of-michigan": {
+    src: "/images/universities/university-of-michigan.jpg",
+    alt: "Angell Hall, University of Michigan",
+    photographer: "Chris Rycroft",
+    license: "CC BY 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Front_of_Angell_Hall.jpg",
+  },
+  nyu: {
+    src: "/images/universities/nyu.jpg",
+    alt: "Washington Square Arch, at the heart of NYU's Greenwich Village campus (a public NYC landmark, not an NYU-owned building)",
+    photographer: "Elisa.rolle",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Washington_Square_Arch_03.JPG",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

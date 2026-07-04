@@ -56,6 +56,30 @@
       "photographer": "Doug Letterman",
       "license": "CC BY 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:UC_Berkeley_Sather_Tower_-_Jan_16,_2022.jpg"
+    },
+    {
+      "file": "ucla.jpg",
+      "university": "UCLA",
+      "description": "Royce Hall",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2019_UCLA_Royce_Hall_2.jpg"
+    },
+    {
+      "file": "university-of-michigan.jpg",
+      "university": "University of Michigan",
+      "description": "Angell Hall",
+      "photographer": "Chris Rycroft",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Front_of_Angell_Hall.jpg"
+    },
+    {
+      "file": "nyu.jpg",
+      "university": "New York University",
+      "description": "Washington Square Arch (public NYC landmark at the heart of NYU's campus, not an NYU-owned building)",
+      "photographer": "Elisa.rolle",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Washington_Square_Arch_03.JPG"
     }
   ]
 }

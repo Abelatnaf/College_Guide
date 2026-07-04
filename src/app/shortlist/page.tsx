@@ -12,6 +12,7 @@ import {
 import { useAuth } from "@/components/auth/AuthProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 export default function ShortlistPage() {
   const { shortlist, toggleSave, setNote, hydrated } = useShortlist();
@@ -26,36 +27,37 @@ export default function ShortlistPage() {
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
-      <div className="mb-lg flex flex-col gap-sm sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="font-headline-lg text-headline-lg text-on-background">My Shortlist</h1>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            {hydrated
-              ? `${items.length} ${items.length === 1 ? "university" : "universities"} saved`
-              : "Loading…"}
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-sm">
-          {items.length > 0 && (
-            <Link
-              href="/cost-to-apply"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-lg py-3 font-label-md text-on-primary transition-colors hover:bg-primary-container"
-            >
-              <span className="material-symbols-outlined">payments</span>
-              See what it costs to apply
-            </Link>
-          )}
-          {items.length >= 2 && (
-            <Link
-              href="/compare"
-              className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
-            >
-              <span className="material-symbols-outlined">compare_arrows</span>
-              Compare schools
-            </Link>
-          )}
-        </div>
-      </div>
+      <PageHeader
+        icon="bookmark"
+        title="My Shortlist"
+        description={
+          hydrated
+            ? `${items.length} ${items.length === 1 ? "university" : "universities"} saved`
+            : "Loading…"
+        }
+        actions={
+          <div className="flex flex-wrap gap-sm">
+            {items.length > 0 && (
+              <Link
+                href="/cost-to-apply"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-lg py-3 font-label-md text-on-primary transition-colors hover:bg-primary-container"
+              >
+                <span className="material-symbols-outlined">payments</span>
+                See what it costs to apply
+              </Link>
+            )}
+            {items.length >= 2 && (
+              <Link
+                href="/compare"
+                className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
+              >
+                <span className="material-symbols-outlined">compare_arrows</span>
+                Compare schools
+              </Link>
+            )}
+          </div>
+        }
+      />
 
       {enabled && !user && items.length > 0 && (
         <div className="mb-lg flex flex-col items-start justify-between gap-sm rounded-xl border border-primary/30 bg-secondary-container/40 p-md sm:flex-row sm:items-center">

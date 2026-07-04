@@ -3,6 +3,7 @@ import { getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { aidPolicy, type AidPolicyEntry } from "@/data/aidPolicy";
 import { affordabilitySchools, type AffordabilitySchool } from "@/data/affordabilitySchools";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { formatCurrency } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -132,24 +133,29 @@ export default function AffordabilityFinderPage() {
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
-      <div className="mb-lg">
-        <h1 className="font-headline-lg text-headline-lg text-on-background">Affordability Finder</h1>
-        <p className="mt-sm max-w-3xl font-body-md text-body-md text-on-surface-variant">
-          Two things decide whether a school will actually fund an international student:{" "}
-          <strong className="text-on-surface">need-blind admission</strong> — whether asking for
-          financial aid can hurt your chances of getting in — and{" "}
-          <strong className="text-on-surface">meeting full demonstrated need</strong> — whether the
-          school, once it admits you, covers 100% of the gap between what your family can pay and
-          what it actually costs. A school can do one without the other, and the difference matters
-          enormously for how you should apply.
-        </p>
-        <p className="mt-sm max-w-3xl font-caption text-caption text-on-surface-variant">
-          Every policy below was verified against the school&apos;s own official financial-aid or
-          admissions page during this research pass — not recalled from memory. These policies
-          change over time (some schools have flipped need-blind status more than once), so treat
-          this as a snapshot, and always confirm on the source link before you rely on it.
-        </p>
-      </div>
+      <PageHeader
+        icon="savings"
+        title="Affordability Finder"
+        description={
+          <>
+            <p className="max-w-3xl font-body-md text-body-md text-on-surface-variant">
+              Two things decide whether a school will actually fund an international student:{" "}
+              <strong className="text-on-surface">need-blind admission</strong> — whether asking for
+              financial aid can hurt your chances of getting in — and{" "}
+              <strong className="text-on-surface">meeting full demonstrated need</strong> — whether the
+              school, once it admits you, covers 100% of the gap between what your family can pay and
+              what it actually costs. A school can do one without the other, and the difference matters
+              enormously for how you should apply.
+            </p>
+            <p className="mt-sm max-w-3xl font-caption text-caption text-on-surface-variant">
+              Every policy below was verified against the school&apos;s own official financial-aid or
+              admissions page during this research pass — not recalled from memory. These policies
+              change over time (some schools have flipped need-blind status more than once), so treat
+              this as a snapshot, and always confirm on the source link before you rely on it.
+            </p>
+          </>
+        }
+      />
 
       {/* Tier 1 */}
       <section className="mb-xl">

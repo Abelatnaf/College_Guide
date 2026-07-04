@@ -5,12 +5,16 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { universities, universityCountries } from "@/data/universities";
 import { UniversityCard } from "@/components/ui/UniversityCard";
+import { UniversityCardSkeleton } from "@/components/ui/CardSkeleton";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import {
   FilterSidebar,
   DEFAULT_FILTERS,
   type UniversityFilters,
 } from "@/components/ui/FilterSidebar";
+
+/** Brief shimmer while a filter change re-sorts/re-filters the grid — long enough to read, short enough to never feel laggy. */
+const FILTER_TRANSITION_MS = 220;
 
 const PER_PAGE = 8;
 
@@ -54,6 +58,7 @@ export function DirectoryClient() {
     parseFilters(searchParams),
   );
   const [page, setPage] = useState(1);
+  const [transitioning, setTransitioning] = useState(false);
 
   // Pick up an external `search` change (e.g. the navbar search box).
   useEffect(() => {
@@ -85,6 +90,15 @@ export function DirectoryClient() {
   useEffect(() => {
     setPage(1);
   }, [filterKey]);
+
+  // Brief shimmer whenever the visible result set changes (filter or page),
+  // so a filter tweak reads as a deliberate transition rather than an
+  // instant, jarring re-layout.
+  useEffect(() => {
+    setTransitioning(true);
+    const t = setTimeout(() => setTransitioning(false), FILTER_TRANSITION_MS);
+    return () => clearTimeout(t);
+  }, [filterKey, page]);
 
   const filtered = useMemo(() => {
     const list = universities.filter((u) => {
@@ -154,7 +168,7 @@ export function DirectoryClient() {
             <span className="material-symbols-outlined text-primary">arrow_forward</span>
           </Link>
         )}
-        <div className="mb-8 flex flex-col gap-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="sticky top-20 z-10 mb-8 flex flex-col gap-sm rounded-xl bg-surface/80 py-sm backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="font-headline-lg text-headline-lg text-on-background">
               University Directory
@@ -183,7 +197,13 @@ export function DirectoryClient() {
           </div>
         </div>
 
-        {pageItems.length === 0 ? (
+        {transitioning ? (
+          <div className="grid grid-cols-1 gap-md lg:grid-cols-2">
+            {Array.from({ length: Math.min(pageItems.length || 4, PER_PAGE) }, (_, i) => (
+              <UniversityCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : pageItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
             <span className="material-symbols-outlined mb-md text-[48px] text-outline">
               search_off
@@ -203,8 +223,8 @@ export function DirectoryClient() {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-md lg:grid-cols-2">
-            {pageItems.map((u) => (
-              <UniversityCard key={u.id} university={u} />
+            {pageItems.map((u, i) => (
+              <UniversityCard key={u.id} university={u} revealDelayMs={i * 60} />
             ))}
           </div>
         )}

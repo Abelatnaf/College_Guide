@@ -57,7 +57,15 @@ export default function MajorsPage() {
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
       {/* Hero */}
       <section className="mb-xl text-center md:text-left">
-        <h1 className="mb-md font-headline-xl text-headline-xl-mobile md:text-headline-xl">
+        <span
+          className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
+          aria-hidden="true"
+        >
+          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            school
+          </span>
+        </span>
+        <h1 className="mb-md bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-xl text-headline-xl-mobile font-bold text-transparent md:text-headline-xl">
           Find Your Future Path
         </h1>
         <p className="mb-lg max-w-2xl font-body-lg text-body-lg text-on-surface-variant">

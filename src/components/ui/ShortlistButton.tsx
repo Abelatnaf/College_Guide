@@ -49,7 +49,7 @@ export function ShortlistButton({
       aria-label={saved ? "Remove from shortlist" : "Save to shortlist"}
       aria-pressed={saved}
       className={cn(
-        "flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:text-primary",
+        "flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-lowest/90 shadow-sm backdrop-blur transition-colors hover:text-primary",
         saved && "text-primary",
         className,
       )}

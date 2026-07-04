@@ -10,6 +10,7 @@ import {
   useAcademicProfile,
   useShortlist,
 } from "@/components/providers/StorageProvider";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 const TEST_KEYS: TestKey[] = ["TOEFL", "IELTS", "Duolingo", "SAT", "ACT"];
 
@@ -143,13 +144,11 @@ export default function CostToApplyPage() {
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
-      <div className="mb-lg">
-        <h1 className="font-headline-lg text-headline-lg text-on-background">Cost to Apply</h1>
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          What it actually costs just to submit your applications — fees, tests, and the CSS
-          Profile — with sources for every number, and real guidance on getting them waived.
-        </p>
-      </div>
+      <PageHeader
+        icon="payments"
+        title="Cost to Apply"
+        description="What it actually costs just to submit your applications — fees, tests, and the CSS Profile — with sources for every number, and real guidance on getting them waived."
+      />
 
       {/* Completeness line */}
       <div className="mb-lg rounded-lg bg-surface-container-low px-md py-3 font-caption text-caption text-on-surface-variant">

@@ -9,6 +9,8 @@ const REASONS = [
   "Partnership / press",
 ];
 
+const CONTACT_EMAIL = "abelatnafu.g@gmail.com";
+
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function ContactPage() {
@@ -24,7 +26,7 @@ export default function ContactPage() {
   const body = encodeURIComponent(
     `Name: ${name || "—"}\nEmail: ${email || "—"}\nReason: ${reason}\n\n${message}`,
   );
-  const mailtoHref = `mailto:hello@unipath.app?subject=${subject}&body=${body}`;
+  const mailtoHref = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -153,8 +155,8 @@ export default function ContactPage() {
               <span className="material-symbols-outlined shrink-0 text-error">error</span>
               <p className="font-body-md text-body-md text-on-surface">
                 Something went wrong sending your message. Please try again, or email us directly at{" "}
-                <a href="mailto:hello@unipath.app" className="text-primary underline hover:no-underline">
-                  hello@unipath.app
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline hover:no-underline">
+                  {CONTACT_EMAIL}
                 </a>
                 .
               </p>
@@ -171,7 +173,7 @@ export default function ContactPage() {
           <p className="text-center font-caption text-caption text-on-surface-variant">
             {accessKey
               ? "Sent directly to our team — no email app required."
-              : "Opens your email client addressed to hello@unipath.app"}
+              : `Opens your email client addressed to ${CONTACT_EMAIL}`}
           </p>
         </form>
       )}

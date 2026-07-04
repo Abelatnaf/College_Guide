@@ -200,6 +200,27 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "CC BY 2.0",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:M%C3%BCnchen_-_Technische_Universit%C3%A4t.jpg",
   },
+  "ku-leuven": {
+    src: "/images/universities/ku-leuven.jpg",
+    alt: "University Hall, KU Leuven",
+    photographer: "Frie Van Grunderbeeck",
+    license: "CC BY-SA 3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Universiteitshal_K.U.Leuven.jpg",
+  },
+  sorbonne: {
+    src: "/images/universities/sorbonne.jpg",
+    alt: "The historic Sorbonne building, Latin Quarter, Paris (shared among the historic University of Paris's successor institutions, including Sorbonne University)",
+    photographer: "Michal Osmenda",
+    license: "CC BY-SA 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:La_Sorbonne_-_University_of_Paris,_15_August_2011.jpg",
+  },
+  "tu-delft": {
+    src: "/images/universities/tu-delft.jpg",
+    alt: "The Aula building, TU Delft",
+    photographer: "T Houdijk",
+    license: "CC BY-SA 3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Aula_TU_Delft.jpg",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

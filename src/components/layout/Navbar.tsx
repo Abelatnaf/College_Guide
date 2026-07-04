@@ -8,6 +8,7 @@ import { NavActions } from "@/components/layout/NavActions";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const NAV_LINKS = [
+  { label: "My Path", href: "/path" },
   { label: "Majors", href: "/majors" },
   { label: "Universities", href: "/universities" },
   { label: "Compare", href: "/compare" },

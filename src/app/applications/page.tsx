@@ -18,6 +18,8 @@ import {
 } from "@/lib/storage/types";
 import { STATUS_META, STATUS_ORDER } from "@/lib/applicationMeta";
 import { buildDeadlineIcs, daysUntil, downloadIcs, parseDeadline } from "@/lib/ics";
+import { deadlineDate } from "@/lib/deadlines";
+import { aidSummaryLine } from "@/lib/aidSummary";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
 import { PageHeader } from "@/components/ui/PageHeader";
 
@@ -169,24 +171,6 @@ export default function ApplicationsPage() {
       )}
     </main>
   );
-}
-
-/** One-line, boolean-driven summary of an aid policy — avoids truncating the sourced note mid-sentence. */
-function aidSummaryLine(entry: NonNullable<ReturnType<typeof getAidPolicy>>): string {
-  const parts: string[] = [];
-  if (entry.needBlindForInternational === true) parts.push("Need-blind for international applicants");
-  else if (entry.needBlindForInternational === false) parts.push("Need-aware for international applicants");
-
-  if (entry.meetsFullDemonstratedNeed === true) parts.push("meets full demonstrated need");
-  else if (entry.meetsFullDemonstratedNeed === false) parts.push("does not meet full demonstrated need");
-
-  return parts.length > 0 ? `${parts.join(", ")}.` : entry.note;
-}
-
-function deadlineDate(app: Application): Date | null {
-  const u = getUniversityBySlug(app.slug);
-  if (!u) return null;
-  return parseDeadline(u.applicationDeadline, app.deadline);
 }
 
 function StatusSummary({ applications }: { applications: Application[] }) {

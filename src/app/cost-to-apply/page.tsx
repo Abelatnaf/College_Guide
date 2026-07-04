@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { getUniversityBySlug } from "@/data/universities";
-import { getApplicationFee, type ApplicationFeeEntry } from "@/data/applicationFees";
 import { testFees, cssProfile, waiverGuidance, type TestKey } from "@/data/costReference";
+import { summarizeApplicationFees } from "@/lib/costSummary";
 import { flagFor } from "@/data/flags";
 import {
   useAcademicProfile,
@@ -76,21 +76,10 @@ export default function CostToApplyPage() {
   };
 
   // ── application fees, grouped by currency ──────────────────────────────
-  const { verified, unverified } = useMemo(() => {
-    const verified: { university: (typeof items)[number]["university"]; fee: ApplicationFeeEntry }[] = [];
-    const unverified: (typeof items)[number]["university"][] = [];
-    for (const { university } of items) {
-      const fee = getApplicationFee(university.slug);
-      if (fee) verified.push({ university, fee });
-      else unverified.push(university);
-    }
-    return { verified, unverified };
-  }, [items]);
-
-  const byCurrency = new Map<string, number>();
-  for (const { fee } of verified) {
-    byCurrency.set(fee.currency, (byCurrency.get(fee.currency) ?? 0) + fee.amount);
-  }
+  const { verified, unverified, byCurrency } = useMemo(
+    () => summarizeApplicationFees(items.map(({ university }) => university.slug)),
+    [items],
+  );
 
   const needsCSSProfile = verified.some(({ fee }) => fee.requiresCSSProfile === true);
   const cssProfileSchoolCount = verified.filter(({ fee }) => fee.requiresCSSProfile === true).length;

@@ -221,6 +221,28 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "CC BY-SA 3.0",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Aula_TU_Delft.jpg",
   },
+  "politecnico-milano": {
+    src: "/images/universities/politecnico-milano.jpg",
+    alt: "Main building, Politecnico di Milano",
+    photographer: "NuclearNiranjan",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Polimi_Leonardo_campus_main_building.jpg",
+  },
+  "university-of-toronto": {
+    src: "/images/universities/university-of-toronto.jpg",
+    alt: "University College, University of Toronto",
+    photographer: "Nuthingoldstays",
+    license: "CC BY-SA 3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:University_College_Front_Facade.jpg",
+  },
+  ubc: {
+    src: "/images/universities/ubc.jpg",
+    alt: "The Clock Tower and Irving K. Barber Learning Centre, UBC",
+    photographer: "Dllu",
+    license: "CC BY-SA 4.0",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:UBC_Clock_Tower_and_IKB_Learning_Centre_as_seen_from_Hennings.jpg",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

@@ -216,6 +216,30 @@
       "photographer": "T Houdijk",
       "license": "CC BY-SA 3.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aula_TU_Delft.jpg"
+    },
+    {
+      "file": "politecnico-milano.jpg",
+      "university": "Politecnico di Milano",
+      "description": "Main building",
+      "photographer": "NuclearNiranjan",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polimi_Leonardo_campus_main_building.jpg"
+    },
+    {
+      "file": "university-of-toronto.jpg",
+      "university": "University of Toronto",
+      "description": "University College",
+      "photographer": "Nuthingoldstays",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:University_College_Front_Facade.jpg"
+    },
+    {
+      "file": "ubc.jpg",
+      "university": "University of British Columbia",
+      "description": "The Clock Tower and Irving K. Barber Learning Centre",
+      "photographer": "Dllu",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UBC_Clock_Tower_and_IKB_Learning_Centre_as_seen_from_Hennings.jpg"
     }
   ]
 }

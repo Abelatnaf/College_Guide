@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { getCountryImage } from "@/lib/countryImages";
+import { getUniversityImage } from "@/lib/universityImages";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
 
 /**
  * Location-flavored image band for a university card/hero.
  *
- * Renders a real, free-license photo of the university's actual COUNTRY (city
- * skyline etc.) with a green gradient wash and an honest location chip —
- * deliberately never claiming to depict the university's actual campus, and
- * never a different country's skyline (see the honesty contract in
- * src/lib/countryImages.ts). Falls back to the generated CampusGraphic when
- * no photo exists for that country.
+ * Prefers a verified, genuine photo of the university's OWN campus (see the
+ * honesty contract in src/lib/universityImages.ts) when one exists. Most
+ * universities don't have one, so this falls back to a real photo of the
+ * university's actual COUNTRY (city skyline etc.) — never a different
+ * country's skyline (see src/lib/countryImages.ts) — and finally to the
+ * generated CampusGraphic gradient when neither exists.
  */
 export function LocationImage({
   name,
+  slug,
   country,
   city,
   className,
@@ -23,15 +25,19 @@ export function LocationImage({
 }: {
   /** University name — used only for the CampusGraphic fallback. */
   name: string;
+  /** University slug — checked against verified per-campus photos first. */
+  slug: string;
   country: string;
-  /** Optional "City, ST" string shown in the location chip instead of the country label. */
+  /** Optional "City, ST" string shown in the location chip instead of the country/campus label. */
   city?: string;
   className?: string;
   showLabel?: boolean;
   sizes?: string;
   priority?: boolean;
 }) {
-  const image = getCountryImage(country);
+  const uniImage = getUniversityImage(slug);
+  const countryImage = getCountryImage(country);
+  const image = uniImage ?? countryImage;
 
   if (!image) {
     return <CampusGraphic name={name} className={className} />;
@@ -54,7 +60,7 @@ export function LocationImage({
           <span className="material-symbols-outlined text-[12px]" aria-hidden="true">
             location_on
           </span>
-          {city ?? image.label}
+          {city ?? (uniImage ? undefined : countryImage?.label)}
         </span>
       )}
     </div>

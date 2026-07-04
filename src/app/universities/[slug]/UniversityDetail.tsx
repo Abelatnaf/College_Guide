@@ -116,6 +116,7 @@ export function UniversityDetail({
         <div className="relative h-64 w-full md:h-[400px]">
           <LocationImage
             name={u.name}
+            slug={u.slug}
             country={u.country}
             city={`${u.city}, ${u.country}`}
             showLabel={false}
@@ -643,6 +644,7 @@ export function UniversityDetail({
           <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
             <LocationImage
               name={u.name}
+              slug={u.slug}
               country={u.country}
               city={`${u.city}, ${u.country}`}
               className="h-full w-full"

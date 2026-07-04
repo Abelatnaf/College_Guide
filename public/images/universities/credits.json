@@ -1,0 +1,61 @@
+{
+  "license": "Genuine campus photos are sourced from Wikimedia Commons under free licenses (CC BY, CC BY-SA, or public domain) that require attribution, unlike the Pexels photos elsewhere on this site. Each entry's license and source are listed below to satisfy that requirement.",
+  "photos": [
+    {
+      "file": "mit.jpg",
+      "university": "Massachusetts Institute of Technology",
+      "description": "The Great Dome, Building 10",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2017_Maclaurin_Buildings_(MIT_Building_10)_and_Great_Dome_close.jpg"
+    },
+    {
+      "file": "harvard.jpg",
+      "university": "Harvard University",
+      "description": "Widener Library, Harvard Yard",
+      "photographer": "Phoebe Barghouty",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Widener_Library_front.jpg"
+    },
+    {
+      "file": "stanford.jpg",
+      "university": "Stanford University",
+      "description": "Main Quad and Hoover Tower",
+      "photographer": "King of Hearts",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stanford_University_Main_Quad_(cropped).jpg"
+    },
+    {
+      "file": "yale.jpg",
+      "university": "Yale University",
+      "description": "Harkness Tower",
+      "photographer": "Hrichardson (WMF)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harkness_Tower_Yale_Fall_2014.jpg"
+    },
+    {
+      "file": "princeton.jpg",
+      "university": "Princeton University",
+      "description": "Nassau Hall",
+      "photographer": "Ken Lund",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cannon_Green_and_Nassau_Hall,_Princeton_University.jpg"
+    },
+    {
+      "file": "columbia.jpg",
+      "university": "Columbia University",
+      "description": "Low Memorial Library",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2014_Columbia_University_Low_Memorial_Library_from_front.jpg"
+    },
+    {
+      "file": "uc-berkeley.jpg",
+      "university": "UC Berkeley",
+      "description": "Sather Tower (the Campanile)",
+      "photographer": "Doug Letterman",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UC_Berkeley_Sather_Tower_-_Jan_16,_2022.jpg"
+    }
+  ]
+}

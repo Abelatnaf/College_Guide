@@ -172,6 +172,34 @@ export const UNIVERSITY_IMAGES: Partial<Record<string, UniversityImage>> = {
     license: "CC BY-SA 4.0",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:University_of_Manchester_-_Whitworth_Building.jpg",
   },
+  "kings-college-london": {
+    src: "/images/universities/kings-college-london.jpg",
+    alt: "King's College London signage, Strand Campus",
+    photographer: "Katy Ereira",
+    license: "CC BY 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kings_College_London_Sign.jpg",
+  },
+  "eth-zurich": {
+    src: "/images/universities/eth-zurich.jpg",
+    alt: "Main building of ETH Zurich",
+    photographer: "Leonhard Lenz",
+    license: "CC0 1.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Hauptgeb%C3%A4ude_der_ETH_Z%C3%BCrich_2022-09-24_01.jpg",
+  },
+  epfl: {
+    src: "/images/universities/epfl.jpg",
+    alt: "The Rolex Learning Center, EPFL",
+    photographer: "Philippe (Nphilou)",
+    license: "CC BY-SA 4.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Rolex_Learning_Center.jpg",
+  },
+  "tu-munich": {
+    src: "/images/universities/tu-munich.jpg",
+    alt: "Main building clock tower, Technical University of Munich",
+    photographer: "Fred Romero",
+    license: "CC BY 2.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:M%C3%BCnchen_-_Technische_Universit%C3%A4t.jpg",
+  },
 };
 
 export function getUniversityImage(slug: string): UniversityImage | undefined {

@@ -160,6 +160,38 @@
       "photographer": "Mike Peel (www.mikepeel.net)",
       "license": "CC BY-SA 4.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:University_of_Manchester_-_Whitworth_Building.jpg"
+    },
+    {
+      "file": "kings-college-london.jpg",
+      "university": "King's College London",
+      "description": "King's College London signage, Strand Campus",
+      "photographer": "Katy Ereira",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kings_College_London_Sign.jpg"
+    },
+    {
+      "file": "eth-zurich.jpg",
+      "university": "ETH Zurich",
+      "description": "Main building",
+      "photographer": "Leonhard Lenz",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hauptgeb%C3%A4ude_der_ETH_Z%C3%BCrich_2022-09-24_01.jpg"
+    },
+    {
+      "file": "epfl.jpg",
+      "university": "EPFL",
+      "description": "The Rolex Learning Center",
+      "photographer": "Philippe (Nphilou)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rolex_Learning_Center.jpg"
+    },
+    {
+      "file": "tu-munich.jpg",
+      "university": "Technical University of Munich",
+      "description": "Main building clock tower",
+      "photographer": "Fred Romero",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchen_-_Technische_Universit%C3%A4t.jpg"
     }
   ]
 }

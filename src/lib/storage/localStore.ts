@@ -12,6 +12,7 @@ export const STORAGE_KEYS = {
   applications: "applications",
   costScenarios: "costScenarios",
   chatHistory: "chatHistory",
+  essays: "essays",
   migratedPrefix: "migrated:",
 } as const;
 

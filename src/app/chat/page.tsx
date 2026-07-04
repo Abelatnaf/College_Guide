@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown, { type Components } from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { readLocal, writeLocal, removeLocal, STORAGE_KEYS } from "@/lib/storage/localStore";
 import type { ChatMessage } from "@/lib/ai/chatAssistant";
+import { MarkdownContent } from "@/components/ui/MarkdownContent";
 
 // Prompts intentionally cover general strategy + the app's verified-data topics.
 // Deliberately no "acceptance rate" style prompts — the assistant doesn't track those.
@@ -14,64 +13,6 @@ const SUGGESTED_PROMPTS = [
   "Which schools are need-blind for international students?",
   "How do I get application fees waived?",
 ];
-
-/** Markdown → Tailwind-styled elements. Compact margins — chat bubbles, not an article. */
-const markdownComponents: Components = {
-  p: ({ children }) => <p className="mb-2 leading-relaxed last:mb-0">{children}</p>,
-  strong: ({ children }) => <strong className="font-semibold text-on-surface">{children}</strong>,
-  em: ({ children }) => <em className="italic">{children}</em>,
-  ul: ({ children }) => <ul className="mb-2 list-disc space-y-1 pl-5 last:mb-0">{children}</ul>,
-  ol: ({ children }) => <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0">{children}</ol>,
-  li: ({ children }) => <li className="leading-relaxed">{children}</li>,
-  h1: ({ children }) => (
-    <h1 className="mb-1 mt-2 font-body-lg text-body-lg font-bold first:mt-0">{children}</h1>
-  ),
-  h2: ({ children }) => (
-    <h2 className="mb-1 mt-2 font-body-lg text-body-lg font-semibold first:mt-0">{children}</h2>
-  ),
-  h3: ({ children }) => (
-    <h3 className="mb-1 mt-2 font-body-md text-body-md font-semibold first:mt-0">{children}</h3>
-  ),
-  a: ({ children, href }) => (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-primary underline hover:no-underline"
-    >
-      {children}
-    </a>
-  ),
-  blockquote: ({ children }) => (
-    <blockquote className="my-2 border-l-2 border-primary/30 pl-3 italic text-on-surface-variant">
-      {children}
-    </blockquote>
-  ),
-  pre: ({ children }) => (
-    <pre className="mb-2 overflow-x-auto rounded-lg bg-surface-container p-3 text-[0.85em] last:mb-0">
-      {children}
-    </pre>
-  ),
-  code: ({ className, children }) => {
-    const text = String(children ?? "");
-    const isInline = !className && !text.includes("\n");
-    return isInline ? (
-      <code className="rounded bg-surface-container px-1 py-0.5 font-mono text-[0.85em]">
-        {children}
-      </code>
-    ) : (
-      <code className="font-mono text-[0.85em]">{children}</code>
-    );
-  },
-};
-
-function AssistantMarkdown({ content }: { content: string }) {
-  return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-      {content}
-    </ReactMarkdown>
-  );
-}
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -361,7 +302,7 @@ export default function ChatPage() {
                   ) : (
                     <div className="group flex max-w-[85%] flex-col items-start gap-1 sm:max-w-[75%]">
                       <div className="w-full rounded-2xl rounded-bl-md border border-outline-variant/40 bg-surface-container-low px-md py-sm font-body-md text-body-md text-on-surface shadow-[0_2px_10px_rgba(0,0,0,0.05)]">
-                        <AssistantMarkdown content={m.content} />
+                        <MarkdownContent content={m.content} />
                         {isStreamingMessage && (
                           <span
                             className="ml-0.5 inline-block h-4 w-[2px] animate-pulse bg-primary align-middle"

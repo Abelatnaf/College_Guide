@@ -78,6 +78,102 @@
       "description": "India Gate silhouette at dawn, New Delhi, India",
       "photographer": "Pramod Tiwari",
       "sourceUrl": "https://www.pexels.com/photo/the-india-gate-in-new-delhi-at-dawn-13602922/"
+    },
+    {
+      "file": "country-switzerland.jpg",
+      "description": "Grossmünster and the Limmat river, Zurich, Switzerland",
+      "photographer": "Magda Ehlers",
+      "sourceUrl": "https://www.pexels.com/photo/scenic-view-of-historic-zurich-skyline-32008182/"
+    },
+    {
+      "file": "country-germany.jpg",
+      "description": "Berlin skyline with the Fernsehturm (TV Tower) and the Spree river, Germany",
+      "photographer": "Ch Jawad",
+      "sourceUrl": "https://www.pexels.com/photo/berlin-skyline-with-tv-tower-and-river-spree-38150071/"
+    },
+    {
+      "file": "country-belgium.jpg",
+      "description": "Aerial view of Brussels, Belgium",
+      "photographer": "X1ntao ZHOU",
+      "sourceUrl": "https://www.pexels.com/photo/panoramic-cityscape-view-of-brussels-skyline-28530781/"
+    },
+    {
+      "file": "country-france.jpg",
+      "description": "Eiffel Tower and city rooftops, Paris, France",
+      "photographer": "BAE JUN",
+      "sourceUrl": "https://www.pexels.com/photo/eiffel-tower-skyline-view-in-paris-france-33373690/"
+    },
+    {
+      "file": "country-netherlands.jpg",
+      "description": "Canal houses in Amsterdam's Centrum, Netherlands",
+      "photographer": "Ludovic Delot",
+      "sourceUrl": "https://www.pexels.com/photo/charming-canal-houses-in-amsterdam-s-centrum-37034503/"
+    },
+    {
+      "file": "country-italy.jpg",
+      "description": "St. Peter's Basilica over the Tiber river at twilight, Rome, Italy",
+      "photographer": "Daniel Zbroja",
+      "sourceUrl": "https://www.pexels.com/photo/skyline-of-rome-at-sunset-27530585/"
+    },
+    {
+      "file": "country-ireland.jpg",
+      "description": "Ha'penny Bridge over the River Liffey, Dublin, Ireland",
+      "photographer": "Adrien Olichon",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-dublin-cityscape-with-iconic-river-view-33999754/"
+    },
+    {
+      "file": "country-sweden.jpg",
+      "description": "Stockholm City Hall at sunset over the waterfront, Sweden",
+      "photographer": "Dawid Tkocz",
+      "sourceUrl": "https://www.pexels.com/photo/stockholm-city-hall-at-sunset-over-waterfront-35015237/"
+    },
+    {
+      "file": "country-spain.jpg",
+      "description": "Torrespaña Tower and modern skyline, Madrid, Spain",
+      "photographer": "Mateusz Walendzik",
+      "sourceUrl": "https://www.pexels.com/photo/skyline-of-madrid-spain-with-the-view-of-torrespana-17421340/"
+    },
+    {
+      "file": "country-denmark.jpg",
+      "description": "Copenhagen City Hall tower and rooftops, Denmark",
+      "photographer": "Irene Wahl",
+      "sourceUrl": "https://www.pexels.com/photo/cityscape-of-copenhagen-with-church-tower-17603856/"
+    },
+    {
+      "file": "country-austria.jpg",
+      "description": "Rooftops and church spires, Vienna, Austria",
+      "photographer": "Eleonora Vokueva",
+      "sourceUrl": "https://www.pexels.com/photo/aerial-view-of-vienna-s-historic-skyline-37449565/"
+    },
+    {
+      "file": "country-finland.jpg",
+      "description": "Helsinki Cathedral viewed from a historic street, Finland",
+      "photographer": "Mingyang LIU",
+      "sourceUrl": "https://www.pexels.com/photo/helsinki-cathedral-through-historic-street-view-37079868/"
+    },
+    {
+      "file": "country-poland.jpg",
+      "description": "Warsaw skyline with the Palace of Culture and Science, Poland",
+      "photographer": "Renata Rafa",
+      "sourceUrl": "https://www.pexels.com/photo/cityscape-of-warsaw-with-iconic-skyline-33894194/"
+    },
+    {
+      "file": "country-norway.jpg",
+      "description": "Oslo waterfront at sunset, Norway",
+      "photographer": "@nomundodejr Jr.",
+      "sourceUrl": "https://www.pexels.com/photo/cityscape-of-oslo-19735999/"
+    },
+    {
+      "file": "country-portugal.jpg",
+      "description": "Lisbon rooftops at twilight, Portugal",
+      "photographer": "Matej Simko",
+      "sourceUrl": "https://www.pexels.com/photo/cityscape-of-lisbon-19952255/"
+    },
+    {
+      "file": "country-czech-republic.jpg",
+      "description": "Prague rooftops and the Vltava river, Czech Republic",
+      "photographer": "Diego F. Parra",
+      "sourceUrl": "https://www.pexels.com/photo/panoramic-view-of-prague-czech-republic-16922751/"
     }
   ]
 }

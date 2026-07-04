@@ -1,20 +1,20 @@
 import Image from "next/image";
-import type { Region } from "@/types";
-import { getRegionImage } from "@/lib/regionImages";
+import { getCountryImage } from "@/lib/countryImages";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
 
 /**
  * Location-flavored image band for a university card/hero.
  *
- * Renders a real, free-license photo of the university's REGION (city
+ * Renders a real, free-license photo of the university's actual COUNTRY (city
  * skyline etc.) with a green gradient wash and an honest location chip —
- * deliberately never claiming to depict the university's actual campus
- * (see the honesty contract in src/lib/regionImages.ts). Falls back to the
- * generated CampusGraphic when no region photo exists.
+ * deliberately never claiming to depict the university's actual campus, and
+ * never a different country's skyline (see the honesty contract in
+ * src/lib/countryImages.ts). Falls back to the generated CampusGraphic when
+ * no photo exists for that country.
  */
 export function LocationImage({
   name,
-  region,
+  country,
   city,
   className,
   showLabel = true,
@@ -23,15 +23,15 @@ export function LocationImage({
 }: {
   /** University name — used only for the CampusGraphic fallback. */
   name: string;
-  region: Region;
-  /** Optional "City, ST" string shown in the location chip instead of the region label. */
+  country: string;
+  /** Optional "City, ST" string shown in the location chip instead of the country label. */
   city?: string;
   className?: string;
   showLabel?: boolean;
   sizes?: string;
   priority?: boolean;
 }) {
-  const image = getRegionImage(region);
+  const image = getCountryImage(country);
 
   if (!image) {
     return <CampusGraphic name={name} className={className} />;

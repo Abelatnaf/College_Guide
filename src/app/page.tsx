@@ -5,6 +5,7 @@ import { majors } from "@/data/majors";
 import { applicationFees } from "@/data/applicationFees";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUpStat } from "@/components/ui/CountUpStat";
+import { HeroCta } from "@/components/ui/HeroCta";
 
 const FEATURES = [
   {
@@ -60,13 +61,7 @@ export default function HomePage() {
                 and compare your shortlist side by side — all in one place.
               </p>
               <div className="flex flex-col items-center justify-center gap-md pt-md sm:flex-row lg:justify-start">
-                <Link
-                  href="/quiz"
-                  className="flex h-14 w-full items-center justify-center gap-base rounded-lg bg-primary px-lg font-label-md text-body-md text-on-primary transition-all hover:brightness-105 hover:shadow-lg sm:w-auto"
-                >
-                  Get Started
-                  <span className="material-symbols-outlined">arrow_forward</span>
-                </Link>
+                <HeroCta />
                 <a
                   href="#how-it-works"
                   className="flex h-14 w-full items-center justify-center rounded-lg bg-surface-container-low px-lg font-label-md text-body-md text-primary transition-all hover:bg-surface-container sm:w-auto"

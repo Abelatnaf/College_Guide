@@ -98,6 +98,15 @@ export default function PathPage() {
       cta: "Compare schools",
     });
   }
+  if (hasProfile || shortlist.length > 0) {
+    actions.push({
+      icon: "edit_note",
+      title: "Start drafting your essays",
+      body: "Get a head start with generic prompt shapes and structured AI feedback.",
+      href: "/essays",
+      cta: "Go to Essay Hub",
+    });
+  }
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">

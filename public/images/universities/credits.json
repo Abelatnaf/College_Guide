@@ -1,0 +1,245 @@
+{
+  "license": "Genuine campus photos are sourced from Wikimedia Commons under free licenses (CC BY, CC BY-SA, or public domain) that require attribution, unlike the Pexels photos elsewhere on this site. Each entry's license and source are listed below to satisfy that requirement.",
+  "photos": [
+    {
+      "file": "mit.jpg",
+      "university": "Massachusetts Institute of Technology",
+      "description": "The Great Dome, Building 10",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2017_Maclaurin_Buildings_(MIT_Building_10)_and_Great_Dome_close.jpg"
+    },
+    {
+      "file": "harvard.jpg",
+      "university": "Harvard University",
+      "description": "Widener Library, Harvard Yard",
+      "photographer": "Phoebe Barghouty",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Widener_Library_front.jpg"
+    },
+    {
+      "file": "stanford.jpg",
+      "university": "Stanford University",
+      "description": "Main Quad and Hoover Tower",
+      "photographer": "King of Hearts",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stanford_University_Main_Quad_(cropped).jpg"
+    },
+    {
+      "file": "yale.jpg",
+      "university": "Yale University",
+      "description": "Harkness Tower",
+      "photographer": "Hrichardson (WMF)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harkness_Tower_Yale_Fall_2014.jpg"
+    },
+    {
+      "file": "princeton.jpg",
+      "university": "Princeton University",
+      "description": "Nassau Hall",
+      "photographer": "Ken Lund",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cannon_Green_and_Nassau_Hall,_Princeton_University.jpg"
+    },
+    {
+      "file": "columbia.jpg",
+      "university": "Columbia University",
+      "description": "Low Memorial Library",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2014_Columbia_University_Low_Memorial_Library_from_front.jpg"
+    },
+    {
+      "file": "uc-berkeley.jpg",
+      "university": "UC Berkeley",
+      "description": "Sather Tower (the Campanile)",
+      "photographer": "Doug Letterman",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UC_Berkeley_Sather_Tower_-_Jan_16,_2022.jpg"
+    },
+    {
+      "file": "ucla.jpg",
+      "university": "UCLA",
+      "description": "Royce Hall",
+      "photographer": "Beyond My Ken",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2019_UCLA_Royce_Hall_2.jpg"
+    },
+    {
+      "file": "university-of-michigan.jpg",
+      "university": "University of Michigan",
+      "description": "Angell Hall",
+      "photographer": "Chris Rycroft",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Front_of_Angell_Hall.jpg"
+    },
+    {
+      "file": "nyu.jpg",
+      "university": "New York University",
+      "description": "Washington Square Arch (public NYC landmark at the heart of NYU's campus, not an NYU-owned building)",
+      "photographer": "Elisa.rolle",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Washington_Square_Arch_03.JPG"
+    },
+    {
+      "file": "carnegie-mellon.jpg",
+      "university": "Carnegie Mellon University",
+      "description": "Hamerschlag Hall",
+      "photographer": "-cpt-",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CMU_Hamerschlag_Hall.jpg"
+    },
+    {
+      "file": "johns-hopkins.jpg",
+      "university": "Johns Hopkins University",
+      "description": "Gilman Hall at the head of the Upper Quad",
+      "photographer": "Ottawa80",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gilman_Hall_at_the_head_of_the_Upper_Quad,_Johns_Hopkins_University.jpg"
+    },
+    {
+      "file": "caltech.jpg",
+      "university": "California Institute of Technology",
+      "description": "Millikan Library",
+      "photographer": "en:User:Geographer",
+      "license": "CC BY 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Millikan_Library,_Caltech.jpg"
+    },
+    {
+      "file": "cornell.jpg",
+      "university": "Cornell University",
+      "description": "McGraw Tower",
+      "photographer": "Herbert Lanks",
+      "license": "Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornell_University_-_McGraw_Tower.jpg"
+    },
+    {
+      "file": "oxford.jpg",
+      "university": "University of Oxford",
+      "description": "The Radcliffe Camera",
+      "photographer": "Zhushenje",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Radcliffe_Camera,_Oxford,_UK.jpg"
+    },
+    {
+      "file": "cambridge.jpg",
+      "university": "University of Cambridge",
+      "description": "King's College Chapel",
+      "photographer": "Martinvl",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kings_College_Cambridge_Chapel_from_the_river.jpg"
+    },
+    {
+      "file": "imperial-college.jpg",
+      "university": "Imperial College London",
+      "description": "Queen's Tower",
+      "photographer": "Chris Sampson",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Queen's_Tower,_Imperial_College_London.jpg"
+    },
+    {
+      "file": "ucl.jpg",
+      "university": "University College London",
+      "description": "The Wilkins Building portico",
+      "photographer": "LordHarris",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UCL_Portico_Building.jpg"
+    },
+    {
+      "file": "edinburgh.jpg",
+      "university": "University of Edinburgh",
+      "description": "Old College quad",
+      "photographer": "Su Hongjia",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Old_College,_University_of_Edinburgh.JPG"
+    },
+    {
+      "file": "manchester.jpg",
+      "university": "University of Manchester",
+      "description": "Whitworth Building",
+      "photographer": "Mike Peel (www.mikepeel.net)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:University_of_Manchester_-_Whitworth_Building.jpg"
+    },
+    {
+      "file": "kings-college-london.jpg",
+      "university": "King's College London",
+      "description": "King's College London signage, Strand Campus",
+      "photographer": "Katy Ereira",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kings_College_London_Sign.jpg"
+    },
+    {
+      "file": "eth-zurich.jpg",
+      "university": "ETH Zurich",
+      "description": "Main building",
+      "photographer": "Leonhard Lenz",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hauptgeb%C3%A4ude_der_ETH_Z%C3%BCrich_2022-09-24_01.jpg"
+    },
+    {
+      "file": "epfl.jpg",
+      "university": "EPFL",
+      "description": "The Rolex Learning Center",
+      "photographer": "Philippe (Nphilou)",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rolex_Learning_Center.jpg"
+    },
+    {
+      "file": "tu-munich.jpg",
+      "university": "Technical University of Munich",
+      "description": "Main building clock tower",
+      "photographer": "Fred Romero",
+      "license": "CC BY 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%BCnchen_-_Technische_Universit%C3%A4t.jpg"
+    },
+    {
+      "file": "ku-leuven.jpg",
+      "university": "KU Leuven",
+      "description": "University Hall",
+      "photographer": "Frie Van Grunderbeeck",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Universiteitshal_K.U.Leuven.jpg"
+    },
+    {
+      "file": "sorbonne.jpg",
+      "university": "Sorbonne University",
+      "description": "The historic Sorbonne building, Latin Quarter, Paris (shared among the University of Paris's successor institutions)",
+      "photographer": "Michal Osmenda",
+      "license": "CC BY-SA 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Sorbonne_-_University_of_Paris,_15_August_2011.jpg"
+    },
+    {
+      "file": "tu-delft.jpg",
+      "university": "TU Delft",
+      "description": "The Aula building",
+      "photographer": "T Houdijk",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aula_TU_Delft.jpg"
+    },
+    {
+      "file": "politecnico-milano.jpg",
+      "university": "Politecnico di Milano",
+      "description": "Main building",
+      "photographer": "NuclearNiranjan",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Polimi_Leonardo_campus_main_building.jpg"
+    },
+    {
+      "file": "university-of-toronto.jpg",
+      "university": "University of Toronto",
+      "description": "University College",
+      "photographer": "Nuthingoldstays",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:University_College_Front_Facade.jpg"
+    },
+    {
+      "file": "ubc.jpg",
+      "university": "University of British Columbia",
+      "description": "The Clock Tower and Irving K. Barber Learning Centre",
+      "photographer": "Dllu",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:UBC_Clock_Tower_and_IKB_Learning_Centre_as_seen_from_Hennings.jpg"
+    }
+  ]
+}

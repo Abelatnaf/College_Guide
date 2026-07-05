@@ -51,6 +51,7 @@ export function UniversityCard({
       <div className="relative h-40 bg-primary-container/10">
         <LocationImage
           name={university.name}
+          slug={university.slug}
           country={university.country}
           city={university.city}
           className="absolute inset-0 h-full w-full"

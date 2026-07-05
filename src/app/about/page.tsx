@@ -1,5 +1,20 @@
 import Link from "next/link";
 import imageCredits from "../../../public/images/credits.json";
+import universityImageCreditsRaw from "../../../public/images/universities/credits.json";
+
+interface UniversityPhotoCredit {
+  file: string;
+  university: string;
+  description: string;
+  photographer: string;
+  license: string;
+  sourceUrl: string;
+}
+
+const universityImageCredits = universityImageCreditsRaw as {
+  license: string;
+  photos: UniversityPhotoCredit[];
+};
 
 export const metadata = {
   title: "About — UniPath",
@@ -74,12 +89,10 @@ export default function AboutPage() {
             Photo credits
           </summary>
           <p className="mb-md mt-sm font-caption text-caption text-on-surface-variant">
-            Location photography is real, free-license city/region photography — never a photo of
-            a specific university&apos;s campus (see our{" "}
-            <Link href="/universities" className="text-primary underline hover:no-underline">
-              directory
-            </Link>{" "}
-            for each school&apos;s own logo instead). All photos via{" "}
+            Most location photography is real, free-license city/country photography — not a photo
+            of a specific university&apos;s campus. A small number of well-known schools show a
+            genuine, individually-verified campus photo instead (listed separately below); every
+            other school keeps its honest country-level photo. All city photos via{" "}
             <a
               href="https://www.pexels.com"
               target="_blank"
@@ -105,6 +118,32 @@ export default function AboutPage() {
               </li>
             ))}
           </ul>
+
+          {universityImageCredits.photos.length > 0 && (
+            <>
+              <p className="mb-xs mt-lg font-label-md text-label-md text-on-surface">
+                Verified campus photos
+              </p>
+              <p className="mb-md font-caption text-caption text-on-surface-variant">
+                {universityImageCredits.license}
+              </p>
+              <ul className="grid grid-cols-1 gap-xs font-caption text-caption text-on-surface-variant sm:grid-cols-2">
+                {universityImageCredits.photos.map((p) => (
+                  <li key={p.file}>
+                    {p.university} — {p.description} ({p.license}) —{" "}
+                    <a
+                      href={p.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline hover:no-underline"
+                    >
+                      {p.photographer}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </details>
       </section>
     </main>

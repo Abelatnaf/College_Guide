@@ -1,10 +1,16 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useReveal } from "@/lib/hooks/useReveal";
-import { cn } from "@/lib/utils";
+import { m } from "framer-motion";
+import { fadeUp, viewportOnce } from "@/lib/motion";
 
-/** Wraps children in a scroll-triggered fade-up reveal, with optional stagger delay. */
+/**
+ * Wraps children in a scroll-triggered fade-up reveal, with optional stagger
+ * delay. Public API (children / delayMs / className) is unchanged — swapping
+ * the internals to framer-motion upgrades every existing `<Reveal>` across the
+ * app for free. Reduced-motion is honored globally via `<MotionConfig
+ * reducedMotion="user">`.
+ */
 export function Reveal({
   children,
   delayMs = 0,
@@ -14,14 +20,16 @@ export function Reveal({
   delayMs?: number;
   className?: string;
 }) {
-  const { ref, visible } = useReveal<HTMLDivElement>();
   return (
-    <div
-      ref={ref}
-      className={cn(visible ? "animate-fade-up" : "opacity-0", className)}
-      style={visible ? { animationDelay: `${delayMs}ms` } : undefined}
+    <m.div
+      className={className}
+      variants={fadeUp}
+      custom={delayMs / 1000}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
     >
       {children}
-    </div>
+    </m.div>
   );
 }

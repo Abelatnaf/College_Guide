@@ -21,7 +21,7 @@ export function PageHeader({
     <div className="mb-lg flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
       <div className="flex items-start gap-sm">
         <span
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tertiary-fixed text-on-primary shadow-glow"
           aria-hidden="true"
         >
           <span
@@ -32,7 +32,7 @@ export function PageHeader({
           </span>
         </span>
         <div>
-          <h1 className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-lg text-headline-lg font-bold text-transparent">
+          <h1 className="bg-gradient-to-r from-primary to-tertiary-fixed bg-clip-text font-headline-lg text-headline-lg font-bold text-transparent">
             {title}
           </h1>
           {description && (

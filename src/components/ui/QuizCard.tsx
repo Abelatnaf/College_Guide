@@ -48,10 +48,10 @@ function Choice({
       className={
         "flex items-center rounded-xl border-2 p-md text-left transition-all duration-200 " +
         (isSelected
-          ? "border-primary bg-primary-container/5"
+          ? "border-primary bg-primary-container/10 shadow-glow-sm"
           : isDisabled
             ? "cursor-not-allowed border-transparent bg-surface opacity-40"
-            : "border-transparent bg-surface hover:border-primary hover:shadow-lg")
+            : "border-outline-variant/30 bg-surface-container-low/40 hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-glow-sm")
       }
     >
       <div

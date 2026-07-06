@@ -55,6 +55,7 @@ const TOKEN_NAMES = [
   "on-error-container",
   "outline",
   "outline-variant",
+  "glow",
 ] as const;
 
 const colors = Object.fromEntries(TOKEN_NAMES.map((name) => [name, token(name)]));
@@ -88,6 +89,12 @@ const config: Config = {
       },
       maxWidth: {
         "container-max": "1200px",
+      },
+      boxShadow: {
+        // Signature cinematic emerald glow
+        glow: "0 0 40px rgb(var(--glow) / 0.22)",
+        "glow-sm": "0 0 20px rgb(var(--glow) / 0.18)",
+        "glow-lg": "0 0 70px rgb(var(--glow) / 0.28)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
@@ -140,6 +147,12 @@ const config: Config = {
           "0%": { backgroundPosition: "-400px 0" },
           "100%": { backgroundPosition: "400px 0" },
         },
+        // Ambient aurora "breathing" — opacity only, so it never fights the
+        // transform-based centering of the orbs it's applied to.
+        "aurora-pulse": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "0.65" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease forwards",
@@ -147,6 +160,8 @@ const config: Config = {
         "fade-up": "fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "scale-in": "scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         shimmer: "shimmer 1.4s linear infinite",
+        "aurora-slow": "aurora-pulse 12s ease-in-out infinite",
+        "aurora-slower": "aurora-pulse 18s ease-in-out infinite 2s",
       },
     },
   },

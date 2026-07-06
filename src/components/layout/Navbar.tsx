@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { NavActions } from "@/components/layout/NavActions";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "My Path", href: "/path" },
@@ -131,8 +130,6 @@ export function Navbar() {
             />
           </form>
 
-          <ThemeToggle className="hidden md:flex" />
-
           <NavActions />
 
           <button
@@ -179,10 +176,6 @@ export function Navbar() {
               </Link>
             ))}
           </nav>
-          <div className="mt-md flex items-center justify-between">
-            <span className="font-caption text-caption text-on-surface-variant">Appearance</span>
-            <ThemeToggle />
-          </div>
           <NavActions mobile />
         </div>
       )}

@@ -45,17 +45,18 @@ export function UniversityCard({
 }) {
   return (
     <div
-      className="flex animate-fade-up flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest opacity-0 shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgb(var(--shadow-ambient)/0.08)] dark:shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.3)] dark:hover:shadow-[0_8px_25px_rgb(var(--shadow-ambient)/0.45)]"
+      className="group flex animate-fade-up flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest opacity-0 shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
       style={{ animationDelay: `${revealDelayMs}ms` }}
     >
-      <div className="relative h-40 bg-primary-container/10">
+      <div className="relative h-40 overflow-hidden bg-primary-container/10">
         <LocationImage
           name={university.name}
           slug={university.slug}
           country={university.country}
           city={university.city}
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-container-lowest/70 via-transparent to-transparent" />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-surface-container-lowest/90 px-3 py-1.5 shadow-sm backdrop-blur">
           <span className="text-lg leading-none">{flagFor(university.country)}</span>
           <span className="font-caption text-caption font-bold text-on-surface">

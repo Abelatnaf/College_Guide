@@ -19,9 +19,9 @@ export function MajorCard({ major, expanded, onToggle }: MajorCardProps) {
     return (
       <button
         onClick={onToggle}
-        className="flex h-full w-full flex-col rounded-xl border border-outline-variant bg-surface-container-lowest p-lg text-left shadow-[0_4px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)]"
+        className="group flex h-full w-full flex-col rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-lg text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
       >
-        <div className="mb-md flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-container text-secondary">
+        <div className="mb-md flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-container text-primary transition-transform duration-300 group-hover:scale-110">
           <span className="material-symbols-outlined">{major.icon}</span>
         </div>
         <h3 className="mb-xs font-headline-md text-headline-md">{major.name}</h3>

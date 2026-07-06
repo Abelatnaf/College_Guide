@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/components/providers/Providers";
+import { AmbientBackground } from "@/components/three/AmbientBackground";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-screen flex-col bg-surface font-sans text-on-surface antialiased">
         <Providers>
+          <AmbientBackground />
           <Suspense fallback={<div className="h-20 border-b border-outline-variant bg-surface" />}>
             <Navbar />
           </Suspense>

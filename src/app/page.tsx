@@ -6,6 +6,9 @@ import { applicationFees } from "@/data/applicationFees";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUpStat } from "@/components/ui/CountUpStat";
 import { HeroCta } from "@/components/ui/HeroCta";
+import { Stagger } from "@/components/motion/Stagger";
+import { StaggerItem } from "@/components/motion/StaggerItem";
+import { GlobeLoader } from "@/components/three/GlobeLoader";
 
 const FEATURES = [
   {
@@ -43,92 +46,95 @@ export default function HomePage() {
     <main>
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-xl pb-24 md:py-32">
-        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary-fixed opacity-20 blur-3xl" />
-        <div className="absolute top-1/2 -left-24 h-64 w-64 rounded-full bg-tertiary-fixed opacity-10 blur-2xl" />
         <div className="relative z-10 mx-auto max-w-container-max px-md md:px-lg">
           <div className="grid grid-cols-1 items-center gap-xl lg:grid-cols-2">
-            <div className="space-y-md text-center lg:text-left">
-              <div className="inline-flex animate-fade-in items-center gap-xs rounded-full bg-secondary-container px-sm py-1 font-label-md text-[12px] text-on-secondary-container">
-                <span className="material-symbols-outlined text-[16px]">verified</span>
-                <span>{universityCount}+ universities in our directory</span>
-              </div>
-              <h1 className="max-w-xl font-headline-xl-mobile text-headline-xl-mobile leading-tight text-on-background md:font-headline-xl md:text-headline-xl">
-                Find Your <span className="italic text-primary">Perfect</span> University
-              </h1>
-              <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant lg:mx-0">
-                Take a short quiz to get matched with schools that fit your budget,
-                grades, and goals, see honest admission-chance estimates for each one,
-                and compare your shortlist side by side — all in one place.
-              </p>
-              <div className="flex flex-col items-center justify-center gap-md pt-md sm:flex-row lg:justify-start">
-                <HeroCta />
-                <a
-                  href="#how-it-works"
-                  className="flex h-14 w-full items-center justify-center rounded-lg bg-surface-container-low px-lg font-label-md text-body-md text-primary transition-all hover:bg-surface-container sm:w-auto"
-                >
-                  See How It Works
-                </a>
-              </div>
-              <div className="flex items-center justify-center gap-lg pt-sm lg:justify-start">
-                <div className="text-center lg:text-left">
-                  <p className="font-headline-md text-headline-md font-bold text-primary">
-                    <CountUpStat value={universityCount} suffix="+" />
-                  </p>
-                  <p className="font-caption text-caption text-on-surface-variant">Universities</p>
+            <Stagger className="space-y-md text-center lg:text-left" stagger={0.09} delay={0.05}>
+              <StaggerItem>
+                <div className="inline-flex items-center gap-xs rounded-full border border-primary/25 bg-secondary-container/50 px-sm py-1 font-label-md text-[12px] text-on-secondary-container backdrop-blur-sm">
+                  <span className="material-symbols-outlined text-[16px] text-primary">public</span>
+                  <span>{universityCount}+ universities in our directory</span>
                 </div>
-                <div className="text-center lg:text-left">
-                  <p className="font-headline-md text-headline-md font-bold text-primary">
-                    <CountUpStat value={majorCount} />
-                  </p>
-                  <p className="font-caption text-caption text-on-surface-variant">Fields of study</p>
+              </StaggerItem>
+              <StaggerItem variant="rise">
+                <h1 className="max-w-xl font-headline-xl-mobile text-headline-xl-mobile leading-tight text-on-background md:font-headline-xl md:text-headline-xl">
+                  Find Your{" "}
+                  <span className="italic bg-gradient-to-r from-primary to-tertiary-fixed bg-clip-text text-transparent">
+                    Perfect
+                  </span>{" "}
+                  University
+                </h1>
+              </StaggerItem>
+              <StaggerItem>
+                <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant lg:mx-0">
+                  Take a short quiz to get matched with schools that fit your budget,
+                  grades, and goals, see honest admission-chance estimates for each one,
+                  and compare your shortlist side by side — all in one place.
+                </p>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="flex flex-col items-center justify-center gap-md pt-md sm:flex-row lg:justify-start">
+                  <HeroCta />
+                  <a
+                    href="#how-it-works"
+                    className="flex h-14 w-full items-center justify-center rounded-lg border border-outline-variant/40 bg-surface-container-low/60 px-lg font-label-md text-body-md text-primary backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-surface-container sm:w-auto"
+                  >
+                    See How It Works
+                  </a>
                 </div>
-                <div className="text-center lg:text-left">
-                  <p className="font-headline-md text-headline-md font-bold text-primary">
-                    <CountUpStat value={verifiedFeeCount} />
-                  </p>
-                  <p className="font-caption text-caption text-on-surface-variant">Verified fees</p>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="flex items-center justify-center gap-lg pt-sm lg:justify-start">
+                  <div className="text-center lg:text-left">
+                    <p className="font-headline-md text-headline-md font-bold text-primary">
+                      <CountUpStat value={universityCount} suffix="+" />
+                    </p>
+                    <p className="font-caption text-caption text-on-surface-variant">Universities</p>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <p className="font-headline-md text-headline-md font-bold text-primary">
+                      <CountUpStat value={majorCount} />
+                    </p>
+                    <p className="font-caption text-caption text-on-surface-variant">Fields of study</p>
+                  </div>
+                  <div className="text-center lg:text-left">
+                    <p className="font-headline-md text-headline-md font-bold text-primary">
+                      <CountUpStat value={verifiedFeeCount} />
+                    </p>
+                    <p className="font-caption text-caption text-on-surface-variant">Verified fees</p>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </StaggerItem>
+            </Stagger>
 
-            {/* Visual side — real photo, honest overlay */}
+            {/* Visual side — interactive procedural globe (drag to spin, hover a
+                pin for a school; degrades to a CSS globe on modest devices). */}
             <div className="relative hidden lg:block">
-              <div className="relative aspect-square w-full overflow-hidden rounded-[32px] shadow-2xl">
-                <Image
-                  src="/images/hero-students.jpg"
-                  alt="Students studying together"
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  priority
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
-                <Link
-                  href="/universities/stanford"
-                  className="glass-panel absolute bottom-md left-md right-md rounded-xl border border-white/30 p-md shadow-lg transition-transform hover:-translate-y-1"
-                >
-                  <div className="mb-sm flex items-center justify-between">
-                    <h4 className="font-label-md text-on-surface">Featured School</h4>
-                    <span className="font-bold text-primary">Explore Profile</span>
+              <GlobeLoader className="relative aspect-square w-full" />
+              <Link
+                href="/universities/stanford"
+                className="glass-panel absolute bottom-2 left-2 right-2 rounded-xl border border-primary/25 p-md shadow-lg transition-transform hover:-translate-y-1"
+              >
+                <div className="mb-sm flex items-center justify-between">
+                  <h4 className="font-label-md text-on-surface">Featured School</h4>
+                  <span className="font-bold text-primary">Explore Profile</span>
+                </div>
+                <div className="flex items-center gap-sm">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-fixed">
+                    <span className="material-symbols-outlined text-on-primary-fixed-variant">
+                      account_balance
+                    </span>
                   </div>
-                  <div className="flex items-center gap-sm">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-fixed">
-                      <span className="material-symbols-outlined text-on-primary-fixed-variant">
-                        account_balance
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-bold text-on-surface">Stanford University</p>
-                      <p className="font-caption text-caption text-on-surface-variant">
-                        Stanford, California
-                      </p>
-                    </div>
+                  <div>
+                    <p className="font-bold text-on-surface">Stanford University</p>
+                    <p className="font-caption text-caption text-on-surface-variant">
+                      Stanford, California
+                    </p>
                   </div>
-                </Link>
-              </div>
-              <div className="absolute -top-6 -right-6 flex items-center gap-sm rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-xl">
+                </div>
+              </Link>
+              <div className="glass-panel absolute -top-2 -right-2 flex items-center gap-sm rounded-xl border border-primary/25 p-md shadow-glow">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
-                  <span className="material-symbols-outlined text-white">
+                  <span className="material-symbols-outlined text-on-tertiary-container">
                     workspace_premium
                   </span>
                 </div>

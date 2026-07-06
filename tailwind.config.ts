@@ -55,6 +55,7 @@ const TOKEN_NAMES = [
   "on-error-container",
   "outline",
   "outline-variant",
+  "glow",
 ] as const;
 
 const colors = Object.fromEntries(TOKEN_NAMES.map((name) => [name, token(name)]));
@@ -88,6 +89,12 @@ const config: Config = {
       },
       maxWidth: {
         "container-max": "1200px",
+      },
+      boxShadow: {
+        // Signature cinematic emerald glow
+        glow: "0 0 40px rgb(var(--glow) / 0.22)",
+        "glow-sm": "0 0 20px rgb(var(--glow) / 0.18)",
+        "glow-lg": "0 0 70px rgb(var(--glow) / 0.28)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],

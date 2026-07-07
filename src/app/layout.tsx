@@ -5,7 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/components/providers/Providers";
-import { AmbientBackground } from "@/components/three/AmbientBackground";
+import { AmbientBackground } from "@/components/ambient/AmbientBackground";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -8,7 +8,9 @@ import { CountUpStat } from "@/components/ui/CountUpStat";
 import { HeroCta } from "@/components/ui/HeroCta";
 import { Stagger } from "@/components/motion/Stagger";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-import { GlobeLoader } from "@/components/three/GlobeLoader";
+import { Tilt3D } from "@/components/motion/Tilt3D";
+import { ScrollParallax } from "@/components/motion/ScrollParallax";
+import { CinematicHeroMedia } from "@/components/hero/CinematicHeroMedia";
 
 const FEATURES = [
   {
@@ -106,48 +108,65 @@ export default function HomePage() {
               </StaggerItem>
             </Stagger>
 
-            {/* Visual side — interactive procedural globe (drag to spin, hover a
-                pin for a school; degrades to a CSS globe on modest devices). */}
-            <div className="relative hidden lg:block">
-              <GlobeLoader className="relative aspect-square w-full" />
-              <Link
-                href="/universities/stanford"
-                className="glass-panel absolute bottom-2 left-2 right-2 rounded-xl border border-primary/25 p-md shadow-lg transition-transform hover:-translate-y-1"
+            {/* Visual side — cinematic campus photo sequence (auto-prefers a
+                real background video at /videos/hero-campus.mp4 if one is
+                added), tilted in 3D toward the cursor with floating glass
+                panels layered above at their own depth. */}
+            <ScrollParallax strength={24} className="relative hidden lg:block">
+              <Tilt3D
+                maxTilt={6}
+                className="aspect-square w-full overflow-hidden rounded-[32px] border border-primary/15 shadow-glow-lg motion-safe:animate-float-slow"
               >
-                <div className="mb-sm flex items-center justify-between">
-                  <h4 className="font-label-md text-on-surface">Featured School</h4>
-                  <span className="font-bold text-primary">Explore Profile</span>
-                </div>
-                <div className="flex items-center gap-sm">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-fixed">
-                    <span className="material-symbols-outlined text-on-primary-fixed-variant">
-                      account_balance
+                <CinematicHeroMedia className="absolute inset-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/5 to-transparent" />
+              </Tilt3D>
+
+              <Tilt3D maxTilt={14} className="absolute bottom-2 left-2 right-2 rounded-xl">
+                <Link
+                  href="/universities/stanford"
+                  className="glass-panel block rounded-xl border border-primary/25 p-md shadow-lg"
+                >
+                  <div className="mb-sm flex items-center justify-between">
+                    <h4 className="font-label-md text-on-surface">Featured School</h4>
+                    <span className="font-bold text-primary">Explore Profile</span>
+                  </div>
+                  <div className="flex items-center gap-sm">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-fixed">
+                      <span className="material-symbols-outlined text-on-primary-fixed-variant">
+                        account_balance
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-bold text-on-surface">Stanford University</p>
+                      <p className="font-caption text-caption text-on-surface-variant">
+                        Stanford, California
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </Tilt3D>
+
+              <Tilt3D
+                maxTilt={16}
+                className="absolute -top-2 -right-2 rounded-xl motion-safe:animate-float-slower"
+              >
+                <div className="glass-panel flex items-center gap-sm rounded-xl border border-primary/25 p-md shadow-glow">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
+                    <span className="material-symbols-outlined text-on-tertiary-container">
+                      workspace_premium
                     </span>
                   </div>
                   <div>
-                    <p className="font-bold text-on-surface">Stanford University</p>
-                    <p className="font-caption text-caption text-on-surface-variant">
-                      Stanford, California
+                    <p className="font-caption text-caption font-bold uppercase tracking-wider text-on-surface-variant">
+                      Directory Size
+                    </p>
+                    <p className="font-headline-md text-headline-md font-bold text-on-surface">
+                      {universityCount}+
                     </p>
                   </div>
                 </div>
-              </Link>
-              <div className="glass-panel absolute -top-2 -right-2 flex items-center gap-sm rounded-xl border border-primary/25 p-md shadow-glow">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
-                  <span className="material-symbols-outlined text-on-tertiary-container">
-                    workspace_premium
-                  </span>
-                </div>
-                <div>
-                  <p className="font-caption text-caption font-bold uppercase tracking-wider text-on-surface-variant">
-                    Directory Size
-                  </p>
-                  <p className="font-headline-md text-headline-md font-bold text-on-surface">
-                    {universityCount}+
-                  </p>
-                </div>
-              </div>
-            </div>
+              </Tilt3D>
+            </ScrollParallax>
           </div>
         </div>
       </section>
@@ -167,28 +186,30 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-md md:grid-cols-3">
             {FEATURES.map((f, i) => (
               <Reveal key={f.href} delayMs={i * 100}>
-                <Link
-                  href={f.href}
-                  className="card-hover-shadow group flex h-full flex-col rounded-[16px] border border-outline-variant/30 bg-surface-container-lowest p-xl"
-                >
-                  <div
-                    className={`mb-md flex h-16 w-16 items-center justify-center rounded-[12px] ${f.iconWrap}`}
+                <Tilt3D maxTilt={8} className="h-full rounded-[16px]">
+                  <Link
+                    href={f.href}
+                    className="card-hover-shadow group flex h-full flex-col rounded-[16px] border border-outline-variant/30 bg-surface-container-lowest p-xl"
                   >
-                    <span className="material-symbols-outlined text-[32px] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-                      {f.icon}
+                    <div
+                      className={`mb-md flex h-16 w-16 items-center justify-center rounded-[12px] ${f.iconWrap}`}
+                    >
+                      <span className="material-symbols-outlined text-[32px] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+                        {f.icon}
+                      </span>
+                    </div>
+                    <h3 className="mb-sm font-headline-md text-headline-md text-on-surface">
+                      {f.title}
+                    </h3>
+                    <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
+                      {f.body}
+                    </p>
+                    <span className="flex items-center gap-xs font-label-md text-primary transition-all group-hover:gap-base">
+                      {f.cta}
+                      <span className="material-symbols-outlined text-[18px]">chevron_right</span>
                     </span>
-                  </div>
-                  <h3 className="mb-sm font-headline-md text-headline-md text-on-surface">
-                    {f.title}
-                  </h3>
-                  <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
-                    {f.body}
-                  </p>
-                  <span className="flex items-center gap-xs font-label-md text-primary transition-all group-hover:gap-base">
-                    {f.cta}
-                    <span className="material-symbols-outlined text-[18px]">chevron_right</span>
-                  </span>
-                </Link>
+                  </Link>
+                </Tilt3D>
               </Reveal>
             ))}
           </div>
@@ -199,89 +220,97 @@ export default function HomePage() {
       <section className="py-xl">
         <div className="mx-auto max-w-container-max px-md md:px-lg">
           <div className="grid h-auto grid-cols-1 grid-rows-2 gap-md md:h-[600px] md:grid-cols-4">
-            <Reveal className="relative flex flex-col justify-end overflow-hidden rounded-[24px] p-xl md:col-span-2 md:row-span-2">
-              <Image
-                src="/images/hero-graduation.jpg"
-                alt="Graduates celebrating"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/20" />
-              <div className="relative z-10 space-y-sm text-white">
-                <span className="rounded-full bg-white/20 px-sm py-1 font-label-md text-caption uppercase backdrop-blur-md">
-                  How We&apos;re Different
-                </span>
-                <h2 className="font-headline-lg text-headline-lg">
-                  Know Your Real Chances
-                </h2>
-                <p className="max-w-sm font-body-md text-body-md opacity-90">
-                  Every school gets a Safety, Target, Reach, or High Reach estimate with
-                  the reasoning shown right alongside it — not a black-box percentage.
-                </p>
-                <Link
-                  href="/quiz"
-                  className="mt-md inline-block rounded-lg bg-white px-lg py-sm font-bold text-primary"
-                >
-                  Take the Quiz
-                </Link>
-              </div>
+            <Reveal className="md:col-span-2 md:row-span-2">
+              <Tilt3D maxTilt={5} className="relative h-full overflow-hidden rounded-[24px]">
+                <Image
+                  src="/images/hero-graduation.jpg"
+                  alt="Graduates celebrating"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/20" />
+                <div className="relative z-10 flex h-full flex-col justify-end space-y-sm p-xl text-white">
+                  <span className="rounded-full bg-white/20 px-sm py-1 font-label-md text-caption uppercase backdrop-blur-md">
+                    How We&apos;re Different
+                  </span>
+                  <h2 className="font-headline-lg text-headline-lg">
+                    Know Your Real Chances
+                  </h2>
+                  <p className="max-w-sm font-body-md text-body-md opacity-90">
+                    Every school gets a Safety, Target, Reach, or High Reach estimate with
+                    the reasoning shown right alongside it — not a black-box percentage.
+                  </p>
+                  <Link
+                    href="/quiz"
+                    className="mt-md inline-block rounded-lg bg-white px-lg py-sm font-bold text-primary"
+                  >
+                    Take the Quiz
+                  </Link>
+                </div>
+              </Tilt3D>
             </Reveal>
 
             <Reveal delayMs={100} className="md:col-span-2">
-              <Link
-                href="/affordability-finder"
-                className="group flex h-full items-center justify-between overflow-hidden rounded-[24px] bg-surface-container-highest p-lg"
-              >
-                <div className="max-w-[60%]">
-                  <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
-                    Affordability Finder
-                  </h4>
-                  <p className="text-body-md text-on-surface-variant">
-                    See which universities are need-blind and meet full demonstrated need for
-                    international students, verified against official aid policies — with sources.
-                  </p>
-                </div>
-                <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest shadow-md transition-transform group-hover:scale-110">
-                  <span className="material-symbols-outlined text-[48px] text-primary">
-                    payments
-                  </span>
-                </div>
-              </Link>
+              <Tilt3D maxTilt={8} className="h-full rounded-[24px]">
+                <Link
+                  href="/affordability-finder"
+                  className="group flex h-full items-center justify-between overflow-hidden rounded-[24px] bg-surface-container-highest p-lg"
+                >
+                  <div className="max-w-[60%]">
+                    <h4 className="mb-xs font-headline-md text-headline-md text-on-surface">
+                      Affordability Finder
+                    </h4>
+                    <p className="text-body-md text-on-surface-variant">
+                      See which universities are need-blind and meet full demonstrated need for
+                      international students, verified against official aid policies — with sources.
+                    </p>
+                  </div>
+                  <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-surface-container-lowest shadow-md transition-transform group-hover:scale-110">
+                    <span className="material-symbols-outlined text-[48px] text-primary">
+                      payments
+                    </span>
+                  </div>
+                </Link>
+              </Tilt3D>
             </Reveal>
 
             <Reveal delayMs={150}>
-              <Link
-                href="#how-it-works"
-                className="group flex h-full flex-col justify-between rounded-[24px] bg-secondary-container p-lg transition-all hover:-translate-y-0.5"
-              >
-                <span className="material-symbols-outlined text-[40px] text-primary transition-transform group-hover:scale-110">
-                  history_edu
-                </span>
-                <div>
-                  <p className="font-bold text-on-surface">Application Tracker</p>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    Stay on top of every deadline.
-                  </p>
-                </div>
-              </Link>
+              <Tilt3D maxTilt={10} className="h-full rounded-[24px]">
+                <Link
+                  href="#how-it-works"
+                  className="group flex h-full flex-col justify-between rounded-[24px] bg-secondary-container p-lg"
+                >
+                  <span className="material-symbols-outlined text-[40px] text-primary transition-transform group-hover:scale-110">
+                    history_edu
+                  </span>
+                  <div>
+                    <p className="font-bold text-on-surface">Application Tracker</p>
+                    <p className="font-caption text-caption text-on-surface-variant">
+                      Stay on top of every deadline.
+                    </p>
+                  </div>
+                </Link>
+              </Tilt3D>
             </Reveal>
 
             <Reveal delayMs={200}>
-              <Link
-                href="/contact"
-                className="group flex h-full flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg transition-all hover:-translate-y-0.5"
-              >
-                <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant transition-transform group-hover:scale-110">
-                  forum
-                </span>
-                <div>
-                  <p className="font-bold text-on-surface">Have Questions?</p>
-                  <p className="font-caption text-caption text-on-surface-variant">
-                    Reach out to our team.
-                  </p>
-                </div>
-              </Link>
+              <Tilt3D maxTilt={10} className="h-full rounded-[24px]">
+                <Link
+                  href="/contact"
+                  className="group flex h-full flex-col justify-between rounded-[24px] bg-tertiary-fixed p-lg"
+                >
+                  <span className="material-symbols-outlined text-[40px] text-on-tertiary-fixed-variant transition-transform group-hover:scale-110">
+                    forum
+                  </span>
+                  <div>
+                    <p className="font-bold text-on-surface">Have Questions?</p>
+                    <p className="font-caption text-caption text-on-surface-variant">
+                      Reach out to our team.
+                    </p>
+                  </div>
+                </Link>
+              </Tilt3D>
             </Reveal>
           </div>
         </div>
@@ -328,35 +357,37 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="relative flex h-full min-h-[280px] flex-col items-center justify-center p-md text-center">
-              <Image
-                src="/images/hero-journey.jpg"
-                alt="Airplane window view above the clouds"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-container/95 via-primary-container/50 to-transparent" />
-              <div className="relative z-10 flex flex-col items-center">
-                <div className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-xl">
-                  <span className="material-symbols-outlined text-[40px] text-primary">
-                    rocket_launch
-                  </span>
+            <ScrollParallax strength={30} className="relative h-full min-h-[280px]">
+              <Tilt3D maxTilt={5} className="relative h-full overflow-hidden">
+                <Image
+                  src="/images/hero-journey.jpg"
+                  alt="Airplane window view above the clouds"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-container/95 via-primary-container/50 to-transparent" />
+                <div className="relative z-10 flex h-full flex-col items-center justify-center p-md text-center">
+                  <div className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-xl">
+                    <span className="material-symbols-outlined text-[40px] text-primary">
+                      rocket_launch
+                    </span>
+                  </div>
+                  <p className="mb-xs font-headline-md text-headline-md text-white">
+                    Ready when you are
+                  </p>
+                  <p className="mb-md max-w-xs text-body-md text-white/90">
+                    Build your profile to unlock school matches tailored just for you.
+                  </p>
+                  <Link
+                    href="/quiz"
+                    className="rounded-lg bg-white px-lg py-sm font-bold text-primary"
+                  >
+                    Start My Profile
+                  </Link>
                 </div>
-                <p className="mb-xs font-headline-md text-headline-md text-white">
-                  Ready when you are
-                </p>
-                <p className="mb-md max-w-xs text-body-md text-white/90">
-                  Build your profile to unlock school matches tailored just for you.
-                </p>
-                <Link
-                  href="/quiz"
-                  className="rounded-lg bg-white px-lg py-sm font-bold text-primary"
-                >
-                  Start My Profile
-                </Link>
-              </div>
-            </div>
+              </Tilt3D>
+            </ScrollParallax>
           </Reveal>
         </div>
       </section>

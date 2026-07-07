@@ -153,6 +153,16 @@ const config: Config = {
           "0%, 100%": { opacity: "0.3" },
           "50%": { opacity: "0.65" },
         },
+        // Slow cinematic zoom for the hero photo sequence (Ken Burns).
+        "ken-burns": {
+          "0%, 100%": { transform: "scale(1) translate(0, 0)" },
+          "50%": { transform: "scale(1.12) translate(-1%, -1%)" },
+        },
+        // Gentle idle bob for floating 3D depth layers.
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease forwards",
@@ -162,6 +172,9 @@ const config: Config = {
         shimmer: "shimmer 1.4s linear infinite",
         "aurora-slow": "aurora-pulse 12s ease-in-out infinite",
         "aurora-slower": "aurora-pulse 18s ease-in-out infinite 2s",
+        "ken-burns": "ken-burns 12s ease-in-out infinite",
+        "float-slow": "float 6s ease-in-out infinite",
+        "float-slower": "float 7.5s ease-in-out infinite 0.8s",
       },
     },
   },

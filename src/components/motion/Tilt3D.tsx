@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useRef, useState, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 import { m, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -20,11 +20,13 @@ const SPRING = { stiffness: 300, damping: 25, mass: 0.6 };
 export function Tilt3D({
   children,
   className,
+  style,
   maxTilt = 10,
   glare = true,
 }: {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   maxTilt?: number;
   glare?: boolean;
 }) {
@@ -40,7 +42,11 @@ export function Tilt3D({
   );
 
   if (reduceMotion) {
-    return <div className={className}>{children}</div>;
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
   }
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
@@ -63,7 +69,7 @@ export function Tilt3D({
       onPointerMove={handlePointerMove}
       onPointerEnter={() => setHovering(true)}
       onPointerLeave={handlePointerLeave}
-      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      style={{ ...style, rotateX, rotateY, transformPerspective: 900 }}
       whileHover={{ scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className={cn("relative will-change-transform [transform-style:preserve-3d]", className)}

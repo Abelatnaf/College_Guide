@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Major } from "@/types";
+import { Tilt3D } from "@/components/motion/Tilt3D";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -17,22 +18,24 @@ export function MajorCard({ major, expanded, onToggle }: MajorCardProps) {
 
   if (!expanded) {
     return (
-      <button
-        onClick={onToggle}
-        className="group flex h-full w-full flex-col rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-lg text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
-      >
-        <div className="mb-md flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-container text-primary transition-transform duration-300 group-hover:scale-110">
-          <span className="material-symbols-outlined">{major.icon}</span>
-        </div>
-        <h3 className="mb-xs font-headline-md text-headline-md">{major.name}</h3>
-        <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
-          {major.description}
-        </p>
-        <div className="flex items-center justify-between font-label-md text-label-md text-primary">
-          <span>Explore {major.subMajors.length} Tracks</span>
-          <span className="material-symbols-outlined">arrow_forward</span>
-        </div>
-      </button>
+      <Tilt3D maxTilt={8} className="h-full rounded-xl">
+        <button
+          onClick={onToggle}
+          className="group flex h-full w-full flex-col rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-lg text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
+        >
+          <div className="mb-md flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-container text-primary transition-transform duration-300 group-hover:scale-110">
+            <span className="material-symbols-outlined">{major.icon}</span>
+          </div>
+          <h3 className="mb-xs font-headline-md text-headline-md">{major.name}</h3>
+          <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
+            {major.description}
+          </p>
+          <div className="flex items-center justify-between font-label-md text-label-md text-primary">
+            <span>Explore {major.subMajors.length} Tracks</span>
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </div>
+        </button>
+      </Tilt3D>
     );
   }
 

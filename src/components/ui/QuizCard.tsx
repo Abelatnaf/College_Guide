@@ -98,8 +98,11 @@ export function QuizCard(props: QuizCardProps) {
   const { question, options, helperText } = props;
 
   return (
-    <Tilt3D maxTilt={5} glare={false} className="animate-slide-in rounded-xl">
-      <div className="rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-sm md:p-lg">
+    // animate-slide-in lives on the inner div, not this Tilt3D wrapper: a CSS
+    // animation always wins the cascade over an inline style for the same
+    // property, so putting it here would permanently block Tilt3D's tilt.
+    <Tilt3D maxTilt={5} glare={false} className="rounded-xl">
+      <div className="animate-slide-in rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-sm md:p-lg">
         <h1 className="mb-xs font-headline-lg text-headline-lg text-on-surface">
           {question}
         </h1>

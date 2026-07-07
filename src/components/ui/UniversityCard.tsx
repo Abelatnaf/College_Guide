@@ -45,12 +45,15 @@ export function UniversityCard({
   revealDelayMs?: number;
 }) {
   return (
-    <Tilt3D
-      maxTilt={6}
-      className="h-full animate-fade-up rounded-xl opacity-0"
-      style={{ animationDelay: `${revealDelayMs}ms` }}
-    >
-      <div className="group flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow">
+    // The entrance animation lives on the inner div, not this Tilt3D
+    // wrapper: a CSS `animation` always wins the cascade for the properties
+    // it targets over an inline style, so putting fade-up's transform here
+    // would permanently block Tilt3D's own rotateX/rotateY after mount.
+    <Tilt3D maxTilt={6} className="h-full rounded-xl">
+      <div
+        className="group flex h-full animate-fade-up flex-col overflow-hidden rounded-xl border border-outline-variant/20 bg-surface-container-lowest opacity-0 shadow-[0_4px_15px_rgb(var(--shadow-ambient)/0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow"
+        style={{ animationDelay: `${revealDelayMs}ms` }}
+      >
         <div className="relative h-40 overflow-hidden bg-primary-container/10">
           <LocationImage
             name={university.name}

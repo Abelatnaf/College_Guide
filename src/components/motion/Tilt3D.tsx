@@ -13,9 +13,13 @@ const SPRING = { stiffness: 300, damping: 25, mass: 0.6 };
  * feature/bento tiles, and shared cards so "3D everywhere" comes from one
  * primitive instead of per-page transform code.
  *
- * Skips all of it under prefers-reduced-motion (renders a plain div, no
- * listeners) — this is manually driven via pointer events, which framer's
- * global `MotionConfig reducedMotion="user"` doesn't reach on its own.
+ * Always renders the same `m.div` structure regardless of
+ * prefers-reduced-motion — branching between a plain `<div>` and `<m.div>`
+ * based on that value caused a real hydration mismatch (React errors
+ * #418/#423), since `useReducedMotion()` can resolve synchronously on the
+ * client's first render, differently from what the server saw. Reduced
+ * motion instead zeroes the tilt amount, so rotation stays pinned at 0
+ * regardless of pointer movement — a value difference, not a structural one.
  */
 export function Tilt3D({
   children,
@@ -31,23 +35,16 @@ export function Tilt3D({
   glare?: boolean;
 }) {
   const reduceMotion = useReducedMotion();
+  const effectiveMaxTilt = reduceMotion ? 0 : maxTilt;
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
-  const rotateX = useSpring(useTransform(py, [0, 1], [maxTilt, -maxTilt]), SPRING);
-  const rotateY = useSpring(useTransform(px, [0, 1], [-maxTilt, maxTilt]), SPRING);
+  const rotateX = useSpring(useTransform(py, [0, 1], [effectiveMaxTilt, -effectiveMaxTilt]), SPRING);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-effectiveMaxTilt, effectiveMaxTilt]), SPRING);
   const glareBackground = useTransform([px, py], ([gx, gy]: number[]) =>
     `radial-gradient(circle at ${gx * 100}% ${gy * 100}%, rgba(255,255,255,0.16), transparent 60%)`,
   );
-
-  if (reduceMotion) {
-    return (
-      <div className={className} style={style}>
-        {children}
-      </div>
-    );
-  }
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     const el = ref.current;
@@ -79,7 +76,7 @@ export function Tilt3D({
         <m.div
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-300"
-          style={{ background: glareBackground, opacity: hovering ? 1 : 0 }}
+          style={{ background: glareBackground, opacity: hovering && !reduceMotion ? 1 : 0 }}
         />
       )}
     </m.div>

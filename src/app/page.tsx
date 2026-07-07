@@ -113,13 +113,19 @@ export default function HomePage() {
                 added), tilted in 3D toward the cursor with floating glass
                 panels layered above at their own depth. */}
             <ScrollParallax strength={24} className="relative hidden lg:block">
-              <Tilt3D
-                maxTilt={6}
-                className="aspect-square w-full overflow-hidden rounded-[32px] border border-primary/15 shadow-glow-lg motion-safe:animate-float-slow"
-              >
-                <CinematicHeroMedia className="absolute inset-0" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/5 to-transparent" />
-              </Tilt3D>
+              {/* Float (CSS keyframe) and tilt (framer inline transform) both
+                  target `transform`, and an animation always wins over an
+                  inline style for the same property — so they live on
+                  separate nested elements instead of fighting on one. */}
+              <div className="motion-safe:animate-float-slow">
+                <Tilt3D
+                  maxTilt={6}
+                  className="aspect-square w-full overflow-hidden rounded-[32px] border border-primary/15 shadow-glow-lg"
+                >
+                  <CinematicHeroMedia className="absolute inset-0" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/5 to-transparent" />
+                </Tilt3D>
+              </div>
 
               <Tilt3D maxTilt={14} className="absolute bottom-2 left-2 right-2 rounded-xl">
                 <Link
@@ -146,26 +152,25 @@ export default function HomePage() {
                 </Link>
               </Tilt3D>
 
-              <Tilt3D
-                maxTilt={16}
-                className="absolute -top-2 -right-2 rounded-xl motion-safe:animate-float-slower"
-              >
-                <div className="glass-panel flex items-center gap-sm rounded-xl border border-primary/25 p-md shadow-glow">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
-                    <span className="material-symbols-outlined text-on-tertiary-container">
-                      workspace_premium
-                    </span>
+              <div className="absolute -top-2 -right-2 motion-safe:animate-float-slower">
+                <Tilt3D maxTilt={16} className="rounded-xl">
+                  <div className="glass-panel flex items-center gap-sm rounded-xl border border-primary/25 p-md shadow-glow">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary-container">
+                      <span className="material-symbols-outlined text-on-tertiary-container">
+                        workspace_premium
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-caption text-caption font-bold uppercase tracking-wider text-on-surface-variant">
+                        Directory Size
+                      </p>
+                      <p className="font-headline-md text-headline-md font-bold text-on-surface">
+                        {universityCount}+
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-caption text-caption font-bold uppercase tracking-wider text-on-surface-variant">
-                      Directory Size
-                    </p>
-                    <p className="font-headline-md text-headline-md font-bold text-on-surface">
-                      {universityCount}+
-                    </p>
-                  </div>
-                </div>
-              </Tilt3D>
+                </Tilt3D>
+              </div>
             </ScrollParallax>
           </div>
         </div>

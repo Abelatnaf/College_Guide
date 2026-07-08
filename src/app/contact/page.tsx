@@ -69,7 +69,7 @@ export default function ContactPage() {
             mail
           </span>
         </span>
-        <h1 className="mb-md bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-xl text-headline-xl-mobile font-bold text-transparent md:text-headline-xl">
+        <h1 className="mb-md font-display text-display-lg text-on-surface">
           Get in Touch
         </h1>
         <p className="mx-auto max-w-lg font-body-lg text-body-lg text-on-surface-variant">

@@ -30,7 +30,7 @@ export default function TermsPage() {
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-xs font-headline-xl text-headline-xl-mobile md:text-headline-xl">
+        <h1 className="mb-xs font-display text-display-lg text-on-surface">
           Terms of Service
         </h1>
         <p className="mb-lg font-caption text-caption text-on-surface-variant">

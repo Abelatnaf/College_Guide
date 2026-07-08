@@ -187,7 +187,7 @@ export default function ChatPage() {
             </span>
           </span>
           <div>
-            <h1 className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-lg text-headline-lg font-bold text-transparent">
+            <h1 className="font-display text-display-md text-on-surface">
               Ask AI
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant">

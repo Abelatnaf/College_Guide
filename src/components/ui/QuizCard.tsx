@@ -103,7 +103,7 @@ export function QuizCard(props: QuizCardProps) {
     // property, so putting it here would permanently block Tilt3D's tilt.
     <Tilt3D maxTilt={5} glare={false} className="rounded-xl">
       <div className="animate-slide-in rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-sm md:p-lg">
-        <h1 className="mb-xs font-headline-lg text-headline-lg text-on-surface">
+        <h1 className="mb-xs font-display text-display-md text-on-surface">
           {question}
         </h1>
         {helperText && (

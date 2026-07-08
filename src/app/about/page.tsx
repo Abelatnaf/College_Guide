@@ -25,7 +25,7 @@ export default function AboutPage() {
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
       <section className="mx-auto max-w-3xl text-center">
-        <h1 className="mb-md font-headline-xl text-headline-xl-mobile md:text-headline-xl">
+        <h1 className="mb-md font-display text-display-lg text-on-surface">
           About UniPath
         </h1>
         <p className="mx-auto max-w-2xl font-body-lg text-body-lg text-on-surface-variant">

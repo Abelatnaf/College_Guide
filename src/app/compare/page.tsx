@@ -34,7 +34,7 @@ export default function ComparePage() {
             compare_arrows
           </span>
         </span>
-        <h1 className="mb-base bg-gradient-to-r from-primary to-primary/70 bg-clip-text font-headline-xl text-headline-xl-mobile font-bold text-transparent md:text-headline-xl">
+        <h1 className="mb-base font-display text-display-lg text-on-surface">
           Compare Universities
         </h1>
         <p className="max-w-2xl font-body-lg text-body-lg text-on-surface-variant">

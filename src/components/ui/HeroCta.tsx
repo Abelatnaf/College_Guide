@@ -13,10 +13,12 @@ export function HeroCta() {
   return (
     <Link
       href={hasStarted ? "/path" : "/quiz"}
-      className="flex h-14 w-full items-center justify-center gap-base rounded-lg bg-primary px-lg font-label-md text-body-md text-on-primary transition-all hover:brightness-105 hover:shadow-lg sm:w-auto"
+      className="group flex h-14 w-full items-center justify-center gap-base rounded-full bg-primary px-8 font-label-md text-body-md text-on-primary shadow-glow-sm transition-all duration-300 hover:shadow-glow hover:brightness-110 sm:w-auto"
     >
       {hasStarted ? "Continue My Path" : "Get Started"}
-      <span className="material-symbols-outlined">arrow_forward</span>
+      <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">
+        arrow_forward
+      </span>
     </Link>
   );
 }

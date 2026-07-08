@@ -98,8 +98,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
-        display: ["var(--font-inter)", "Inter", "sans-serif"],
-        serif: ["var(--font-inter)", "Inter", "sans-serif"],
+        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        serif: ["var(--font-fraunces)", "Georgia", "serif"],
         mono: ["var(--font-inter)", "Inter", "sans-serif"],
         inter: ["var(--font-inter)", "Inter", "sans-serif"],
         "label-md": ["var(--font-inter)", "Inter", "sans-serif"],
@@ -125,6 +125,13 @@ const config: Config = {
         "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "600" }],
         "headline-xl-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
         "headline-xl": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        // Editorial display scale (Fraunces) — fluid so the hero fills any
+        // viewport without per-breakpoint overrides.
+        "display-xl": ["clamp(52px, 7.5vw, 100px)", { lineHeight: "0.98", letterSpacing: "-0.02em", fontWeight: "480" }],
+        "display-lg": ["clamp(38px, 5vw, 64px)", { lineHeight: "1.04", letterSpacing: "-0.015em", fontWeight: "480" }],
+        "display-md": ["clamp(28px, 3.5vw, 42px)", { lineHeight: "1.12", letterSpacing: "-0.01em", fontWeight: "500" }],
+        // Uppercase micro-label (tracked-out editorial eyebrow).
+        micro: ["11px", { lineHeight: "1.2", letterSpacing: "0.22em", fontWeight: "600" }],
       },
       keyframes: {
         "fade-in": {
@@ -163,6 +170,12 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        // Infinite horizontal scroll for the university-names strip. Content
+        // is duplicated once, so -50% loops seamlessly.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.5s ease forwards",
@@ -175,6 +188,7 @@ const config: Config = {
         "ken-burns": "ken-burns 12s ease-in-out infinite",
         "float-slow": "float 6s ease-in-out infinite",
         "float-slower": "float 7.5s ease-in-out infinite 0.8s",
+        marquee: "marquee 45s linear infinite",
       },
     },
   },

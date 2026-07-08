@@ -170,7 +170,7 @@ export function DirectoryClient() {
         )}
         <div className="sticky top-20 z-10 mb-8 flex flex-col gap-sm rounded-xl bg-surface/80 py-sm backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="font-headline-lg text-headline-lg text-on-background">
+            <h1 className="font-display text-display-md text-on-background">
               University Directory
             </h1>
             <p className="font-body-md text-body-md text-on-surface-variant">

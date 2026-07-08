@@ -8,7 +8,7 @@ export default function UniversityNotFound() {
           travel_explore
         </span>
       </div>
-      <h1 className="mb-sm font-headline-lg text-headline-lg text-on-surface">
+      <h1 className="mb-sm font-display text-display-md text-on-surface">
         University Not Found
       </h1>
       <p className="mb-lg max-w-md font-body-md text-body-md text-on-surface-variant">

@@ -1,16 +1,26 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from "@/components/providers/Providers";
-import { AmbientBackground } from "@/components/three/AmbientBackground";
+import { AmbientBackground } from "@/components/ambient/AmbientBackground";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+});
+
+// Editorial display serif — headlines only; Inter stays the workhorse for
+// body/UI text. The opsz axis keeps large sizes elegant and small sizes sturdy.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} scroll-smooth`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${fraunces.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -41,7 +55,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col bg-surface font-sans text-on-surface antialiased">
         <Providers>
           <AmbientBackground />
-          <Suspense fallback={<div className="h-20 border-b border-outline-variant bg-surface" />}>
+          <Suspense fallback={<div className="hairline h-16 border-b bg-surface" />}>
             <Navbar />
           </Suspense>
           <div className="flex-grow">{children}</div>

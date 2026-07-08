@@ -1,5 +1,7 @@
 "use client";
 
+import { Tilt3D } from "@/components/motion/Tilt3D";
+
 export interface QuizOption {
   value: string;
   label: string;
@@ -96,46 +98,51 @@ export function QuizCard(props: QuizCardProps) {
   const { question, options, helperText } = props;
 
   return (
-    <div className="animate-slide-in rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-sm md:p-lg">
-      <h1 className="mb-xs font-headline-lg text-headline-lg text-on-surface">
-        {question}
-      </h1>
-      {helperText && (
-        <p className="mb-lg font-body-md text-body-md text-on-surface-variant">
-          {helperText}
-        </p>
-      )}
-      {!helperText && <div className="mb-xl" />}
+    // animate-slide-in lives on the inner div, not this Tilt3D wrapper: a CSS
+    // animation always wins the cascade over an inline style for the same
+    // property, so putting it here would permanently block Tilt3D's tilt.
+    <Tilt3D maxTilt={5} glare={false} className="rounded-xl">
+      <div className="animate-slide-in rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-sm md:p-lg">
+        <h1 className="mb-xs font-display text-display-md text-on-surface">
+          {question}
+        </h1>
+        {helperText && (
+          <p className="mb-lg font-body-md text-body-md text-on-surface-variant">
+            {helperText}
+          </p>
+        )}
+        {!helperText && <div className="mb-xl" />}
 
-      <div className="grid grid-cols-1 gap-md">
-        {options.map((opt) => {
-          if (props.mode === "multi") {
-            const isSelected = props.selected.includes(opt.value);
-            const atMax = props.selected.length >= props.maxSelections;
+        <div className="grid grid-cols-1 gap-md">
+          {options.map((opt) => {
+            if (props.mode === "multi") {
+              const isSelected = props.selected.includes(opt.value);
+              const atMax = props.selected.length >= props.maxSelections;
+              return (
+                <Choice
+                  key={opt.value}
+                  option={opt}
+                  isSelected={isSelected}
+                  isDisabled={!isSelected && atMax}
+                  shape="square"
+                  onClick={() => props.onSelect(opt.value)}
+                />
+              );
+            }
+            const isSelected = props.selected === opt.value;
             return (
               <Choice
                 key={opt.value}
                 option={opt}
                 isSelected={isSelected}
-                isDisabled={!isSelected && atMax}
-                shape="square"
+                isDisabled={false}
+                shape="round"
                 onClick={() => props.onSelect(opt.value)}
               />
             );
-          }
-          const isSelected = props.selected === opt.value;
-          return (
-            <Choice
-              key={opt.value}
-              option={opt}
-              isSelected={isSelected}
-              isDisabled={false}
-              shape="round"
-              onClick={() => props.onSelect(opt.value)}
-            />
-          );
-        })}
+          })}
+        </div>
       </div>
-    </div>
+    </Tilt3D>
   );
 }

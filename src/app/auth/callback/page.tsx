@@ -55,7 +55,7 @@ function CallbackInner() {
       {error ? (
         <>
           <span className="material-symbols-outlined mb-md text-[40px] text-error">error</span>
-          <h1 className="mb-xs font-headline-md text-headline-md text-on-surface">
+          <h1 className="mb-xs font-display text-[26px] text-on-surface">
             Sign-in failed
           </h1>
           <p className="mb-md font-body-md text-body-md text-on-surface-variant">{error}</p>

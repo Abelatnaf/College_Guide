@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 
 /**
- * Returns true only once it's safe to mount an expensive (WebGL) subtree:
- * after the browser goes idle (so the canvas never competes with LCP) and,
- * if a `ref` is supplied, once that element scrolls near the viewport.
+ * Returns true only once it's safe to mount/start an expensive or distracting
+ * subtree (e.g. an autoplaying motion sequence): after the browser goes idle
+ * (so it never competes with LCP) and, if a `ref` is supplied, once that
+ * element scrolls near the viewport.
  *
  * Below-fold instances pass a ref + rootMargin; above-fold instances omit the
  * ref and just wait for idle.

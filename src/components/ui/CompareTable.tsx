@@ -54,11 +54,14 @@ interface CompareTableProps {
   onChange: (slotIndex: number, slug: string) => void;
 }
 
+// Same dark-safe palette as ChanceBadge — this table predates the dark-only
+// migration and was still using light-only chip colors that read as blown-out
+// mint/red pills against the cinematic dark background.
 const CHANCE_COLORS: Record<string, string> = {
-  safety: "bg-green-100 text-green-800",
-  target: "bg-blue-100 text-blue-800",
-  reach: "bg-amber-100 text-amber-800",
-  "high-reach": "bg-red-100 text-red-800",
+  safety: "bg-[#0f7a4e]/20 text-[#7fe0b2]",
+  target: "bg-[#21588f]/25 text-[#a9c9f0]",
+  reach: "bg-[#9a6b15]/25 text-[#eccb87]",
+  "high-reach": "bg-[#b3261e]/25 text-[#f5b4ae]",
 };
 
 export function CompareTable({ universities, allUniversities, onChange }: CompareTableProps) {

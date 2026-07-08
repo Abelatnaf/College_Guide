@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
+import { Tilt3D } from "@/components/motion/Tilt3D";
 
 /**
- * Shared page-header pattern (icon chip + gradient title) — the visual
- * language introduced on the chat page, applied consistently across the
- * rest of the app for the Phase B "uplift pass". Layout-neutral: pages keep
+ * Shared page-header pattern (icon chip + editorial serif title) — applied
+ * consistently across the app, so every inner route inherits the display
+ * typeface and the 3D chip without per-page code. Layout-neutral: pages keep
  * their own container/spacing, this just standardizes the header itself.
  */
 export function PageHeader({
@@ -19,24 +20,26 @@ export function PageHeader({
 }) {
   return (
     <div className="mb-lg flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
-      <div className="flex items-start gap-sm">
-        <span
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tertiary-fixed text-on-primary shadow-glow"
-          aria-hidden="true"
-        >
+      <div className="flex items-start gap-md">
+        <Tilt3D maxTilt={20} className="mt-1 shrink-0 rounded-xl">
           <span
-            className="material-symbols-outlined text-[24px]"
-            style={{ fontVariationSettings: "'FILL' 1" }}
+            className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tertiary-fixed text-on-primary shadow-glow"
+            aria-hidden="true"
           >
-            {icon}
+            <span
+              className="material-symbols-outlined text-[24px]"
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
+              {icon}
+            </span>
           </span>
-        </span>
+        </Tilt3D>
         <div>
-          <h1 className="bg-gradient-to-r from-primary to-tertiary-fixed bg-clip-text font-headline-lg text-headline-lg font-bold text-transparent">
-            {title}
-          </h1>
+          <h1 className="font-display text-display-md text-on-surface">{title}</h1>
           {description && (
-            <div className="font-body-md text-body-md text-on-surface-variant">{description}</div>
+            <div className="mt-1 font-body-md text-body-md text-on-surface-variant">
+              {description}
+            </div>
           )}
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
   useAcademicProfile,
   useCostScenarios,
 } from "@/components/providers/StorageProvider";
+import { Tilt3D } from "@/components/motion/Tilt3D";
 
 const INPUT_FIELDS: { key: keyof CostInputs; label: string; hint: string; step: number }[] = [
   { key: "livingCost", label: "Living cost / year", hint: "Housing, food, personal", step: 500 },
@@ -128,15 +129,17 @@ export function CostRoiPanel({ university: u }: { university: University }) {
 
         {/* Results */}
         <div className="space-y-gutter">
-          <div className="rounded-xl bg-primary p-lg text-on-primary shadow-lg">
-            <p className="font-label-md text-label-md opacity-80">Net cost per year (after aid)</p>
-            <p className="mt-1 font-headline-xl text-headline-xl">
-              {formatCurrency(results.netAnnual, u.currency)}
-            </p>
-            <p className="mt-2 font-caption text-caption opacity-80">
-              {formatCurrency(results.totalProgram, u.currency)} total over {inputs.years} years
-            </p>
-          </div>
+          <Tilt3D maxTilt={6} className="rounded-xl">
+            <div className="rounded-xl bg-primary p-lg text-on-primary shadow-lg">
+              <p className="font-label-md text-label-md opacity-80">Net cost per year (after aid)</p>
+              <p className="mt-1 font-headline-xl text-headline-xl">
+                {formatCurrency(results.netAnnual, u.currency)}
+              </p>
+              <p className="mt-2 font-caption text-caption opacity-80">
+                {formatCurrency(results.totalProgram, u.currency)} total over {inputs.years} years
+              </p>
+            </div>
+          </Tilt3D>
 
           <div className="grid grid-cols-2 gap-md">
             <Stat

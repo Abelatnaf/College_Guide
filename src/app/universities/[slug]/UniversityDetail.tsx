@@ -138,7 +138,7 @@ export function UniversityDetail({
             <UniversityLogo name={u.name} website={u.website} size={80} className="md:h-28 md:w-28" />
           </div>
           <div className="flex-1 pb-1">
-            <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-white md:font-headline-xl md:text-headline-xl">
+            <h1 className="font-display text-display-lg text-white">
               {u.name}
             </h1>
             <div className="mt-2 flex flex-wrap items-center gap-2">

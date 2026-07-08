@@ -103,15 +103,18 @@ const config: Config = {
         mono: ["var(--font-inter)", "Inter", "sans-serif"],
         inter: ["var(--font-inter)", "Inter", "sans-serif"],
         "label-md": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-sm": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-md": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-lg-mobile": ["var(--font-inter)", "Inter", "sans-serif"],
+        // Heading roles carry the editorial serif app-wide; body/label/caption
+        // stay Inter for dense-UI readability. Sizes are unchanged, so this
+        // flip is layout-safe everywhere.
+        "headline-sm": ["var(--font-fraunces)", "Georgia", "serif"],
+        "headline-md": ["var(--font-fraunces)", "Georgia", "serif"],
+        "headline-lg-mobile": ["var(--font-fraunces)", "Georgia", "serif"],
         "body-md": ["var(--font-inter)", "Inter", "sans-serif"],
         "body-lg": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-xl-mobile": ["var(--font-inter)", "Inter", "sans-serif"],
+        "headline-xl-mobile": ["var(--font-fraunces)", "Georgia", "serif"],
         caption: ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-xl": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-lg": ["var(--font-inter)", "Inter", "sans-serif"],
+        "headline-xl": ["var(--font-fraunces)", "Georgia", "serif"],
+        "headline-lg": ["var(--font-fraunces)", "Georgia", "serif"],
       },
       // Role-based type scale from the Stitch design system
       fontSize: {

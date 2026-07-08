@@ -64,7 +64,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
   };
 
   return (
-    <div className="sticky top-28 rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-md shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
+    <div className="hairline sticky top-28 rounded-2xl border bg-surface-container-lowest p-md">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-headline-md text-lg font-bold text-primary">Filters</h2>
         <button
@@ -77,7 +77,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
 
       {/* Country */}
       <div className="mb-8">
-        <label className="mb-3 block font-label-md text-label-md text-on-surface-variant">
+        <label className="mb-3 block font-micro text-micro uppercase text-on-surface-variant">
           Country
         </label>
         <div className="relative">
@@ -101,7 +101,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
 
       {/* Region */}
       <div className="mb-8">
-        <label className="mb-3 block font-label-md text-label-md text-on-surface-variant">
+        <label className="mb-3 block font-micro text-micro uppercase text-on-surface-variant">
           Region
         </label>
         <div className="relative">
@@ -145,7 +145,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
 
       {/* Acceptance Rate */}
       <div className="mb-8">
-        <label className="mb-3 block font-label-md text-label-md text-on-surface-variant">
+        <label className="mb-3 block font-micro text-micro uppercase text-on-surface-variant">
           Acceptance Rate
         </label>
         <div className="space-y-3">
@@ -183,7 +183,7 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
 
       {/* Global Ranking */}
       <div className="mb-4">
-        <label className="mb-3 block font-label-md text-label-md text-on-surface-variant">
+        <label className="mb-3 block font-micro text-micro uppercase text-on-surface-variant">
           Global Ranking
         </label>
         <div className="space-y-3">

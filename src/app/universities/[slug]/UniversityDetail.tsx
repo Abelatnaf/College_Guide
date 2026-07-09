@@ -25,6 +25,9 @@ import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { estimateChance } from "@/lib/chances";
 import { getAidPolicy } from "@/data/aidPolicy";
 import { RealOutcomesBlock } from "@/components/university/RealOutcomesBlock";
+import { universityDeadlines, type ResolvedDeadline } from "@/lib/deadlines";
+import { daysUntil, buildDeadlineIcs, downloadIcs } from "@/lib/ics";
+import { InternationalInfoCard } from "@/components/university/InternationalInfoCard";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -40,6 +43,15 @@ const TABS = [
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
+
+const DEADLINE_TYPE_LABEL: Record<ResolvedDeadline["type"], string> = {
+  ED: "Early Decision",
+  ED2: "Early Decision II",
+  EA: "Early Action",
+  RD: "Regular Decision",
+  Rolling: "Rolling Admission",
+  listed: "Application Deadline",
+};
 
 const iconFor = (majorName: string) =>
   majors.find((m) => m.name === majorName)?.icon ?? "menu_book";
@@ -108,6 +120,7 @@ export function UniversityDetail({
   const admissions = getAdmissionsTier(u);
   const cost = getCostBreakdown(u);
   const timeline = getApplicationTimeline(u);
+  const resolvedDeadlines = universityDeadlines(u);
 
   return (
     <>
@@ -674,7 +687,10 @@ export function UniversityDetail({
             </div>
           </div>
 
-          <RealOutcomesBlock slug={u.slug} />
+          <div className="grid grid-cols-1 gap-gutter lg:grid-cols-2">
+            <RealOutcomesBlock slug={u.slug} />
+            <InternationalInfoCard country={u.country} />
+          </div>
         </div>
       )}
 
@@ -710,27 +726,85 @@ export function UniversityDetail({
 
       {tab === "deadlines" && (
         <div className="mx-auto max-w-2xl">
-          <div className="rounded-xl border-2 border-primary bg-surface-container-lowest p-lg text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
-            <span className="material-symbols-outlined text-[48px] text-primary" style={FILL_1}>
-              event_available
-            </span>
-            <p className="mt-sm font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">
-              Application Deadline
-            </p>
-            <p className="font-headline-xl text-headline-xl text-primary">
-              {u.applicationDeadline}
-            </p>
-            <p className="mt-md font-body-md text-body-md text-on-surface-variant">
-              Submit all materials by this date. We recommend applying at least two weeks
-              early to allow time for transcripts and recommendations to arrive.
-            </p>
-            <a
-              href={mailto}
-              className="mt-lg inline-block rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition-colors hover:bg-primary-container"
-            >
-              Request Deadline Details
-            </a>
-          </div>
+          {resolvedDeadlines.length === 1 && resolvedDeadlines[0].type === "listed" ? (
+            <div className="rounded-xl border-2 border-primary bg-surface-container-lowest p-lg text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
+              <span className="material-symbols-outlined text-[48px] text-primary" style={FILL_1}>
+                event_available
+              </span>
+              <p className="mt-sm font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">
+                Application Deadline
+              </p>
+              <p className="font-headline-xl text-headline-xl text-primary">
+                {u.applicationDeadline}
+              </p>
+              <p className="mt-md font-body-md text-body-md text-on-surface-variant">
+                Submit all materials by this date. We recommend applying at least two weeks
+                early to allow time for transcripts and recommendations to arrive.
+              </p>
+              <a
+                href={mailto}
+                className="mt-lg inline-block rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition-colors hover:bg-primary-container"
+              >
+                Request Deadline Details
+              </a>
+            </div>
+          ) : (
+            <div className="space-y-md">
+              {resolvedDeadlines.map((d, i) => (
+                <div
+                  key={`${d.type}-${d.label}-${i}`}
+                  className="rounded-xl border-2 border-primary bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-sm">
+                    <span className="rounded-full bg-primary px-3 py-1 font-label-md text-caption text-on-primary">
+                      {DEADLINE_TYPE_LABEL[d.type]}
+                    </span>
+                    {d.date && (
+                      <span className="font-caption text-caption text-on-surface-variant">
+                        {daysUntil(d.date) >= 0 ? `${daysUntil(d.date)} days away` : "Passed this cycle"}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-sm font-headline-lg text-headline-lg text-primary">{d.label}</p>
+                  {d.note && (
+                    <p className="mt-xs font-caption text-caption text-on-surface-variant">{d.note}</p>
+                  )}
+                  <div className="mt-md flex flex-wrap gap-md">
+                    {d.date && (
+                      <button
+                        onClick={() => {
+                          const date = d.date;
+                          if (!date) return;
+                          downloadIcs(
+                            `${u.slug}-${d.type}-deadline`,
+                            buildDeadlineIcs({
+                              uid: `${u.slug}-${d.type}-${d.label}@unipath`,
+                              title: `${u.name} — ${DEADLINE_TYPE_LABEL[d.type]} Deadline`,
+                              date,
+                              description: d.note,
+                            }),
+                          );
+                        }}
+                        className="rounded-lg border-2 border-primary px-md py-2 font-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary"
+                      >
+                        Add to calendar
+                      </button>
+                    )}
+                    {d.sourceUrl && (
+                      <a
+                        href={d.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center font-caption text-caption text-primary underline hover:no-underline"
+                      >
+                        Source
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="mt-gutter rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
             <h3 className="mb-md font-headline-md text-headline-md">Suggested Timeline</h3>

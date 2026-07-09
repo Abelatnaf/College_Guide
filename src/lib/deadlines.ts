@@ -1,4 +1,5 @@
 import { getUniversityBySlug } from "@/data/universities";
+import { getDeadlines, type DeadlineType } from "@/data/deadlines";
 import { parseDeadline, daysUntil } from "@/lib/ics";
 import type { Application } from "@/lib/storage/types";
 import type { University } from "@/types";
@@ -29,4 +30,21 @@ export function upcomingDeadlines(applications: Application[], limit = 3): Upcom
     .filter((x): x is UpcomingDeadline => x !== null && x.daysUntil >= 0);
 
   return withDates.sort((a, b) => a.date.getTime() - b.date.getTime()).slice(0, limit);
+}
+
+export interface ResolvedDeadline {
+  type: DeadlineType | "listed";
+  label: string;
+  date: Date | null;
+  sourceUrl?: string;
+  note?: string;
+}
+
+/** Verified per-round deadlines when we have them, falling back to the school's single static label otherwise. */
+export function universityDeadlines(u: University): ResolvedDeadline[] {
+  const structured = getDeadlines(u.slug);
+  if (structured?.length) {
+    return structured.map((d) => ({ ...d, date: parseDeadline(d.label) }));
+  }
+  return [{ type: "listed", label: u.applicationDeadline, date: parseDeadline(u.applicationDeadline) }];
 }

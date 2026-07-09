@@ -73,6 +73,14 @@ export interface QuizAnswers {
   fieldIsOther?: boolean;
   gpa: "3.5+" | "3.0-3.5" | "2.5-3.0" | "Below 2.5";
   campusSize: "Small" | "Medium" | "Large";
+  /** How much scholarships / financial aid matter — scored against each school's real aid data. */
+  aidImportance?: "Essential" | "Helpful" | "Not a factor";
+  /** Preferred average class size band, scored against `avgClassSize`. */
+  classSize?: "Small" | "Medium" | "Large" | "No preference";
+  /** Up to 2 school-personality picks (research, STEM, liberal arts, …), scored against tags. */
+  vibes?: string[];
+  /** How safety- vs reach-leaning the match list should be. */
+  ambition?: "Safe" | "Balanced" | "Reach";
   /** Optional standardized test score, collected to sharpen chance estimates. */
   testScore?: { type: "SAT" | "ACT" | "None"; value?: number };
 }

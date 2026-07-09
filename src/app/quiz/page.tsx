@@ -82,6 +82,92 @@ const TEST_SCORE_OPTIONS: QuizOption[] = [
   { value: "None", label: "Skip this", sub: "I don't have a test score yet" },
 ];
 
+const AID_OPTIONS: QuizOption[] = [
+  {
+    value: "Essential",
+    label: "Essential",
+    sub: "I can't attend without scholarships or aid",
+  },
+  { value: "Helpful", label: "Helpful", sub: "Aid would make a real difference" },
+  { value: "Not a factor", label: "Not a factor", sub: "I don't need aid to attend" },
+];
+
+const CLASS_SIZE_OPTIONS: QuizOption[] = [
+  { value: "Small", label: "Intimate seminars", sub: "Average class under ~20 students" },
+  { value: "Medium", label: "Mid-size classes", sub: "Roughly 20–40 students" },
+  { value: "Large", label: "Big lectures are fine", sub: "40+ doesn't bother me" },
+  { value: "No preference", label: "No preference", sub: "Class size isn't a factor" },
+];
+
+/**
+ * School-personality picks, each mapped to a predicate over real university
+ * data (tags / founding year / tuition) — never a vibe we can't verify.
+ */
+const VIBE_OPTIONS: (QuizOption & {
+  matches?: (u: (typeof universities)[number]) => boolean;
+})[] = [
+  {
+    value: "Research",
+    label: "Research powerhouse",
+    sub: "Labs, papers, and grad-school pipelines",
+    matches: (u) => u.tags.includes("Research"),
+  },
+  {
+    value: "STEM",
+    label: "STEM & tech energy",
+    sub: "Engineering culture, startups, hackathons",
+    matches: (u) => u.tags.includes("STEM") || u.tags.includes("Tech"),
+  },
+  {
+    value: "Liberal Arts",
+    label: "Liberal arts & broad thinking",
+    sub: "Small, discussion-driven, interdisciplinary",
+    matches: (u) => u.tags.includes("Liberal Arts"),
+  },
+  {
+    value: "Historic",
+    label: "History & prestige",
+    sub: "Storied campuses and old traditions",
+    matches: (u) =>
+      u.established < 1900 ||
+      u.tags.some((t) => ["Historic", "Elite", "Prestige", "Ivy League"].includes(t)),
+  },
+  {
+    value: "Value",
+    label: "Affordable value",
+    sub: "Low or no tuition, big return",
+    matches: (u) =>
+      u.annualTuition < 15000 ||
+      u.tags.includes("Affordable") ||
+      u.tags.includes("Tuition-free"),
+  },
+  {
+    value: "Urban",
+    label: "Buzzing city campus",
+    sub: "In the middle of a major city",
+    matches: (u) => u.tags.includes("Urban"),
+  },
+  { value: "No preference", label: "No preference", sub: "Surprise me" },
+];
+
+const VIBE_LABELS: Record<string, string> = Object.fromEntries(
+  VIBE_OPTIONS.map((v) => [v.value, v.label]),
+);
+
+const AMBITION_OPTIONS: QuizOption[] = [
+  {
+    value: "Safe",
+    label: "Play it safer",
+    sub: "Prioritize schools where my odds are strong",
+  },
+  { value: "Balanced", label: "Balanced mix", sub: "A healthy spread of odds" },
+  {
+    value: "Reach",
+    label: "Aim high",
+    sub: "Show me ambitious, selective picks",
+  },
+];
+
 const BUDGET_MAX: Record<string, number> = {
   "Under $15k": 15000,
   "$15k-$30k": 30000,
@@ -100,13 +186,21 @@ const GPA_MIN_ACCEPT: Record<string, number> = {
 const sizeBucket = (pop: number) =>
   pop < 5000 ? "Small" : pop <= 20000 ? "Medium" : "Large";
 
+const classSizeBucket = (avg: number) =>
+  avg <= 20 ? "Small" : avg <= 40 ? "Medium" : "Large";
+
 interface Answers {
   region: string[];
   budget: string;
+  aidImportance: string;
   field: string;
   fieldOtherText: string;
   gpa: string;
+  classSize: string;
   campusSize: string;
+  /** Up to 2 school-personality picks, or ["No preference"]. */
+  vibes: string[];
+  ambition: string;
   /** "SAT" | "ACT" | "None" | "" (unanswered). */
   testScoreType: string;
   testScoreValue: string;
@@ -115,10 +209,14 @@ interface Answers {
 const EMPTY_ANSWERS: Answers = {
   region: [],
   budget: "",
+  aidImportance: "",
   field: "",
   fieldOtherText: "",
   gpa: "",
+  classSize: "",
   campusSize: "",
+  vibes: [],
+  ambition: "",
   testScoreType: "",
   testScoreValue: "",
 };
@@ -165,7 +263,20 @@ function computeMatches(answers: Answers): QuizMatch[] {
     ? Math.max(0, 90 - testScoreStrength(testType, testValue) * 90)
     : 0;
 
-  const maxScore = 30 + 25 + 20 + 20 + 10 + (hasTestScore ? 15 : 0);
+  const aidWeight =
+    answers.aidImportance === "Essential" ? 18 : answers.aidImportance === "Helpful" ? 10 : 0;
+  const hasClassSizePref = Boolean(answers.classSize) && answers.classSize !== "No preference";
+  const vibePicks = answers.vibes.filter((v) => v !== "No preference");
+  const vibeMatchers = VIBE_OPTIONS.filter(
+    (v) => vibePicks.includes(v.value) && v.matches,
+  );
+
+  const maxScore =
+    30 + 25 + 20 + 20 + 10 +
+    aidWeight +
+    (hasClassSizePref ? 10 : 0) +
+    vibeMatchers.length * 8 +
+    (hasTestScore ? 15 : 0);
 
   const noPreference = answers.region.includes("No preference") || answers.region.length === 0;
   const isOther = answers.field === OTHER_VALUE;
@@ -209,6 +320,34 @@ function computeMatches(answers: Answers): QuizMatch[] {
       reasons.push(`${answers.campusSize} campus size`);
     }
 
+    // Financial aid, scored against the school's real scholarship/aid data.
+    if (aidWeight > 0) {
+      if (u.scholarships.available) {
+        score += aidWeight;
+        reasons.push(
+          u.financialAid >= 40
+            ? `Scholarships offered, ${u.financialAid}% of students receive aid`
+            : "Scholarships available",
+        );
+      } else if (answers.aidImportance === "Essential") {
+        score -= 10; // hard signal: they can't attend without aid
+      }
+    }
+
+    // Learning environment, scored against real average class size.
+    if (hasClassSizePref && classSizeBucket(u.avgClassSize) === answers.classSize) {
+      score += 10;
+      reasons.push(`Average class of ~${u.avgClassSize} fits your learning style`);
+    }
+
+    // School personality, each pick scored via a verifiable data predicate.
+    for (const vibe of vibeMatchers) {
+      if (vibe.matches!(u)) {
+        score += 8;
+        reasons.push(VIBE_LABELS[vibe.value]);
+      }
+    }
+
     if (hasTestScore) {
       if (u.acceptanceRate >= testMinAccept) {
         score += 15;
@@ -218,8 +357,23 @@ function computeMatches(answers: Answers): QuizMatch[] {
       }
     }
 
-    // Light tiebreaker favoring stronger global rank.
-    score += Math.max(0, 10 - u.globalRanking / 25);
+    // Rank tiebreaker, scaled by how bold the student wants the list to be.
+    const rankBonus = Math.max(0, 10 - u.globalRanking / 25);
+    if (answers.ambition === "Reach") {
+      score += rankBonus * 2;
+      if (u.acceptanceRate < 12) {
+        score += 8;
+        reasons.push("Ambitious, selective pick — as requested");
+      }
+    } else if (answers.ambition === "Safe") {
+      score += rankBonus * 0.5;
+      if (u.acceptanceRate >= gpaMinAccept + 20) {
+        score += 8;
+        reasons.push("Comfortable admission odds");
+      }
+    } else {
+      score += rankBonus;
+    }
 
     return { u, score, reasons };
   });
@@ -230,7 +384,7 @@ function computeMatches(answers: Answers): QuizMatch[] {
     .map((t) => ({
       university: t.u,
       matchPercent: Math.min(99, Math.max(70, Math.round((t.score / maxScore) * 100))),
-      reasons: t.reasons.slice(0, 3),
+      reasons: t.reasons.slice(0, 5),
     }));
 }
 
@@ -253,6 +407,16 @@ function toQuizAnswers(answers: Answers): QuizAnswers {
     fieldIsOther: isOther,
     gpa: answers.gpa as QuizAnswers["gpa"],
     campusSize: answers.campusSize as QuizAnswers["campusSize"],
+    ...(answers.aidImportance
+      ? { aidImportance: answers.aidImportance as QuizAnswers["aidImportance"] }
+      : {}),
+    ...(answers.classSize
+      ? { classSize: answers.classSize as QuizAnswers["classSize"] }
+      : {}),
+    ...(answers.vibes.length > 0 ? { vibes: answers.vibes } : {}),
+    ...(answers.ambition
+      ? { ambition: answers.ambition as QuizAnswers["ambition"] }
+      : {}),
     testScore,
   };
 }
@@ -260,9 +424,13 @@ function toQuizAnswers(answers: Answers): QuizAnswers {
 const STEP_LABELS = [
   "Region",
   "Budget",
+  "Financial Aid",
   "Field of Study",
   "GPA",
+  "Class Size",
   "Campus Size",
+  "School Personality",
+  "Your List",
   "Test Score",
 ];
 
@@ -331,29 +499,37 @@ function QuizPageInner() {
   const isAnswered = useMemo(() => {
     if (step === 0) return answers.region.length > 0;
     if (step === 1) return Boolean(answers.budget);
-    if (step === 2)
+    if (step === 2) return Boolean(answers.aidImportance);
+    if (step === 3)
       return answers.field === OTHER_VALUE
         ? answers.fieldOtherText.trim().length > 0
         : Boolean(answers.field);
-    if (step === 3) return Boolean(answers.gpa);
-    if (step === 4) return Boolean(answers.campusSize);
-    // Step 5 (test score) is optional/skippable — always considered answered.
+    if (step === 4) return Boolean(answers.gpa);
+    if (step === 5) return Boolean(answers.classSize);
+    if (step === 6) return Boolean(answers.campusSize);
+    if (step === 7) return answers.vibes.length > 0;
+    if (step === 8) return Boolean(answers.ambition);
+    // Step 9 (test score) is optional/skippable — always considered answered.
     return true;
   }, [step, answers]);
 
-  const toggleRegion = (value: string) => {
+  /** Multi-select toggle where "No preference" is exclusive and picks are capped. */
+  const toggleCapped = (key: "region" | "vibes", cap: number) => (value: string) => {
     setAnswers((a) => {
+      const current = a[key];
       if (value === "No preference") {
-        return { ...a, region: ["No preference"] };
+        return { ...a, [key]: ["No preference"] };
       }
-      const withoutNoPreference = a.region.filter((r) => r !== "No preference");
+      const withoutNoPreference = current.filter((r) => r !== "No preference");
       if (withoutNoPreference.includes(value)) {
-        return { ...a, region: withoutNoPreference.filter((r) => r !== value) };
+        return { ...a, [key]: withoutNoPreference.filter((r) => r !== value) };
       }
-      if (withoutNoPreference.length >= 2) return a; // capped at 2
-      return { ...a, region: [...withoutNoPreference, value] };
+      if (withoutNoPreference.length >= cap) return a;
+      return { ...a, [key]: [...withoutNoPreference, value] };
     });
   };
+  const toggleRegion = toggleCapped("region", 2);
+  const toggleVibe = toggleCapped("vibes", 2);
 
   const handleContinue = () => {
     if (!isAnswered) return;
@@ -424,6 +600,16 @@ function QuizPageInner() {
               />
             )}
             {step === 2 && (
+              <QuizCard
+                mode="single"
+                question="How important are scholarships & financial aid?"
+                helperText="We'll weigh each school's real scholarship programs and the share of students receiving aid."
+                options={AID_OPTIONS}
+                selected={answers.aidImportance || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, aidImportance: value }))}
+              />
+            )}
+            {step === 3 && (
               <div>
                 <QuizCard
                   mode="single"
@@ -455,7 +641,7 @@ function QuizPageInner() {
                 )}
               </div>
             )}
-            {step === 3 && (
+            {step === 4 && (
               <QuizCard
                 mode="single"
                 question="What is your GPA range?"
@@ -464,16 +650,48 @@ function QuizPageInner() {
                 onSelect={(value) => setAnswers((a) => ({ ...a, gpa: value }))}
               />
             )}
-            {step === 4 && (
+            {step === 5 && (
+              <QuizCard
+                mode="single"
+                question="What learning environment suits you best?"
+                helperText="Scored against each school's real average class size."
+                options={CLASS_SIZE_OPTIONS}
+                selected={answers.classSize || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, classSize: value }))}
+              />
+            )}
+            {step === 6 && (
               <QuizCard
                 mode="single"
                 question="What campus size do you prefer?"
+                helperText="Total student population — a different thing from class size."
                 options={CAMPUS_OPTIONS}
                 selected={answers.campusSize || undefined}
                 onSelect={(value) => setAnswers((a) => ({ ...a, campusSize: value }))}
               />
             )}
-            {step === 5 && (
+            {step === 7 && (
+              <QuizCard
+                mode="multi"
+                question="What should your school be known for?"
+                helperText="Pick up to 2 — each matched against real school traits, not guesses."
+                options={VIBE_OPTIONS}
+                selected={answers.vibes}
+                maxSelections={2}
+                onSelect={toggleVibe}
+              />
+            )}
+            {step === 8 && (
+              <QuizCard
+                mode="single"
+                question="How bold should your list be?"
+                helperText="This shifts the balance between strong-odds schools and selective reaches."
+                options={AMBITION_OPTIONS}
+                selected={answers.ambition || undefined}
+                onSelect={(value) => setAnswers((a) => ({ ...a, ambition: value }))}
+              />
+            )}
+            {step === 9 && (
               <div>
                 <QuizCard
                   mode="single"
@@ -552,7 +770,8 @@ function QuizPageInner() {
                 Your Top 3 Matches
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant">
-                Based on your region, budget, field, GPA, and campus preferences.
+                Scored across all {STEP_LABELS.length} of your answers — region, budget,
+                aid, academics, learning style, and campus fit.
               </p>
             </div>
 

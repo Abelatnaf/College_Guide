@@ -24,6 +24,7 @@ import { UniversityLogo } from "@/components/ui/UniversityLogo";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { estimateChance } from "@/lib/chances";
 import { getAidPolicy } from "@/data/aidPolicy";
+import { RealOutcomesBlock } from "@/components/university/RealOutcomesBlock";
 
 const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
@@ -672,6 +673,8 @@ export function UniversityDetail({
               </ul>
             </div>
           </div>
+
+          <RealOutcomesBlock slug={u.slug} />
         </div>
       )}
 

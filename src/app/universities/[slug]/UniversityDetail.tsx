@@ -296,6 +296,32 @@ export function UniversityDetail({
                       Visit ↗
                     </a>
                   </li>
+                  {u.admissionsUrl && (
+                    <li className="flex justify-between">
+                      <span>Admissions</span>
+                      <a
+                        href={u.admissionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-primary hover:underline"
+                      >
+                        Visit ↗
+                      </a>
+                    </li>
+                  )}
+                  {u.financialAidUrl && (
+                    <li className="flex justify-between">
+                      <span>Financial Aid Office</span>
+                      <a
+                        href={u.financialAidUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-primary hover:underline"
+                      >
+                        Visit ↗
+                      </a>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
@@ -320,6 +346,16 @@ export function UniversityDetail({
               </p>
               <ShortlistButton slug={u.slug} variant="full" className="mb-3" />
               <TrackApplicationButton slug={u.slug} className="mb-3" />
+              {u.applicationUrl && (
+                <a
+                  href={u.applicationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 font-bold text-on-primary transition-all hover:bg-primary-container"
+                >
+                  Apply Now <span className="material-symbols-outlined">open_in_new</span>
+                </a>
+              )}
               <a
                 href={mailto}
                 className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 font-bold text-on-primary transition-all hover:bg-primary-container"

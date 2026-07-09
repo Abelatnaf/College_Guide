@@ -25,6 +25,9 @@ export const universities: University[] = [
     campusLife: "Intense, collaborative, and famously quirky — home to 500+ student groups and legendary 'hacks'.",
     established: 1861,
     website: "https://web.mit.edu",
+    admissionsUrl: "https://mitadmissions.org/",
+    financialAidUrl: "https://sfs.mit.edu/",
+    applicationUrl: "https://mitadmissions.org/apply/",
   },
   {
     id: "u2",
@@ -50,6 +53,9 @@ export const universities: University[] = [
     campusLife: "Historic Cambridge campus with a rich house system, 450+ organizations, and Division I athletics.",
     established: 1636,
     website: "https://www.harvard.edu",
+    admissionsUrl: "https://college.harvard.edu/admissions",
+    financialAidUrl: "https://college.harvard.edu/financial-aid",
+    applicationUrl: "https://college.harvard.edu/admissions/apply/application-requirements",
   },
   {
     id: "u3",
@@ -75,6 +81,9 @@ export const universities: University[] = [
     campusLife: "Sun-soaked 8,000-acre campus with a strong sports tradition and deep entrepreneurial energy.",
     established: 1885,
     website: "https://www.stanford.edu",
+    admissionsUrl: "https://admission.stanford.edu/",
+    financialAidUrl: "https://financialaid.stanford.edu/",
+    applicationUrl: "https://commonapp.org/",
   },
   {
     id: "u4",
@@ -100,6 +109,9 @@ export const universities: University[] = [
     campusLife: "Tight-knit residential colleges, a celebrated a cappella and theater scene, and Gothic architecture.",
     established: 1701,
     website: "https://www.yale.edu",
+    admissionsUrl: "https://admissions.yale.edu/",
+    financialAidUrl: "https://finaid.yale.edu/",
+    applicationUrl: "https://admissions.yale.edu/first-year-application-process",
   },
   {
     id: "u5",
@@ -150,6 +162,9 @@ export const universities: University[] = [
     campusLife: "A classic urban campus in Morningside Heights, immersed in New York City life.",
     established: 1754,
     website: "https://www.columbia.edu",
+    admissionsUrl: "https://www.columbia.edu/content/admissions",
+    financialAidUrl: "https://sfs.columbia.edu/",
+    applicationUrl: "https://www.columbia.edu/content/admissions-offices",
   },
   {
     id: "u7",
@@ -175,6 +190,9 @@ export const universities: University[] = [
     campusLife: "A vibrant, politically engaged campus beside a lively college town in the Bay Area.",
     established: 1868,
     website: "https://www.berkeley.edu",
+    admissionsUrl: "https://admissions.berkeley.edu/",
+    financialAidUrl: "https://financialaid.berkeley.edu/contact-us",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u8",
@@ -200,6 +218,9 @@ export const universities: University[] = [
     campusLife: "A large, spirited campus in Westwood with elite sports and a major presence in entertainment.",
     established: 1919,
     website: "https://www.ucla.edu",
+    admissionsUrl: "https://www.admissions.ucla.edu/",
+    financialAidUrl: "https://financialaid.ucla.edu/",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u9",
@@ -225,6 +246,9 @@ export const universities: University[] = [
     campusLife: "Quintessential Big Ten college town energy with passionate football culture and 1,500+ clubs.",
     established: 1817,
     website: "https://umich.edu",
+    admissionsUrl: "https://admissions.umich.edu/",
+    financialAidUrl: "https://finaid.umich.edu/",
+    applicationUrl: "https://admissions.umich.edu/apply",
   },
   {
     id: "u10",
@@ -250,6 +274,9 @@ export const universities: University[] = [
     campusLife: "A campus woven into New York City itself, with a global network of study-away sites.",
     established: 1831,
     website: "https://www.nyu.edu",
+    admissionsUrl: "https://www.nyu.edu/admissions.html",
+    financialAidUrl: "https://www.nyu.edu/admissions/financial-aid-and-scholarships.html",
+    applicationUrl: "https://www.nyu.edu/admissions/undergraduate-admissions/how-to-apply.html",
   },
   {
     id: "u11",
@@ -275,6 +302,9 @@ export const universities: University[] = [
     campusLife: "An intense, maker-oriented community with strong traditions like the Spring Carnival buggy races.",
     established: 1900,
     website: "https://www.cmu.edu",
+    admissionsUrl: "https://admission.enrollment.cmu.edu/",
+    financialAidUrl: "https://admission.enrollment.cmu.edu/pages/financial-aid",
+    applicationUrl: "https://admission.enrollment.cmu.edu/pages/apply-now",
   },
   {
     id: "u12",
@@ -300,6 +330,9 @@ export const universities: University[] = [
     campusLife: "A research-driven culture anchored by its world-famous medical campus and hospital.",
     established: 1876,
     website: "https://www.jhu.edu",
+    admissionsUrl: "https://apply.jhu.edu/",
+    financialAidUrl: "https://sfs.jhu.edu/",
+    applicationUrl: "https://apply.commonapp.org/",
   },
   {
     id: "u13",
@@ -325,6 +358,9 @@ export const universities: University[] = [
     campusLife: "An intimate, intense STEM community known for elaborate pranks and an honor code.",
     established: 1891,
     website: "https://www.caltech.edu",
+    admissionsUrl: "https://www.admissions.caltech.edu/",
+    financialAidUrl: "https://www.finaid.caltech.edu/",
+    applicationUrl: "https://www.admissions.caltech.edu/apply",
   },
   {
     id: "u14",
@@ -350,6 +386,9 @@ export const universities: University[] = [
     campusLife: "A scenic hilltop campus above Ithaca's gorges, with a huge range of clubs and Greek life.",
     established: 1865,
     website: "https://www.cornell.edu",
+    admissionsUrl: "https://admissions.cornell.edu/",
+    financialAidUrl: "https://finaid.cornell.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u15",
@@ -975,6 +1014,9 @@ export const universities: University[] = [
     campusLife: "A lively urban campus in West Philadelphia with strong Greek life and athletics.",
     established: 1740,
     website: "https://www.upenn.edu",
+    admissionsUrl: "https://www.upenn.edu/admissions/",
+    financialAidUrl: "https://www.srfs.upenn.edu/",
+    applicationUrl: "https://www.admissions.upenn.edu/apply/",
   },
   {
     id: "u40",
@@ -1000,6 +1042,9 @@ export const universities: University[] = [
     campusLife: "A spirited, progressive campus on College Hill above downtown Providence.",
     established: 1764,
     website: "https://www.brown.edu",
+    admissionsUrl: "https://www.brown.edu/admission",
+    financialAidUrl: "https://finaid.brown.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u41",
@@ -1025,6 +1070,9 @@ export const universities: University[] = [
     campusLife: "A close-knit campus in the New Hampshire woods with legendary winter and outdoor clubs.",
     established: 1769,
     website: "https://www.dartmouth.edu",
+    admissionsUrl: "https://admissions.dartmouth.edu/",
+    financialAidUrl: "https://admissions.dartmouth.edu/afford/apply-financial-aid",
+    applicationUrl: "https://admissions.dartmouth.edu/apply/apply-dartmouth",
   },
   {
     id: "u42",
@@ -1050,6 +1098,9 @@ export const universities: University[] = [
     campusLife: "An energetic campus famous for Cameron Crazies and the Duke–UNC rivalry.",
     established: 1838,
     website: "https://www.duke.edu",
+    admissionsUrl: "https://www.admissions.duke.edu/",
+    financialAidUrl: "https://www.finaid.duke.edu/",
+    applicationUrl: "https://admissions.duke.edu/application/instructions",
   },
   {
     id: "u43",
@@ -1075,6 +1126,9 @@ export const universities: University[] = [
     campusLife: "A balanced campus on Lake Michigan with Big Ten athletics and strong arts.",
     established: 1851,
     website: "https://www.northwestern.edu",
+    admissionsUrl: "https://www.northwestern.edu/admissions/",
+    financialAidUrl: "https://www.undergradaid.northwestern.edu/",
+    applicationUrl: "https://www.northwestern.edu/admissions/",
   },
   {
     id: "u44",
@@ -1100,6 +1154,9 @@ export const universities: University[] = [
     campusLife: "A spirited, STEM-driven campus in midtown Atlanta with strong co-op and athletics.",
     established: 1885,
     website: "https://www.gatech.edu",
+    admissionsUrl: "https://www.admission.gatech.edu/",
+    financialAidUrl: "https://www.finaid.gatech.edu/",
+    applicationUrl: "https://www.admission.gatech.edu/apply/",
   },
   {
     id: "u45",
@@ -1125,6 +1182,9 @@ export const universities: University[] = [
     campusLife: "A huge, spirited campus in the heart of Austin's vibrant culture and tech boom.",
     established: 1883,
     website: "https://www.utexas.edu",
+    admissionsUrl: "https://www.admissions.utexas.edu/",
+    financialAidUrl: "https://www.finaid.utexas.edu/",
+    applicationUrl: "https://www.utexas.edu/apply",
   },
   {
     id: "u46",
@@ -1510,6 +1570,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Arts & Design", "Engineering", "Computer Science"], tags: ["Private", "Research", "Film"],
     description: "A major private research university in Los Angeles, USC is especially renowned for its cinematic arts, business, and engineering programs.",
     campusLife: "A spirited campus with powerhouse athletics and deep ties to the entertainment industry.", established: 1880, website: "https://www.usc.edu",
+    admissionsUrl: "https://admission.usc.edu/",
+    financialAidUrl: "https://financialaid.usc.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u62", slug: "rice", name: "Rice University", country: "United States", city: "Houston, TX", region: "USA",
@@ -1518,6 +1581,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Social Sciences"], tags: ["Private", "Research", "STEM"],
     description: "A small, highly selective private research university known for strong science and engineering programs and a low student-to-faculty ratio.",
     campusLife: "An intimate residential-college system on a leafy Houston campus.", established: 1912, website: "https://www.rice.edu",
+    admissionsUrl: "https://futureowls.rice.edu/home.aspx",
+    financialAidUrl: "https://financialaid.rice.edu/",
+    applicationUrl: "https://admission.rice.edu/apply",
   },
   {
     id: "u63", slug: "vanderbilt", name: "Vanderbilt University", country: "United States", city: "Nashville, TN", region: "USA",
@@ -1526,6 +1592,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Business", "Social Sciences", "Engineering"], tags: ["Private", "Research", "Medical"],
     description: "A leading private research university with top programs in medicine, education, and music, set in vibrant Nashville.",
     campusLife: "A park-like campus (a national arboretum) with strong school spirit.", established: 1873, website: "https://www.vanderbilt.edu",
+    admissionsUrl: "https://www.vanderbilt.edu/Admissions/",
+    financialAidUrl: "https://www.vanderbilt.edu/financialaid/",
+    applicationUrl: "https://admissions.vanderbilt.edu/apply/",
   },
   {
     id: "u64", slug: "emory", name: "Emory University", country: "United States", city: "Atlanta, GA", region: "USA",
@@ -1534,6 +1603,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Business", "Natural Sciences", "Social Sciences"], tags: ["Private", "Research", "Medical"],
     description: "A private research university with a strong reputation in medicine, public health, and business, closely tied to the CDC.",
     campusLife: "A green Atlanta campus with a health-and-research-focused community.", established: 1836, website: "https://www.emory.edu",
+    admissionsUrl: "https://apply.emory.edu/",
+    financialAidUrl: "https://www.studentaid.emory.edu/",
+    applicationUrl: "https://apply.emory.edu/apply/first-year/how-to-apply.html",
   },
   {
     id: "u65", slug: "notre-dame", name: "University of Notre Dame", country: "United States", city: "Notre Dame, IN", region: "USA",
@@ -1542,6 +1614,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Engineering", "Social Sciences", "Law"], tags: ["Private", "Research", "Catholic"],
     description: "A renowned Catholic research university known for its Mendoza business school, strong alumni network, and football tradition.",
     campusLife: "A close-knit, tradition-rich campus famed for game-day spirit.", established: 1842, website: "https://www.nd.edu",
+    admissionsUrl: "https://admissions.nd.edu/",
+    financialAidUrl: "https://financialaid.nd.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u66", slug: "georgetown", name: "Georgetown University", country: "United States", city: "Washington, DC", region: "USA",
@@ -1550,6 +1625,9 @@ export const universities: University[] = [
     majorsOffered: ["Law", "Social Sciences", "Business", "Medicine"], tags: ["Private", "Urban", "Politics"],
     description: "The oldest Catholic university in the US, Georgetown is a global leader in international affairs, law, and public policy.",
     campusLife: "A historic campus in the heart of Washington's political world.", established: 1789, website: "https://www.georgetown.edu",
+    admissionsUrl: "https://uadmissions.georgetown.edu/",
+    financialAidUrl: "https://finaid.georgetown.edu/",
+    applicationUrl: "https://uapply.georgetown.edu/register/firstyearapplication",
   },
   {
     id: "u67", slug: "boston-university", name: "Boston University", country: "United States", city: "Boston, MA", region: "USA",
@@ -1558,6 +1636,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Engineering", "Medicine", "Arts & Design"], tags: ["Private", "Urban", "Research"],
     description: "A large private research university spread along the Charles River, strong across business, communications, and the sciences.",
     campusLife: "An urban, internationally diverse campus woven into the city of Boston.", established: 1839, website: "https://www.bu.edu",
+    admissionsUrl: "https://www.bu.edu/admissions",
+    financialAidUrl: "https://www.bu.edu/finaid",
+    applicationUrl: "https://www.bu.edu/admissions/apply",
   },
   {
     id: "u68", slug: "boston-college", name: "Boston College", country: "United States", city: "Chestnut Hill, MA", region: "USA",
@@ -1566,6 +1647,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Social Sciences", "Law", "Natural Sciences"], tags: ["Private", "Catholic", "Liberal Arts"],
     description: "A Jesuit research university known for its Carroll School of Management and a strong liberal-arts core.",
     campusLife: "A collegiate-Gothic campus just outside Boston with strong school spirit.", established: 1863, website: "https://www.bc.edu",
+    admissionsUrl: "https://www.bc.edu/content/bc-web/admission.html",
+    financialAidUrl: "https://www.bc.edu/bc-web/offices/student-services/financial-aid.html",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u69", slug: "tufts", name: "Tufts University", country: "United States", city: "Medford, MA", region: "USA",
@@ -1574,6 +1658,9 @@ export const universities: University[] = [
     majorsOffered: ["Social Sciences", "Engineering", "Medicine", "Arts & Design"], tags: ["Private", "Research", "Liberal Arts"],
     description: "A research university blending liberal arts with strengths in international relations, engineering, and the health sciences.",
     campusLife: "An academically intense yet collaborative campus near Boston.", established: 1852, website: "https://www.tufts.edu",
+    admissionsUrl: "https://admissions.tufts.edu/",
+    financialAidUrl: "https://students.tufts.edu/financial-services",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u70", slug: "washington-university-st-louis", name: "Washington University in St. Louis", country: "United States", city: "St. Louis, MO", region: "USA",
@@ -1582,6 +1669,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Business", "Arts & Design", "Natural Sciences"], tags: ["Private", "Research", "Medical"],
     description: "A private research university with top-ranked medical and design schools and a strong commitment to financial aid.",
     campusLife: "A collegiate-Gothic campus on the edge of Forest Park.", established: 1853, website: "https://www.wustl.edu",
+    admissionsUrl: "https://admissions.washu.edu/",
+    financialAidUrl: "https://financialaid.washu.edu/",
+    applicationUrl: "https://admissions.washu.edu/",
   },
   {
     id: "u71", slug: "university-of-washington", name: "University of Washington", country: "United States", city: "Seattle, WA", region: "USA",
@@ -1590,6 +1680,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Medicine", "Engineering", "Natural Sciences"], tags: ["Public", "Research", "Tech"],
     description: "A top public research university and a major hub for computer science, medicine, and global health in the Pacific Northwest.",
     campusLife: "A scenic Seattle campus near the region's booming tech industry.", established: 1861, website: "https://www.washington.edu",
+    admissionsUrl: "https://admit.washington.edu/",
+    financialAidUrl: "https://www.washington.edu/financialaid/",
+    applicationUrl: "https://admit.washington.edu/apply/",
   },
   {
     id: "u72", slug: "uc-san-diego", name: "University of California, San Diego", country: "United States", city: "San Diego, CA", region: "USA",
@@ -1598,6 +1691,9 @@ export const universities: University[] = [
     majorsOffered: ["Natural Sciences", "Engineering", "Medicine", "Computer Science"], tags: ["Public", "Research", "STEM"],
     description: "A leading public research university strong in the biological sciences, engineering, and oceanography.",
     campusLife: "A coastal La Jolla campus organized into distinct residential colleges.", established: 1960, website: "https://www.ucsd.edu",
+    admissionsUrl: "https://admissions.ucsd.edu/index.html",
+    financialAidUrl: "https://fas.ucsd.edu/",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u73", slug: "uc-davis", name: "University of California, Davis", country: "United States", city: "Davis, CA", region: "USA",
@@ -1606,6 +1702,9 @@ export const universities: University[] = [
     majorsOffered: ["Natural Sciences", "Engineering", "Business", "Social Sciences"], tags: ["Public", "Research", "Agriculture"],
     description: "A top public university world-renowned for agriculture, veterinary medicine, and environmental science.",
     campusLife: "A bike-friendly campus in a classic California college town.", established: 1905, website: "https://www.ucdavis.edu",
+    admissionsUrl: "https://ucdavis.edu/admissions/",
+    financialAidUrl: "https://financialaid.ucdavis.edu/",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u74", slug: "uc-irvine", name: "University of California, Irvine", country: "United States", city: "Irvine, CA", region: "USA",
@@ -1614,6 +1713,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Business", "Natural Sciences", "Social Sciences"], tags: ["Public", "Research"],
     description: "A fast-rising public research university known for its strengths in computer science, biology, and the social sciences.",
     campusLife: "A park-centered campus in safe, planned Orange County.", established: 1965, website: "https://www.uci.edu",
+    admissionsUrl: "https://admissions.uci.edu/",
+    financialAidUrl: "https://www.ofas.uci.edu/",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u75", slug: "uiuc", name: "University of Illinois Urbana-Champaign", country: "United States", city: "Champaign, IL", region: "USA",
@@ -1622,6 +1724,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Computer Science", "Business", "Natural Sciences"], tags: ["Public", "STEM", "Big Ten"],
     description: "A flagship public university with a world-leading engineering and computer science program.",
     campusLife: "A classic Big Ten campus with a vast range of student organizations.", established: 1867, website: "https://illinois.edu",
+    admissionsUrl: "https://illinois.edu/admissions",
+    financialAidUrl: "https://www.osfa.illinois.edu/",
+    applicationUrl: "https://admissions.illinois.edu/apply",
   },
   {
     id: "u76", slug: "wisconsin-madison", name: "University of Wisconsin–Madison", country: "United States", city: "Madison, WI", region: "USA",
@@ -1630,6 +1735,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Social Sciences"], tags: ["Public", "Research", "Big Ten"],
     description: "A major public research university with broad academic strength and a strong tradition of public service.",
     campusLife: "A lakeside campus famed for its lively student life and traditions.", established: 1848, website: "https://www.wisc.edu",
+    admissionsUrl: "https://www.admissions.wisc.edu/",
+    financialAidUrl: "https://financialaid.wisc.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u77", slug: "unc-chapel-hill", name: "University of North Carolina at Chapel Hill", country: "United States", city: "Chapel Hill, NC", region: "USA",
@@ -1638,6 +1746,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Business", "Social Sciences", "Natural Sciences"], tags: ["Public", "Research"],
     description: "The oldest public university in the US, UNC is a leading research institution with strong medicine and journalism programs.",
     campusLife: "A historic Southern campus with passionate basketball culture.", established: 1789, website: "https://www.unc.edu",
+    admissionsUrl: "https://www.admissions.unc.edu/",
+    financialAidUrl: "https://studentaid.unc.edu/",
+    applicationUrl: "https://www.admissions.unc.edu/Apply",
   },
   {
     id: "u78", slug: "university-of-virginia", name: "University of Virginia", country: "United States", city: "Charlottesville, VA", region: "USA",
@@ -1646,6 +1757,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Law", "Social Sciences", "Engineering"], tags: ["Public", "Research", "Historic"],
     description: "Founded by Thomas Jefferson, UVA is a top public university with renowned business, law, and liberal-arts programs.",
     campusLife: "A UNESCO-listed Jeffersonian campus steeped in tradition.", established: 1819, website: "https://www.virginia.edu",
+    admissionsUrl: "https://admission.virginia.edu/",
+    financialAidUrl: "https://sfs.virginia.edu/",
+    applicationUrl: "https://www.virginia.edu/apply",
   },
   {
     id: "u79", slug: "purdue", name: "Purdue University", country: "United States", city: "West Lafayette, IN", region: "USA",
@@ -1654,6 +1768,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Computer Science", "Business", "Natural Sciences"], tags: ["Public", "STEM", "Big Ten"],
     description: "A leading public university for engineering and aviation, known for affordability and a frozen-tuition pledge.",
     campusLife: "A spirited STEM-driven campus with a strong aerospace legacy.", established: 1869, website: "https://www.purdue.edu",
+    admissionsUrl: "https://www.purdue.edu/purdue/admissions/",
+    financialAidUrl: "https://www.purdue.edu/dfa/",
+    applicationUrl: "https://www.admissions.purdue.edu/apply/apply.php",
   },
   {
     id: "u80", slug: "ohio-state", name: "Ohio State University", country: "United States", city: "Columbus, OH", region: "USA",
@@ -1662,6 +1779,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Engineering", "Medicine", "Social Sciences"], tags: ["Public", "Research", "Big Ten"],
     description: "One of the largest universities in the US, Ohio State is a comprehensive research institution with broad academic offerings.",
     campusLife: "A massive, energetic campus with legendary football Saturdays.", established: 1870, website: "https://www.osu.edu",
+    admissionsUrl: "https://undergrad.osu.edu/",
+    financialAidUrl: "https://undergrad.osu.edu/cost-and-aid/financial-aid",
+    applicationUrl: "https://undergrad.osu.edu/apply",
   },
 
   // ---------- Europe (expansion) ----------
@@ -2176,6 +2296,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Business", "Natural Sciences", "Communications & Media"], tags: ["Public", "Research", "Large"],
     description: "A top-ranked public research university with standout programs in engineering, business, and journalism, backed by major NIH and NSF funding.",
     campusLife: "A massive, spirited campus built around Gator athletics, Greek life, and hundreds of student organizations.", established: 1853, website: "https://www.ufl.edu",
+    admissionsUrl: "https://www.admissions.ufl.edu/",
+    financialAidUrl: "https://www.sfa.ufl.edu/",
+    applicationUrl: "https://admissions.ufl.edu/apply/freshman",
   },
   {
     id: "u144", slug: "penn-state", name: "Penn State University", country: "United States", city: "University Park, PA", region: "USA",
@@ -2184,6 +2307,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Business", "Communications & Media", "Education"], tags: ["Public", "Research", "Large"],
     description: "One of America's largest public research universities, with nationally recognized programs in engineering, business, and journalism.",
     campusLife: "A classic Big Ten college town with legendary football Saturdays and a tight-knit alumni network.", established: 1855, website: "https://www.psu.edu",
+    admissionsUrl: "https://admissions.psu.edu/",
+    financialAidUrl: "https://studentaid.psu.edu/",
+    applicationUrl: "https://admissions.psu.edu/apply/",
   },
   {
     id: "u145", slug: "university-of-maryland", name: "University of Maryland", country: "United States", city: "College Park, MD", region: "USA",
@@ -2192,6 +2318,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Engineering", "Business", "Social Sciences"], tags: ["Public", "Research", "STEM"],
     description: "A flagship public university just outside Washington, D.C., with nationally ranked computer science, engineering, and public policy programs.",
     campusLife: "A lively campus minutes from the nation's capital, with deep pipelines into government, policy, and tech internships.", established: 1856, website: "https://www.umd.edu",
+    admissionsUrl: "https://www.admissions.umd.edu/",
+    financialAidUrl: "https://www.financialaid.umd.edu/",
+    applicationUrl: "https://www.admissions.umd.edu/apply/",
   },
   {
     id: "u146", slug: "texas-am", name: "Texas A&M University", country: "United States", city: "College Station, TX", region: "USA",
@@ -2200,6 +2329,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Natural Sciences", "Business", "Architecture & Urban Planning"], tags: ["Public", "Research", "Large"],
     description: "One of the largest universities in the US, famed for engineering, agriculture, and architecture, with an unusually loyal Aggie alumni network.",
     campusLife: "A tradition-soaked campus where school spirit and Corps of Cadets history run deep.", established: 1876, website: "https://www.tamu.edu",
+    admissionsUrl: "https://admissions.tamu.edu/",
+    financialAidUrl: "https://financialaid.tamu.edu/",
+    applicationUrl: "https://admissions.tamu.edu/apply/freshman",
   },
   {
     id: "u147", slug: "university-of-minnesota", name: "University of Minnesota", country: "United States", city: "Minneapolis, MN", region: "USA",
@@ -2208,6 +2340,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Business", "Natural Sciences", "Mathematics & Statistics"], tags: ["Public", "Research", "Urban"],
     description: "A major public research university in the Twin Cities, with renowned medical, statistics, and business programs and deep industry ties.",
     campusLife: "An urban, river-split campus with a famously resilient community through long winters.", established: 1851, website: "https://twin-cities.umn.edu",
+    admissionsUrl: "https://admissions.tc.umn.edu/",
+    financialAidUrl: "https://onestop.umn.edu/finances/financial-aid",
+    applicationUrl: "https://admissions.tc.umn.edu/apply/how-apply",
   },
   {
     id: "u148", slug: "arizona-state", name: "Arizona State University", country: "United States", city: "Tempe, AZ", region: "USA",
@@ -2216,6 +2351,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Communications & Media", "Arts & Design", "Social Sciences"], tags: ["Public", "Innovative", "Accessible"],
     description: "Recognized as one of the most innovative universities in the US, ASU pairs broad accessibility with strong programs in business, journalism, and design.",
     campusLife: "A huge, sun-soaked campus with a fast-growing reputation for flexible online and hybrid study.", established: 1885, website: "https://www.asu.edu",
+    admissionsUrl: "https://admission.asu.edu/contact",
+    financialAidUrl: "https://students.asu.edu/contact/financialaid",
+    applicationUrl: "https://webapp4.asu.edu/uga_admissionsapp/",
   },
 
   // ---------- Europe (expansion 2) ----------
@@ -2426,6 +2564,9 @@ export const universities: University[] = [
     majorsOffered: ["Economics", "Social Sciences", "Natural Sciences", "Business"].length ? ["Social Sciences", "Natural Sciences", "Business", "Law"] : [], tags: ["Private", "Research", "Rigorous"],
     description: "Famed for its rigorous, discussion-driven core curriculum, UChicago is a powerhouse in economics, the social sciences, and the natural sciences.",
     campusLife: "An intellectually intense Hyde Park campus known for its love of ideas and Scav Hunt tradition.", established: 1890, website: "https://www.uchicago.edu",
+    admissionsUrl: "https://collegeadmissions.uchicago.edu/",
+    financialAidUrl: "https://financialaid.uchicago.edu/",
+    applicationUrl: "https://collegeadmissions.uchicago.edu/apply/",
   },
   {
     id: "u174", slug: "case-western-reserve", name: "Case Western Reserve University", country: "United States", city: "Cleveland, OH", region: "USA",
@@ -2434,6 +2575,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Medicine", "Natural Sciences", "Business"], tags: ["Private", "Research", "STEM"],
     description: "A research-intensive university known for biomedical engineering, medicine, and a flexible interdisciplinary curriculum.",
     campusLife: "A compact campus anchoring Cleveland's University Circle arts and medical district.", established: 1826, website: "https://case.edu",
+    admissionsUrl: "https://admission.case.edu/",
+    financialAidUrl: "https://financialaid.case.edu/",
+    applicationUrl: "https://admission.case.edu/apply/",
   },
   {
     id: "u175", slug: "university-of-rochester", name: "University of Rochester", country: "United States", city: "Rochester, NY", region: "USA",
@@ -2442,6 +2586,9 @@ export const universities: University[] = [
     majorsOffered: ["Medicine", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Research", "Music"],
     description: "Home to the renowned Eastman School of Music alongside strong medicine, optics, and engineering programs.",
     campusLife: "A self-contained River Campus along the Genesee River with a famously flexible curriculum.", established: 1850, website: "https://www.rochester.edu",
+    admissionsUrl: "https://enrollment.rochester.edu/",
+    financialAidUrl: "https://enrollment.rochester.edu/financial-aid/",
+    applicationUrl: "https://www.commonapp.org/explore/university-rochester",
   },
   {
     id: "u176", slug: "brandeis-university", name: "Brandeis University", country: "United States", city: "Waltham, MA", region: "USA",
@@ -2450,6 +2597,9 @@ export const universities: University[] = [
     majorsOffered: ["Social Sciences", "Natural Sciences", "Business", "Arts & Design"], tags: ["Private", "Liberal Arts", "Small"],
     description: "A small, research-active liberal arts university with a strong social-justice tradition and tight-knit community.",
     campusLife: "A hilly New England campus 9 miles from Boston with a strong sense of community.", established: 1948, website: "https://www.brandeis.edu",
+    admissionsUrl: "https://www.brandeis.edu/admissions/",
+    financialAidUrl: "https://www.brandeis.edu/student-financial-services/",
+    applicationUrl: "https://www.brandeis.edu/admissions/apply/index.html",
   },
   {
     id: "u177", slug: "university-of-miami", name: "University of Miami", country: "United States", city: "Coral Gables, FL", region: "USA",
@@ -2458,6 +2608,9 @@ export const universities: University[] = [
     majorsOffered: ["Business", "Communications & Media", "Medicine", "Engineering"], tags: ["Private", "Research", "Coastal"],
     description: "A research university known for marine science, business, and communications, with a sunny coastal campus.",
     campusLife: "A palm-lined Coral Gables campus minutes from Miami's beaches and nightlife.", established: 1925, website: "https://welcome.miami.edu",
+    admissionsUrl: "https://welcome.miami.edu/admissions/index.html",
+    financialAidUrl: "https://admissions.miami.edu/undergraduate/financial-aid/index.html",
+    applicationUrl: "https://miami.edu/admission/index.php/undergraduate_admission/apply/",
   },
 
   // ---------- Europe (expansion 3) ----------
@@ -2962,6 +3115,9 @@ export const universities: University[] = [
     majorsOffered: ["Physics", "Chemical Engineering", "Computer Science", "Economics", "Marine/Environmental Science", "Film and Media Studies"], tags: ["Public", "Research", "STEM", "Large", "Coastal"],
     description: "UC Santa Barbara is a public research university and one of the ten campuses of the University of California system, known for strong physics, chemistry, and engineering programs and multiple Nobel laureates on faculty. It sits on a beachfront campus in Goleta/Santa Barbara and enrolls roughly 26,000 students.",
     campusLife: "UCSB has a well-known beach-adjacent campus culture with heavy participation in surfing, cycling, and outdoor recreation alongside a strong Division I athletics and Greek life scene.", established: 1909, website: "https://www.ucsb.edu",
+    admissionsUrl: "https://www.admissions.ucsb.edu/",
+    financialAidUrl: "https://www.finaid.ucsb.edu/",
+    applicationUrl: "https://admission.universityofcalifornia.edu/apply-now.html",
   },
   {
     id: "u239", slug: "university-of-colorado-boulder", name: "University of Colorado Boulder", country: "United States", city: "Boulder, CO", region: "USA",
@@ -2970,6 +3126,9 @@ export const universities: University[] = [
     majorsOffered: ["Aerospace Engineering", "Environmental Science", "Computer Science", "Geology/Earth Sciences", "Business (Leeds School of Business)", "Molecular, Cellular & Developmental Biology"], tags: ["Public", "Research", "R1", "STEM", "Large"],
     description: "University of Colorado Boulder is a large public flagship research university and R1 institution, part of the Association of American Universities, especially strong in aerospace engineering, earth/geological sciences, and environmental studies. Founded in 1876, it enrolls over 33,000 undergraduates on a campus at the base of the Rocky Mountains.",
     campusLife: "CU Boulder offers a large-school Big 12 athletics and outdoor-recreation culture, with easy access to hiking, skiing, and climbing in the nearby Flatirons and Rockies.", established: 1876, website: "https://www.colorado.edu",
+    admissionsUrl: "https://www.colorado.edu/admissions",
+    financialAidUrl: "https://www.colorado.edu/financialaid",
+    applicationUrl: "https://www.colorado.edu/admissions/process/first-year/apply",
   },
   {
     id: "u240", slug: "university-of-iowa", name: "University of Iowa", country: "United States", city: "Iowa City, IA", region: "USA",
@@ -2978,6 +3137,9 @@ export const universities: University[] = [
     majorsOffered: ["Writing/Creative Writing", "Nursing", "Health Sciences", "Business", "Psychology", "Engineering"], tags: ["Public", "Research", "Large", "Big Ten", "Liberal Arts"],
     description: "The University of Iowa is a large public research university founded in 1847 in Iowa City, known nationally for its Writers' Workshop and strong health sciences, nursing, and hospital-affiliated programs. It is a member of the Big Ten Conference and classified as an R1 (very high research activity) institution.",
     campusLife: "The university has a large, active campus culture centered on Big Ten athletics, a renowned literary/arts community, and the Iowa River running through the heart of campus.", established: 1847, website: "https://www.uiowa.edu",
+    admissionsUrl: "https://admissions.uiowa.edu/",
+    financialAidUrl: "https://financialaid.uiowa.edu/",
+    applicationUrl: "https://admissions.uiowa.edu/apply",
   },
   {
     id: "u241", slug: "michigan-state-university", name: "Michigan State University", country: "United States", city: "East Lansing, MI", region: "USA",
@@ -2986,6 +3148,9 @@ export const universities: University[] = [
     majorsOffered: ["Supply Chain Management", "Veterinary Medicine", "Education", "Agriculture and Natural Resources", "Communication", "Engineering"], tags: ["Public", "Research", "Land-Grant", "Big Ten", "Large"],
     description: "Michigan State University is a public land-grant research university founded in 1855 in East Lansing, Michigan, recognized as the nation's first land-grant institution under the Morrill Act. It is a member of the Big Ten Conference and classified as an R1 (very high research activity) university.",
     campusLife: "MSU's East Lansing campus is one of the largest in the U.S., with a sprawling residential quad system, Big Ten athletics, and a student body of over 50,000 drawn from all 50 states and more than 130 countries.", established: 1855, website: "https://msu.edu",
+    admissionsUrl: "https://admissions.msu.edu/",
+    financialAidUrl: "https://www.finaid.msu.edu/",
+    applicationUrl: "https://admissions.msu.edu/apply",
   },
   {
     id: "u242", slug: "rutgers-university-new-brunswick", name: "Rutgers University-New Brunswick", country: "United States", city: "New Brunswick, NJ", region: "USA",
@@ -2994,6 +3159,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Biological Sciences", "Business Administration", "Engineering", "Pharmacy", "Psychology"], tags: ["Public", "Research", "Big Ten", "Large", "Diverse"],
     description: "Rutgers University-New Brunswick is the flagship campus of New Jersey's state university system, a large public research university founded in 1766 and a member of the Big Ten and Association of American Universities. It offers broad undergraduate and graduate programs across its multiple New Brunswick-area campuses, with particular strength in the sciences, engineering, business, and pharmacy.",
     campusLife: "With nearly 38,000 undergraduates spread across five New Brunswick-area campuses linked by a busy free bus system, the atmosphere is large, diverse, and Big Ten in energy, with hundreds of clubs and a major Division I athletics scene.", established: 1766, website: "https://www.rutgers.edu",
+    admissionsUrl: "https://admissions.rutgers.edu/",
+    financialAidUrl: "https://scarlethub.rutgers.edu/financial-services/office-of-financial-aid/",
+    applicationUrl: "https://admissions.rutgers.edu/apply",
   },
   {
     id: "u243", slug: "university-of-connecticut", name: "University of Connecticut", country: "United States", city: "Storrs, CT", region: "USA",
@@ -3002,6 +3170,9 @@ export const universities: University[] = [
     majorsOffered: ["Engineering", "Business Administration", "Nursing", "Pharmacy", "Political Science", "Biological Sciences"], tags: ["Public", "Research", "R1", "Flagship", "Athletics"],
     description: "The University of Connecticut is the state's flagship public research university, founded in 1881 and known for strong programs in engineering, business, nursing, and its nationally dominant basketball programs. It holds R1 (very high research activity) Carnegie classification and is consistently ranked among the top 25 U.S. public universities.",
     campusLife: "The Storrs campus has a classic New England quad feel with active Greek life, Division I athletics (especially men's and women's basketball), and over 700 student organizations.", established: 1881, website: "https://uconn.edu",
+    admissionsUrl: "https://admissions.uconn.edu/",
+    financialAidUrl: "https://financialaid.uconn.edu/",
+    applicationUrl: "https://admissions.uconn.edu/apply",
   },
   {
     id: "u244", slug: "university-of-pittsburgh", name: "University of Pittsburgh", country: "United States", city: "Pittsburgh, PA", region: "USA",
@@ -3010,6 +3181,9 @@ export const universities: University[] = [
     majorsOffered: ["Nursing", "Business Administration", "Engineering", "Computer Science", "Psychology", "Economics"], tags: ["Public", "Research", "R1", "Nursing", "Medical"],
     description: "The University of Pittsburgh is a major public research university founded in 1787, ranked among the top public universities nationally and 52nd globally by U.S. News. It is especially well-regarded for nursing (top 10 nationally), health sciences, and biomedical research, anchored by its University of Pittsburgh Medical Center (UPMC) partnership.",
     campusLife: "Pitt's urban Oakland campus, centered on the iconic 42-story Cathedral of Learning, is embedded in Pittsburgh's museum and hospital district and offers a full slate of Division I ACC athletics and over 600 student organizations.", established: 1787, website: "https://www.pitt.edu",
+    admissionsUrl: "https://admissions.pitt.edu/",
+    financialAidUrl: "https://financialaid.pitt.edu/",
+    applicationUrl: "https://pitt.mycollegeapplication.org/Login.aspx",
   },
   {
     id: "u245", slug: "university-of-utah", name: "University of Utah", country: "United States", city: "Salt Lake City, UT", region: "USA",
@@ -3018,6 +3192,9 @@ export const universities: University[] = [
     majorsOffered: ["Business Administration", "Biology", "Psychology", "Mechanical Engineering", "Computer Science", "Nursing"], tags: ["Public", "Research", "R1", "Mountain Campus", "Medical"],
     description: "The University of Utah is a public R1 research university founded in 1850, located in Salt Lake City with a nationally ranked academic medical center and strong programs in engineering, business, and the sciences. It has a high acceptance rate reflecting its role as Utah's flagship public university, paired with growing national research output.",
     campusLife: "Set at the base of the Wasatch Mountains, the U offers easy access to world-class skiing and hiking alongside a full Pac-12 Division I athletics and Greek life scene, though most students live off campus.", established: 1850, website: "https://www.utah.edu",
+    admissionsUrl: "https://admissions.utah.edu/",
+    financialAidUrl: "https://financialaid.utah.edu/",
+    applicationUrl: "https://admissions.utah.edu/apply/",
   },
   {
     id: "u246", slug: "syracuse-university", name: "Syracuse University", country: "United States", city: "Syracuse, NY", region: "USA",
@@ -3026,6 +3203,9 @@ export const universities: University[] = [
     majorsOffered: ["Journalism and Communications", "Business Administration", "Architecture", "Computer Science", "Public Administration/International Relations", "Visual and Performing Arts"], tags: ["Private", "Research", "Journalism", "Athletics", "Study Abroad"],
     description: "Syracuse University is a private research university in Syracuse, NY, founded in 1870, known for its Newhouse School of journalism, Whitman School of Management, and Maxwell School of public affairs. It enrolls roughly 22,600 students and admits under half of undergraduate applicants.",
     campusLife: "Syracuse is known for passionate Division I athletics at the JMA Wireless Dome, a large study-abroad network, and a sizable Greek and student-org scene on its hilltop campus.", established: 1870, website: "https://www.syracuse.edu",
+    admissionsUrl: "https://www.syracuse.edu/admissions/",
+    financialAidUrl: "https://www.syracuse.edu/admissions/cost-and-aid/",
+    applicationUrl: "https://www.syracuse.edu/admissions/apply/",
   },
   {
     id: "u247", slug: "northeastern-university", name: "Northeastern University", country: "United States", city: "Boston, MA", region: "USA",
@@ -3034,6 +3214,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Business Administration", "Engineering", "Health Sciences", "Criminal Justice", "International Affairs"], tags: ["Private", "Co-op Program", "Highly Selective", "Urban", "Career-Focused"],
     description: "Northeastern University is a private research university in Boston founded in 1898, world-renowned for its cooperative education (co-op) program that places roughly 95% of undergraduates in full-time, paid professional work experience. It has grown into one of the most selective private universities in the US, admitting only around 6% of applicants.",
     campusLife: "Northeastern's urban Boston campus blends city life with a tight-knit residential community, anchored by its signature co-op culture and a global network of satellite campuses.", established: 1898, website: "https://www.northeastern.edu",
+    admissionsUrl: "https://www.northeastern.edu/admissions/",
+    financialAidUrl: "https://studentfinance.northeastern.edu/",
+    applicationUrl: "https://www.commonapp.org/",
   },
   {
     id: "u248", slug: "wake-forest-university", name: "Wake Forest University", country: "United States", city: "Winston-Salem, NC", region: "USA",
@@ -3042,6 +3225,9 @@ export const universities: University[] = [
     majorsOffered: ["Business (Economics/Finance)", "Politics and International Affairs", "Psychology", "Biology", "Communication", "Computer Science"], tags: ["Private", "Small Classes", "Pre-Law/Pre-Med", "ACC Athletics"],
     description: "Wake Forest University is a private research university in Winston-Salem, North Carolina, founded in 1834, known for combining liberal arts undergraduate teaching with research-university resources. It has a low student-faculty ratio (10:1) and a reputation for strong pre-law, pre-med, and business preparation.",
     campusLife: "Wake Forest has a close-knit, Division I ACC campus culture with a strong Greek life presence and small, discussion-based classes (99% under 50 students).", established: 1834, website: "https://www.wfu.edu",
+    admissionsUrl: "https://admissions.wfu.edu/",
+    financialAidUrl: "https://financialaid.wfu.edu/",
+    applicationUrl: "https://admissions.wfu.edu/",
   },
   {
     id: "u249", slug: "villanova-university", name: "Villanova University", country: "United States", city: "Villanova, PA", region: "USA",
@@ -3050,6 +3236,9 @@ export const universities: University[] = [
     majorsOffered: ["Finance", "Nursing", "Mechanical Engineering", "Computer Science", "Communication", "Political Science"], tags: ["Private", "Catholic", "Business & Nursing", "Selective"],
     description: "Villanova University is a private Catholic research university founded in 1842 by the Augustinian order, known for its strong undergraduate business, nursing, and engineering programs. It is ranked among the top national universities by U.S. News, with a highly residential, close-knit campus culture just outside Philadelphia.",
     campusLife: "Villanova's suburban campus outside Philadelphia is known for strong school spirit around its NCAA Division I Wildcats athletics and a tight-knit, largely residential undergraduate community.", established: 1842, website: "https://www.villanova.edu",
+    admissionsUrl: "https://www1.villanova.edu/university/undergraduate-admission.html",
+    financialAidUrl: "https://www1.villanova.edu/university/office-of-financial-assistance.html",
+    applicationUrl: "https://www1.villanova.edu/university/apply.html",
   },
   {
     id: "u250", slug: "lehigh-university", name: "Lehigh University", country: "United States", city: "Bethlehem, PA", region: "USA",
@@ -3058,6 +3247,9 @@ export const universities: University[] = [
     majorsOffered: ["Mechanical Engineering", "Finance", "Computer Science", "Industrial and Systems Engineering", "Accounting", "Bioengineering"], tags: ["Private", "STEM & Business", "Selective", "Patriot League"],
     description: "Lehigh University is a private research university in Bethlehem, Pennsylvania, founded in 1865 by industrialist Asa Packer and known for strong engineering and business programs. It enrolls roughly 7,900 students and is classified among institutions with very high research activity.",
     campusLife: "Lehigh's hillside campus in Bethlehem's historic Lehigh Valley combines Division I Patriot League athletics with a tight-knit residential community of under 6,000 undergraduates.", established: 1865, website: "https://www.lehigh.edu",
+    admissionsUrl: "https://www.lehigh.edu/admissions",
+    financialAidUrl: "https://www.lehigh.edu/financialaid",
+    applicationUrl: "https://www1.lehigh.edu/admissions/undergrad/apply",
   },
   {
     id: "u251", slug: "rensselaer-polytechnic-institute", name: "Rensselaer Polytechnic Institute", country: "United States", city: "Troy, NY", region: "USA",
@@ -3066,6 +3258,9 @@ export const universities: University[] = [
     majorsOffered: ["Computer Science", "Mechanical Engineering", "Aerospace Engineering", "Architecture", "Electrical & Computer Engineering", "Business Management"], tags: ["Private", "STEM", "Oldest US Tech University", "Research"],
     description: "Rensselaer Polytechnic Institute, founded in 1824 in Troy, NY, is the oldest technological research university in the English-speaking world, known for engineering, computer science, and architecture. It combines strong STEM programs with research opportunities.",
     campusLife: "RPI offers a tight-knit STEM-focused campus culture with over 170 student clubs, Division I/III athletics, and a strong Greek life presence on its hillside Troy campus.", established: 1824, website: "https://www.rpi.edu",
+    admissionsUrl: "https://admissions.rpi.edu/",
+    financialAidUrl: "https://admissions.rpi.edu/aid",
+    applicationUrl: "https://admissions.rpi.edu/undergraduate/admission/index.html",
   },
   {
     id: "u252", slug: "worcester-polytechnic-institute", name: "Worcester Polytechnic Institute", country: "United States", city: "Worcester, MA", region: "USA",
@@ -3074,6 +3269,9 @@ export const universities: University[] = [
     majorsOffered: ["Mechanical Engineering", "Electrical & Computer Engineering", "Computer Science", "Robotics Engineering", "Biomedical Engineering", "Actuarial Mathematics"], tags: ["Private", "STEM", "Project-Based Learning", "R1"],
     description: "Worcester Polytechnic Institute is a private STEM-focused research university founded in 1865, known for its distinctive project-based curriculum (the WPI Plan) that sends students to work on real-world projects at over 50 global project centers. It holds R1 research university status and is especially recognized for engineering, robotics, and computer science.",
     campusLife: "WPI's compact 95-acre hilltop campus in Worcester fosters a tight-knit, collaborative STEM culture centered on hands-on team projects rather than traditional lectures.", established: 1865, website: "https://www.wpi.edu",
+    admissionsUrl: "https://www.wpi.edu/admissions/undergraduate",
+    financialAidUrl: "https://www.wpi.edu/admissions/tuition-aid",
+    applicationUrl: "https://www.wpi.edu/admissions/undergraduate/apply/how-to",
   },
   {
     id: "u253", slug: "stevens-institute-of-technology", name: "Stevens Institute of Technology", country: "United States", city: "Hoboken, NJ", region: "USA",
@@ -3082,6 +3280,9 @@ export const universities: University[] = [
     majorsOffered: ["Mechanical Engineering", "Computer Science", "Electrical Engineering", "Quantitative Finance", "Computer Engineering", "Chemical Engineering"], tags: ["Private", "STEM", "NYC-Adjacent", "Career Outcomes"],
     description: "Stevens Institute of Technology is a private research university founded in 1870, known for engineering, computer science, and quantitative finance programs. It sits directly across the Hudson River from Manhattan, giving students close access to NYC's tech and finance industries.",
     campusLife: "The small, tight-knit campus sits on a hill overlooking the Manhattan skyline, with easy PATH train access into NYC.", established: 1870, website: "https://www.stevens.edu",
+    admissionsUrl: "https://www.stevens.edu/admission-aid/undergraduate-admissions/how-to-apply",
+    financialAidUrl: "https://www.stevens.edu/admission-aid/tuition-financial-aid/how-to-apply-for-aid",
+    applicationUrl: "https://www.stevens.edu/admission-aid/undergraduate-admissions/how-to-apply",
   },
 ];
 

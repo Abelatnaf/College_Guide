@@ -35,6 +35,12 @@ export interface University {
   campusLife: string;
   established: number;
   website: string;
+  /** Direct link to the admissions homepage, where available (IPEDS-sourced, US schools only). */
+  admissionsUrl?: string;
+  /** Direct link to the financial aid office page, where available (IPEDS-sourced, US schools only). */
+  financialAidUrl?: string;
+  /** Direct link to the application portal/page, where available (IPEDS-sourced, US schools only). */
+  applicationUrl?: string;
 }
 
 export interface SubMajor {

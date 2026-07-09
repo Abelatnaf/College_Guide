@@ -176,7 +176,10 @@ export function DirectoryClient() {
             <p className="font-body-md text-body-md text-on-surface-variant">
               Showing {filtered.length}{" "}
               {filtered.length === 1 ? "university" : "universities"} matching your
-              criteria
+              criteria ·{" "}
+              <Link href="/universities/us-directory" className="text-primary hover:underline">
+                browse all 5,994 US institutions
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-sm">

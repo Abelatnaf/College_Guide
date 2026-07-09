@@ -1,6 +1,25 @@
 /** Geographic region buckets used by filters and the match quiz. */
 export type Region = "USA" | "Europe" | "Canada" | "China" | "UAE" | "Australia" | "Japan" | "South Korea" | "India";
 
+/**
+ * A raw IPEDS institution record — name/contact info only, no ranking or cost
+ * data. Distinct from `University`: these back the bulk US directory browser,
+ * not the compare/quiz/chances tools, which need the richer curated fields.
+ */
+export interface USInstitution {
+  id: string;
+  name: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  website?: string;
+  admissionsUrl?: string;
+  financialAidUrl?: string;
+  applicationUrl?: string;
+  sector?: string;
+  level?: string;
+}
+
 export interface Scholarship {
   available: boolean;
   types: string[];
@@ -35,6 +54,12 @@ export interface University {
   campusLife: string;
   established: number;
   website: string;
+  /** Direct link to the admissions homepage, where available (IPEDS-sourced, US schools only). */
+  admissionsUrl?: string;
+  /** Direct link to the financial aid office page, where available (IPEDS-sourced, US schools only). */
+  financialAidUrl?: string;
+  /** Direct link to the application portal/page, where available (IPEDS-sourced, US schools only). */
+  applicationUrl?: string;
 }
 
 export interface SubMajor {

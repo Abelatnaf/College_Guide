@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { buildEssayFeedbackSystemPrompt, buildEssayFeedbackContents, labelForPromptType } from "@/lib/ai/essayFeedback";
+import { requireTier } from "@/lib/access/serverAccess";
 
 const MODEL = "gemini-2.5-flash";
 
@@ -14,6 +15,11 @@ export interface EssayFeedbackResult {
 }
 
 export async function POST(request: Request) {
+  const access = await requireTier(request, "premium");
+  if (!access.ok) {
+    return NextResponse.json<EssayFeedbackResult>({ available: false }, { status: access.status });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json<EssayFeedbackResult>({ available: false });

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { buildChatSystemPrompt, buildChatContents, type ChatMessage } from "@/lib/ai/chatAssistant";
+import { requireTier } from "@/lib/access/serverAccess";
 
 const MODEL = "gemini-2.5-flash";
 
@@ -15,6 +16,11 @@ export interface ChatResult {
 }
 
 export async function POST(request: Request) {
+  const access = await requireTier(request, "premium");
+  if (!access.ok) {
+    return NextResponse.json<ChatResult>({ available: false }, { status: access.status });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json<ChatResult>({ available: false });

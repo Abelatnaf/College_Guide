@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { CostInputs, CostResults } from "@/lib/cost";
 import { buildAppealLetterRequest } from "@/lib/ai/appealLetter";
+import { authHeaders } from "@/lib/access/authHeader";
 import type { University } from "@/types";
 
 const MIN_REASON_WORDS = 20;
@@ -47,7 +48,7 @@ export function AppealLetterGenerator({
       const payload = buildAppealLetterRequest(u, inputs, results, reason.trim());
       const res = await fetch("/api/appeal-letter", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify(payload),
         signal: controller.signal,
       });

@@ -23,9 +23,11 @@ function CallbackInner() {
     }
 
     const next = params.get("next") || "/shortlist";
-    const authError = params.get("error_description");
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const authError =
+      params.get("error_description") || hashParams.get("error_description") || params.get("error") || hashParams.get("error");
     if (authError) {
-      setError(authError);
+      setError(authError.replace(/\+/g, " "));
       return;
     }
 

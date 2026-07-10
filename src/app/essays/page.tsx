@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
 import { readLocal, writeLocal, newId, nowIso, STORAGE_KEYS } from "@/lib/storage/localStore";
+import { authHeaders } from "@/lib/access/authHeader";
 
 interface EssayDraft {
   id: string;
@@ -139,7 +140,7 @@ export default function EssaysPage() {
     try {
       const res = await fetch("/api/essay-feedback", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify({ promptType: active.type, content: active.content }),
         signal: controller.signal,
       });

@@ -2,10 +2,16 @@ import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { buildInsightPrompt, type QuizInsightsRequest } from "@/lib/ai/quizInsights";
 import type { QuizInsight, QuizInsightsResult } from "@/types/ai";
+import { requireTier } from "@/lib/access/serverAccess";
 
 const MODEL = "gemini-2.5-flash";
 
 export async function POST(request: Request) {
+  const access = await requireTier(request, "basic");
+  if (!access.ok) {
+    return NextResponse.json<QuizInsightsResult>({ available: false }, { status: access.status });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json<QuizInsightsResult>({ available: false });

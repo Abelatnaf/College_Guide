@@ -1,9 +1,12 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Browser Supabase client — guarded so the whole app works with NO Supabase
- * configured. When the env vars are absent, `getSupabase()` returns null and
- * every feature transparently falls back to localStorage (anonymous mode).
+ * Browser Supabase client. In production this is always configured — the app
+ * is paid, and AccessGate (src/components/auth/AccessGate.tsx) requires
+ * sign-in + an approved payment on every route except marketing/legal pages
+ * and /payment. When the env vars are absent (e.g. a bare local checkout with
+ * no .env.local), `getSupabase()` returns null and AccessGate disables the
+ * paywall as a dev-only escape hatch rather than crashing the app.
  *
  * Auth is fully client-side (PKCE + detectSessionInUrl), so the statically
  * prerendered `/universities/[slug]` pages never touch cookies and stay SSG.

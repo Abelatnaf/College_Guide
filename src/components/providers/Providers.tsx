@@ -4,6 +4,8 @@ import { ThemeProvider } from "next-themes";
 import { LazyMotion, domAnimation, MotionConfig } from "framer-motion";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { AuthDialog } from "@/components/auth/AuthDialog";
+import { AccessProvider } from "@/components/auth/AccessProvider";
+import { AccessGate } from "@/components/auth/AccessGate";
 import { StorageProvider } from "@/components/providers/StorageProvider";
 
 /**
@@ -28,10 +30,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
           disableTransitionOnChange
         >
           <AuthProvider>
-            <StorageProvider>
-              {children}
-              <AuthDialog />
-            </StorageProvider>
+            <AccessProvider>
+              <StorageProvider>
+                <AccessGate>{children}</AccessGate>
+                <AuthDialog />
+              </StorageProvider>
+            </AccessProvider>
           </AuthProvider>
         </ThemeProvider>
       </MotionConfig>

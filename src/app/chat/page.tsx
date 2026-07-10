@@ -5,6 +5,7 @@ import { readLocal, writeLocal, removeLocal, STORAGE_KEYS } from "@/lib/storage/
 import type { ChatMessage } from "@/lib/ai/chatAssistant";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { authHeaders } from "@/lib/access/authHeader";
 
 // Prompts intentionally cover general strategy + the app's verified-data topics.
 // Deliberately no "acceptance rate" style prompts — the assistant doesn't track those.
@@ -81,7 +82,7 @@ export default function ChatPage() {
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(await authHeaders()) },
         body: JSON.stringify({ messages: history }),
         signal: controller.signal,
       });

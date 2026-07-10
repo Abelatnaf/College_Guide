@@ -5,6 +5,7 @@ import {
   buildAppealLetterContents,
   type AppealLetterRequest,
 } from "@/lib/ai/appealLetter";
+import { requireTier } from "@/lib/access/serverAccess";
 
 const MODEL = "gemini-2.5-flash";
 
@@ -18,6 +19,11 @@ export interface AppealLetterResult {
 }
 
 export async function POST(request: Request) {
+  const access = await requireTier(request, "premium");
+  if (!access.ok) {
+    return NextResponse.json<AppealLetterResult>({ available: false }, { status: access.status });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return NextResponse.json<AppealLetterResult>({ available: false });

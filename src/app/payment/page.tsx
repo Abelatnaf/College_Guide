@@ -253,7 +253,7 @@ export default function PaymentPage() {
   const pending = latest?.status === "pending";
 
   return (
-    <main className="mx-auto max-w-3xl px-md py-xl md:px-lg">
+    <main className="mx-auto max-w-5xl px-md py-xl md:px-lg">
       <PageHeader
         icon="payments"
         title="Unlock UniPath"
@@ -372,7 +372,7 @@ export default function PaymentPage() {
 
             {step === 2 && tierInfo && (
               <m.div key="step-2" variants={stepVariants} initial="enter" animate="center" exit="exit">
-                <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
+                <div className="mx-auto max-w-2xl rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
                   <div className="mb-md flex items-center justify-between">
                     <h2 className="font-display text-display-sm text-on-surface">
                       Pay {tierInfo.priceEtb} ETB for {tierInfo.label}
@@ -453,7 +453,7 @@ export default function PaymentPage() {
 
             {step === 3 && tierInfo && (
               <m.div key="step-3" variants={stepVariants} initial="enter" animate="center" exit="exit">
-                <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
+                <div className="mx-auto max-w-2xl rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
                   <div className="mb-md flex items-center justify-between">
                     <h2 className="font-display text-display-sm text-on-surface">
                       Upload your payment screenshot

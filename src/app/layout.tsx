@@ -4,6 +4,7 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AskAiFab } from "@/components/layout/AskAiFab";
 import { Providers } from "@/components/providers/Providers";
 import { AmbientBackground } from "@/components/ambient/AmbientBackground";
 
@@ -60,6 +61,7 @@ export default function RootLayout({
           </Suspense>
           <div className="flex-grow">{children}</div>
           <Footer />
+          <AskAiFab />
         </Providers>
       </body>
     </html>

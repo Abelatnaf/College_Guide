@@ -4,17 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import { readLocal, writeLocal, removeLocal, STORAGE_KEYS } from "@/lib/storage/localStore";
 import type { ChatMessage } from "@/lib/ai/chatAssistant";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
+import { useAuth } from "@/components/auth/AuthProvider";
 
 // Prompts intentionally cover general strategy + the app's verified-data topics.
 // Deliberately no "acceptance rate" style prompts — the assistant doesn't track those.
 const SUGGESTED_PROMPTS = [
-  "How do I write a strong personal statement?",
-  "What's the visa process for studying in the US?",
-  "Which schools are need-blind for international students?",
-  "How do I get application fees waived?",
+  { label: "Personal statement", icon: "edit_note", prompt: "How do I write a strong personal statement?" },
+  { label: "Visa process", icon: "flight_takeoff", prompt: "What's the visa process for studying in the US?" },
+  { label: "Need-blind schools", icon: "volunteer_activism", prompt: "Which schools are need-blind for international students?" },
+  { label: "Fee waivers", icon: "confirmation_number", prompt: "How do I get application fees waived?" },
 ];
 
 export default function ChatPage() {
+  const { user } = useAuth();
+  const firstName =
+    (user?.user_metadata?.full_name as string | undefined)?.split(" ")[0] ||
+    user?.email?.split("@")[0] ||
+    null;
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const [input, setInput] = useState("");
@@ -172,34 +179,83 @@ export default function ChatPage() {
 
   const busy = loading || streaming;
   const lastIndex = messages.length - 1;
+  const empty = messages.length === 0;
+
+  // Shared composer — rendered once, sized differently depending on where it appears
+  // (large + centered on the empty state, slim + sticky once a conversation exists).
+  const composer = (big: boolean) => (
+    <div
+      className={
+        big
+          ? "flex w-full items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest p-2 pl-lg shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgba(0,105,72,0.12),0_8px_30px_rgba(0,0,0,0.12)]"
+          : "flex items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest/90 p-1.5 pl-md shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgba(0,105,72,0.12),0_4px_20px_rgba(0,0,0,0.08)]"
+      }
+    >
+      <textarea
+        ref={textareaRef}
+        value={input}
+        onChange={handleInput}
+        onKeyDown={handleKeyDown}
+        placeholder="Ask about admissions, aid, essays, visas..."
+        rows={1}
+        disabled={busy}
+        aria-label="Message the assistant"
+        className={
+          big
+            ? "max-h-[140px] flex-1 resize-none self-center border-none bg-transparent py-3 font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-0 disabled:opacity-60"
+            : "max-h-[140px] flex-1 resize-none self-center border-none bg-transparent py-2 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-0 disabled:opacity-60"
+        }
+      />
+      {busy ? (
+        <button
+          onClick={stopGenerating}
+          aria-label="Stop generating"
+          className={
+            big
+              ? "inline-flex h-12 w-12 shrink-0 items-center justify-center self-end rounded-full border border-outline-variant bg-surface-container text-on-surface shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary"
+              : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full border border-outline-variant bg-surface-container text-on-surface shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary"
+          }
+        >
+          <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            stop
+          </span>
+        </button>
+      ) : (
+        <button
+          onClick={() => sendMessage()}
+          disabled={!input.trim()}
+          aria-label="Send message"
+          className={
+            big
+              ? "inline-flex h-12 w-12 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(0,105,72,0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+              : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(0,105,72,0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+          }
+        >
+          <span className="material-symbols-outlined text-[20px]">send</span>
+        </button>
+      )}
+    </div>
+  );
 
   return (
     <main className="mx-auto flex h-[calc(100vh-5rem)] max-w-container-max flex-col px-md pb-lg pt-lg md:px-lg">
       {/* Header */}
-      <div className="mb-md flex flex-col gap-sm sm:flex-row sm:items-start sm:justify-between">
+      <div className="mb-sm flex items-center justify-between gap-sm">
         <div className="flex items-center gap-sm">
           <span
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgba(0,105,72,0.35)]"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgba(0,105,72,0.35)]"
             aria-hidden="true"
           >
-            <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
               auto_awesome
             </span>
           </span>
-          <div>
-            <h1 className="font-display text-display-md text-on-surface">
-              Ask AI
-            </h1>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              A college-admissions assistant for general strategy, essays, visas, test prep, and
-              more.
-            </p>
-          </div>
+          <h1 className="font-display text-headline-md text-on-surface">Ask AI</h1>
         </div>
         {messages.length > 0 && (
           <button
             onClick={clearConversation}
-            className="group inline-flex items-center gap-1 self-start rounded-full border border-outline-variant bg-surface-container-lowest px-md py-1.5 font-label-md text-label-md text-on-surface-variant shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary hover:shadow-[0_0_0_3px_rgba(0,105,72,0.12)] sm:self-auto"
+            className="group inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-md py-1.5 font-label-md text-label-md text-on-surface-variant shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary hover:shadow-[0_0_0_3px_rgba(0,105,72,0.12)]"
           >
             <span className="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:-rotate-6">
               delete_sweep
@@ -226,52 +282,53 @@ export default function ChatPage() {
         </p>
       </div>
 
-      {/* Message list */}
-      <div
-        ref={listRef}
-        className="flex-1 overflow-y-auto rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-md shadow-[0_4px_20px_rgba(0,0,0,0.06)] sm:p-lg"
-        aria-live="polite"
-      >
-        {messages.length === 0 ? (
-          <div className="flex h-full flex-col items-center justify-center px-md text-center">
-            <span
-              className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/40 text-primary shadow-[0_8px_30px_rgba(0,105,72,0.18)]"
-              aria-hidden="true"
-            >
-              <span className="material-symbols-outlined text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-                auto_awesome
-              </span>
+      {empty ? (
+        /* Empty state — centered greeting + big composer + quick-prompt pills */
+        <div className="flex flex-1 flex-col items-center justify-center px-md pb-10 text-center">
+          <span
+            className="mb-md flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/40 text-primary shadow-[0_8px_30px_rgba(0,105,72,0.18)]"
+            aria-hidden="true"
+          >
+            <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
+              auto_awesome
             </span>
-            <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
-              What can I help with?
-            </h3>
-            <p className="max-w-xl font-body-md text-body-md text-on-surface-variant">
-              Ask about essay strategy, visa basics, test prep, application timelines, how
-              need-blind admissions work, or general study-abroad advice for international
-              applicants. Ask about a specific school&apos;s fees or aid policy and I&apos;ll check
-              UniPath&apos;s verified data for you — I&apos;ll say so plainly if it isn&apos;t
-              covered yet.
-            </p>
+          </span>
+          <h2 className="mb-sm font-display text-display-lg text-on-surface">
+            Hey there{firstName ? `, ${firstName}` : ""}
+          </h2>
+          <p className="mb-lg max-w-lg font-body-md text-body-md text-on-surface-variant">
+            Ask about essays, visas, test prep, or timelines — or a specific school&apos;s fees and
+            aid, checked against UniPath&apos;s verified data.
+          </p>
 
-            {/* Suggested prompt chips */}
-            <div className="mt-lg grid w-full max-w-xl grid-cols-1 gap-sm sm:grid-cols-2">
-              {SUGGESTED_PROMPTS.map((prompt) => (
-                <button
-                  key={prompt}
-                  onClick={() => sendMessage(prompt)}
-                  disabled={busy}
-                  className="group flex items-center gap-sm rounded-xl border border-outline-variant/40 bg-surface-container-lowest px-md py-sm text-left font-body-md text-body-md text-on-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-[0_8px_20px_rgba(0,105,72,0.12)] disabled:pointer-events-none disabled:opacity-50"
-                >
-                  <span className="material-symbols-outlined shrink-0 text-[20px] text-primary/70 transition-colors duration-200 group-hover:text-primary">
-                    arrow_outward
-                  </span>
-                  <span className="flex-1">{prompt}</span>
-                </button>
-              ))}
-            </div>
+          <div className="w-full max-w-2xl">{composer(true)}</div>
+
+          {/* Suggested prompt pills */}
+          <div className="mt-lg flex flex-wrap items-center justify-center gap-sm">
+            {SUGGESTED_PROMPTS.map((p) => (
+              <button
+                key={p.label}
+                onClick={() => sendMessage(p.prompt)}
+                disabled={busy}
+                className="group inline-flex items-center gap-2 rounded-full border border-outline-variant/50 bg-surface-container-lowest px-lg py-2.5 font-label-md text-label-md text-on-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_8px_20px_rgba(0,105,72,0.12)] disabled:pointer-events-none disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[18px] text-primary/70 transition-colors duration-200 group-hover:text-primary">
+                  {p.icon}
+                </span>
+                {p.label}
+              </button>
+            ))}
           </div>
-        ) : (
-          <div className="flex flex-col gap-md">
+        </div>
+      ) : (
+        <>
+          {/* Message list */}
+          <div
+            ref={listRef}
+            className="flex-1 overflow-y-auto rounded-2xl border border-outline-variant/30 bg-surface-container-lowest p-md shadow-[0_4px_20px_rgba(0,0,0,0.06)] sm:p-lg"
+            aria-live="polite"
+          >
+            <div className="flex flex-col gap-md">
             {messages.map((m, i) => {
               const isStreamingMessage = streaming && i === lastIndex && m.role === "assistant";
               return (
@@ -363,46 +420,13 @@ export default function ChatPage() {
             )}
 
             <div ref={scrollRef} />
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* Input — sticky, premium, focus glow */}
-      <div className="sticky bottom-0 mt-md pt-sm">
-        <div className="flex items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest/90 p-1.5 pl-md shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgba(0,105,72,0.12),0_4px_20px_rgba(0,0,0,0.08)]">
-          <textarea
-            ref={textareaRef}
-            value={input}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask about admissions, aid, essays, visas..."
-            rows={1}
-            disabled={busy}
-            aria-label="Message the assistant"
-            className="max-h-[140px] flex-1 resize-none self-center border-none bg-transparent py-2 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-0 disabled:opacity-60"
-          />
-          {busy ? (
-            <button
-              onClick={stopGenerating}
-              aria-label="Stop generating"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full border border-outline-variant bg-surface-container text-on-surface shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary"
-            >
-              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-                stop
-              </span>
-            </button>
-          ) : (
-            <button
-              onClick={() => sendMessage()}
-              disabled={!input.trim()}
-              aria-label="Send message"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(0,105,72,0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
-            >
-              <span className="material-symbols-outlined text-[20px]">send</span>
-            </button>
-          )}
-        </div>
-      </div>
+          {/* Input — sticky, premium, focus glow */}
+          <div className="sticky bottom-0 mt-md pt-sm">{composer(false)}</div>
+        </>
+      )}
     </main>
   );
 }

@@ -414,8 +414,8 @@ export function AuthDialog() {
               )}
 
               <p className="mt-5 text-center text-[11px] leading-relaxed text-on-surface-variant/50">
-                Signing in is optional. Your shortlist, profile, and applications
-                always work locally on this device — an account just syncs them across devices.
+                An account is required to use UniPath. Once you&apos;re signed in, you&apos;ll pick
+                a plan and submit payment for approval.
               </p>
             </>
           )}

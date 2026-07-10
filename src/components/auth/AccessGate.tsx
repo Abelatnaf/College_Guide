@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
+import { LockScreen } from "@/components/auth/LockScreen";
 
 /**
  * App-wide hard paywall. Everything except marketing/legal pages, the payment
@@ -49,20 +50,19 @@ export function AccessGate({ children }: { children: React.ReactNode }) {
 
   if (!user) {
     return (
-      <main className="flex flex-grow flex-col items-center justify-center gap-md px-md py-xl text-center">
-        <span className="material-symbols-outlined text-[40px] text-on-surface-variant">lock</span>
-        <h1 className="font-display text-display-md text-on-surface">Sign in to continue</h1>
-        <p className="max-w-md font-body-md text-body-md text-on-surface-variant">
-          UniPath requires an account so we can track your paid access. Sign in or create an
-          account to get started.
-        </p>
-        <button
-          onClick={openAuth}
-          className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary"
-        >
-          Sign in
-        </button>
-      </main>
+      <LockScreen
+        icon="lock"
+        title="Sign in to continue"
+        description="UniPath requires an account so we can track your paid access. Sign in or create an account to get started."
+        action={
+          <button
+            onClick={openAuth}
+            className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition hover:shadow-glow-sm"
+          >
+            Sign in
+          </button>
+        }
+      />
     );
   }
 

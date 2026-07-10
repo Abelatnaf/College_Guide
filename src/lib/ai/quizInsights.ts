@@ -3,6 +3,7 @@ import type { QuizInsight, QuizInsightsResult } from "@/types/ai";
 import type { ChanceResult } from "@/lib/chances";
 import { getAidPolicy } from "@/data/aidPolicy";
 import { getApplicationFee } from "@/data/applicationFees";
+import { authHeaders } from "@/lib/access/authHeader";
 
 /** Short, verified affordability facts for a match — only present when web-verified data exists. */
 export interface QuizInsightAidInput {
@@ -147,7 +148,7 @@ export async function requestQuizInsights(
   try {
     const res = await fetch("/api/quiz-insights", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...(await authHeaders()) },
       body: JSON.stringify(payload),
     });
     if (!res.ok) return { available: false };

@@ -14,6 +14,7 @@ import {
   useCostScenarios,
 } from "@/components/providers/StorageProvider";
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { AppealLetterGenerator } from "@/components/university/AppealLetterGenerator";
 
 const INPUT_FIELDS: { key: keyof CostInputs; label: string; hint: string; step: number }[] = [
   { key: "livingCost", label: "Living cost / year", hint: "Housing, food, personal", step: 500 },
@@ -235,6 +236,8 @@ export function CostRoiPanel({ university: u }: { university: University }) {
         Estimates only. Living costs, aid, and salaries vary widely by program, country, and year —
         use this to compare options, not as a financial guarantee.
       </p>
+
+      <AppealLetterGenerator university={u} inputs={inputs} results={results} />
     </div>
   );
 }

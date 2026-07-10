@@ -8,6 +8,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { strengthIndex } from "@/lib/chances";
 import type { AcademicProfile } from "@/lib/storage/types";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ShareProgressSection } from "@/components/profile/ShareProgressSection";
 
 type NumericField = "gpa" | "sat" | "act" | "toefl" | "ielts";
 
@@ -181,6 +182,8 @@ export default function ProfilePage() {
           </button>
         </div>
       )}
+
+      {enabled && user && <ShareProgressSection />}
     </main>
   );
 }

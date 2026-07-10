@@ -49,6 +49,14 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
             </span>
           )}
         </Link>
+        {enabled && user && (
+          <Link
+            href="/shared"
+            className="flex items-center gap-sm rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
+          >
+            <span className="material-symbols-outlined">diversity_1</span> Shared with you
+          </Link>
+        )}
         {enabled &&
           (user ? (
             <button
@@ -95,6 +103,13 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
                   <p className="truncate px-3 py-2 font-caption text-caption text-on-surface-variant">
                     {user.email}
                   </p>
+                  <Link
+                    href="/shared"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex w-full items-center gap-sm rounded-lg px-3 py-2 text-left font-body-md text-body-md text-on-surface hover:bg-surface-container"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">diversity_1</span> Shared with you
+                  </Link>
                   <button
                     onClick={() => {
                       setMenuOpen(false);

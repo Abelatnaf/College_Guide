@@ -25,10 +25,16 @@ type LatestSubmission = {
 } | null;
 
 const TIER_ICON: Record<Tier, string> = {
-  basic: "explore",
-  standard: "calculate",
-  premium: "auto_awesome",
+  basic: "school",
+  standard: "assignment",
+  premium: "workspace_premium",
 };
+
+const TRUST_ITEMS = [
+  { icon: "shield", title: "Secure Payment", desc: "Your data is safe with us" },
+  { icon: "bolt", title: "Instant Access", desc: "Get started immediately" },
+  { icon: "headset_mic", title: "24/7 Support", desc: "We're here to help" },
+] as const;
 
 const stepVariants: Variants = {
   enter: { opacity: 0, x: 32 },
@@ -254,11 +260,13 @@ export default function PaymentPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-md py-xl md:px-lg">
-      <PageHeader
-        icon="payments"
-        title="Unlock UniPath"
-        description="Pick a plan, send the payment, then upload a screenshot of the transfer. We approve access by hand, usually within a day."
-      />
+      {step !== 1 && (
+        <PageHeader
+          icon="payments"
+          title="Unlock UniPath"
+          description="Pick a plan, send the payment, then upload a screenshot of the transfer. We approve access by hand, usually within a day."
+        />
+      )}
 
       {latest && (
         <Reveal
@@ -297,39 +305,48 @@ export default function PaymentPage() {
 
       {!pending && (
         <>
-          <Stepper step={step} />
+          {step !== 1 && <Stepper step={step} />}
 
           <AnimatePresence mode="wait">
             {step === 1 && (
               <m.div key="step-1" variants={stepVariants} initial="enter" animate="center" exit="exit">
-                <Stagger className="grid gap-md sm:grid-cols-3" stagger={0.1}>
+                <Reveal className="mb-xl flex flex-col items-center text-center">
+                  <span className="mb-md inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 font-label-sm text-label-sm text-primary">
+                    <span className="material-symbols-outlined text-[16px]">gpp_good</span>
+                    Choose the plan that fits you best
+                  </span>
+                  <h1 className="text-4xl font-extrabold text-on-surface sm:text-5xl">
+                    Pick Your Plan
+                  </h1>
+                  <p className="mt-sm max-w-md font-body-md text-body-md text-on-surface-variant">
+                    Unlock powerful tools and features to ace your application journey.
+                  </p>
+                </Reveal>
+
+                <Stagger className="grid items-stretch gap-md sm:grid-cols-3" stagger={0.1}>
                   {TIERS.map((t) => (
-                    <StaggerItem key={t.id} variant="scale">
-                      <Tilt3D maxTilt={8} className="h-full rounded-xl">
-                        <button
-                          onClick={() => setSelectedTier(t.id)}
-                          className={`relative h-full w-full rounded-xl border p-lg text-left transition ${
-                            selectedTier === t.id
-                              ? "border-primary bg-primary/10 shadow-glow-sm"
-                              : "border-outline-variant/30 bg-surface-container-lowest hover:border-primary/40"
+                    <StaggerItem key={t.id} variant="scale" className="h-full">
+                      <Tilt3D maxTilt={8} className="h-full rounded-2xl">
+                        <div
+                          className={`relative flex h-full flex-col rounded-2xl border p-lg text-center ${
+                            t.id === "standard"
+                              ? "border-2 border-primary bg-surface-container-lowest shadow-glow"
+                              : "border-outline-variant/30 bg-surface-container-lowest"
                           }`}
                         >
                           {t.id === "standard" && (
-                            <span className="absolute -top-3 right-4 rounded-full bg-tertiary px-sm py-0.5 font-label-sm text-[11px] text-on-tertiary shadow-glow-sm">
-                              Most popular
+                            <span className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-primary px-3 py-1 font-label-sm text-[11px] font-semibold text-on-primary shadow-glow-sm">
+                              <span className="material-symbols-outlined text-[14px]">star</span>
+                              MOST POPULAR
                             </span>
                           )}
-                          <span
-                            className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                              selectedTier === t.id
-                                ? "bg-primary text-on-primary"
-                                : "bg-surface-container text-on-surface-variant"
-                            }`}
-                          >
-                            <span className="material-symbols-outlined text-[20px]">
+
+                          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-primary/40 bg-primary/5 text-primary">
+                            <span className="material-symbols-outlined text-[26px]">
                               {TIER_ICON[t.id]}
                             </span>
                           </span>
+
                           <h3 className="mt-md font-display text-display-sm text-on-surface">
                             {t.label}
                           </h3>
@@ -339,34 +356,64 @@ export default function PaymentPage() {
                           <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">
                             {t.tagline}
                           </p>
-                          <ul className="mt-md space-y-1">
+
+                          <div className="my-md border-t border-outline-variant/20" />
+
+                          <ul className="flex-grow space-y-2 text-left">
                             {t.features.map((f) => (
                               <li
                                 key={f}
-                                className="flex gap-2 font-body-sm text-body-sm text-on-surface-variant"
+                                className="flex items-start gap-2 font-body-sm text-body-sm text-on-surface-variant"
                               >
-                                <span className="material-symbols-outlined text-[16px] text-primary">
-                                  check
+                                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+                                  <span className="material-symbols-outlined text-[14px]">
+                                    check
+                                  </span>
                                 </span>
                                 {f}
                               </li>
                             ))}
                           </ul>
-                        </button>
+
+                          <button
+                            onClick={() => {
+                              setSelectedTier(t.id);
+                              setStep(2);
+                            }}
+                            className={`mt-lg rounded-lg px-lg py-sm font-label-md text-label-md transition ${
+                              t.id === "standard"
+                                ? "bg-primary text-on-primary hover:shadow-glow-sm"
+                                : "border border-primary/40 text-primary hover:bg-primary/10"
+                            }`}
+                          >
+                            Choose {t.label}
+                          </button>
+                        </div>
                       </Tilt3D>
                     </StaggerItem>
                   ))}
                 </Stagger>
 
-                <div className="mt-lg flex justify-end">
-                  <button
-                    onClick={() => setStep(2)}
-                    disabled={!selectedTier}
-                    className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition enabled:hover:shadow-glow-sm disabled:opacity-40"
-                  >
-                    Continue
-                  </button>
+                <div className="mt-xl grid gap-md rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-lg sm:grid-cols-3">
+                  {TRUST_ITEMS.map((item) => (
+                    <div key={item.title} className="flex items-center gap-sm">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                      </span>
+                      <div>
+                        <p className="font-label-md text-label-md text-on-surface">{item.title}</p>
+                        <p className="font-body-sm text-body-sm text-on-surface-variant">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
+
+                <p className="mt-lg text-center font-body-sm text-body-sm text-on-surface-variant">
+                  Pay via <strong className="text-on-surface">Telebirr</strong> or{" "}
+                  <strong className="text-on-surface">Bank of Abyssinia</strong>
+                </p>
               </m.div>
             )}
 

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAccess } from "@/components/auth/AccessProvider";
+import { LockScreen } from "@/components/auth/LockScreen";
 import { TIERS, type Tier } from "@/lib/access/tiers";
 
 /**
@@ -24,20 +25,18 @@ export function RequireTier({ tier, children }: { tier: Tier; children: React.Re
 
   const tierInfo = TIERS.find((t) => t.id === tier)!;
   return (
-    <main className="flex flex-grow flex-col items-center justify-center gap-md px-md py-xl text-center">
-      <span className="material-symbols-outlined text-[40px] text-on-surface-variant">lock</span>
-      <h1 className="font-display text-display-md text-on-surface">
-        {tierInfo.label} plan required
-      </h1>
-      <p className="max-w-md font-body-md text-body-md text-on-surface-variant">
-        This feature is part of the {tierInfo.label} plan ({tierInfo.priceEtb} ETB) and up.
-      </p>
-      <Link
-        href="/payment"
-        className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary"
-      >
-        View plans
-      </Link>
-    </main>
+    <LockScreen
+      icon="workspace_premium"
+      title={`${tierInfo.label} plan required`}
+      description={`This feature is part of the ${tierInfo.label} plan (${tierInfo.priceEtb} ETB) and up.`}
+      action={
+        <Link
+          href="/payment"
+          className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition hover:shadow-glow-sm"
+        >
+          View plans
+        </Link>
+      }
+    />
   );
 }

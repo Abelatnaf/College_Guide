@@ -1,11 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type DragEvent } from "react";
 import { useRouter } from "next/navigation";
+import { m, AnimatePresence, type Variants } from "framer-motion";
 import { getSupabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Reveal } from "@/components/ui/Reveal";
+import { LockScreen } from "@/components/auth/LockScreen";
+import { Stagger } from "@/components/motion/Stagger";
+import { StaggerItem } from "@/components/motion/StaggerItem";
+import { Tilt3D } from "@/components/motion/Tilt3D";
+import { EASE } from "@/lib/motion";
 import { TIERS, PAYMENT_DETAILS, type Tier } from "@/lib/access/tiers";
 
 type Method = "telebirr" | "abyssinia";
@@ -17,17 +24,115 @@ type LatestSubmission = {
   created_at: string;
 } | null;
 
+const TIER_ICON: Record<Tier, string> = {
+  basic: "explore",
+  standard: "calculate",
+  premium: "auto_awesome",
+};
+
+const stepVariants: Variants = {
+  enter: { opacity: 0, x: 32 },
+  center: { opacity: 1, x: 0, transition: { duration: 0.4, ease: EASE } },
+  exit: { opacity: 0, x: -32, transition: { duration: 0.25, ease: EASE } },
+};
+
+function Stepper({ step }: { step: 1 | 2 | 3 }) {
+  const steps = [
+    { n: 1 as const, label: "Plan" },
+    { n: 2 as const, label: "Pay" },
+    { n: 3 as const, label: "Proof" },
+  ];
+  return (
+    <div className="mb-xl flex items-center justify-center">
+      {steps.map((s, i) => (
+        <div key={s.n} className="flex items-center">
+          <div className="flex flex-col items-center gap-1">
+            <m.div
+              animate={{
+                scale: step === s.n ? 1.1 : 1,
+                backgroundColor: step >= s.n ? "rgb(var(--primary))" : "transparent",
+              }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border-2 font-label-md text-label-md ${
+                step >= s.n
+                  ? "border-primary text-on-primary"
+                  : "border-outline-variant/40 text-on-surface-variant"
+              }`}
+            >
+              {step > s.n ? (
+                <span className="material-symbols-outlined text-[18px]">check</span>
+              ) : (
+                s.n
+              )}
+            </m.div>
+            <span
+              className={`font-label-sm text-label-sm ${
+                step === s.n ? "text-on-surface" : "text-on-surface-variant"
+              }`}
+            >
+              {s.label}
+            </span>
+          </div>
+          {i < steps.length - 1 && (
+            <div className="relative mx-2 mb-4 h-0.5 w-10 overflow-hidden rounded-full bg-outline-variant/30 sm:w-20">
+              <m.div
+                className="absolute inset-y-0 left-0 bg-primary"
+                initial={false}
+                animate={{ width: step > s.n ? "100%" : "0%" }}
+                transition={{ duration: 0.35, ease: EASE }}
+              />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CopyField({ label, value, field, copied, onCopy }: {
+  label: string;
+  value: string;
+  field: string;
+  copied: string | null;
+  onCopy: (value: string, field: string) => void;
+}) {
+  const isCopied = copied === field;
+  return (
+    <div className="flex items-center justify-between gap-md rounded-lg bg-surface-container px-md py-sm">
+      <div>
+        <p className="font-label-sm text-label-sm text-on-surface-variant">{label}</p>
+        <p className="font-body-md text-body-md text-on-surface">{value}</p>
+      </div>
+      <button
+        onClick={() => onCopy(value, field)}
+        className="flex shrink-0 items-center gap-1 rounded-lg border border-outline-variant/30 px-sm py-xs font-label-sm text-label-sm text-on-surface-variant transition hover:border-primary/40 hover:text-primary"
+      >
+        <span className="material-symbols-outlined text-[16px]">
+          {isCopied ? "check" : "content_copy"}
+        </span>
+        {isCopied ? "Copied" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
 export default function PaymentPage() {
   const router = useRouter();
   const { user, loading: authLoading, openAuth } = useAuth();
   const { isUnlocked, loading: accessLoading, refresh } = useAccess();
-  const [selectedTier, setSelectedTier] = useState<Tier>("standard");
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [selectedTier, setSelectedTier] = useState<Tier | null>(null);
   const [method, setMethod] = useState<Method>("telebirr");
   const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [dragActive, setDragActive] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [latest, setLatest] = useState<LatestSubmission>(null);
   const [loadingLatest, setLoadingLatest] = useState(true);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadLatest = useCallback(async () => {
     const supabase = getSupabase();
@@ -57,9 +162,36 @@ export default function PaymentPage() {
     }
   }, [authLoading, accessLoading, isUnlocked, router]);
 
+  useEffect(() => {
+    if (!file) {
+      setPreviewUrl(null);
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  const copy = async (value: string, field: string) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField((f) => (f === field ? null : f)), 1500);
+    } catch {
+      /* clipboard unavailable — copy button just silently no-ops */
+    }
+  };
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragActive(false);
+    const dropped = e.dataTransfer.files?.[0];
+    if (dropped) setFile(dropped);
+  };
+
   const handleSubmit = async () => {
     const supabase = getSupabase();
-    if (!supabase || !user || !file) return;
+    if (!supabase || !user || !file || !selectedTier) return;
     setSubmitting(true);
     setError(null);
     try {
@@ -80,6 +212,7 @@ export default function PaymentPage() {
       });
       if (insertError) throw insertError;
 
+      setSubmitted(true);
       setFile(null);
       await loadLatest();
       await refresh();
@@ -100,23 +233,23 @@ export default function PaymentPage() {
 
   if (!user) {
     return (
-      <main className="flex flex-grow flex-col items-center justify-center gap-md px-md py-xl text-center">
-        <span className="material-symbols-outlined text-[40px] text-on-surface-variant">lock</span>
-        <h1 className="font-display text-display-md text-on-surface">Sign in to pay</h1>
-        <p className="max-w-md font-body-md text-body-md text-on-surface-variant">
-          Create an account or sign in first, then come back here to choose a plan.
-        </p>
-        <button
-          onClick={openAuth}
-          className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary"
-        >
-          Sign in
-        </button>
-      </main>
+      <LockScreen
+        icon="lock"
+        title="Sign in to pay"
+        description="Create an account or sign in first, then come back here to choose a plan."
+        action={
+          <button
+            onClick={openAuth}
+            className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition hover:shadow-glow-sm"
+          >
+            Sign in
+          </button>
+        }
+      />
     );
   }
 
-  const tierInfo = TIERS.find((t) => t.id === selectedTier)!;
+  const tierInfo = selectedTier ? TIERS.find((t) => t.id === selectedTier)! : null;
   const pending = latest?.status === "pending";
 
   return (
@@ -128,125 +261,286 @@ export default function PaymentPage() {
       />
 
       {latest && (
-        <div
+        <Reveal
           className={`mb-lg rounded-xl border p-lg ${
             latest.status === "rejected"
               ? "border-error/40 bg-error/10"
               : "border-outline-variant/30 bg-surface-container-lowest"
           }`}
         >
-          {latest.status === "pending" && (
+          {latest.status === "pending" && !submitted && (
             <p className="font-body-md text-body-md text-on-surface">
-              Your <strong>{latest.tier}</strong> payment is under review. We&apos;ll unlock your
-              account as soon as it&apos;s approved — no need to resubmit.
+              Your <strong className="capitalize">{latest.tier}</strong> payment is under review.
+              We&apos;ll unlock your account as soon as it&apos;s approved — no need to resubmit.
             </p>
           )}
           {latest.status === "rejected" && (
             <>
               <p className="font-body-md text-body-md text-on-surface">
-                Your last submission (<strong>{latest.tier}</strong>) was rejected
-                {latest.rejection_reason ? `: ${latest.rejection_reason}` : "."}
+                Your last submission (<strong className="capitalize">{latest.tier}</strong>) was
+                rejected{latest.rejection_reason ? `: ${latest.rejection_reason}` : "."}
               </p>
               <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">
                 Double-check the amount and account, then submit a new screenshot below.
               </p>
             </>
           )}
-        </div>
+          {submitted && latest.status === "pending" && (
+            <p className="flex items-center gap-2 font-body-md text-body-md text-on-surface">
+              <span className="material-symbols-outlined text-primary">task_alt</span>
+              Submitted! Your <strong className="capitalize">{latest.tier}</strong> payment is now
+              in the review queue.
+            </p>
+          )}
+        </Reveal>
       )}
 
       {!pending && (
         <>
-          <div className="mb-lg grid gap-md sm:grid-cols-3">
-            {TIERS.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setSelectedTier(t.id)}
-                className={`rounded-xl border p-lg text-left transition ${
-                  selectedTier === t.id
-                    ? "border-primary bg-primary/10"
-                    : "border-outline-variant/30 bg-surface-container-lowest hover:border-primary/40"
-                }`}
-              >
-                <h3 className="font-display text-display-sm text-on-surface">{t.label}</h3>
-                <p className="mt-1 font-label-lg text-label-lg text-primary">{t.priceEtb} ETB</p>
-                <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">{t.tagline}</p>
-                <ul className="mt-md space-y-1">
-                  {t.features.map((f) => (
-                    <li key={f} className="flex gap-2 font-body-sm text-body-sm text-on-surface-variant">
-                      <span className="material-symbols-outlined text-[16px] text-primary">check</span>
-                      {f}
-                    </li>
+          <Stepper step={step} />
+
+          <AnimatePresence mode="wait">
+            {step === 1 && (
+              <m.div key="step-1" variants={stepVariants} initial="enter" animate="center" exit="exit">
+                <Stagger className="grid gap-md sm:grid-cols-3" stagger={0.1}>
+                  {TIERS.map((t) => (
+                    <StaggerItem key={t.id} variant="scale">
+                      <Tilt3D maxTilt={8} className="h-full rounded-xl">
+                        <button
+                          onClick={() => setSelectedTier(t.id)}
+                          className={`relative h-full w-full rounded-xl border p-lg text-left transition ${
+                            selectedTier === t.id
+                              ? "border-primary bg-primary/10 shadow-glow-sm"
+                              : "border-outline-variant/30 bg-surface-container-lowest hover:border-primary/40"
+                          }`}
+                        >
+                          {t.id === "standard" && (
+                            <span className="absolute -top-3 right-4 rounded-full bg-tertiary px-sm py-0.5 font-label-sm text-[11px] text-on-tertiary shadow-glow-sm">
+                              Most popular
+                            </span>
+                          )}
+                          <span
+                            className={`flex h-10 w-10 items-center justify-center rounded-lg ${
+                              selectedTier === t.id
+                                ? "bg-primary text-on-primary"
+                                : "bg-surface-container text-on-surface-variant"
+                            }`}
+                          >
+                            <span className="material-symbols-outlined text-[20px]">
+                              {TIER_ICON[t.id]}
+                            </span>
+                          </span>
+                          <h3 className="mt-md font-display text-display-sm text-on-surface">
+                            {t.label}
+                          </h3>
+                          <p className="mt-1 font-label-lg text-label-lg text-primary">
+                            {t.priceEtb} ETB
+                          </p>
+                          <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">
+                            {t.tagline}
+                          </p>
+                          <ul className="mt-md space-y-1">
+                            {t.features.map((f) => (
+                              <li
+                                key={f}
+                                className="flex gap-2 font-body-sm text-body-sm text-on-surface-variant"
+                              >
+                                <span className="material-symbols-outlined text-[16px] text-primary">
+                                  check
+                                </span>
+                                {f}
+                              </li>
+                            ))}
+                          </ul>
+                        </button>
+                      </Tilt3D>
+                    </StaggerItem>
                   ))}
-                </ul>
-              </button>
-            ))}
-          </div>
+                </Stagger>
 
-          <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
-            <h2 className="mb-md font-display text-display-sm text-on-surface">
-              Pay {tierInfo.priceEtb} ETB for {tierInfo.label}
-            </h2>
+                <div className="mt-lg flex justify-end">
+                  <button
+                    onClick={() => setStep(2)}
+                    disabled={!selectedTier}
+                    className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition enabled:hover:shadow-glow-sm disabled:opacity-40"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </m.div>
+            )}
 
-            <div className="mb-md flex gap-sm">
-              {(["telebirr", "abyssinia"] as Method[]).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMethod(m)}
-                  className={`rounded-lg border px-md py-xs font-label-md text-label-md ${
-                    method === m
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-outline-variant/30 text-on-surface-variant"
-                  }`}
-                >
-                  {m === "telebirr" ? "Telebirr" : "Bank of Abyssinia"}
-                </button>
-              ))}
-            </div>
+            {step === 2 && tierInfo && (
+              <m.div key="step-2" variants={stepVariants} initial="enter" animate="center" exit="exit">
+                <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
+                  <div className="mb-md flex items-center justify-between">
+                    <h2 className="font-display text-display-sm text-on-surface">
+                      Pay {tierInfo.priceEtb} ETB for {tierInfo.label}
+                    </h2>
+                    <button
+                      onClick={() => setStep(1)}
+                      className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary"
+                    >
+                      Change plan
+                    </button>
+                  </div>
 
-            <div className="mb-lg rounded-lg bg-surface-container p-md font-body-md text-body-md text-on-surface">
-              {method === "telebirr" ? (
-                <>
-                  <p>
-                    Send to Telebirr number <strong>{PAYMENT_DETAILS.telebirr.number}</strong>
-                  </p>
-                  <p className="text-on-surface-variant">
-                    Account name: {PAYMENT_DETAILS.telebirr.name}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>
-                    Send to Bank of Abyssinia account{" "}
-                    <strong>{PAYMENT_DETAILS.abyssinia.accountNumber}</strong>
-                  </p>
-                  <p className="text-on-surface-variant">
-                    Account name: {PAYMENT_DETAILS.abyssinia.name}
-                  </p>
-                </>
-              )}
-            </div>
+                  <div className="mb-md flex gap-sm">
+                    {(["telebirr", "abyssinia"] as Method[]).map((m2) => (
+                      <button
+                        key={m2}
+                        onClick={() => setMethod(m2)}
+                        className={`rounded-lg border px-md py-xs font-label-md text-label-md transition ${
+                          method === m2
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-outline-variant/30 text-on-surface-variant hover:border-primary/30"
+                        }`}
+                      >
+                        {m2 === "telebirr" ? "Telebirr" : "Bank of Abyssinia"}
+                      </button>
+                    ))}
+                  </div>
 
-            <label className="mb-xs block font-label-md text-label-md text-on-surface-variant">
-              Upload a screenshot of the completed payment
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-              className="mb-md block w-full text-body-sm text-on-surface-variant file:mr-md file:rounded-lg file:border-0 file:bg-primary file:px-md file:py-xs file:font-label-md file:text-on-primary"
-            />
+                  <div className="mb-lg space-y-sm">
+                    {method === "telebirr" ? (
+                      <>
+                        <CopyField
+                          label="Telebirr number"
+                          value={PAYMENT_DETAILS.telebirr.number}
+                          field="telebirr-number"
+                          copied={copiedField}
+                          onCopy={copy}
+                        />
+                        <CopyField
+                          label="Account name"
+                          value={PAYMENT_DETAILS.telebirr.name}
+                          field="telebirr-name"
+                          copied={copiedField}
+                          onCopy={copy}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <CopyField
+                          label="Bank of Abyssinia account number"
+                          value={PAYMENT_DETAILS.abyssinia.accountNumber}
+                          field="abyssinia-number"
+                          copied={copiedField}
+                          onCopy={copy}
+                        />
+                        <CopyField
+                          label="Account name"
+                          value={PAYMENT_DETAILS.abyssinia.name}
+                          field="abyssinia-name"
+                          copied={copiedField}
+                          onCopy={copy}
+                        />
+                      </>
+                    )}
+                  </div>
 
-            {error && <p className="mb-md font-body-sm text-body-sm text-error">{error}</p>}
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => setStep(3)}
+                      className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition hover:shadow-glow-sm"
+                    >
+                      I&apos;ve sent it — continue
+                    </button>
+                  </div>
+                </div>
+              </m.div>
+            )}
 
-            <button
-              onClick={handleSubmit}
-              disabled={!file || submitting}
-              className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary disabled:opacity-50"
-            >
-              {submitting ? "Submitting…" : "Submit for review"}
-            </button>
-          </div>
+            {step === 3 && tierInfo && (
+              <m.div key="step-3" variants={stepVariants} initial="enter" animate="center" exit="exit">
+                <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
+                  <div className="mb-md flex items-center justify-between">
+                    <h2 className="font-display text-display-sm text-on-surface">
+                      Upload your payment screenshot
+                    </h2>
+                    <button
+                      onClick={() => setStep(2)}
+                      className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary"
+                    >
+                      Back
+                    </button>
+                  </div>
+
+                  <div
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      setDragActive(true);
+                    }}
+                    onDragLeave={() => setDragActive(false)}
+                    onDrop={handleDrop}
+                    onClick={() => fileInputRef.current?.click()}
+                    className={`mb-lg flex cursor-pointer flex-col items-center justify-center gap-sm rounded-xl border-2 border-dashed p-xl text-center transition ${
+                      dragActive
+                        ? "border-primary bg-primary/10"
+                        : "border-outline-variant/40 hover:border-primary/40"
+                    }`}
+                  >
+                    {previewUrl ? (
+                      <m.img
+                        key={previewUrl}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.25, ease: EASE }}
+                        src={previewUrl}
+                        alt="Selected payment screenshot"
+                        className="h-40 w-40 rounded-lg object-cover shadow-glow-sm"
+                      />
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[36px] text-on-surface-variant">
+                          cloud_upload
+                        </span>
+                        <p className="font-body-md text-body-md text-on-surface">
+                          Drag & drop your screenshot here
+                        </p>
+                        <p className="font-body-sm text-body-sm text-on-surface-variant">
+                          or click to browse
+                        </p>
+                      </>
+                    )}
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                      className="hidden"
+                    />
+                  </div>
+
+                  {file && (
+                    <div className="mb-md flex items-center justify-between rounded-lg bg-surface-container px-md py-sm">
+                      <span className="truncate font-body-sm text-body-sm text-on-surface-variant">
+                        {file.name}
+                      </span>
+                      <button
+                        onClick={() => setFile(null)}
+                        className="font-label-sm text-label-sm text-error hover:underline"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
+
+                  {error && <p className="mb-md font-body-sm text-body-sm text-error">{error}</p>}
+
+                  <div className="flex justify-end">
+                    <button
+                      onClick={handleSubmit}
+                      disabled={!file || submitting}
+                      className="rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary transition enabled:hover:shadow-glow-sm disabled:opacity-40"
+                    >
+                      {submitting ? "Submitting…" : "Submit for review"}
+                    </button>
+                  </div>
+                </div>
+              </m.div>
+            )}
+          </AnimatePresence>
         </>
       )}
     </main>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter, Fraunces } from "next/font/google";
+import { Figtree, Lora, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,20 +8,28 @@ import { AskAiFab } from "@/components/layout/AskAiFab";
 import { Providers } from "@/components/providers/Providers";
 import { AmbientBackground } from "@/components/ambient/AmbientBackground";
 
-const inter = Inter({
+// Rounded humanist sans — the workhorse for body/UI text.
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-figtree",
   display: "swap",
 });
 
-// Editorial display serif — headlines only; Inter stays the workhorse for
-// body/UI text. The opsz axis keeps large sizes elegant and small sizes sturdy.
-const fraunces = Fraunces({
+// Warm literary serif — headlines only.
+const lora = Lora({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-lora",
   display: "swap",
   style: ["normal", "italic"],
-  axes: ["opsz"],
+});
+
+// Handwritten accent — used sparingly for the mentor's-margin-note device.
+// Never body text.
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+  weight: ["500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${inter.variable} ${fraunces.variable} scroll-smooth`}
+      className={`${figtree.variable} ${lora.variable} ${caveat.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>

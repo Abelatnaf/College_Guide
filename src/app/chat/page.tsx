@@ -188,8 +188,8 @@ export default function ChatPage() {
     <div
       className={
         big
-          ? "flex w-full items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest p-2 pl-lg shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgba(0,105,72,0.12),0_8px_30px_rgba(0,0,0,0.12)]"
-          : "flex items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest/90 p-1.5 pl-md shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgba(0,105,72,0.12),0_4px_20px_rgba(0,0,0,0.08)]"
+          ? "flex w-full items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest p-2 pl-lg shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgb(var(--primary)/0.12),0_8px_30px_rgba(0,0,0,0.12)]"
+          : "flex items-end gap-sm rounded-3xl border border-outline-variant bg-surface-container-lowest/90 p-1.5 pl-md shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-all duration-200 focus-within:border-primary/60 focus-within:shadow-[0_0_0_3px_rgb(var(--primary)/0.12),0_4px_20px_rgba(0,0,0,0.08)]"
       }
     >
       <textarea
@@ -228,8 +228,8 @@ export default function ChatPage() {
           aria-label="Send message"
           className={
             big
-              ? "inline-flex h-12 w-12 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(0,105,72,0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
-              : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgba(0,105,72,0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+              ? "inline-flex h-12 w-12 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgb(var(--primary)/0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+              : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgb(var(--primary)/0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
           }
         >
           <span className="material-symbols-outlined text-[20px]">send</span>
@@ -244,7 +244,7 @@ export default function ChatPage() {
       <div className="mb-sm flex items-center justify-between gap-sm">
         <div className="flex items-center gap-sm">
           <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgba(0,105,72,0.35)]"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
             aria-hidden="true"
           >
             <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -256,7 +256,7 @@ export default function ChatPage() {
         {messages.length > 0 && (
           <button
             onClick={clearConversation}
-            className="group inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-md py-1.5 font-label-md text-label-md text-on-surface-variant shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary hover:shadow-[0_0_0_3px_rgba(0,105,72,0.12)]"
+            className="group inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-md py-1.5 font-label-md text-label-md text-on-surface-variant shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary hover:shadow-[0_0_0_3px_rgb(var(--primary)/0.12)]"
           >
             <span className="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:-rotate-6">
               delete_sweep
@@ -287,7 +287,7 @@ export default function ChatPage() {
         /* Empty state — centered greeting + big composer + quick-prompt pills */
         <div className="flex flex-1 flex-col items-center justify-center px-md pb-10 text-center">
           <span
-            className="mb-md flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/40 text-primary shadow-[0_8px_30px_rgba(0,105,72,0.18)]"
+            className="mb-md flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/40 text-primary shadow-[0_8px_30px_rgb(var(--primary)/0.18)]"
             aria-hidden="true"
           >
             <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -311,7 +311,7 @@ export default function ChatPage() {
                 key={p.label}
                 onClick={() => sendMessage(p.prompt)}
                 disabled={busy}
-                className="group inline-flex items-center gap-2 rounded-full border border-outline-variant/50 bg-surface-container-lowest px-lg py-2.5 font-label-md text-label-md text-on-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_8px_20px_rgba(0,105,72,0.12)] disabled:pointer-events-none disabled:opacity-50"
+                className="group inline-flex items-center gap-2 rounded-full border border-outline-variant/50 bg-surface-container-lowest px-lg py-2.5 font-label-md text-label-md text-on-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_8px_20px_rgb(var(--primary)/0.12)] disabled:pointer-events-none disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[18px] text-primary/70 transition-colors duration-200 group-hover:text-primary">
                   {p.icon}
@@ -341,7 +341,7 @@ export default function ChatPage() {
                 >
                   {m.role === "assistant" && (
                     <span
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)]"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)]"
                       aria-hidden="true"
                     >
                       <span
@@ -354,7 +354,7 @@ export default function ChatPage() {
                   )}
 
                   {m.role === "user" ? (
-                    <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-md py-sm font-body-md text-body-md leading-relaxed text-on-primary shadow-[0_4px_14px_rgba(0,105,72,0.28)] sm:max-w-[70%]">
+                    <div className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-primary px-md py-sm font-body-md text-body-md leading-relaxed text-on-primary shadow-[0_4px_14px_rgb(var(--primary)/0.28)] sm:max-w-[70%]">
                       {m.content}
                     </div>
                   ) : (
@@ -389,7 +389,7 @@ export default function ChatPage() {
             {loading && (
               <div className="flex animate-fade-in items-end justify-start gap-sm">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgba(0,105,72,0.3)]"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)]"
                   aria-hidden="true"
                 >
                   <span

@@ -15,8 +15,8 @@ import { StorageProvider } from "@/components/providers/StorageProvider";
  *   (~15-25KB) and enforces the lightweight `m.*` components everywhere.
  * - MotionConfig reducedMotion="user" makes every animation respect
  *   prefers-reduced-motion (transforms drop, gentle opacity remains).
- * - ThemeProvider is pinned to dark: the app is dark-only now (the light
- *   palette survives solely for print/PDF via the @media print override).
+ * - ThemeProvider defaults to the warm light palette but lets the system
+ *   preference or the navbar toggle switch to the warm-dark variant.
  */
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -24,9 +24,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <MotionConfig reducedMotion="user">
         <ThemeProvider
           attribute="class"
-          forcedTheme="dark"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="light"
+          enableSystem
           disableTransitionOnChange
         >
           <AuthProvider>

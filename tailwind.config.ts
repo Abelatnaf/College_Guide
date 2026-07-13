@@ -97,24 +97,27 @@ const config: Config = {
         "glow-lg": "0 0 70px rgb(var(--glow) / 0.28)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "sans-serif"],
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
-        serif: ["var(--font-fraunces)", "Georgia", "serif"],
-        mono: ["var(--font-inter)", "Inter", "sans-serif"],
-        inter: ["var(--font-inter)", "Inter", "sans-serif"],
-        "label-md": ["var(--font-inter)", "Inter", "sans-serif"],
+        sans: ["var(--font-figtree)", "Figtree", "sans-serif"],
+        display: ["var(--font-lora)", "Georgia", "serif"],
+        serif: ["var(--font-lora)", "Georgia", "serif"],
+        mono: ["var(--font-figtree)", "Figtree", "sans-serif"],
+        inter: ["var(--font-figtree)", "Figtree", "sans-serif"],
+        // Handwritten marginalia accent — mentor's-note device. Used sparingly,
+        // never for body copy.
+        hand: ["var(--font-caveat)", "cursive"],
+        "label-md": ["var(--font-figtree)", "Figtree", "sans-serif"],
         // Heading roles carry the editorial serif app-wide; body/label/caption
-        // stay Inter for dense-UI readability. Sizes are unchanged, so this
+        // stay Figtree for dense-UI readability. Sizes are unchanged, so this
         // flip is layout-safe everywhere.
-        "headline-sm": ["var(--font-fraunces)", "Georgia", "serif"],
-        "headline-md": ["var(--font-fraunces)", "Georgia", "serif"],
-        "headline-lg-mobile": ["var(--font-fraunces)", "Georgia", "serif"],
-        "body-md": ["var(--font-inter)", "Inter", "sans-serif"],
-        "body-lg": ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-xl-mobile": ["var(--font-fraunces)", "Georgia", "serif"],
-        caption: ["var(--font-inter)", "Inter", "sans-serif"],
-        "headline-xl": ["var(--font-fraunces)", "Georgia", "serif"],
-        "headline-lg": ["var(--font-fraunces)", "Georgia", "serif"],
+        "headline-sm": ["var(--font-lora)", "Georgia", "serif"],
+        "headline-md": ["var(--font-lora)", "Georgia", "serif"],
+        "headline-lg-mobile": ["var(--font-lora)", "Georgia", "serif"],
+        "body-md": ["var(--font-figtree)", "Figtree", "sans-serif"],
+        "body-lg": ["var(--font-figtree)", "Figtree", "sans-serif"],
+        "headline-xl-mobile": ["var(--font-lora)", "Georgia", "serif"],
+        caption: ["var(--font-figtree)", "Figtree", "sans-serif"],
+        "headline-xl": ["var(--font-lora)", "Georgia", "serif"],
+        "headline-lg": ["var(--font-lora)", "Georgia", "serif"],
       },
       // Role-based type scale from the Stitch design system
       fontSize: {

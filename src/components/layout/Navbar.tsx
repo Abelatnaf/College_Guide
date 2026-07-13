@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { NavActions } from "@/components/layout/NavActions";
 
 const NAV_LINKS = [
-  { label: "My Path", href: "/path" },
+  { label: "Command Center", href: "/path" },
   { label: "Majors", href: "/majors" },
   { label: "Universities", href: "/universities" },
   { label: "Compare", href: "/compare" },
@@ -57,7 +57,7 @@ export function Navbar() {
       className={cn(
         "no-print hairline sticky top-0 z-50 w-full border-b transition-all duration-300 ease-in-out",
         scrolled
-          ? "bg-surface/80 shadow-[0_8px_32px_rgb(0_0_0/0.35)] backdrop-blur-xl"
+          ? "bg-surface/85 shadow-[0_8px_32px_rgb(var(--shadow-ambient)/0.18)] backdrop-blur-xl"
           : "bg-surface/60 backdrop-blur-md",
       )}
     >

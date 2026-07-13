@@ -1,10 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import { useShortlist, useApplications } from "@/components/providers/StorageProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { cn } from "@/lib/utils";
+
+/** Light/dark toggle. Renders a stable placeholder pre-mount to avoid a hydration mismatch. */
+function ThemeToggle({ mobile = false }: { mobile?: boolean }) {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+  const toggle = () => setTheme(isDark ? "light" : "dark");
+
+  if (mobile) {
+    return (
+      <button
+        onClick={toggle}
+        className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
+      >
+        <span className="material-symbols-outlined">{isDark ? "light_mode" : "dark_mode"}</span>
+        {isDark ? "Light mode" : "Dark mode"}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      onClick={toggle}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary active:scale-95"
+    >
+      <span className="material-symbols-outlined">{mounted ? (isDark ? "light_mode" : "dark_mode") : "dark_mode"}</span>
+    </button>
+  );
+}
 
 /**
  * Right-cluster nav actions: shortlist (with live count), applications, and an
@@ -23,6 +57,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
   if (mobile) {
     return (
       <div className="flex flex-col gap-sm border-t border-outline-variant pt-md">
+        <ThemeToggle mobile />
         <Link
           href="/shortlist"
           className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
@@ -79,6 +114,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
 
   return (
     <div className="hidden items-center gap-1 md:flex">
+      <ThemeToggle />
       <NavIcon href="/shortlist" icon="bookmark" label="Shortlist" badge={count} />
       <NavIcon href="/applications" icon="assignment" label="Applications" badge={appCount} />
       {enabled &&
@@ -152,7 +188,7 @@ function NavIcon({
       aria-label={label}
       title={label}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary hover:shadow-[0_0_0_4px_rgba(0,105,72,0.08)] active:scale-95",
+        "relative flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary hover:shadow-[0_0_0_4px_rgb(var(--primary)/0.08)] active:scale-95",
       )}
     >
       <span className="material-symbols-outlined">{icon}</span>

@@ -146,7 +146,7 @@ export default function HomePage() {
                   className="hairline aspect-[4/5] w-full overflow-hidden rounded-[28px] border shadow-glow-lg"
                 >
                   <CinematicHeroMedia className="absolute inset-0" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--shadow-ambient)/0.85)] via-[rgb(var(--shadow-ambient)/0.12)] to-transparent" />
                   {/* bottom-36 clears the featured-school card overlaid below */}
                   <p className="absolute bottom-36 left-6 right-6 font-display text-[24px] italic leading-snug text-white/90">
                     “The right school is the one that fits — not just the one that’s famous.”
@@ -154,10 +154,10 @@ export default function HomePage() {
                 </Tilt3D>
               </div>
 
-              <Tilt3D maxTilt={14} className="absolute -bottom-4 left-6 right-6 rounded-2xl">
+              <Tilt3D maxTilt={14} className="dogear absolute -bottom-4 left-6 right-6">
                 <Link
                   href="/universities/stanford"
-                  className="glass-panel hairline block rounded-2xl border p-md shadow-lg"
+                  className="glass-panel hairline block border p-md shadow-lg"
                 >
                   <div className="mb-sm flex items-center justify-between">
                     <p className="font-micro text-micro uppercase text-on-surface-variant">
@@ -168,8 +168,8 @@ export default function HomePage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-sm">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-fixed">
-                      <span className="material-symbols-outlined text-on-primary-fixed-variant">
+                    <div className="seal-mark flex h-11 w-11 shrink-0 items-center justify-center">
+                      <span className="material-symbols-outlined text-[20px] text-on-primary">
                         account_balance
                       </span>
                     </div>
@@ -274,7 +274,7 @@ export default function HomePage() {
                   sizes="(min-width: 768px) 50vw, 100vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/45 to-background/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--shadow-ambient)/0.95)] via-[rgb(var(--shadow-ambient)/0.5)] to-[rgb(var(--shadow-ambient)/0.12)]" />
                 <div className="relative z-10 flex h-full flex-col justify-end p-lg md:p-xl">
                   <p className="mb-sm font-micro text-micro uppercase text-primary">
                     How we’re different
@@ -421,7 +421,7 @@ export default function HomePage() {
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--shadow-ambient)/0.9)] via-[rgb(var(--shadow-ambient)/0.35)] to-transparent" />
               <div className="relative z-10 flex h-full flex-col items-center justify-center p-lg text-center">
                 <p className="mb-xs font-display text-display-md italic text-white">
                   Ready when you are.

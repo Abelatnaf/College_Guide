@@ -1,6 +1,6 @@
 /**
- * The app-wide cinematic backdrop, mounted once in the root layout. Pure CSS
- * — two softly "breathing" emerald aurora orbs plus an edge vignette. No JS,
+ * The app-wide ambient backdrop, mounted once in the root layout. Pure CSS
+ * — two softly "breathing" gold/sage orbs plus an edge vignette. No JS,
  * no canvas, no WebGL: cheap enough to render unconditionally on every
  * device, and `motion-safe:` keeps the breathing animation off entirely under
  * prefers-reduced-motion.

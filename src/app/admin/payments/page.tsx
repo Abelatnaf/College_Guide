@@ -5,6 +5,7 @@ import { getSupabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 import type { Tier } from "@/lib/access/tiers";
 
 type Status = "pending" | "approved" | "rejected";
@@ -130,7 +131,7 @@ export default function AdminPaymentsPage() {
   if (!isAdmin) {
     return (
       <main className="flex flex-grow flex-col items-center justify-center gap-md px-md py-xl text-center">
-        <span className="material-symbols-outlined text-[40px] text-error">block</span>
+        <Icon name="block" className="text-[40px] text-error" />
         <h1 className="font-display text-display-md text-on-surface">Not authorized</h1>
         <p className="max-w-md font-body-md text-body-md text-on-surface-variant">
           This page is restricted to UniPath admins.

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { NavActions } from "@/components/layout/NavActions";
+import { Icon } from "@/components/ui/Icon";
 
 const NAV_LINKS = [
   { label: "Command Center", href: "/path" },
@@ -107,9 +108,9 @@ export function Navbar() {
             <button
               type="submit"
               aria-label="Search schools"
-              className="material-symbols-outlined mr-2 text-[20px] text-on-surface-variant transition-colors duration-200 hover:text-primary"
+              className="mr-2 text-[20px] text-on-surface-variant transition-colors duration-200 hover:text-primary"
             >
-              search
+              <Icon name="search" />
             </button>
             <input
               value={search}
@@ -127,9 +128,7 @@ export function Navbar() {
             aria-label="Toggle menu"
             className="flex items-center p-2 text-on-surface md:hidden"
           >
-            <span className="material-symbols-outlined">
-              {mobileOpen ? "close" : "menu"}
-            </span>
+            <Icon name={mobileOpen ? "close" : "menu"} />
           </button>
         </div>
       </div>
@@ -141,7 +140,7 @@ export function Navbar() {
             onSubmit={submitSearch}
             className="hairline mb-md flex items-center rounded-full border bg-surface-container-low px-4 py-2 transition-all duration-200 focus-within:border-primary/50"
           >
-            <span className="material-symbols-outlined mr-2 text-on-surface-variant">search</span>
+            <Icon name="search" className="mr-2 text-on-surface-variant" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}

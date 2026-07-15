@@ -22,6 +22,7 @@ import { deadlineDate } from "@/lib/deadlines";
 import { aidSummaryLine } from "@/lib/aidSummary";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 
 export default function ApplicationsPage() {
   const {
@@ -69,7 +70,7 @@ export default function ApplicationsPage() {
                 href="/calendar"
                 className="flex items-center gap-1 rounded-lg border border-outline-variant px-3 py-1.5 font-label-md text-label-md text-on-surface-variant transition-colors hover:border-primary hover:text-primary"
               >
-                <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                <Icon name="calendar_month" className="text-[18px]" />
                 Calendar
               </Link>
               <div className="flex rounded-lg border border-outline-variant p-0.5">
@@ -77,14 +78,14 @@ export default function ApplicationsPage() {
                   onClick={() => setView("cards")}
                   className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "cards" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
                 >
-                  <span className="material-symbols-outlined text-[18px]">view_agenda</span>
+                  <Icon name="view_agenda" className="text-[18px]" />
                   Cards
                 </button>
                 <button
                   onClick={() => setView("timeline")}
                   className={`flex items-center gap-1 rounded-md px-3 py-1.5 font-label-md text-label-md transition-colors ${view === "timeline" ? "bg-primary text-on-primary" : "text-on-surface-variant hover:text-primary"}`}
                 >
-                  <span className="material-symbols-outlined text-[18px]">timeline</span>
+                  <Icon name="timeline" className="text-[18px]" />
                   Deadlines
                 </button>
               </div>
@@ -125,7 +126,7 @@ export default function ApplicationsPage() {
                   onClick={() => addApplication(s.slug)}
                   className="inline-flex items-center gap-1 rounded-full border border-outline-variant px-3 py-1.5 font-label-md text-label-md text-on-surface transition-colors hover:border-primary hover:text-primary"
                 >
-                  <span className="material-symbols-outlined text-[18px]">add</span>
+                  <Icon name="add" className="text-[18px]" />
                   {u.name}
                 </button>
               );
@@ -136,7 +137,7 @@ export default function ApplicationsPage() {
 
       {hydrated && applications.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">assignment</span>
+          <Icon name="assignment" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
             No applications yet
           </h3>
@@ -273,7 +274,7 @@ function ApplicationCard({
               aria-label="Remove application"
               className="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-error"
             >
-              <span className="material-symbols-outlined">delete</span>
+              <Icon name="delete" />
             </button>
           </div>
 
@@ -301,7 +302,7 @@ function ApplicationCard({
                       : "text-on-surface-variant"
                 }`}
               >
-                <span className="material-symbols-outlined text-[18px]">event</span>
+                <Icon name="event" className="text-[18px]" />
                 {days != null && days < 0
                   ? "Deadline passed"
                   : days === 0
@@ -315,7 +316,7 @@ function ApplicationCard({
               disabled={!deadline}
               className="inline-flex items-center gap-1 rounded-lg border border-outline-variant px-3 py-1.5 font-label-md text-label-md text-on-surface transition-colors hover:border-primary hover:text-primary disabled:opacity-40"
             >
-              <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
+              <Icon name="calendar_add_on" className="text-[18px]" />
               Add to calendar
             </button>
 
@@ -355,7 +356,7 @@ function ApplicationCard({
                       c.done ? "border-primary bg-primary text-on-primary" : "border-outline"
                     }`}
                   >
-                    {c.done && <span className="material-symbols-outlined text-[14px]">check</span>}
+                    {c.done && <Icon name="check" className="text-[14px]" />}
                   </button>
                   <span
                     className={`flex-1 font-body-md text-body-md ${
@@ -369,7 +370,7 @@ function ApplicationCard({
                     aria-label="Remove item"
                     className="text-on-surface-variant transition-colors hover:text-error"
                   >
-                    <span className="material-symbols-outlined text-[18px]">close</span>
+                    <Icon name="close" className="text-[18px]" />
                   </button>
                 </li>
               ))}
@@ -465,7 +466,7 @@ function DeadlineTimeline({ applications }: { applications: Application[] }) {
   if (withDeadlines.length === 0) {
     return (
       <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg text-center">
-        <span className="material-symbols-outlined mb-sm text-[40px] text-outline">event_busy</span>
+        <Icon name="event_busy" className="mb-sm text-[40px] text-outline" />
         <p className="font-body-md text-body-md text-on-surface-variant">
           No deadlines to show. Add deadline dates to your applications to see them here.
         </p>

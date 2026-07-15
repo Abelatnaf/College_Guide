@@ -6,9 +6,8 @@ import { ShortlistButton } from "@/components/ui/ShortlistButton";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { LocationImage } from "@/components/ui/LocationImage";
 import { UniversityLogo } from "@/components/ui/UniversityLogo";
+import { Icon } from "@/components/ui/Icon";
 import { Tilt3D } from "@/components/motion/Tilt3D";
-
-const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
 function Stat({
   icon,
@@ -22,9 +21,7 @@ function Stat({
   return (
     <div className="flex items-center gap-3">
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-low">
-        <span className="material-symbols-outlined text-primary" style={FILL_1}>
-          {icon}
-        </span>
+        <Icon name={icon} className="text-primary" filled />
       </div>
       <div>
         <p className="mb-1 font-caption text-caption leading-none text-on-surface-variant">

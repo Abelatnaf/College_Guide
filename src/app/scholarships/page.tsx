@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { scholarships } from "@/data/scholarships";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 
 const ALL_DESTINATIONS = "All destinations";
 
@@ -38,9 +39,7 @@ export default function ScholarshipsPage() {
       />
 
       <div className="mb-lg flex items-start gap-sm rounded-xl border border-primary/25 bg-gradient-to-r from-secondary-container/50 to-secondary-container/20 px-md py-sm">
-        <span className="material-symbols-outlined mt-0.5 shrink-0 text-[20px] text-primary" aria-hidden="true">
-          verified
-        </span>
+        <Icon name="verified" className="mt-0.5 shrink-0 text-[20px] text-primary" />
         <p className="font-caption text-caption text-on-surface">
           This list is <strong>not exhaustive</strong> — it covers a handful of major, well-documented
           programs, each verified against its own official website. Coverage amounts, eligibility rules,
@@ -51,9 +50,7 @@ export default function ScholarshipsPage() {
 
       <div className="mb-lg flex flex-col gap-sm sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
-            search
-          </span>
+          <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -89,7 +86,7 @@ export default function ScholarshipsPage() {
 
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">search_off</span>
+          <Icon name="search_off" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">No matches</h3>
           <p className="max-w-md font-body-md text-body-md text-on-surface-variant">
             Try a different search term or destination.

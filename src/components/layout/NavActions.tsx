@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { useShortlist, useApplications } from "@/components/providers/StorageProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { cn } from "@/lib/utils";
+import { Icon } from "@/components/ui/Icon";
 
 /** Light/dark toggle. Renders a stable placeholder pre-mount to avoid a hydration mismatch. */
 function ThemeToggle({ mobile = false }: { mobile?: boolean }) {
@@ -22,7 +23,7 @@ function ThemeToggle({ mobile = false }: { mobile?: boolean }) {
         onClick={toggle}
         className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
       >
-        <span className="material-symbols-outlined">{isDark ? "light_mode" : "dark_mode"}</span>
+        <Icon name={isDark ? "light_mode" : "dark_mode"} />
         {isDark ? "Light mode" : "Dark mode"}
       </button>
     );
@@ -35,7 +36,7 @@ function ThemeToggle({ mobile = false }: { mobile?: boolean }) {
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary active:scale-95"
     >
-      <span className="material-symbols-outlined">{mounted ? (isDark ? "light_mode" : "dark_mode") : "dark_mode"}</span>
+      <Icon name={mounted ? (isDark ? "light_mode" : "dark_mode") : "dark_mode"} />
     </button>
   );
 }
@@ -63,7 +64,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
           className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
         >
           <span className="flex items-center gap-sm">
-            <span className="material-symbols-outlined">bookmark</span> Shortlist
+            <Icon name="bookmark" /> Shortlist
           </span>
           {count > 0 && (
             <span className="animate-fade-in rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary shadow-sm">
@@ -76,7 +77,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
           className="flex items-center justify-between rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
         >
           <span className="flex items-center gap-sm">
-            <span className="material-symbols-outlined">assignment</span> Applications
+            <Icon name="assignment" /> Applications
           </span>
           {appCount > 0 && (
             <span className="animate-fade-in rounded-full bg-primary px-2 py-0.5 font-label-md text-caption text-on-primary shadow-sm">
@@ -89,7 +90,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
             href="/shared"
             className="flex items-center gap-sm rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
           >
-            <span className="material-symbols-outlined">diversity_1</span> Shared with you
+            <Icon name="diversity_1" /> Shared with you
           </Link>
         )}
         {enabled &&
@@ -98,14 +99,14 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
               onClick={() => signOut()}
               className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
             >
-              <span className="material-symbols-outlined">logout</span> Sign out
+              <Icon name="logout" /> Sign out
             </button>
           ) : (
             <button
               onClick={openAuth}
               className="flex items-center gap-sm rounded-lg px-4 py-3 text-left font-body-md text-body-md text-on-surface-variant transition-all duration-200 active:scale-[0.98] hover:bg-gradient-to-r hover:from-primary/10 hover:to-transparent hover:text-primary"
             >
-              <span className="material-symbols-outlined">login</span> Sign in to sync
+              <Icon name="login" /> Sign in to sync
             </button>
           ))}
       </div>
@@ -144,7 +145,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
                     onClick={() => setMenuOpen(false)}
                     className="flex w-full items-center gap-sm rounded-lg px-3 py-2 text-left font-body-md text-body-md text-on-surface hover:bg-surface-container"
                   >
-                    <span className="material-symbols-outlined text-[20px]">diversity_1</span> Shared with you
+                    <Icon name="diversity_1" className="text-[20px]" /> Shared with you
                   </Link>
                   <button
                     onClick={() => {
@@ -153,7 +154,7 @@ export function NavActions({ mobile = false }: { mobile?: boolean }) {
                     }}
                     className="flex w-full items-center gap-sm rounded-lg px-3 py-2 text-left font-body-md text-body-md text-on-surface hover:bg-surface-container"
                   >
-                    <span className="material-symbols-outlined text-[20px]">logout</span> Sign out
+                    <Icon name="logout" className="text-[20px]" /> Sign out
                   </button>
                 </div>
               </>
@@ -191,7 +192,7 @@ function NavIcon({
         "relative flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-all duration-200 hover:scale-110 hover:bg-gradient-to-b hover:from-primary/15 hover:to-primary/5 hover:text-primary hover:shadow-[0_0_0_4px_rgb(var(--primary)/0.08)] active:scale-95",
       )}
     >
-      <span className="material-symbols-outlined">{icon}</span>
+      <Icon name={icon} />
       {badge > 0 && (
         <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] animate-fade-in items-center justify-center rounded-full bg-primary px-1 font-label-md text-[10px] text-on-primary shadow-sm">
           {badge}

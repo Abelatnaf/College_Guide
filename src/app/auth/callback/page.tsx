@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabase } from "@/lib/supabase/client";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Client-side auth callback. The Supabase browser client auto-detects the
@@ -56,7 +57,7 @@ function CallbackInner() {
     <main className="flex flex-grow flex-col items-center justify-center px-md py-xl text-center">
       {error ? (
         <>
-          <span className="material-symbols-outlined mb-md text-[40px] text-error">error</span>
+          <Icon name="error" className="mb-md text-[40px] text-error" />
           <h1 className="mb-xs font-display text-[26px] text-on-surface">
             Sign-in failed
           </h1>

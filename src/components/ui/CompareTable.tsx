@@ -5,6 +5,7 @@ import { formatCurrency, formatNumber } from "@/lib/utils";
 import { getCostBreakdown } from "@/lib/universityInsights";
 import { estimateChance, TIER_META } from "@/lib/chances";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { Icon } from "@/components/ui/Icon";
 import { UniversityLogo } from "@/components/ui/UniversityLogo";
 
 interface Row {
@@ -107,7 +108,7 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
               <tr key={row.label} className="border-b border-outline-variant transition-colors hover:bg-surface-container-low">
                 <td className="p-md font-label-md text-on-surface-variant">
                   <div className="flex items-center gap-sm">
-                    <span className="material-symbols-outlined text-primary">{row.icon}</span>
+                    <Icon name={row.icon} className="text-primary" />
                     {row.label}
                   </div>
                 </td>
@@ -122,9 +123,7 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
                     <span className="flex items-center gap-1">
                       {row.format(u)}
                       {i === best && (
-                        <span className="material-symbols-outlined text-[16px] text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>
-                          star
-                        </span>
+                        <Icon name="star" className="text-[16px] text-primary" filled />
                       )}
                     </span>
                   </td>
@@ -135,7 +134,7 @@ export function CompareTable({ universities, allUniversities, onChange }: Compar
           <tr className="border-b border-outline-variant transition-colors hover:bg-surface-container-low">
             <td className="p-md font-label-md text-on-surface-variant">
               <div className="flex items-center gap-sm">
-                <span className="material-symbols-outlined text-primary">target</span>
+                <Icon name="target" className="text-primary" />
                 Your Chances
               </div>
             </td>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useApplications } from "@/components/providers/StorageProvider";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DeadlineCalendar } from "@/components/ui/DeadlineCalendar";
+import { Icon } from "@/components/ui/Icon";
 
 export default function CalendarPage() {
   const { applications, hydrated } = useApplications();
@@ -19,7 +20,7 @@ export default function CalendarPage() {
             href="/applications"
             className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
           >
-            <span className="material-symbols-outlined">assignment</span>
+            <Icon name="assignment" />
             Application tracker
           </Link>
         }
@@ -31,7 +32,7 @@ export default function CalendarPage() {
         </div>
       ) : applications.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">event_busy</span>
+          <Icon name="event_busy" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
             No applications tracked yet
           </h3>

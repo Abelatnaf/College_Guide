@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Shared page-header pattern (icon chip + editorial serif title) — applied
@@ -26,12 +27,7 @@ export function PageHeader({
             className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-tertiary-fixed text-on-primary shadow-glow"
             aria-hidden="true"
           >
-            <span
-              className="material-symbols-outlined text-[24px]"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              {icon}
-            </span>
+            <Icon name={icon} className="text-[24px]" filled />
           </span>
         </Tilt3D>
         <div>

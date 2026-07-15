@@ -8,6 +8,7 @@ import {
   fetchAdmitOutcomeTotal,
   type AdmitOutcomeStatRow,
 } from "@/lib/admitOutcomes";
+import { Icon } from "@/components/ui/Icon";
 import { AdmitOutcomeForm } from "./AdmitOutcomeForm";
 
 const METRIC_LABEL: Record<AdmitOutcomeStatRow["metric"], string> = {
@@ -72,7 +73,7 @@ export function RealOutcomesBlock({ slug }: { slug: string }) {
   return (
     <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
       <div className="mb-sm flex items-center gap-2">
-        <span className="material-symbols-outlined text-primary">groups</span>
+        <Icon name="groups" className="text-primary" />
         <h3 className="font-headline-md text-headline-md">Real Applicant Outcomes</h3>
       </div>
       <p className="mb-md font-caption text-caption text-on-surface-variant">

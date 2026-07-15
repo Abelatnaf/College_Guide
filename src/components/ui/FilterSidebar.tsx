@@ -1,5 +1,7 @@
 "use client";
 
+import { Icon } from "@/components/ui/Icon";
+
 export interface UniversityFilters {
   country: string; // "All" or a country name
   region: string; // "All" or a Region value
@@ -93,9 +95,10 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
               </option>
             ))}
           </select>
-          <span className="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
-            expand_more
-          </span>
+          <Icon
+            name="expand_more"
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+          />
         </div>
       </div>
 
@@ -116,9 +119,10 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
               </option>
             ))}
           </select>
-          <span className="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
-            expand_more
-          </span>
+          <Icon
+            name="expand_more"
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+          />
         </div>
       </div>
 

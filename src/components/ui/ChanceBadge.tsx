@@ -2,6 +2,7 @@
 
 import { getUniversityBySlug } from "@/data/universities";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { Icon } from "@/components/ui/Icon";
 import { estimateChance, type ChanceTier } from "@/lib/chances";
 import { cn } from "@/lib/utils";
 
@@ -48,7 +49,7 @@ export function ChanceBadge({
         className,
       )}
     >
-      <span className="material-symbols-outlined text-[14px]">target</span>
+      <Icon name="target" className="text-[14px]" />
       {chance.label}
       {showEstimate && chance.hasProfile ? ` · ~${chance.estimate}%` : ""}
     </span>

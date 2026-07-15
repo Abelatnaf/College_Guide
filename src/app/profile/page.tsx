@@ -9,6 +9,7 @@ import { strengthIndex } from "@/lib/chances";
 import type { AcademicProfile } from "@/lib/storage/types";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ShareProgressSection } from "@/components/profile/ShareProgressSection";
+import { Icon } from "@/components/ui/Icon";
 
 type NumericField = "gpa" | "sat" | "act" | "toefl" | "ielts";
 
@@ -156,7 +157,7 @@ export default function ProfilePage() {
           )}
           {saved && (
             <span className="inline-flex items-center gap-1 font-label-md text-label-md text-primary">
-              <span className="material-symbols-outlined text-[18px]">check_circle</span> Saved
+              <Icon name="check_circle" className="text-[18px]" /> Saved
             </span>
           )}
         </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 import imageCredits from "../../../public/images/credits.json";
 import universityImageCreditsRaw from "../../../public/images/universities/credits.json";
 
@@ -38,9 +39,7 @@ export default function AboutPage() {
 
       <section className="mx-auto mt-xl grid max-w-3xl gap-lg md:grid-cols-3">
         <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-lg">
-          <span className="material-symbols-outlined mb-sm text-3xl text-primary">
-            travel_explore
-          </span>
+          <Icon name="travel_explore" className="mb-sm text-3xl text-primary" />
           <h3 className="mb-xs font-headline-sm text-headline-sm">What we do</h3>
           <p className="font-body-md text-body-md text-on-surface-variant">
             Curate university and major data into a searchable, comparable
@@ -48,9 +47,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-lg">
-          <span className="material-symbols-outlined mb-sm text-3xl text-primary">
-            insights
-          </span>
+          <Icon name="insights" className="mb-sm text-3xl text-primary" />
           <h3 className="mb-xs font-headline-sm text-headline-sm">
             How we match
           </h3>
@@ -60,9 +57,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-lg">
-          <span className="material-symbols-outlined mb-sm text-3xl text-primary">
-            groups
-          </span>
+          <Icon name="groups" className="mb-sm text-3xl text-primary" />
           <h3 className="mb-xs font-headline-sm text-headline-sm">Who it&apos;s for</h3>
           <p className="font-body-md text-body-md text-on-surface-variant">
             Students applying internationally who need to compare schools

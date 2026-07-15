@@ -1,4 +1,5 @@
 import { getInternationalInfo } from "@/data/internationalInfo";
+import { Icon } from "@/components/ui/Icon";
 
 /** Curated official government links for studying as an international student in this school's country. Renders nothing when unverified — never a placeholder implying unverified info. */
 export function InternationalInfoCard({ country }: { country: string }) {
@@ -8,7 +9,7 @@ export function InternationalInfoCard({ country }: { country: string }) {
   return (
     <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
       <div className="mb-sm flex items-center gap-2">
-        <span className="material-symbols-outlined text-primary">public</span>
+        <Icon name="public" className="text-primary" />
         <h3 className="font-headline-md text-headline-md">Studying in {info.country}</h3>
       </div>
       <p className="mb-md font-caption text-caption text-on-surface-variant">{info.note}</p>

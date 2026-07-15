@@ -12,6 +12,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 import { Tilt3D } from "@/components/motion/Tilt3D";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { CinematicHeroMedia } from "@/components/hero/CinematicHeroMedia";
+import { Icon } from "@/components/ui/Icon";
 
 const FEATURES = [
   {
@@ -113,7 +114,7 @@ export default function HomePage() {
                     className="hairline flex h-14 w-full items-center justify-center gap-2 rounded-full border px-8 font-label-md text-body-md text-on-surface transition-all duration-300 hover:border-primary/50 hover:text-primary sm:w-auto"
                   >
                     How It Works
-                    <span className="material-symbols-outlined text-[18px]">south</span>
+                    <Icon name="south" className="text-[18px]" />
                   </a>
                 </div>
               </StaggerItem>
@@ -169,9 +170,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-center gap-sm">
                     <div className="seal-mark flex h-11 w-11 shrink-0 items-center justify-center">
-                      <span className="material-symbols-outlined text-[20px] text-on-primary">
-                        account_balance
-                      </span>
+                      <Icon name="account_balance" className="text-[20px] text-on-primary" />
                     </div>
                     <div>
                       <p className="font-display text-[18px] text-on-surface">
@@ -233,16 +232,17 @@ export default function HomePage() {
                     >
                       {f.index}
                     </span>
-                    <span className="material-symbols-outlined mb-lg text-[36px] text-primary transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
-                      {f.icon}
-                    </span>
+                    <Icon
+                      name={f.icon}
+                      className="mb-lg text-[36px] text-primary transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+                    />
                     <h3 className="mb-sm font-display text-[24px] text-on-surface">{f.title}</h3>
                     <p className="mb-lg flex-grow font-body-md text-body-md text-on-surface-variant">
                       {f.body}
                     </p>
                     <span className="flex items-center gap-xs font-micro text-micro uppercase text-primary transition-all group-hover:gap-base">
                       {f.cta}
-                      <span className="material-symbols-outlined text-[16px]">east</span>
+                      <Icon name="east" className="text-[16px]" />
                     </span>
                   </Link>
                 </Tilt3D>
@@ -291,7 +291,7 @@ export default function HomePage() {
                     className="inline-flex w-fit items-center gap-2 rounded-full bg-primary px-6 py-3 font-label-md text-on-primary shadow-glow-sm transition-all hover:shadow-glow"
                   >
                     Take the Quiz
-                    <span className="material-symbols-outlined text-[18px]">east</span>
+                    <Icon name="east" className="text-[18px]" />
                   </Link>
                 </div>
               </Tilt3D>
@@ -312,9 +312,10 @@ export default function HomePage() {
                       verified against official aid policies, with sources.
                     </p>
                   </div>
-                  <span className="material-symbols-outlined shrink-0 text-[44px] text-primary transition-transform duration-300 group-hover:scale-110">
-                    payments
-                  </span>
+                  <Icon
+                    name="payments"
+                    className="shrink-0 text-[44px] text-primary transition-transform duration-300 group-hover:scale-110"
+                  />
                 </Link>
               </Tilt3D>
             </Reveal>
@@ -325,9 +326,10 @@ export default function HomePage() {
                   href="/applications"
                   className="hairline group flex h-full flex-col justify-between rounded-[24px] border bg-surface-container-lowest p-lg transition-colors hover:border-primary/40"
                 >
-                  <span className="material-symbols-outlined text-[36px] text-primary transition-transform group-hover:scale-110">
-                    history_edu
-                  </span>
+                  <Icon
+                    name="history_edu"
+                    className="text-[36px] text-primary transition-transform group-hover:scale-110"
+                  />
                   <div>
                     <p className="font-display text-[19px] text-on-surface">Application Tracker</p>
                     <p className="font-caption text-caption text-on-surface-variant">
@@ -344,9 +346,10 @@ export default function HomePage() {
                   href="/contact"
                   className="hairline group flex h-full flex-col justify-between rounded-[24px] border bg-primary-container/20 p-lg transition-colors hover:border-primary/40"
                 >
-                  <span className="material-symbols-outlined text-[36px] text-primary transition-transform group-hover:scale-110">
-                    forum
-                  </span>
+                  <Icon
+                    name="forum"
+                    className="text-[36px] text-primary transition-transform group-hover:scale-110"
+                  />
                   <div>
                     <p className="font-display text-[19px] text-on-surface">Have Questions?</p>
                     <p className="font-caption text-caption text-on-surface-variant">

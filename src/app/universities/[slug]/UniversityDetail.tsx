@@ -15,6 +15,7 @@ import {
   type PercentileContext,
 } from "@/lib/universityInsights";
 import { UniversityPrintDocument } from "./UniversityPrintDocument";
+import { Icon } from "@/components/ui/Icon";
 import { ShortlistButton } from "@/components/ui/ShortlistButton";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { CostRoiPanel } from "@/components/ui/CostRoiPanel";
@@ -28,8 +29,6 @@ import { RealOutcomesBlock } from "@/components/university/RealOutcomesBlock";
 import { universityDeadlines, type ResolvedDeadline } from "@/lib/deadlines";
 import { daysUntil, buildDeadlineIcs, downloadIcs } from "@/lib/ics";
 import { InternationalInfoCard } from "@/components/university/InternationalInfoCard";
-
-const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
 const TABS = [
   { id: "overview", label: "Overview" },
@@ -144,7 +143,7 @@ export function UniversityDetail({
           onClick={() => window.print()}
           className="absolute right-lg top-lg flex items-center gap-2 rounded-lg bg-surface-container-lowest/95 px-lg py-sm font-label-md text-label-md font-semibold text-primary shadow-lg transition-all hover:bg-primary hover:text-on-primary"
         >
-          <span className="material-symbols-outlined">download</span>
+          <Icon name="download" />
           Download Detailed Profile
         </button>
         <div className="absolute bottom-0 left-0 flex w-full flex-col items-start gap-md p-lg md:flex-row md:items-end">
@@ -180,7 +179,7 @@ export function UniversityDetail({
             key={s.label}
             className="glass-panel flex items-center gap-sm rounded-xl border border-outline-variant/30 px-md py-sm shadow-sm"
           >
-            <span className="material-symbols-outlined text-primary">{s.icon}</span>
+            <Icon name={s.icon} className="text-primary" />
             <div>
               <p className="font-caption text-caption text-on-surface-variant">{s.label}</p>
               <p className="font-label-md text-on-surface">{s.value}</p>
@@ -214,14 +213,14 @@ export function UniversityDetail({
             aria-label="Cost to apply"
             className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
           >
-            <span className="material-symbols-outlined">request_quote</span>
+            <Icon name="request_quote" />
           </Link>
           <Link
             href="/compare"
             aria-label="Compare schools"
             className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
           >
-            <span className="material-symbols-outlined">compare_arrows</span>
+            <Icon name="compare_arrows" />
           </Link>
         </div>
       </div>
@@ -257,12 +256,7 @@ export function UniversityDetail({
               <ul className="space-y-sm">
                 {whyChoose.map((b) => (
                   <li key={b} className="flex items-start gap-sm">
-                    <span
-                      className="material-symbols-outlined mt-0.5 text-primary"
-                      style={FILL_1}
-                    >
-                      task_alt
-                    </span>
+                    <Icon name="task_alt" className="mt-0.5 text-primary" filled />
                     <span className="font-body-md text-body-md text-on-surface-variant">
                       {b}
                     </span>
@@ -367,14 +361,14 @@ export function UniversityDetail({
                   rel="noopener noreferrer"
                   className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 font-bold text-on-primary transition-all hover:bg-primary-container"
                 >
-                  Apply Now <span className="material-symbols-outlined">open_in_new</span>
+                  Apply Now <Icon name="open_in_new" />
                 </a>
               )}
               <a
                 href={mailto}
                 className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 font-bold text-on-primary transition-all hover:bg-primary-container"
               >
-                Request Info <span className="material-symbols-outlined">send</span>
+                Request Info <Icon name="send" />
               </a>
               <Link
                 href="/compare"
@@ -390,7 +384,7 @@ export function UniversityDetail({
               return (
                 <div className="rounded-xl border border-primary/25 bg-gradient-to-br from-secondary-container/50 to-secondary-container/10 p-lg">
                   <div className="mb-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary">verified</span>
+                    <Icon name="verified" className="text-primary" />
                     <h3 className="font-headline-md text-headline-md">Verified Aid Policy</h3>
                   </div>
                   <div className="mb-sm flex flex-wrap gap-2">
@@ -437,9 +431,7 @@ export function UniversityDetail({
                         {flagFor(s.country)} {s.country} · #{s.globalRanking}
                       </p>
                     </div>
-                    <span className="material-symbols-outlined text-on-surface-variant">
-                      arrow_forward
-                    </span>
+                    <Icon name="arrow_forward" className="text-on-surface-variant" />
                   </Link>
                 ))}
               </div>
@@ -481,7 +473,7 @@ export function UniversityDetail({
                 >
                   <div className="flex items-center gap-md">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary-container text-primary">
-                      <span className="material-symbols-outlined">{iconFor(m)}</span>
+                      <Icon name={iconFor(m)} />
                     </div>
                     <div>
                       <p className="font-body-md text-body-md font-semibold">{m}</p>
@@ -582,12 +574,11 @@ export function UniversityDetail({
       {tab === "scholarships" && (
         <div>
           <div className="mb-lg flex items-center gap-sm">
-            <span
-              className={`material-symbols-outlined ${u.scholarships.available ? "text-primary" : "text-outline"}`}
-              style={FILL_1}
-            >
-              {u.scholarships.available ? "verified" : "do_not_disturb_on"}
-            </span>
+            <Icon
+              name={u.scholarships.available ? "verified" : "do_not_disturb_on"}
+              className={u.scholarships.available ? "text-primary" : "text-outline"}
+              filled
+            />
             <h2 className="font-headline-md text-headline-md">
               {u.scholarships.available
                 ? "Scholarships Available"
@@ -601,9 +592,7 @@ export function UniversityDetail({
                 className="flex items-center gap-md rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-md shadow-[0_4px_15px_rgba(0,0,0,0.05)]"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-container/10 text-primary">
-                  <span className="material-symbols-outlined" style={FILL_1}>
-                    card_membership
-                  </span>
+                  <Icon name="card_membership" filled />
                 </div>
                 <div>
                   <p className="font-body-md text-body-md font-semibold">{s}</p>
@@ -674,12 +663,7 @@ export function UniversityDetail({
               <ul className="space-y-sm">
                 {admissions.requirements.map((item) => (
                   <li key={item} className="flex items-start gap-sm">
-                    <span
-                      className="material-symbols-outlined mt-0.5 text-primary"
-                      style={FILL_1}
-                    >
-                      check_circle
-                    </span>
+                    <Icon name="check_circle" className="mt-0.5 text-primary" filled />
                     <span className="font-body-md text-body-md">{item}</span>
                   </li>
                 ))}
@@ -728,9 +712,7 @@ export function UniversityDetail({
         <div className="mx-auto max-w-2xl">
           {resolvedDeadlines.length === 1 && resolvedDeadlines[0].type === "listed" ? (
             <div className="rounded-xl border-2 border-primary bg-surface-container-lowest p-lg text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
-              <span className="material-symbols-outlined text-[48px] text-primary" style={FILL_1}>
-                event_available
-              </span>
+              <Icon name="event_available" className="text-[48px] text-primary" filled />
               <p className="mt-sm font-label-md text-label-md uppercase tracking-wider text-on-surface-variant">
                 Application Deadline
               </p>

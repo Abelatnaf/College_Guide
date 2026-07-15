@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
+import { Icon } from "@/components/ui/Icon";
 import { readLocal, writeLocal, newId, nowIso, STORAGE_KEYS } from "@/lib/storage/localStore";
 import { authHeaders } from "@/lib/access/authHeader";
 
@@ -197,7 +198,7 @@ export default function EssaysPage() {
                 onClick={() => createDraft("custom", "Untitled draft")}
                 className="flex items-center gap-1 rounded-lg bg-primary px-3 py-1.5 font-label-md text-label-md text-on-primary transition-colors hover:bg-primary-container"
               >
-                <span className="material-symbols-outlined text-[18px]">add</span>
+                <Icon name="add" className="text-[18px]" />
                 New
               </button>
             </div>
@@ -241,7 +242,7 @@ export default function EssaysPage() {
                       aria-label={`Delete ${d.title || "draft"}`}
                       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-error"
                     >
-                      <span className="material-symbols-outlined text-[18px]">delete</span>
+                      <Icon name="delete" className="text-[18px]" />
                     </button>
                   </div>
                 ))}
@@ -276,7 +277,7 @@ export default function EssaysPage() {
         <div className="space-y-lg lg:col-span-2">
           {!active ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-              <span className="material-symbols-outlined mb-md text-[48px] text-outline">edit_note</span>
+              <Icon name="edit_note" className="mb-md text-[48px] text-outline" />
               <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
                 No draft selected
               </h3>
@@ -310,7 +311,7 @@ export default function EssaysPage() {
                       onClick={stopFeedback}
                       className="flex items-center gap-1 rounded-lg border border-outline-variant px-md py-1.5 font-label-md text-label-md text-on-surface-variant transition-colors hover:border-error hover:text-error"
                     >
-                      <span className="material-symbols-outlined text-[18px]">stop_circle</span>
+                      <Icon name="stop_circle" className="text-[18px]" />
                       Stop
                     </button>
                   ) : (
@@ -319,7 +320,7 @@ export default function EssaysPage() {
                       disabled={!canRequestFeedback}
                       className="flex items-center gap-1 rounded-lg bg-primary px-md py-1.5 font-label-md text-label-md text-on-primary transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-40"
                     >
-                      <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
+                      <Icon name="auto_awesome" className="text-[18px]" />
                       {feedbackLoading ? "Thinking…" : "Get AI feedback"}
                     </button>
                   )}
@@ -329,7 +330,7 @@ export default function EssaysPage() {
               {(feedback || feedbackLoading || feedbackUnavailable) && (
                 <section className="rounded-xl border border-primary/25 bg-gradient-to-br from-secondary-container/40 to-secondary-container/10 p-lg">
                   <div className="mb-sm flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary">auto_awesome</span>
+                    <Icon name="auto_awesome" className="text-primary" />
                     <h3 className="font-headline-md text-headline-md text-on-surface">AI Feedback</h3>
                   </div>
                   <p className="mb-md font-caption text-caption text-on-surface-variant">
@@ -338,7 +339,7 @@ export default function EssaysPage() {
                   </p>
                   {feedbackUnavailable ? (
                     <div className="flex items-start gap-sm rounded-lg border border-error/30 bg-error-container/40 p-md">
-                      <span className="material-symbols-outlined shrink-0 text-error">error</span>
+                      <Icon name="error" className="shrink-0 text-error" />
                       <p className="font-body-md text-body-md text-on-surface">
                         Feedback is temporarily unavailable. Please try again in a moment.
                       </p>

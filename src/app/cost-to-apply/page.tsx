@@ -11,6 +11,7 @@ import {
   useShortlist,
 } from "@/components/providers/StorageProvider";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 
 const TEST_KEYS: TestKey[] = ["TOEFL", "IELTS", "Duolingo", "SAT", "ACT"];
 
@@ -104,7 +105,7 @@ export default function CostToApplyPage() {
     return (
       <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">payments</span>
+          <Icon name="payments" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
             Add schools to see what it costs to apply
           </h3>
@@ -201,7 +202,7 @@ export default function CostToApplyPage() {
                 className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-outline-variant px-md py-1.5 font-label-md text-label-md text-on-surface transition-colors hover:border-primary hover:text-primary"
               >
                 Official site
-                <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                <Icon name="open_in_new" className="text-[16px]" />
               </a>
             </div>
           ))}
@@ -307,7 +308,7 @@ export default function CostToApplyPage() {
       {/* Waiver guidance */}
       <section className="mb-xl rounded-xl border border-primary/30 bg-secondary-container/40 p-lg">
         <h2 className="mb-sm flex items-center gap-2 font-headline-md text-headline-md text-on-surface">
-          <span className="material-symbols-outlined text-primary">volunteer_activism</span>
+          <Icon name="volunteer_activism" className="text-primary" />
           Getting these fees waived
         </h2>
         <p className="font-body-md text-body-md text-on-surface">{waiverGuidance}</p>

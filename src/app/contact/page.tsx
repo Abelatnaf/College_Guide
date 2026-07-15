@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Icon } from "@/components/ui/Icon";
 
 const REASONS = [
   "General question",
@@ -65,9 +66,7 @@ export default function ContactPage() {
           className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
           aria-hidden="true"
         >
-          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            mail
-          </span>
+          <Icon name="mail" className="text-[26px]" filled />
         </span>
         <h1 className="mb-md font-display text-display-lg text-on-surface">
           Get in Touch
@@ -80,7 +79,7 @@ export default function ContactPage() {
 
       {status === "success" ? (
         <div className="mx-auto mt-xl max-w-xl rounded-2xl border border-primary/30 bg-secondary-container/30 p-lg text-center">
-          <span className="material-symbols-outlined mb-sm text-[40px] text-primary">check_circle</span>
+          <Icon name="check_circle" className="mb-sm text-[40px] text-primary" />
           <h2 className="mb-xs font-headline-md text-headline-md text-on-surface">Message sent</h2>
           <p className="font-body-md text-body-md text-on-surface-variant">
             Thanks for reaching out — we&apos;ll get back to you by email soon.
@@ -152,7 +151,7 @@ export default function ContactPage() {
 
           {status === "error" && (
             <div className="flex items-start gap-sm rounded-xl border border-error/30 bg-error-container/40 p-md">
-              <span className="material-symbols-outlined shrink-0 text-error">error</span>
+              <Icon name="error" className="shrink-0 text-error" />
               <p className="font-body-md text-body-md text-on-surface">
                 Something went wrong sending your message. Please try again, or email us directly at{" "}
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline hover:no-underline">

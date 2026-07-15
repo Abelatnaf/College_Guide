@@ -12,6 +12,7 @@ import { LockScreen } from "@/components/auth/LockScreen";
 import { Stagger } from "@/components/motion/Stagger";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { Icon } from "@/components/ui/Icon";
 import { EASE } from "@/lib/motion";
 import { TIERS, PAYMENT_DETAILS, type Tier } from "@/lib/access/tiers";
 
@@ -66,7 +67,7 @@ function Stepper({ step }: { step: 1 | 2 | 3 }) {
               }`}
             >
               {step > s.n ? (
-                <span className="material-symbols-outlined text-[18px]">check</span>
+                <Icon name="check" className="text-[18px]" />
               ) : (
                 s.n
               )}
@@ -113,9 +114,7 @@ function CopyField({ label, value, field, copied, onCopy }: {
         onClick={() => onCopy(value, field)}
         className="flex shrink-0 items-center gap-1 rounded-lg border border-outline-variant/30 px-sm py-xs font-label-sm text-label-sm text-on-surface-variant transition hover:border-primary/40 hover:text-primary"
       >
-        <span className="material-symbols-outlined text-[16px]">
-          {isCopied ? "check" : "content_copy"}
-        </span>
+        <Icon name={isCopied ? "check" : "content_copy"} className="text-[16px]" />
         {isCopied ? "Copied" : "Copy"}
       </button>
     </div>
@@ -295,7 +294,7 @@ export default function PaymentPage() {
           )}
           {submitted && latest.status === "pending" && (
             <p className="flex items-center gap-2 font-body-md text-body-md text-on-surface">
-              <span className="material-symbols-outlined text-primary">task_alt</span>
+              <Icon name="task_alt" className="text-primary" />
               Submitted! Your <strong className="capitalize">{latest.tier}</strong> payment is now
               in the review queue.
             </p>
@@ -312,7 +311,7 @@ export default function PaymentPage() {
               <m.div key="step-1" variants={stepVariants} initial="enter" animate="center" exit="exit">
                 <Reveal className="mb-xl flex flex-col items-center text-center">
                   <span className="mb-md inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 font-label-sm text-label-sm text-primary">
-                    <span className="material-symbols-outlined text-[16px]">gpp_good</span>
+                    <Icon name="gpp_good" className="text-[16px]" />
                     Choose the plan that fits you best
                   </span>
                   <h1 className="text-4xl font-extrabold text-on-surface sm:text-5xl">
@@ -336,15 +335,13 @@ export default function PaymentPage() {
                         >
                           {t.id === "standard" && (
                             <span className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-primary px-3 py-1 font-label-sm text-[11px] font-semibold text-on-primary shadow-glow-sm">
-                              <span className="material-symbols-outlined text-[14px]">star</span>
+                              <Icon name="star" className="text-[14px]" />
                               MOST POPULAR
                             </span>
                           )}
 
                           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-primary/40 bg-primary/5 text-primary">
-                            <span className="material-symbols-outlined text-[26px]">
-                              {TIER_ICON[t.id]}
-                            </span>
+                            <Icon name={TIER_ICON[t.id]} className="text-[26px]" />
                           </span>
 
                           <h3 className="mt-md font-display text-display-sm text-on-surface">
@@ -366,9 +363,7 @@ export default function PaymentPage() {
                                 className="flex items-start gap-2 font-body-sm text-body-sm text-on-surface-variant"
                               >
                                 <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
-                                  <span className="material-symbols-outlined text-[14px]">
-                                    check
-                                  </span>
+                                  <Icon name="check" className="text-[14px]" />
                                 </span>
                                 {f}
                               </li>
@@ -398,7 +393,7 @@ export default function PaymentPage() {
                   {TRUST_ITEMS.map((item) => (
                     <div key={item.title} className="flex items-center gap-sm">
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                        <Icon name={item.icon} className="text-[20px]" />
                       </span>
                       <div>
                         <p className="font-label-md text-label-md text-on-surface">{item.title}</p>
@@ -539,9 +534,7 @@ export default function PaymentPage() {
                       />
                     ) : (
                       <>
-                        <span className="material-symbols-outlined text-[36px] text-on-surface-variant">
-                          cloud_upload
-                        </span>
+                        <Icon name="cloud_upload" className="text-[36px] text-on-surface-variant" />
                         <p className="font-body-md text-body-md text-on-surface">
                           Drag & drop your screenshot here
                         </p>

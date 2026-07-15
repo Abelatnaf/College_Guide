@@ -13,6 +13,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 
 export default function ShortlistPage() {
   const { shortlist, toggleSave, setNote, hydrated } = useShortlist();
@@ -42,7 +43,7 @@ export default function ShortlistPage() {
                 href="/cost-to-apply"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-lg py-3 font-label-md text-on-primary transition-colors hover:bg-primary-container"
               >
-                <span className="material-symbols-outlined">payments</span>
+                <Icon name="payments" />
                 See what it costs to apply
               </Link>
             )}
@@ -51,7 +52,7 @@ export default function ShortlistPage() {
                 href="/compare"
                 className="inline-flex items-center gap-2 rounded-lg bg-secondary-container px-lg py-3 font-label-md text-primary transition-colors hover:bg-outline-variant/20"
               >
-                <span className="material-symbols-outlined">compare_arrows</span>
+                <Icon name="compare_arrows" />
                 Compare schools
               </Link>
             )}
@@ -75,7 +76,7 @@ export default function ShortlistPage() {
 
       {hydrated && items.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">bookmark_border</span>
+          <Icon name="bookmark_border" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
             No saved universities yet
           </h3>
@@ -129,7 +130,7 @@ export default function ShortlistPage() {
                         aria-label="Remove from shortlist"
                         className="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-error"
                       >
-                        <span className="material-symbols-outlined">delete</span>
+                        <Icon name="delete" />
                       </button>
                     </div>
 
@@ -157,7 +158,7 @@ export default function ShortlistPage() {
                           href="/applications"
                           className="inline-flex items-center gap-1 rounded-lg bg-secondary-container px-md py-1.5 font-label-md text-label-md text-primary"
                         >
-                          <span className="material-symbols-outlined text-[18px]">check</span>
+                          <Icon name="check" className="text-[18px]" />
                           Tracking
                         </Link>
                       ) : (
@@ -165,7 +166,7 @@ export default function ShortlistPage() {
                           onClick={() => addApplication(u.slug)}
                           className="inline-flex items-center gap-1 rounded-lg bg-primary px-md py-1.5 font-label-md text-label-md text-on-primary transition-colors hover:bg-primary-container"
                         >
-                          <span className="material-symbols-outlined text-[18px]">add</span>
+                          <Icon name="add" className="text-[18px]" />
                           Track application
                         </button>
                       )}

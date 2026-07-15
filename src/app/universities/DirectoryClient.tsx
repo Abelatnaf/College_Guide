@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { universities, universityCountries } from "@/data/universities";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { UniversityCardSkeleton } from "@/components/ui/CardSkeleton";
+import { Icon } from "@/components/ui/Icon";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import {
   FilterSidebar,
@@ -162,10 +163,10 @@ export function DirectoryClient() {
             className="mb-md flex items-center justify-between gap-sm rounded-xl border border-primary/30 bg-secondary-container/40 p-md transition-colors hover:border-primary"
           >
             <span className="flex items-center gap-sm font-body-md text-body-md text-on-surface">
-              <span className="material-symbols-outlined text-primary">target</span>
+              <Icon name="target" className="text-primary" />
               Add your GPA &amp; test scores to see your admission chances on every school.
             </span>
-            <span className="material-symbols-outlined text-primary">arrow_forward</span>
+            <Icon name="arrow_forward" className="text-primary" />
           </Link>
         )}
         <div className="sticky top-20 z-10 mb-8 flex flex-col gap-sm rounded-xl bg-surface/80 py-sm backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
@@ -208,9 +209,7 @@ export function DirectoryClient() {
           </div>
         ) : pageItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-            <span className="material-symbols-outlined mb-md text-[48px] text-outline">
-              search_off
-            </span>
+            <Icon name="search_off" className="mb-md text-[48px] text-outline" />
             <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
               No universities found
             </h3>
@@ -241,7 +240,7 @@ export function DirectoryClient() {
               aria-label="Previous page"
               className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container disabled:opacity-40 disabled:hover:bg-transparent"
             >
-              <span className="material-symbols-outlined">chevron_left</span>
+              <Icon name="chevron_left" />
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
               <button
@@ -263,7 +262,7 @@ export function DirectoryClient() {
               aria-label="Next page"
               className="flex h-10 w-10 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container disabled:opacity-40 disabled:hover:bg-transparent"
             >
-              <span className="material-symbols-outlined">chevron_right</span>
+              <Icon name="chevron_right" />
             </button>
           </nav>
         )}

@@ -1,9 +1,8 @@
 "use client";
 
 import { useShortlist } from "@/components/providers/StorageProvider";
+import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/utils";
-
-const FILL_1 = { fontVariationSettings: "'FILL' 1" } as const;
 
 /**
  * Reusable shortlist toggle. `icon` renders the round bookmark button used on
@@ -35,9 +34,7 @@ export function ShortlistButton({
           className,
         )}
       >
-        <span className="material-symbols-outlined" style={saved ? FILL_1 : undefined}>
-          {saved ? "bookmark" : "bookmark_border"}
-        </span>
+        <Icon name={saved ? "bookmark" : "bookmark_border"} filled={saved} />
         {saved ? "Saved to Shortlist" : "Save to Shortlist"}
       </button>
     );
@@ -54,9 +51,7 @@ export function ShortlistButton({
         className,
       )}
     >
-      <span className="material-symbols-outlined" style={saved ? FILL_1 : undefined}>
-        {saved ? "bookmark" : "bookmark_border"}
-      </span>
+      <Icon name={saved ? "bookmark" : "bookmark_border"} filled={saved} />
     </button>
   );
 }

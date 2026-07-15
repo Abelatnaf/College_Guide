@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAcademicProfile, useShortlist } from "@/components/providers/StorageProvider";
+import { Icon } from "@/components/ui/Icon";
 
 /** Hydration-aware hero CTA: sends returning students to their Command Center, new visitors to the quiz. */
 export function HeroCta() {
@@ -16,9 +17,10 @@ export function HeroCta() {
       className="group flex h-14 w-full items-center justify-center gap-base rounded-full bg-primary px-8 font-label-md text-body-md text-on-primary shadow-glow-sm transition-all duration-300 hover:shadow-glow hover:brightness-110 sm:w-auto"
     >
       {hasStarted ? "Open Command Center" : "Get Started"}
-      <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-1">
-        arrow_forward
-      </span>
+      <Icon
+        name="arrow_forward"
+        className="transition-transform duration-300 group-hover:translate-x-1"
+      />
     </Link>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from "@/components/providers/StorageProvider";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
+import { Icon } from "@/components/ui/Icon";
 import { upcomingDeadlines, deadlineDate } from "@/lib/deadlines";
 import { daysUntil } from "@/lib/ics";
 import { summarizeApplicationFees } from "@/lib/costSummary";
@@ -168,7 +169,7 @@ export default function PathPage() {
             className="mt-sm inline-flex items-center gap-1 font-label-md text-primary hover:underline"
           >
             Finish your profile
-            <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+            <Icon name="arrow_forward" className="text-[18px]" />
           </Link>
         )}
       </div>
@@ -176,7 +177,7 @@ export default function PathPage() {
       {/* Handwritten mentor note — the single highest-priority thing to do next */}
       {hydrated && topAction && (
         <div className="mb-lg flex items-start gap-md border-l-[3px] border-error bg-surface-container-lowest p-md">
-          <span className="material-symbols-outlined mt-0.5 shrink-0 text-error">edit</span>
+          <Icon name="edit" className="mt-0.5 shrink-0 text-error" />
           <div>
             <p className="font-hand text-[22px] leading-snug text-error">
               {topAction.body} — {topAction.title.toLowerCase()} first.
@@ -186,7 +187,7 @@ export default function PathPage() {
               className="mt-1 inline-flex items-center gap-1 font-label-md text-caption text-primary hover:underline"
             >
               {topAction.cta}
-              <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+              <Icon name="arrow_forward" className="text-[14px]" />
             </Link>
           </div>
         </div>
@@ -230,7 +231,7 @@ export default function PathPage() {
             <p className="font-body-md text-body-md text-on-surface-variant">Loading…</p>
           ) : schoolCards.length === 0 && untracked.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-              <span className="material-symbols-outlined mb-md text-[48px] text-outline">folder_open</span>
+              <Icon name="folder_open" className="mb-md text-[48px] text-outline" />
               <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">
                 No folders open yet
               </h3>
@@ -274,7 +275,7 @@ export default function PathPage() {
                     onClick={() => addApplication(university.slug)}
                     className="flex shrink-0 items-center gap-1 rounded-full border border-outline-variant px-3 py-1.5 font-label-md text-label-md text-on-surface transition-colors hover:border-primary hover:text-primary"
                   >
-                    <span className="material-symbols-outlined text-[18px]">create_new_folder</span>
+                    <Icon name="create_new_folder" className="text-[18px]" />
                     Open folder
                   </button>
                 </div>
@@ -306,7 +307,7 @@ export default function PathPage() {
                     className="block rounded-lg border border-outline-variant/30 p-md transition-colors hover:border-primary"
                   >
                     <div className="mb-1 flex items-center gap-2">
-                      <span className="material-symbols-outlined text-primary">{a.icon}</span>
+                      <Icon name={a.icon} className="text-primary" />
                       <p className="font-label-md text-on-surface">{a.title}</p>
                     </div>
                     <p className="mb-2 font-caption text-caption text-on-surface-variant">{a.body}</p>
@@ -353,7 +354,7 @@ export default function PathPage() {
               className="mt-sm inline-flex items-center gap-1 font-label-md text-primary hover:underline"
             >
               Full cost breakdown
-              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              <Icon name="arrow_forward" className="text-[18px]" />
             </Link>
           </section>
         </div>
@@ -440,7 +441,7 @@ function SchoolFolderCard({
                       }`}
                     >
                       {item.done && (
-                        <span className="material-symbols-outlined text-[14px] text-on-tertiary">check</span>
+                        <Icon name="check" className="text-[14px] text-on-tertiary" />
                       )}
                     </span>
                     <span

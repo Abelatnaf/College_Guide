@@ -1,12 +1,11 @@
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 
 export default function UniversityNotFound() {
   return (
     <main className="mx-auto flex min-h-[60vh] max-w-container-max flex-col items-center justify-center px-md py-xl text-center">
       <div className="mb-md flex h-20 w-20 items-center justify-center rounded-full bg-secondary-container">
-        <span className="material-symbols-outlined text-[40px] text-primary">
-          travel_explore
-        </span>
+        <Icon name="travel_explore" className="text-[40px] text-primary" />
       </div>
       <h1 className="mb-sm font-display text-display-md text-on-surface">
         University Not Found

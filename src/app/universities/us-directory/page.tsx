@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { curatedSlugFor, searchUSInstitutions, usInstitutions, usSectors, usStates } from "@/lib/usInstitutions";
+import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = {
   title: "US Institution Directory — UniPath",
@@ -40,7 +41,7 @@ export default function USDirectoryPage({
           href="/universities"
           className="flex items-center gap-1 font-label-md text-caption text-primary hover:underline"
         >
-          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          <Icon name="arrow_back" className="text-[18px]" />
           Back to curated University Directory
         </Link>
         <h1 className="font-display text-display-md text-on-background">US Institution Directory</h1>
@@ -105,7 +106,7 @@ export default function USDirectoryPage({
 
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-xl text-center">
-          <span className="material-symbols-outlined mb-md text-[48px] text-outline">search_off</span>
+          <Icon name="search_off" className="mb-md text-[48px] text-outline" />
           <h3 className="mb-xs font-headline-md text-headline-md text-on-surface">No institutions found</h3>
           <p className="font-body-md text-body-md text-on-surface-variant">
             Try a different search term or clear the filters.
@@ -174,7 +175,7 @@ export default function USDirectoryPage({
                 : "flex h-10 items-center justify-center rounded-full px-md text-on-surface-variant transition-colors hover:bg-surface-container"
             }
           >
-            <span className="material-symbols-outlined">chevron_left</span>
+            <Icon name="chevron_left" />
           </Link>
           <span className="font-label-md text-caption text-on-surface-variant">
             Page {page} of {totalPages}
@@ -188,7 +189,7 @@ export default function USDirectoryPage({
                 : "flex h-10 items-center justify-center rounded-full px-md text-on-surface-variant transition-colors hover:bg-surface-container"
             }
           >
-            <span className="material-symbols-outlined">chevron_right</span>
+            <Icon name="chevron_right" />
           </Link>
         </nav>
       )}

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 import { getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { deadlineDate } from "@/lib/deadlines";
@@ -106,7 +107,7 @@ export function DeadlineCalendar({ applications }: { applications: Application[]
             aria-label="Previous month"
             className="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
           >
-            <span className="material-symbols-outlined">chevron_left</span>
+            <Icon name="chevron_left" />
           </button>
           <h2 className="w-40 text-center font-headline-md text-headline-md text-on-surface">
             {MONTH_FORMAT.format(viewDate)}
@@ -116,7 +117,7 @@ export function DeadlineCalendar({ applications }: { applications: Application[]
             aria-label="Next month"
             className="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary"
           >
-            <span className="material-symbols-outlined">chevron_right</span>
+            <Icon name="chevron_right" />
           </button>
           <button
             onClick={() => setViewDate(new Date(today.getFullYear(), today.getMonth(), 1))}
@@ -130,7 +131,7 @@ export function DeadlineCalendar({ applications }: { applications: Application[]
           disabled={events.filter((e) => e.days >= 0).length === 0}
           className="flex items-center gap-1 rounded-lg bg-primary px-md py-1.5 font-label-md text-label-md text-on-primary transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <span className="material-symbols-outlined text-[18px]">calendar_add_on</span>
+          <Icon name="calendar_add_on" className="text-[18px]" />
           Add all to my calendar
         </button>
       </div>

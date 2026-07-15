@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { readLocal, writeLocal, removeLocal, STORAGE_KEYS } from "@/lib/storage/localStore";
 import type { ChatMessage } from "@/lib/ai/chatAssistant";
 import { MarkdownContent } from "@/components/ui/MarkdownContent";
+import { Icon } from "@/components/ui/Icon";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { authHeaders } from "@/lib/access/authHeader";
 
@@ -217,9 +218,7 @@ export default function ChatPage() {
               : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full border border-outline-variant bg-surface-container text-on-surface shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary"
           }
         >
-          <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            stop
-          </span>
+          <Icon name="stop" className="text-[20px]" filled />
         </button>
       ) : (
         <button
@@ -232,7 +231,7 @@ export default function ChatPage() {
               : "inline-flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-full bg-primary text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)] transition-all duration-200 hover:bg-primary-container hover:shadow-[0_4px_12px_rgb(var(--primary)/0.4)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
           }
         >
-          <span className="material-symbols-outlined text-[20px]">send</span>
+          <Icon name="send" className="text-[20px]" />
         </button>
       )}
     </div>
@@ -247,9 +246,7 @@ export default function ChatPage() {
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
             aria-hidden="true"
           >
-            <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-              auto_awesome
-            </span>
+            <Icon name="auto_awesome" className="text-[20px]" filled />
           </span>
           <h1 className="font-display text-headline-md text-on-surface">Ask AI</h1>
         </div>
@@ -258,9 +255,7 @@ export default function ChatPage() {
             onClick={clearConversation}
             className="group inline-flex items-center gap-1 rounded-full border border-outline-variant bg-surface-container-lowest px-md py-1.5 font-label-md text-label-md text-on-surface-variant shadow-sm transition-all duration-200 hover:border-primary/60 hover:text-primary hover:shadow-[0_0_0_3px_rgb(var(--primary)/0.12)]"
           >
-            <span className="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:-rotate-6">
-              delete_sweep
-            </span>
+            <Icon name="delete_sweep" className="text-[18px] transition-transform duration-200 group-hover:-rotate-6" />
             Clear conversation
           </button>
         )}
@@ -268,12 +263,7 @@ export default function ChatPage() {
 
       {/* Trust note — always visible, not buried. Slimmer, refined banner. */}
       <div className="mb-md flex items-start gap-sm rounded-xl border border-primary/25 bg-gradient-to-r from-secondary-container/50 to-secondary-container/20 px-md py-sm">
-        <span
-          className="material-symbols-outlined mt-0.5 shrink-0 text-[20px] text-primary"
-          aria-hidden="true"
-        >
-          verified
-        </span>
+        <Icon name="verified" className="mt-0.5 shrink-0 text-[20px] text-primary" />
         <p className="font-caption text-caption text-on-surface">
           For general advice (essays, visas, test prep, timelines) I&apos;ll use my own knowledge.
           For a specific school&apos;s fees or aid policy, I&apos;ll only use UniPath&apos;s
@@ -290,9 +280,7 @@ export default function ChatPage() {
             className="mb-md flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-secondary-container to-secondary-container/40 text-primary shadow-[0_8px_30px_rgb(var(--primary)/0.18)]"
             aria-hidden="true"
           >
-            <span className="material-symbols-outlined text-[32px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-              auto_awesome
-            </span>
+            <Icon name="auto_awesome" className="text-[32px]" filled />
           </span>
           <h2 className="mb-sm font-display text-display-lg text-on-surface">
             Hey there{firstName ? `, ${firstName}` : ""}
@@ -313,9 +301,7 @@ export default function ChatPage() {
                 disabled={busy}
                 className="group inline-flex items-center gap-2 rounded-full border border-outline-variant/50 bg-surface-container-lowest px-lg py-2.5 font-label-md text-label-md text-on-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary hover:shadow-[0_8px_20px_rgb(var(--primary)/0.12)] disabled:pointer-events-none disabled:opacity-50"
               >
-                <span className="material-symbols-outlined text-[18px] text-primary/70 transition-colors duration-200 group-hover:text-primary">
-                  {p.icon}
-                </span>
+                <Icon name={p.icon} className="text-[18px] text-primary/70 transition-colors duration-200 group-hover:text-primary" />
                 {p.label}
               </button>
             ))}
@@ -344,12 +330,7 @@ export default function ChatPage() {
                       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)]"
                       aria-hidden="true"
                     >
-                      <span
-                        className="material-symbols-outlined text-[18px]"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        auto_awesome
-                      </span>
+                      <Icon name="auto_awesome" className="text-[18px]" filled />
                     </span>
                   )}
 
@@ -374,9 +355,7 @@ export default function ChatPage() {
                           aria-label={copiedIndex === i ? "Copied" : "Copy message"}
                           className="ml-1 inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 font-caption text-caption text-on-surface-variant opacity-100 transition-colors hover:text-primary sm:opacity-0 sm:group-hover:opacity-100"
                         >
-                          <span className="material-symbols-outlined text-[16px]">
-                            {copiedIndex === i ? "check" : "content_copy"}
-                          </span>
+                          <Icon name={copiedIndex === i ? "check" : "content_copy"} className="text-[16px]" />
                           {copiedIndex === i ? "Copied" : "Copy"}
                         </button>
                       )}
@@ -392,12 +371,7 @@ export default function ChatPage() {
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_2px_8px_rgb(var(--primary)/0.3)]"
                   aria-hidden="true"
                 >
-                  <span
-                    className="material-symbols-outlined text-[18px]"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    auto_awesome
-                  </span>
+                  <Icon name="auto_awesome" className="text-[18px]" filled />
                 </span>
                 <div
                   className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-outline-variant/40 bg-surface-container-low px-md py-sm shadow-[0_2px_10px_rgba(0,0,0,0.05)]"
@@ -413,7 +387,7 @@ export default function ChatPage() {
 
             {unavailable && (
               <div className="flex animate-fade-in items-start gap-sm rounded-2xl border border-error/30 bg-error-container/40 p-md">
-                <span className="material-symbols-outlined shrink-0 text-error">error</span>
+                <Icon name="error" className="shrink-0 text-error" />
                 <p className="font-body-md text-body-md text-on-surface">
                   The assistant is temporarily unavailable. Please try again in a moment.
                 </p>

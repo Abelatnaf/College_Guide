@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useApplications } from "@/components/providers/StorageProvider";
+import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/utils";
 
 /**
@@ -32,7 +33,7 @@ export function TrackApplicationButton({
             className,
           )}
         >
-          <span className="material-symbols-outlined">assignment_turned_in</span>
+          <Icon name="assignment_turned_in" />
         </Link>
       );
     }
@@ -45,7 +46,7 @@ export function TrackApplicationButton({
           className,
         )}
       >
-        <span className="material-symbols-outlined">add_task</span>
+        <Icon name="add_task" />
       </button>
     );
   }
@@ -59,7 +60,7 @@ export function TrackApplicationButton({
           className,
         )}
       >
-        <span className="material-symbols-outlined">assignment_turned_in</span>
+        <Icon name="assignment_turned_in" />
         View in Application Tracker
       </Link>
     );
@@ -73,7 +74,7 @@ export function TrackApplicationButton({
         className,
       )}
     >
-      <span className="material-symbols-outlined">add_task</span>
+      <Icon name="add_task" />
       Track Application
     </button>
   );

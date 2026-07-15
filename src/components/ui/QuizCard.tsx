@@ -1,6 +1,7 @@
 "use client";
 
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { Icon } from "@/components/ui/Icon";
 
 export interface QuizOption {
   value: string;
@@ -72,14 +73,13 @@ function Choice({
             }
           />
         ) : (
-          <span
+          <Icon
+            name="check"
             className={
-              "material-symbols-outlined text-[16px] text-white transition-opacity " +
+              "text-[16px] text-white transition-opacity " +
               (isSelected ? "opacity-100" : "opacity-0")
             }
-          >
-            check
-          </span>
+          />
         )}
       </div>
       <span className="ml-md font-body-lg text-body-lg text-on-surface">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Icon } from "@/components/ui/Icon";
 
 const EXPLORE_LINKS = [
   { label: "Universities", href: "/universities" },
@@ -62,7 +63,7 @@ export function Footer() {
                 aria-label="Homepage"
                 className="hairline flex h-9 w-9 items-center justify-center rounded-full border text-on-surface-variant transition-all hover:border-primary/50 hover:text-primary hover:shadow-glow-sm"
               >
-                <span className="material-symbols-outlined text-lg">language</span>
+                <Icon name="language" className="text-lg" />
               </Link>
               <button
                 type="button"
@@ -70,14 +71,14 @@ export function Footer() {
                 aria-label="Share this page"
                 className="hairline flex h-9 w-9 items-center justify-center rounded-full border text-on-surface-variant transition-all hover:border-primary/50 hover:text-primary hover:shadow-glow-sm"
               >
-                <span className="material-symbols-outlined text-lg">share</span>
+                <Icon name="share" className="text-lg" />
               </button>
               <Link
                 href="/contact"
                 aria-label="Email us"
                 className="hairline flex h-9 w-9 items-center justify-center rounded-full border text-on-surface-variant transition-all hover:border-primary/50 hover:text-primary hover:shadow-glow-sm"
               >
-                <span className="material-symbols-outlined text-lg">alternate_email</span>
+                <Icon name="alternate_email" className="text-lg" />
               </Link>
               {copied && (
                 <span className="font-caption text-caption text-primary">Link copied!</span>

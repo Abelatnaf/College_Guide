@@ -14,6 +14,7 @@ import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
 import { estimateChance } from "@/lib/chances";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { Icon } from "@/components/ui/Icon";
 import { buildInsightsRequest, requestQuizInsights } from "@/lib/ai/quizInsights";
 import type { QuizInsightsResult } from "@/types/ai";
 import { readLocal, writeLocal } from "@/lib/storage/localStore";
@@ -734,7 +735,7 @@ function QuizPageInner() {
                 disabled={step === 0}
                 className="flex items-center gap-xs font-label-md text-on-surface-variant transition-colors hover:text-primary disabled:opacity-40"
               >
-                <span className="material-symbols-outlined text-[20px]">arrow_back</span>
+                <Icon name="arrow_back" className="text-[20px]" />
                 Back
               </button>
               <button
@@ -763,9 +764,7 @@ function QuizPageInner() {
         {status === "results" && (
           <section>
             <div className="mb-lg text-center">
-              <span className="material-symbols-outlined text-[40px] text-primary">
-                celebration
-              </span>
+              <Icon name="celebration" className="text-[40px] text-primary" />
               <h2 className="font-headline-lg text-headline-lg text-on-surface">
                 Your Top 3 Matches
               </h2>
@@ -850,9 +849,7 @@ function QuizPageInner() {
                 disabled={profileSaved}
                 className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary px-lg py-3 font-label-md text-primary transition-colors hover:bg-primary hover:text-on-primary disabled:opacity-60 disabled:hover:bg-transparent disabled:hover:text-primary"
               >
-                <span className="material-symbols-outlined text-[20px]">
-                  {profileSaved ? "check_circle" : "save"}
-                </span>
+                <Icon name={profileSaved ? "check_circle" : "save"} className="text-[20px]" />
                 {profileSaved ? "Saved to profile" : "Save answers to my profile"}
               </button>
               <Link

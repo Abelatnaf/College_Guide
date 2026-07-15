@@ -1,3 +1,4 @@
+import { Icon } from "@/components/ui/Icon";
 import { avatarColorFor, initialsFor } from "@/lib/universityLogo";
 
 /**
@@ -25,12 +26,10 @@ export function CampusGraphic({
       }}
       aria-hidden="true"
     >
-      <span
-        className="material-symbols-outlined absolute -bottom-4 -right-4 select-none text-white/15"
-        style={{ fontSize: 140 }}
-      >
-        {icon}
-      </span>
+      <Icon
+        name={icon}
+        className="absolute -bottom-4 -right-4 select-none text-white/15 text-[140px]"
+      />
       <span className="relative z-10 font-headline-lg text-headline-lg font-bold tracking-wide text-white/90">
         {initialsFor(name)}
       </span>

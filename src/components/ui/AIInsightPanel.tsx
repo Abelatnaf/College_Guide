@@ -1,6 +1,7 @@
 "use client";
 
 import type { QuizInsight } from "@/types/ai";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Optional, additive panel showing AI-generated narrative reasoning for a quiz
@@ -20,7 +21,7 @@ export function AIInsightPanel({
   return (
     <div className="mt-sm rounded-lg border border-outline-variant bg-surface-container-low p-sm">
       <div className="mb-1 flex items-center gap-1.5">
-        <span className="material-symbols-outlined text-[16px] text-primary">auto_awesome</span>
+        <Icon name="auto_awesome" className="text-[16px] text-primary" />
         <span className="font-label-md text-caption uppercase tracking-wider text-primary">
           AI-generated insight
         </span>

@@ -14,6 +14,7 @@ import {
   useCostScenarios,
 } from "@/components/providers/StorageProvider";
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { Icon } from "@/components/ui/Icon";
 import { AppealLetterGenerator } from "@/components/university/AppealLetterGenerator";
 
 const INPUT_FIELDS: { key: keyof CostInputs; label: string; hint: string; step: number }[] = [
@@ -224,7 +225,7 @@ export function CostRoiPanel({ university: u }: { university: University }) {
                   aria-label="Delete scenario"
                   className="flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container hover:text-error"
                 >
-                  <span className="material-symbols-outlined">delete</span>
+                  <Icon name="delete" />
                 </button>
               </li>
             ))}

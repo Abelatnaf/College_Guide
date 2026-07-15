@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
+import { Icon } from "@/components/ui/Icon";
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -134,7 +135,7 @@ export function AuthDialog() {
   const sentView = (
     <div className="text-center">
       <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-        <span className="material-symbols-outlined text-[32px] text-primary">mark_email_read</span>
+        <Icon name="mark_email_read" className="text-[32px] text-primary" />
       </div>
       <h3 className="mb-2 text-lg font-bold text-on-surface">Check your inbox</h3>
       <p className="mb-1 text-sm text-on-surface-variant">
@@ -159,7 +160,7 @@ export function AuthDialog() {
     "w-full rounded-xl border-2 border-outline-variant/60 bg-surface py-3 pl-12 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0";
 
   const iconClass =
-    "material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant/50";
+    "absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant/50";
 
   return (
     <div
@@ -181,16 +182,11 @@ export function AuthDialog() {
             aria-label="Close"
             className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-on-primary/70 transition-colors hover:bg-white/20 hover:text-on-primary"
           >
-            <span className="material-symbols-outlined text-[20px]">close</span>
+            <Icon name="close" className="text-[20px]" />
           </button>
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20">
-              <span
-                className="material-symbols-outlined text-[24px] text-on-primary"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                school
-              </span>
+              <Icon name="school" className="text-[24px] text-on-primary" filled />
             </div>
             <div>
               <h2 className="text-lg font-bold text-on-primary">Welcome to CollegeGuide</h2>
@@ -252,7 +248,7 @@ export function AuthDialog() {
               {mode === "signin" && !useMagicLink ? (
                 <form onSubmit={submitSignIn} className="space-y-3">
                   <div className="relative">
-                    <span className={iconClass}>mail</span>
+                    <Icon name="mail" className={iconClass} />
                     <input
                       ref={inputRef}
                       type="email"
@@ -264,7 +260,7 @@ export function AuthDialog() {
                     />
                   </div>
                   <div className="relative">
-                    <span className={iconClass}>lock</span>
+                    <Icon name="lock" className={iconClass} />
                     <input
                       type="password"
                       required
@@ -286,7 +282,7 @@ export function AuthDialog() {
                       </>
                     ) : (
                       <>
-                        <span className="material-symbols-outlined text-[18px]">login</span>
+                        <Icon name="login" className="text-[18px]" />
                         Sign In
                       </>
                     )}
@@ -302,7 +298,7 @@ export function AuthDialog() {
               ) : mode === "signin" && useMagicLink ? (
                 <form onSubmit={submitMagicLink} className="space-y-3">
                   <div className="relative">
-                    <span className={iconClass}>mail</span>
+                    <Icon name="mail" className={iconClass} />
                     <input
                       ref={inputRef}
                       type="email"
@@ -325,7 +321,7 @@ export function AuthDialog() {
                       </>
                     ) : (
                       <>
-                        <span className="material-symbols-outlined text-[18px]">send</span>
+                        <Icon name="send" className="text-[18px]" />
                         Send me a sign-in link
                       </>
                     )}
@@ -341,7 +337,7 @@ export function AuthDialog() {
               ) : (
                 <form onSubmit={submitSignUp} className="space-y-3">
                   <div className="relative">
-                    <span className={iconClass}>person</span>
+                    <Icon name="person" className={iconClass} />
                     <input
                       ref={inputRef}
                       type="text"
@@ -353,7 +349,7 @@ export function AuthDialog() {
                     />
                   </div>
                   <div className="relative">
-                    <span className={iconClass}>mail</span>
+                    <Icon name="mail" className={iconClass} />
                     <input
                       type="email"
                       required
@@ -364,7 +360,7 @@ export function AuthDialog() {
                     />
                   </div>
                   <div className="relative">
-                    <span className={iconClass}>lock</span>
+                    <Icon name="lock" className={iconClass} />
                     <input
                       type="password"
                       required
@@ -376,7 +372,7 @@ export function AuthDialog() {
                     />
                   </div>
                   <div className="relative">
-                    <span className={iconClass}>lock</span>
+                    <Icon name="lock" className={iconClass} />
                     <input
                       type="password"
                       required
@@ -398,7 +394,7 @@ export function AuthDialog() {
                       </>
                     ) : (
                       <>
-                        <span className="material-symbols-outlined text-[18px]">person_add</span>
+                        <Icon name="person_add" className="text-[18px]" />
                         Create Account
                       </>
                     )}
@@ -408,7 +404,7 @@ export function AuthDialog() {
 
               {status === "error" && (
                 <div className="mt-3 flex items-start gap-2 rounded-lg bg-error/10 px-3 py-2.5">
-                  <span className="material-symbols-outlined mt-0.5 text-[16px] text-error">error</span>
+                  <Icon name="error" className="mt-0.5 text-[16px] text-error" />
                   <p className="text-xs text-error">{message}</p>
                 </div>
               )}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { universities, getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { CompareTable, computeWins } from "@/components/ui/CompareTable";
+import { Icon } from "@/components/ui/Icon";
 
 const DEFAULT_SLUGS = ["harvard", "cambridge", "university-of-toronto"];
 
@@ -30,9 +31,7 @@ export default function ComparePage() {
           className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
           aria-hidden="true"
         >
-          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            compare_arrows
-          </span>
+          <Icon name="compare_arrows" className="text-[26px]" filled />
         </span>
         <h1 className="mb-base font-display text-display-lg text-on-surface">
           Compare Universities
@@ -70,7 +69,7 @@ export default function ComparePage() {
                     key={w}
                     className="flex items-center gap-1 rounded-full bg-primary-fixed/40 px-2 py-1 font-caption text-caption text-on-primary-fixed-variant"
                   >
-                    <span className="material-symbols-outlined text-[14px]">verified</span>
+                    <Icon name="verified" className="text-[14px]" />
                     {w}
                   </span>
                 ))
@@ -102,7 +101,7 @@ export default function ComparePage() {
             onClick={() => window.print()}
             className="flex items-center justify-center gap-2 rounded-lg bg-primary px-lg py-sm font-label-md text-on-primary shadow-md transition-all hover:-translate-y-0.5"
           >
-            <span className="material-symbols-outlined">download</span>
+            <Icon name="download" />
             Download PDF Report
           </button>
           <Link

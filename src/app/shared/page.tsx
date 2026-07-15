@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Icon } from "@/components/ui/Icon";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { acceptShare, listSharedWithMe, listSharesAddressedToMe, type Share, type SharedWithMeEntry } from "@/lib/sharing";
 
@@ -108,7 +109,7 @@ export default function SharedPage() {
                           {s.scope.map((sc) => SCOPE_LABEL[sc]).join(", ")}
                         </p>
                       </div>
-                      <span className="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+                      <Icon name="arrow_forward" className="text-on-surface-variant" />
                     </Link>
                   </li>
                 ))}

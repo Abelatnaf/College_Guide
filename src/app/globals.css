@@ -323,25 +323,6 @@ body {
   box-shadow: 0 2px 4px rgb(var(--shadow-ambient) / 0.2);
 }
 
-/* Material Symbols Outlined base styling */
-.material-symbols-outlined {
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
-  vertical-align: middle;
-  user-select: none;
-}
-
-.material-symbols-outlined.filled {
-  font-variation-settings:
-    "FILL" 1,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
-}
-
 /* Respect reduced-motion: disable the ambient/decorative CSS motion.
    (JS-driven motion is gated separately via useReducedMotion / hooks.) */
 @media (prefers-reduced-motion: reduce) {

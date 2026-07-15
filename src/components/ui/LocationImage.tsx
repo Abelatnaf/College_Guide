@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getCountryImage } from "@/lib/countryImages";
 import { getUniversityImage } from "@/lib/universityImages";
 import { CampusGraphic } from "@/components/ui/CampusGraphic";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Location-flavored image band for a university card/hero.
@@ -57,9 +58,7 @@ export function LocationImage({
       <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/10 to-transparent" />
       {showLabel && (
         <span className="absolute bottom-2 left-2 z-10 flex items-center gap-1 rounded-full bg-black/35 px-2 py-0.5 font-caption text-[11px] text-white backdrop-blur-sm">
-          <span className="material-symbols-outlined text-[12px]" aria-hidden="true">
-            location_on
-          </span>
+          <Icon name="location_on" className="text-[12px]" />
           {city ?? (uniImage ? undefined : countryImage?.label)}
         </span>
       )}

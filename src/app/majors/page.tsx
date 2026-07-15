@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { majors } from "@/data/majors";
 import { MajorCard } from "@/components/ui/MajorCard";
+import { Icon } from "@/components/ui/Icon";
 
 const FILTERS = ["Most Popular", "High Salary", "Fast Growth"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -61,9 +62,7 @@ export default function MajorsPage() {
           className="mb-sm inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/70 text-on-primary shadow-[0_4px_15px_rgb(var(--primary)/0.35)]"
           aria-hidden="true"
         >
-          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>
-            school
-          </span>
+          <Icon name="school" className="text-[26px]" filled />
         </span>
         <h1 className="mb-md font-display text-display-lg text-on-surface">
           Find Your Future Path
@@ -121,9 +120,7 @@ export default function MajorsPage() {
               const inner = (
                 <>
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-primary transition-colors group-hover:bg-primary">
-                    <span className="material-symbols-outlined text-sm text-primary group-hover:text-white">
-                      check
-                    </span>
+                    <Icon name="check" className="text-sm text-primary group-hover:text-white" />
                   </div>
                   <div>
                     <h4 className="font-body-md text-body-md font-bold">{item.title}</h4>
@@ -160,12 +157,10 @@ export default function MajorsPage() {
 
         <div className="group relative min-h-[300px] overflow-hidden rounded-2xl">
           <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-tertiary-container transition-transform duration-700 group-hover:scale-105">
-            <span
-              className="material-symbols-outlined absolute -bottom-10 -right-10 select-none text-white/15"
-              style={{ fontSize: 220 }}
-            >
-              travel_explore
-            </span>
+            <Icon
+              name="travel_explore"
+              className="absolute -bottom-10 -right-10 select-none text-[220px] text-white/15"
+            />
           </div>
           <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-primary/80 to-transparent p-lg">
             <h3 className="mb-xs font-headline-md text-headline-md text-white">

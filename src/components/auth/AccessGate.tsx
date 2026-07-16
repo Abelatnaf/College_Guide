@@ -5,23 +5,31 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
 import { LockScreen } from "@/components/auth/LockScreen";
+import { isFreePreviewSlug } from "@/lib/access/freePreview";
 
 /**
  * App-wide hard paywall. Everything except marketing/legal pages, the payment
- * flow itself, auth callback, and the admin console requires a signed-in user
- * whose profile is admin or has an approved payment.
+ * flow itself, auth callback, the admin console, the university directory
+ * grid, a handful of featured university profiles, and the quiz (see
+ * freePreview.ts) requires a signed-in user whose profile is admin or has an
+ * approved payment.
  *
  * This is a CLIENT-side gate — this app's auth is fully client-side (PKCE,
  * localStorage session, no auth cookies reach the server), so there is no
  * middleware layer that can see the session. The real security boundary for
  * data stays Supabase RLS; this gate is the product-facing "you must pay" UX.
  */
-const EXEMPT_PREFIXES = ["/payment", "/auth", "/admin"];
-const EXEMPT_EXACT = ["/", "/about", "/contact", "/privacy", "/terms"];
+const EXEMPT_PREFIXES = ["/payment", "/auth", "/admin", "/quiz"];
+const EXEMPT_EXACT = ["/", "/about", "/contact", "/privacy", "/terms", "/universities"];
 
 function isExempt(pathname: string): boolean {
   if (EXEMPT_EXACT.includes(pathname)) return true;
-  return EXEMPT_PREFIXES.some((p) => pathname.startsWith(p));
+  if (EXEMPT_PREFIXES.some((p) => pathname.startsWith(p))) return true;
+  // Free-preview university profiles: /universities/<slug>, one path segment
+  // deep. /universities/us-directory and every other slug stay gated.
+  const slugMatch = pathname.match(/^\/universities\/([^/]+)$/);
+  if (slugMatch && isFreePreviewSlug(slugMatch[1])) return true;
+  return false;
 }
 
 export function AccessGate({ children }: { children: React.ReactNode }) {

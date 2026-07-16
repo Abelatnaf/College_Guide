@@ -8,6 +8,8 @@ import { LocationImage } from "@/components/ui/LocationImage";
 import { UniversityLogo } from "@/components/ui/UniversityLogo";
 import { Icon } from "@/components/ui/Icon";
 import { Tilt3D } from "@/components/motion/Tilt3D";
+import { isFreePreviewSlug } from "@/lib/access/freePreview";
+import { getAidPolicy } from "@/data/aidPolicy";
 
 function Stat({
   icon,
@@ -41,6 +43,9 @@ export function UniversityCard({
   /** Stagger delay for the card's entrance animation (paired with animate-fade-up). */
   revealDelayMs?: number;
 }) {
+  const freePreview = isFreePreviewSlug(university.slug);
+  const meetsFullNeed = getAidPolicy(university.slug)?.meetsFullDemonstratedNeed === true;
+
   return (
     // The entrance animation lives on the inner div, not this Tilt3D
     // wrapper: a CSS `animation` always wins the cascade for the properties
@@ -72,6 +77,14 @@ export function UniversityCard({
             className="absolute right-4 top-4"
           />
           <ChanceBadge slug={university.slug} className="absolute bottom-3 left-4" />
+          {freePreview && (
+            <div className="absolute bottom-3 right-4 flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 shadow-sm">
+              <Icon name="lock_open" className="text-[13px] text-on-primary" />
+              <span className="font-caption text-caption font-bold text-on-primary">
+                Free preview
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex-1 p-md">
@@ -86,6 +99,14 @@ export function UniversityCard({
               {university.name}
             </h3>
           </div>
+          {meetsFullNeed && (
+            <div className="mb-3 -mt-2 inline-flex items-center gap-1 rounded-full bg-secondary-container px-2.5 py-1">
+              <Icon name="verified" className="text-[14px] text-on-secondary-container" />
+              <span className="font-caption text-caption font-semibold text-on-secondary-container">
+                Meets full need (intl.)
+              </span>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-y-4">
             <Stat icon="military_tech" label="Global Rank" value={`#${university.globalRanking}`} />
             <Stat

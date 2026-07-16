@@ -8,6 +8,8 @@ export interface UniversityFilters {
   maxTuition: number; // 0 – 100000
   acceptance: string[]; // subset of ["elite", "competitive", "accessible"]
   scholarshipOnly: boolean;
+  /** Verified to meet 100% of demonstrated need for international applicants — see src/data/aidPolicy.ts. */
+  fullNeedOnly: boolean;
   ranking: string; // "all" | "top50" | "top100" | "top500"
   search: string;
   sort: string; // "ranking" | "tuition" | "alpha" | "acceptance"
@@ -19,6 +21,7 @@ export const DEFAULT_FILTERS: UniversityFilters = {
   maxTuition: 100000,
   acceptance: [],
   scholarshipOnly: false,
+  fullNeedOnly: false,
   ranking: "all",
   search: "",
   sort: "ranking",
@@ -179,6 +182,22 @@ export function FilterSidebar({ filters, countries, onChange, onClear }: FilterS
             type="checkbox"
             checked={filters.scholarshipOnly}
             onChange={(e) => onChange({ scholarshipOnly: e.target.checked })}
+            className="peer sr-only"
+          />
+          <div className="peer h-6 w-11 rounded-full bg-secondary-container after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-outline-variant after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none" />
+        </label>
+      </div>
+
+      {/* Full-need-for-international toggle */}
+      <div className="mb-8 flex items-center justify-between gap-3">
+        <label className="font-label-md text-label-md text-on-surface-variant">
+          Meets full need (intl.)
+        </label>
+        <label className="relative inline-flex shrink-0 cursor-pointer items-center">
+          <input
+            type="checkbox"
+            checked={filters.fullNeedOnly}
+            onChange={(e) => onChange({ fullNeedOnly: e.target.checked })}
             className="peer sr-only"
           />
           <div className="peer h-6 w-11 rounded-full bg-secondary-container after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-outline-variant after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none" />

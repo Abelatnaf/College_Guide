@@ -10,6 +10,8 @@ import { QuizCard, type QuizOption } from "@/components/ui/QuizCard";
 import type { QuizAnswers, QuizMatch } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { useAccess } from "@/components/auth/AccessProvider";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
 import { estimateChance } from "@/lib/chances";
@@ -442,6 +444,8 @@ function QuizPageInner() {
     prefilledField && FIELD_TO_CATEGORY[prefilledField] ? prefilledField : "";
 
   const { profile, hasProfile, saveProfile } = useAcademicProfile();
+  const { openAuth } = useAuth();
+  const { isUnlocked } = useAccess();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({
     ...EMPTY_ANSWERS,
@@ -454,11 +458,14 @@ function QuizPageInner() {
   const [insightsLoading, setInsightsLoading] = useState(false);
 
   const fetchInsights = async (computed: QuizMatch[], rawAnswers: Answers) => {
+    // Free/unpaid visitors only see their #1 match — skip the AI call for the
+    // locked matches entirely rather than fetching insight text nobody sees.
+    const visible = isUnlocked ? computed : computed.slice(0, 1);
     const quizAnswers = toQuizAnswers(rawAnswers);
-    const chances = computed.map((m) =>
+    const chances = visible.map((m) =>
       estimateChance(m.university, hasProfile ? profile : null),
     );
-    const cacheKey = `quizInsights:${JSON.stringify(quizAnswers)}`;
+    const cacheKey = `quizInsights:${JSON.stringify(quizAnswers)}:${visible.length}`;
     const cached = readLocal<QuizInsightsResult | null>(cacheKey, null);
     if (cached) {
       setInsights(cached);
@@ -466,7 +473,7 @@ function QuizPageInner() {
     }
 
     setInsightsLoading(true);
-    const payload = buildInsightsRequest(quizAnswers, computed, chances);
+    const payload = buildInsightsRequest(quizAnswers, visible, chances);
     const result = await requestQuizInsights(payload);
     setInsightsLoading(false);
     setInsights(result);
@@ -772,10 +779,57 @@ function QuizPageInner() {
                 Scored across all {STEP_LABELS.length} of your answers — region, budget,
                 aid, academics, learning style, and campus fit.
               </p>
+              {!isUnlocked && (
+                <p className="mt-sm font-label-md text-caption text-primary">
+                  Your #1 match is unlocked below — sign up free to see matches #2 and #3.
+                </p>
+              )}
             </div>
 
             <div className="space-y-md">
-              {matches.map((m, i) => (
+              {matches.map((m, i) => {
+                const locked = !isUnlocked && i > 0;
+                if (locked) {
+                  return (
+                    <div
+                      key={m.university.id}
+                      className="relative overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm"
+                    >
+                      <div className="flex flex-col opacity-40 blur-sm sm:flex-row">
+                        <div className="relative h-32 w-full sm:h-auto sm:w-40 sm:shrink-0">
+                          <CampusGraphic name={m.university.name} className="absolute inset-0" />
+                        </div>
+                        <div className="flex-1 p-md">
+                          <div className="mb-1 flex items-start justify-between gap-sm">
+                            <h3 className="font-headline-md text-headline-md text-on-surface">
+                              {m.university.name}
+                            </h3>
+                            <span className="shrink-0 rounded-full bg-primary px-3 py-1 font-label-md text-caption text-on-primary">
+                              {m.matchPercent}% Match
+                            </span>
+                          </div>
+                          <p className="font-caption text-caption text-on-surface-variant">
+                            {m.university.city}, {m.university.country}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-sm bg-surface-container-lowest/70 p-md text-center backdrop-blur-[2px]">
+                        <Icon name="lock" className="text-[28px] text-primary" />
+                        <p className="font-label-md text-label-md text-on-surface">
+                          Match #{i + 1} is waiting
+                        </p>
+                        <button
+                          onClick={openAuth}
+                          className="rounded-lg bg-primary px-md py-1.5 font-label-md text-caption text-on-primary transition-colors hover:bg-primary-container"
+                        >
+                          Sign up to see all 3 matches
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
                 <div
                   key={m.university.id}
                   className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm"
@@ -834,7 +888,8 @@ function QuizPageInner() {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-lg flex flex-col justify-center gap-sm sm:flex-row">
@@ -859,6 +914,17 @@ function QuizPageInner() {
                 Browse All Universities
               </Link>
             </div>
+            {matches.length > 0 && (
+              <div className="mt-md text-center">
+                <Link
+                  href={`/quiz/result?u=${encodeURIComponent(matches[0].university.slug)}&score=${matches[0].matchPercent}`}
+                  className="inline-flex items-center gap-1 font-label-md text-caption text-primary hover:underline"
+                >
+                  <Icon name="share" className="text-[16px]" />
+                  Share your #1 match with a friend
+                </Link>
+              </div>
+            )}
           </section>
         )}
       </div>

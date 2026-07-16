@@ -36,6 +36,28 @@ export const metadata: Metadata = {
   title: "UniPath — Find Your University Path",
   description:
     "Explore universities and majors, compare schools side by side, and find your best-fit university with UniPath's match quiz.",
+  applicationName: "UniPath",
+  keywords: [
+    "university search",
+    "college comparison",
+    "study abroad",
+    "scholarships",
+    "college admissions",
+    "best-fit university quiz",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: "UniPath",
+    title: "UniPath — Find Your University Path",
+    description:
+      "Explore universities and majors, compare schools side by side, and find your best-fit university with UniPath's match quiz.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "UniPath — Find Your University Path",
+    description:
+      "Explore universities and majors, compare schools side by side, and find your best-fit university with UniPath's match quiz.",
+  },
 };
 
 export default function RootLayout({

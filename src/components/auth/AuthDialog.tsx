@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { Icon } from "@/components/ui/Icon";
+import { PasswordField } from "@/components/ui/PasswordField";
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -190,7 +191,7 @@ export function AuthDialog() {
       className="no-print fixed inset-0 z-[100] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label="Sign in to CollegeGuide"
+      aria-label="Sign in to UniPath"
     >
       <button
         aria-label="Close sign in"
@@ -212,7 +213,7 @@ export function AuthDialog() {
               <Icon name="school" className="text-[24px] text-on-primary" filled />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-on-primary">Welcome to CollegeGuide</h2>
+              <h2 className="text-lg font-bold text-on-primary">Welcome to UniPath</h2>
               <p className="text-sm text-on-primary/70">
                 {mode === "signin" ? "Sign in to save your progress" : "Create your account"}
               </p>
@@ -276,23 +277,20 @@ export function AuthDialog() {
                       ref={inputRef}
                       type="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@email.com"
                       className={inputClass}
                     />
                   </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password"
-                      className={inputClass}
-                    />
-                  </div>
+                  <PasswordField
+                    value={password}
+                    onChange={setPassword}
+                    placeholder="Password"
+                    required
+                    autoComplete="current-password"
+                  />
                   <button
                     type="submit"
                     disabled={status === "sending"}
@@ -323,7 +321,7 @@ export function AuthDialog() {
                       onClick={() => setUseMagicLink(true)}
                       className="text-xs font-medium text-primary hover:underline"
                     >
-                      Use a magic link instead
+                      Email me a sign-in link
                     </button>
                   </div>
                 </form>
@@ -335,6 +333,7 @@ export function AuthDialog() {
                       ref={inputRef}
                       type="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@email.com"
@@ -374,6 +373,7 @@ export function AuthDialog() {
                       ref={inputRef}
                       type="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@email.com"
@@ -393,7 +393,7 @@ export function AuthDialog() {
                     ) : (
                       <>
                         <Icon name="send" className="text-[18px]" />
-                        Send me a sign-in link
+                        Email me a sign-in link
                       </>
                     )}
                   </button>
@@ -402,7 +402,7 @@ export function AuthDialog() {
                     onClick={() => setUseMagicLink(false)}
                     className="w-full text-center text-xs font-medium text-primary hover:underline"
                   >
-                    Use password instead
+                    Sign in with a password instead
                   </button>
                 </form>
               ) : (
@@ -413,6 +413,7 @@ export function AuthDialog() {
                       ref={inputRef}
                       type="text"
                       required
+                      autoComplete="name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Full name"
@@ -424,35 +425,28 @@ export function AuthDialog() {
                     <input
                       type="email"
                       required
+                      autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@email.com"
                       className={inputClass}
                     />
                   </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      minLength={6}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password (min 6 characters)"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Confirm password"
-                      className={inputClass}
-                    />
-                  </div>
+                  <PasswordField
+                    value={password}
+                    onChange={setPassword}
+                    placeholder="Password (min 6 characters)"
+                    required
+                    minLength={6}
+                    autoComplete="new-password"
+                  />
+                  <PasswordField
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                    placeholder="Confirm password"
+                    required
+                    autoComplete="new-password"
+                  />
                   <button
                     type="submit"
                     disabled={status === "sending"}

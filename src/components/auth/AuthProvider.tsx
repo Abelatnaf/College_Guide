@@ -128,6 +128,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const resetPassword = useCallback(async (email: string) => {
     const supabase = getSupabase();
     if (!supabase) return { error: "Accounts are not enabled." };
+    // This becomes {{ .RedirectTo }} in the "Reset Password" email template,
+    // which must link to /auth/confirm (not Supabase's default
+    // {{ .ConfirmationURL }}) — see src/app/auth/confirm/page.tsx for why.
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: typeof window !== "undefined" ? `${window.location.origin}/auth/reset-password` : undefined,
     });

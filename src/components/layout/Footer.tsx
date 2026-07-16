@@ -123,7 +123,7 @@ export function Footer() {
 
         <div className="hairline mt-xl flex items-center justify-between border-t pt-md">
           <p className="font-caption text-caption text-on-surface-variant">
-            © 2024 UniPath. Empowering future scholars.
+            © {new Date().getFullYear()} UniPath. Empowering future scholars.
           </p>
           <p className="hidden font-micro text-micro uppercase text-on-surface-variant/60 sm:block">
             Made for students, everywhere

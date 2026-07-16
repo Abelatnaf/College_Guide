@@ -8,6 +8,7 @@ import {
   UserCog,
   Calculator,
   Eye,
+  EyeOff,
   Crown,
   Building2,
   ArrowLeft,
@@ -218,6 +219,7 @@ const ICONS: Record<string, LucideIcon> = {
   verified: BadgeCheck,
   view_agenda: Rows3,
   visibility: Eye,
+  visibility_off: EyeOff,
   volunteer_activism: HandHeart,
   workspace_premium: Crown,
 };

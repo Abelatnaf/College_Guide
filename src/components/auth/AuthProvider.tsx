@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { useRouter } from "next/navigation";
 import type { Session, User } from "@supabase/supabase-js";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -31,6 +32,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(isSupabaseConfigured);
@@ -51,10 +53,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
 
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, next) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, next) => {
       setSession(next);
       setUser(next?.user ?? null);
       setLoading(false);
+      if (event === "PASSWORD_RECOVERY") {
+        // Supabase's recovery link redirect only lands on /auth/reset-password
+        // when that exact URL is on the project's Redirect URL allowlist —
+        // otherwise it silently falls back to the site's default URL, which
+        // could be any page. Since this provider wraps the whole app, catch
+        // the recovery session wherever it lands and forward the user to the
+        // reset form so the link works regardless of that dashboard setting.
+        router.replace("/auth/reset-password");
+        return;
+      }
       if (next) setAuthOpen(false);
     });
 
@@ -62,7 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       active = false;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [router]);
 
   const openAuth = useCallback(() => {
     if (isSupabaseConfigured) setAuthOpen(true);

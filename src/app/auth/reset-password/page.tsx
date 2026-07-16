@@ -37,19 +37,25 @@ function ResetPasswordInner() {
     }
 
     let done = false;
-    const finish = () => {
+    const finish = (hasSession: boolean) => {
       if (done) return;
       done = true;
-      setReady(true);
+      if (hasSession) {
+        setReady(true);
+      } else {
+        setLinkError(
+          "This reset link didn't work — it may have expired, already been used, or been opened on a different device or browser than the one you requested it from. Please request a new reset link and open it on the same device.",
+        );
+      }
     };
 
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) finish();
+      if (data.session) finish(true);
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) finish();
+      if (session) finish(true);
     });
-    const timeout = setTimeout(finish, 4000);
+    const timeout = setTimeout(() => finish(false), 4000);
 
     return () => {
       sub.subscription.unsubscribe();

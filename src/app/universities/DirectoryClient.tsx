@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { universities, universityCountries } from "@/data/universities";
+import { getAidPolicy } from "@/data/aidPolicy";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { UniversityCardSkeleton } from "@/components/ui/CardSkeleton";
 import { Icon } from "@/components/ui/Icon";
@@ -36,6 +37,7 @@ function parseFilters(sp: URLSearchParams): UniversityFilters {
     sort: sp.get("sort") ?? "ranking",
     ranking: sp.get("ranking") ?? "all",
     scholarshipOnly: sp.get("scholarship") === "1",
+    fullNeedOnly: sp.get("fullNeed") === "1",
     maxTuition: tuition ? Number(tuition) : 100000,
     acceptance: acceptance ? acceptance.split(",").filter(Boolean) : [],
   };
@@ -76,6 +78,7 @@ export function DirectoryClient() {
     if (filters.sort !== "ranking") p.set("sort", filters.sort);
     if (filters.ranking !== "all") p.set("ranking", filters.ranking);
     if (filters.scholarshipOnly) p.set("scholarship", "1");
+    if (filters.fullNeedOnly) p.set("fullNeed", "1");
     if (filters.maxTuition !== 100000) p.set("tuition", String(filters.maxTuition));
     if (filters.acceptance.length) p.set("acceptance", filters.acceptance.join(","));
     const qs = p.toString();
@@ -107,6 +110,7 @@ export function DirectoryClient() {
       if (filters.region !== "All" && u.region !== filters.region) return false;
       if (u.annualTuition > filters.maxTuition) return false;
       if (filters.scholarshipOnly && !u.scholarships.available) return false;
+      if (filters.fullNeedOnly && getAidPolicy(u.slug)?.meetsFullDemonstratedNeed !== true) return false;
       if (filters.ranking === "top50" && u.globalRanking > 50) return false;
       if (filters.ranking === "top100" && u.globalRanking > 100) return false;
       if (filters.ranking === "top500" && u.globalRanking > 500) return false;

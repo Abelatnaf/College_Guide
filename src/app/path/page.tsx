@@ -137,6 +137,24 @@ export default function PathPage() {
       cta: "Go to Essay Hub",
     });
   }
+  // Evergreen suggestions — always appended last, so they fill out the list
+  // for early-stage students instead of the list ever going empty.
+  if (shortlist.length < 5) {
+    actions.push({
+      icon: "menu_book",
+      title: "Explore majors that fit you",
+      body: "Browse 54 majors with real salary and job-growth data before narrowing your list.",
+      href: "/majors",
+      cta: "Browse majors",
+    });
+  }
+  actions.push({
+    icon: "verified",
+    title: "Find schools that meet full financial need",
+    body: "See universities verified to cover 100% of demonstrated need for international students.",
+    href: "/universities?fullNeed=1",
+    cta: "See full-need schools",
+  });
   const [topAction, ...restActions] = actions;
 
   return (
@@ -290,10 +308,6 @@ export default function PathPage() {
             <h2 className="mb-md font-headline-md text-headline-md text-on-surface">Suggested next steps</h2>
             {!hydrated ? (
               <p className="font-body-md text-body-md text-on-surface-variant">Loading…</p>
-            ) : actions.length === 0 ? (
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                You&apos;re all caught up — check back as deadlines approach.
-              </p>
             ) : restActions.length === 0 ? (
               <p className="font-body-md text-body-md text-on-surface-variant">
                 That note above is the one thing to do next.

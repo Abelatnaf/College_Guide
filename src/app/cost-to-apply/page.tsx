@@ -312,6 +312,13 @@ export default function CostToApplyPage() {
           Getting these fees waived
         </h2>
         <p className="font-body-md text-body-md text-on-surface">{waiverGuidance}</p>
+        <Link
+          href="/fee-waivers"
+          className="mt-sm inline-flex items-center gap-1 font-label-md text-primary hover:underline"
+        >
+          See which schools confirm international waivers &amp; how to ask
+          <Icon name="arrow_forward" className="text-[18px]" />
+        </Link>
       </section>
 
       {/* Sources */}

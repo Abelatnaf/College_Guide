@@ -21,7 +21,7 @@ type Status = "idle" | "sending" | "sent" | "error" | "google-loading";
 export function AuthDialog() {
   const {
     enabled, authOpen, closeAuth,
-    signInWithEmail, signInWithPassword, signUpWithPassword, signInWithGoogle,
+    signInWithEmail, signInWithPassword, signUpWithPassword, signInWithGoogle, resetPassword,
   } = useAuth();
   const [mode, setMode] = useState<Mode>("signin");
   const [name, setName] = useState("");
@@ -31,6 +31,7 @@ export function AuthDialog() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [useMagicLink, setUseMagicLink] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export function AuthDialog() {
       setName("");
       setMessage("");
       setUseMagicLink(false);
+      setForgotPassword(false);
     }
   }, [authOpen]);
 
@@ -70,6 +72,7 @@ export function AuthDialog() {
     setConfirmPassword("");
     setName("");
     setUseMagicLink(false);
+    setForgotPassword(false);
   };
 
   const submitMagicLink = async (e: React.FormEvent) => {
@@ -96,6 +99,20 @@ export function AuthDialog() {
       setMessage(error);
     } else {
       setStatus("idle");
+    }
+  };
+
+  const submitForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus("sending");
+    const { error } = await resetPassword(email.trim());
+    if (error) {
+      setStatus("error");
+      setMessage(error);
+    } else {
+      setStatus("sent");
+      setMessage(email.trim());
     }
   };
 
@@ -139,16 +156,22 @@ export function AuthDialog() {
       </div>
       <h3 className="mb-2 text-lg font-bold text-on-surface">Check your inbox</h3>
       <p className="mb-1 text-sm text-on-surface-variant">
-        {mode === "signup" ? "We sent a confirmation link to" : "We sent a sign-in link to"}
+        {forgotPassword
+          ? "We sent a password reset link to"
+          : mode === "signup"
+            ? "We sent a confirmation link to"
+            : "We sent a sign-in link to"}
       </p>
       <p className="mb-4 text-sm font-semibold text-on-surface">{message}</p>
       <p className="text-xs text-on-surface-variant">
-        {mode === "signup"
-          ? "Click the link to confirm your account. It expires in 1 hour."
-          : "Click the link in the email to sign in. It expires in 1 hour."}
+        {forgotPassword
+          ? "Click the link to choose a new password. It expires in 1 hour."
+          : mode === "signup"
+            ? "Click the link to confirm your account. It expires in 1 hour."
+            : "Click the link in the email to sign in. It expires in 1 hour."}
       </p>
       <button
-        onClick={() => { setStatus("idle"); setUseMagicLink(false); }}
+        onClick={() => { setStatus("idle"); setUseMagicLink(false); setForgotPassword(false); }}
         className="mt-5 text-sm font-medium text-primary hover:underline"
       >
         Use a different method
@@ -245,7 +268,7 @@ export function AuthDialog() {
                 <span className="h-px flex-1 bg-outline-variant/60" />
               </div>
 
-              {mode === "signin" && !useMagicLink ? (
+              {mode === "signin" && !useMagicLink && !forgotPassword ? (
                 <form onSubmit={submitSignIn} className="space-y-3">
                   <div className="relative">
                     <Icon name="mail" className={iconClass} />
@@ -287,12 +310,60 @@ export function AuthDialog() {
                       </>
                     )}
                   </button>
+                  <div className="flex items-center justify-between px-0.5">
+                    <button
+                      type="button"
+                      onClick={() => setForgotPassword(true)}
+                      className="text-xs font-medium text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setUseMagicLink(true)}
+                      className="text-xs font-medium text-primary hover:underline"
+                    >
+                      Use a magic link instead
+                    </button>
+                  </div>
+                </form>
+              ) : mode === "signin" && forgotPassword ? (
+                <form onSubmit={submitForgotPassword} className="space-y-3">
+                  <div className="relative">
+                    <Icon name="mail" className={iconClass} />
+                    <input
+                      ref={inputRef}
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@email.com"
+                      className={inputClass}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent" />
+                        Sending reset link…
+                      </>
+                    ) : (
+                      <>
+                        <Icon name="send" className="text-[18px]" />
+                        Send reset link
+                      </>
+                    )}
+                  </button>
                   <button
                     type="button"
-                    onClick={() => setUseMagicLink(true)}
+                    onClick={() => setForgotPassword(false)}
                     className="w-full text-center text-xs font-medium text-primary hover:underline"
                   >
-                    Use a magic link instead
+                    Back to sign in
                   </button>
                 </form>
               ) : mode === "signin" && useMagicLink ? (

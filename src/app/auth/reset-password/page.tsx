@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getSupabase } from "@/lib/supabase/client";
 import { Icon } from "@/components/ui/Icon";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 
 /**
  * Landing page for the "reset password" email link. The Supabase browser
@@ -87,11 +88,6 @@ function ResetPasswordInner() {
     }
   };
 
-  const inputClass =
-    "w-full rounded-xl border-2 border-outline-variant/60 bg-surface py-3 pl-12 pr-4 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0";
-  const iconClass =
-    "absolute left-4 top-1/2 -translate-y-1/2 text-[20px] text-on-surface-variant/50";
-
   if (linkError) {
     return (
       <main className="flex flex-grow flex-col items-center justify-center px-md py-xl text-center">
@@ -135,29 +131,17 @@ function ResetPasswordInner() {
           Choose a new password for your account.
         </p>
         <form onSubmit={submit} className="space-y-3">
-          <div className="relative">
-            <Icon name="lock" className={iconClass} />
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="New password (min 6 characters)"
-              className={inputClass}
-            />
-          </div>
-          <div className="relative">
-            <Icon name="lock" className={iconClass} />
-            <input
-              type="password"
-              required
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm new password"
-              className={inputClass}
-            />
-          </div>
+          <PasswordInput
+            value={password}
+            onChange={setPassword}
+            placeholder="New password (min 6 characters)"
+            minLength={6}
+          />
+          <PasswordInput
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+            placeholder="Confirm new password"
+          />
           <button
             type="submit"
             disabled={status === "saving"}

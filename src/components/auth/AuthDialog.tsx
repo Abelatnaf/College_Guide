@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { Icon } from "@/components/ui/Icon";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 
 function GoogleLogo({ className }: { className?: string }) {
   return (
@@ -282,17 +283,11 @@ export function AuthDialog() {
                       className={inputClass}
                     />
                   </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password"
-                      className={inputClass}
-                    />
-                  </div>
+                  <PasswordInput
+                    value={password}
+                    onChange={setPassword}
+                    placeholder="Password"
+                  />
                   <button
                     type="submit"
                     disabled={status === "sending"}
@@ -323,7 +318,7 @@ export function AuthDialog() {
                       onClick={() => setUseMagicLink(true)}
                       className="text-xs font-medium text-primary hover:underline"
                     >
-                      Use a magic link instead
+                      Sign in with a link instead
                     </button>
                   </div>
                 </form>
@@ -430,29 +425,17 @@ export function AuthDialog() {
                       className={inputClass}
                     />
                   </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      minLength={6}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password (min 6 characters)"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div className="relative">
-                    <Icon name="lock" className={iconClass} />
-                    <input
-                      type="password"
-                      required
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Confirm password"
-                      className={inputClass}
-                    />
-                  </div>
+                  <PasswordInput
+                    value={password}
+                    onChange={setPassword}
+                    placeholder="Password (min 6 characters)"
+                    minLength={6}
+                  />
+                  <PasswordInput
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                    placeholder="Confirm password"
+                  />
                   <button
                     type="submit"
                     disabled={status === "sending"}

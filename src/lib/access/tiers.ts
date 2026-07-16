@@ -29,7 +29,7 @@ export const TIERS: TierInfo[] = [
   {
     id: "basic",
     label: "Basic",
-    priceEtb: 250,
+    priceEtb: 400,
     tagline: "Explore and shortlist schools",
     features: [
       "Browse every university & major",
@@ -42,7 +42,7 @@ export const TIERS: TierInfo[] = [
   {
     id: "standard",
     label: "Standard",
-    priceEtb: 550,
+    priceEtb: 600,
     tagline: "Plan the application, not just the school",
     features: [
       "Everything in Basic",
@@ -56,7 +56,7 @@ export const TIERS: TierInfo[] = [
   {
     id: "premium",
     label: "Premium",
-    priceEtb: 850,
+    priceEtb: 1200,
     tagline: "Full AI-assisted application support",
     features: [
       "Everything in Standard",

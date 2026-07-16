@@ -15,6 +15,7 @@ interface Submission {
   tier: Tier;
   amount_etb: number;
   method: string;
+  referral_code: string | null;
   screenshot_path: string;
   status: Status;
   rejection_reason: string | null;
@@ -25,13 +26,46 @@ interface Submission {
 
 const TABS: Status[] = ["pending", "approved", "rejected"];
 
+/** Compact "2h ago" / "3d ago" style relative time, falling back to a date past ~30 days. */
+function timeAgo(iso: string): string {
+  const ms = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(ms / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return `${days}d ago`;
+  return new Date(iso).toLocaleDateString();
+}
+
 export default function AdminPaymentsPage() {
   const { user, loading: authLoading, openAuth } = useAuth();
   const { isAdmin, loading: accessLoading } = useAccess();
   const [tab, setTab] = useState<Status>("pending");
   const [rows, setRows] = useState<Submission[]>([]);
+  const [counts, setCounts] = useState<Record<Status, number>>({ pending: 0, approved: 0, rejected: 0 });
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
+
+  const loadCounts = useCallback(async () => {
+    const supabase = getSupabase();
+    if (!supabase || !isAdmin) return;
+    const results = await Promise.all(
+      TABS.map((s) =>
+        supabase.from("payment_submissions").select("*", { count: "exact", head: true }).eq("status", s),
+      ),
+    );
+    const next = { pending: 0, approved: 0, rejected: 0 } as Record<Status, number>;
+    TABS.forEach((s, i) => {
+      next[s] = results[i].count ?? 0;
+    });
+    setCounts(next);
+  }, [isAdmin]);
+
+  useEffect(() => {
+    loadCounts();
+  }, [loadCounts]);
 
   const load = useCallback(async () => {
     const supabase = getSupabase();
@@ -84,6 +118,7 @@ export default function AdminPaymentsPage() {
       .eq("id", row.user_id);
     setBusyId(null);
     load();
+    loadCounts();
   };
 
   const reject = async (row: Submission) => {
@@ -104,6 +139,7 @@ export default function AdminPaymentsPage() {
     await supabase.from("profiles").update({ access_status: "rejected" }).eq("id", row.user_id);
     setBusyId(null);
     load();
+    loadCounts();
   };
 
   if (authLoading || accessLoading) {
@@ -149,13 +185,20 @@ export default function AdminPaymentsPage() {
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`rounded-lg border px-md py-xs font-label-md text-label-md capitalize ${
+            className={`flex items-center gap-1.5 rounded-lg border px-md py-xs font-label-md text-label-md capitalize ${
               tab === t
                 ? "border-primary bg-primary/10 text-primary"
                 : "border-outline-variant/30 text-on-surface-variant"
             }`}
           >
             {t}
+            <span
+              className={`rounded-full px-1.5 py-0.5 font-caption text-[11px] font-bold ${
+                tab === t ? "bg-primary text-on-primary" : "bg-surface-container-high text-on-surface-variant"
+              }`}
+            >
+              {counts[t]}
+            </span>
           </button>
         ))}
       </div>
@@ -186,9 +229,13 @@ export default function AdminPaymentsPage() {
                   {row.display_name ?? row.user_id}
                 </p>
                 <p className="font-body-sm text-body-sm text-on-surface-variant">
-                  {row.tier} · {row.amount_etb} ETB · {row.method} ·{" "}
-                  {new Date(row.created_at).toLocaleString()}
+                  {row.tier} · {row.amount_etb} ETB · {row.method} · {timeAgo(row.created_at)}
                 </p>
+                {row.referral_code && (
+                  <p className="mt-1 font-body-sm text-body-sm text-primary">
+                    Referral code: <strong>{row.referral_code}</strong>
+                  </p>
+                )}
                 {row.status === "rejected" && row.rejection_reason && (
                   <p className="mt-1 font-body-sm text-body-sm text-error">
                     Reason: {row.rejection_reason}

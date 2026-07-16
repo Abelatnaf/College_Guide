@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { universities } from "@/data/universities";
@@ -12,6 +12,8 @@ import { formatCurrency } from "@/lib/utils";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
+import { setPaymentContext } from "@/lib/access/paymentContext";
+import { getQuizHistory, recordQuizResult, type QuizHistoryEntry } from "@/lib/quizHistory";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { AIInsightPanel } from "@/components/ui/AIInsightPanel";
 import { estimateChance } from "@/lib/chances";
@@ -456,6 +458,11 @@ function QuizPageInner() {
   const [profileSaved, setProfileSaved] = useState(false);
   const [insights, setInsights] = useState<QuizInsightsResult | null>(null);
   const [insightsLoading, setInsightsLoading] = useState(false);
+  const [history, setHistory] = useState<QuizHistoryEntry[]>([]);
+
+  useEffect(() => {
+    setHistory(getQuizHistory());
+  }, []);
 
   const fetchInsights = async (computed: QuizMatch[], rawAnswers: Answers) => {
     // Free/unpaid visitors only see their #1 match — skip the AI call for the
@@ -551,6 +558,13 @@ function QuizPageInner() {
       setMatches(computed);
       setStatus("results");
       void fetchInsights(computed, answers);
+      if (computed.length > 0) {
+        recordQuizResult({
+          topMatchSlug: computed[0].university.slug,
+          topMatchName: computed[0].university.name,
+          topMatchPercent: computed[0].matchPercent,
+        });
+      }
     }, 1400);
   };
 
@@ -581,6 +595,26 @@ function QuizPageInner() {
                 className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
                 style={{ width: `${progress}%` }}
               />
+            </div>
+          </div>
+        )}
+
+        {status === "quiz" && step === 0 && history.length > 0 && (
+          <div className="mb-lg rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-md">
+            <p className="mb-sm font-label-md text-caption uppercase tracking-wider text-on-surface-variant">
+              Your past matches
+            </p>
+            <div className="flex flex-wrap gap-sm">
+              {history.map((h) => (
+                <Link
+                  key={h.id}
+                  href={`/quiz/result?u=${encodeURIComponent(h.topMatchSlug)}&score=${h.topMatchPercent}`}
+                  className="flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface px-3 py-1.5 font-label-md text-caption text-on-surface transition-colors hover:border-primary hover:text-primary"
+                >
+                  {h.topMatchName}
+                  <span className="text-primary">{h.topMatchPercent}%</span>
+                </Link>
+              ))}
             </div>
           </div>
         )}
@@ -819,7 +853,10 @@ function QuizPageInner() {
                           Match #{i + 1} is waiting
                         </p>
                         <button
-                          onClick={openAuth}
+                          onClick={() => {
+                            setPaymentContext("quiz");
+                            openAuth();
+                          }}
                           className="rounded-lg bg-primary px-md py-1.5 font-label-md text-caption text-on-primary transition-colors hover:bg-primary-container"
                         >
                           Sign up to see all 3 matches

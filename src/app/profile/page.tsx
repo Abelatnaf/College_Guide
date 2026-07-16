@@ -131,6 +131,43 @@ export default function ProfilePage() {
           </div>
         )}
 
+        {(() => {
+          const tips: { icon: string; text: string; href?: string }[] = [];
+          if (draft.gpa == null) {
+            tips.push({ icon: "school", text: "Add your GPA — it's the single biggest signal in your chance estimate." });
+          }
+          if (draft.sat == null && draft.act == null) {
+            tips.push({ icon: "task_alt", text: "Add an SAT or ACT score to sharpen your estimates further." });
+          }
+          if (draft.toefl == null && draft.ielts == null) {
+            tips.push({
+              icon: "translate",
+              text: "Add a TOEFL/IELTS score, or see which of your shortlisted schools even require one.",
+              href: "/test-planner",
+            });
+          }
+          if (!draft.intendedMajor) {
+            tips.push({ icon: "menu_book", text: "Set your intended major to filter schools that actually offer it." });
+          }
+          if (tips.length === 0) return null;
+          return (
+            <ul className="mt-lg space-y-2 rounded-lg bg-surface-container-low p-md">
+              {tips.map((tip) => (
+                <li key={tip.text} className="flex items-start gap-2">
+                  <Icon name={tip.icon} className="mt-0.5 shrink-0 text-[18px] text-primary" />
+                  {tip.href ? (
+                    <Link href={tip.href} className="font-caption text-caption text-on-surface hover:text-primary hover:underline">
+                      {tip.text}
+                    </Link>
+                  ) : (
+                    <span className="font-caption text-caption text-on-surface">{tip.text}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          );
+        })()}
+
         <div className="mt-lg flex flex-wrap items-center gap-sm">
           <button
             onClick={handleSave}

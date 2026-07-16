@@ -5,6 +5,7 @@ import Link from "next/link";
 import { universities, getUniversityBySlug } from "@/data/universities";
 import { flagFor } from "@/data/flags";
 import { CompareTable, computeWins } from "@/components/ui/CompareTable";
+import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { Icon } from "@/components/ui/Icon";
 
 const DEFAULT_SLUGS = ["harvard", "cambridge", "university-of-toronto"];
@@ -55,9 +56,12 @@ export default function ComparePage() {
             key={i}
             className="rounded-xl border border-outline-variant bg-surface-container-lowest p-md shadow-[0_4px_15px_rgba(0,0,0,0.05)]"
           >
-            <div className="mb-sm flex items-center gap-sm">
-              <span className="text-lg">{flagFor(u.country)}</span>
-              <h3 className="font-headline-md text-headline-md text-on-surface">{u.name}</h3>
+            <div className="mb-sm flex items-center justify-between gap-sm">
+              <div className="flex items-center gap-sm">
+                <span className="text-lg">{flagFor(u.country)}</span>
+                <h3 className="font-headline-md text-headline-md text-on-surface">{u.name}</h3>
+              </div>
+              <ChanceBadge slug={u.slug} showEstimate />
             </div>
             <p className="mb-md font-body-md text-body-md text-on-surface-variant">
               {u.city}, {u.country} · Est. {u.established}

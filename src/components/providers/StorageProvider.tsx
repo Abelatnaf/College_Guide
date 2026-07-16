@@ -28,6 +28,7 @@ import {
   type ApplicationStatus,
   type ChecklistItem,
   type CostScenario,
+  type EssayItem,
   type ShortlistItem,
 } from "@/lib/storage/types";
 import {
@@ -66,6 +67,9 @@ interface StorageContextValue {
   addChecklistItem: (slug: string, label: string) => void;
   toggleChecklistItem: (slug: string, itemId: string) => void;
   removeChecklistItem: (slug: string, itemId: string) => void;
+  addEssay: (slug: string, prompt: string, wordLimit: number | null) => void;
+  updateEssay: (slug: string, essayId: string, patch: Partial<Omit<EssayItem, "id">>) => void;
+  removeEssay: (slug: string, essayId: string) => void;
 
   // cost scenarios
   scenarios: CostScenario[];
@@ -306,6 +310,7 @@ export function StorageProvider({ children }: { children: React.ReactNode }) {
           submittedAt: null,
           notes: "",
           checklist: seededChecklist,
+          essays: [],
           createdAt: nowIso(),
           updatedAt: nowIso(),
           ...init,
@@ -373,6 +378,41 @@ export function StorageProvider({ children }: { children: React.ReactNode }) {
     [mutateApplication],
   );
 
+  // ── essays ───────────────────────────────────────────────────────────────
+  const addEssay = useCallback(
+    (slug: string, prompt: string, wordLimit: number | null) => {
+      const trimmed = prompt.trim();
+      if (!trimmed) return;
+      const essay: EssayItem = {
+        id: newId(),
+        prompt: trimmed,
+        status: "not-started",
+        wordCount: 0,
+        wordLimit,
+      };
+      mutateApplication(slug, (a) => ({ ...a, essays: [...(a.essays ?? []), essay] }));
+    },
+    [mutateApplication],
+  );
+
+  const updateEssay = useCallback(
+    (slug: string, essayId: string, patch: Partial<Omit<EssayItem, "id">>) =>
+      mutateApplication(slug, (a) => ({
+        ...a,
+        essays: (a.essays ?? []).map((e) => (e.id === essayId ? { ...e, ...patch } : e)),
+      })),
+    [mutateApplication],
+  );
+
+  const removeEssay = useCallback(
+    (slug: string, essayId: string) =>
+      mutateApplication(slug, (a) => ({
+        ...a,
+        essays: (a.essays ?? []).filter((e) => e.id !== essayId),
+      })),
+    [mutateApplication],
+  );
+
   // ── cost scenarios ────────────────────────────────────────────────────────
   const saveScenario = useCallback(
     (s: Omit<CostScenario, "id" | "createdAt">) => {
@@ -411,6 +451,9 @@ export function StorageProvider({ children }: { children: React.ReactNode }) {
       addChecklistItem,
       toggleChecklistItem,
       removeChecklistItem,
+      addEssay,
+      updateEssay,
+      removeEssay,
       scenarios,
       saveScenario,
       removeScenario,
@@ -434,6 +477,9 @@ export function StorageProvider({ children }: { children: React.ReactNode }) {
       addChecklistItem,
       toggleChecklistItem,
       removeChecklistItem,
+      addEssay,
+      updateEssay,
+      removeEssay,
       scenarios,
       saveScenario,
       removeScenario,
@@ -485,6 +531,9 @@ export function useApplications() {
     addChecklistItem: s.addChecklistItem,
     toggleChecklistItem: s.toggleChecklistItem,
     removeChecklistItem: s.removeChecklistItem,
+    addEssay: s.addEssay,
+    updateEssay: s.updateEssay,
+    removeEssay: s.removeEssay,
   };
 }
 

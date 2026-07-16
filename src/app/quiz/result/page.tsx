@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { getUniversityBySlug } from "@/data/universities";
@@ -21,6 +21,19 @@ function ResultInner() {
   const scoreRaw = Number(params.get("score"));
   const score = Number.isFinite(scoreRaw) ? Math.min(99, Math.max(1, Math.round(scoreRaw))) : null;
   const university = getUniversityBySlug(slug);
+  const [shareUrl, setShareUrl] = useState("");
+
+  // Read the URL only after mount — avoids an SSR/client hydration mismatch
+  // on window.location, which doesn't exist during server rendering.
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
+
+  const shareText = university
+    ? `I matched ${score}% with ${university.name} on UniPath — take the quiz to find yours:`
+    : "";
+  const whatsappHref = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
+  const telegramHref = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
 
   const handleShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : "";
@@ -82,19 +95,38 @@ function ResultInner() {
             {flagFor(university.country)} {university.city}, {university.country}
           </p>
 
-          <div className="mb-lg flex flex-col gap-sm sm:flex-row">
-            <Link
-              href="/quiz"
-              className="flex-1 rounded-lg bg-primary py-3 text-center font-label-md text-on-primary transition-colors hover:bg-primary-container"
+          <Link
+            href="/quiz"
+            className="mb-sm block rounded-lg bg-primary py-3 text-center font-label-md text-on-primary transition-colors hover:bg-primary-container"
+          >
+            Find your own match
+          </Link>
+
+          <div className="mb-lg flex gap-sm">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-outline-variant/60 py-2.5 font-label-md text-caption text-on-surface transition-colors hover:border-primary hover:text-primary"
             >
-              Find your own match
-            </Link>
+              <Icon name="whatsapp" className="text-[18px]" />
+              WhatsApp
+            </a>
+            <a
+              href={telegramHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-outline-variant/60 py-2.5 font-label-md text-caption text-on-surface transition-colors hover:border-primary hover:text-primary"
+            >
+              <Icon name="send" className="text-[18px]" />
+              Telegram
+            </a>
             <button
               onClick={handleShare}
-              className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-outline-variant/60 py-3 font-label-md text-on-surface transition-colors hover:border-primary hover:text-primary"
+              aria-label={copied ? "Link copied" : "Copy link"}
+              className="flex items-center justify-center gap-2 rounded-lg border-2 border-outline-variant/60 px-3 py-2.5 font-label-md text-caption text-on-surface transition-colors hover:border-primary hover:text-primary"
             >
-              <Icon name={copied ? "check" : "share"} className="text-[18px]" />
-              {copied ? "Link copied" : "Share this"}
+              <Icon name={copied ? "check" : "content_copy"} className="text-[18px]" />
             </button>
           </div>
 

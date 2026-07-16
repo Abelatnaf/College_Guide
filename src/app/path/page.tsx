@@ -13,12 +13,13 @@ import {
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ChanceBadge } from "@/components/ui/ChanceBadge";
 import { Icon } from "@/components/ui/Icon";
+import { EssayTracker } from "@/components/university/EssayTracker";
 import { upcomingDeadlines, deadlineDate } from "@/lib/deadlines";
 import { daysUntil } from "@/lib/ics";
 import { summarizeApplicationFees } from "@/lib/costSummary";
 import { aidSummaryLine } from "@/lib/aidSummary";
 import { STATUS_META } from "@/lib/applicationMeta";
-import type { AcademicProfile, Application } from "@/lib/storage/types";
+import type { AcademicProfile, Application, EssayItem } from "@/lib/storage/types";
 import type { University } from "@/types";
 
 /** Fields the profile page actually lets a student fill in — used for the completeness meter. */
@@ -46,6 +47,9 @@ export default function PathPage() {
     applications,
     addApplication,
     toggleChecklistItem,
+    addEssay,
+    updateEssay,
+    removeEssay,
     hydrated: applicationsHydrated,
   } = useApplications();
 
@@ -76,13 +80,25 @@ export default function PathPage() {
       return a.university.name.localeCompare(b.university.name);
     });
 
-  const weekAhead = upcomingDeadlines(applications, 6);
+  const weekAhead = upcomingDeadlines(applications, 8);
   const { unverified: unverifiedFees, byCurrency } = summarizeApplicationFees(
     shortlist.map((s) => s.slug),
   );
 
   // Rule-based next actions, in priority order — no AI, just what the student's own data implies.
   const actions: NextAction[] = [];
+  // An imminent deadline always outranks generic prompts — surfaced first so
+  // it becomes the handwritten mentor note, not buried in "suggested next steps".
+  const soonest = weekAhead[0];
+  if (soonest && soonest.daysUntil <= 7) {
+    actions.push({
+      icon: "event_busy",
+      title: `${soonest.university.name} is due ${soonest.daysUntil === 0 ? "today" : soonest.daysUntil === 1 ? "tomorrow" : `in ${soonest.daysUntil} days`}`,
+      body: `Check the checklist and make sure everything's ready.`,
+      href: `/universities/${soonest.university.slug}`,
+      cta: "Open this application",
+    });
+  }
   if (!hasProfile) {
     actions.push({
       icon: "person",
@@ -211,11 +227,11 @@ export default function PathPage() {
         </div>
       )}
 
-      {/* This week, across every tracked school */}
+      {/* Coming up, across every tracked school */}
       {hydrated && weekAhead.length > 0 && (
         <section className="mb-lg rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg">
           <h2 className="mb-lg font-headline-md text-headline-md text-on-surface">
-            This week, across your folders
+            Coming up, across your folders
           </h2>
           <div className="overflow-x-auto pb-sm">
             <div className="relative flex min-w-[560px] gap-0 border-t-2 border-dotted border-outline pt-sm">
@@ -271,6 +287,9 @@ export default function PathPage() {
                   key={card.app.slug}
                   card={card}
                   onToggleItem={(id) => toggleChecklistItem(card.app.slug, id)}
+                  onAddEssay={(prompt, wordLimit) => addEssay(card.app.slug, prompt, wordLimit)}
+                  onUpdateEssay={(essayId, patch) => updateEssay(card.app.slug, essayId, patch)}
+                  onRemoveEssay={(essayId) => removeEssay(card.app.slug, essayId)}
                 />
               ))}
               {untracked.map(({ item, university }) => (
@@ -380,9 +399,15 @@ export default function PathPage() {
 function SchoolFolderCard({
   card,
   onToggleItem,
+  onAddEssay,
+  onUpdateEssay,
+  onRemoveEssay,
 }: {
   card: SchoolCard;
   onToggleItem: (itemId: string) => void;
+  onAddEssay: (prompt: string, wordLimit: number | null) => void;
+  onUpdateEssay: (essayId: string, patch: Partial<Omit<EssayItem, "id">>) => void;
+  onRemoveEssay: (essayId: string) => void;
 }) {
   const { app, university, days } = card;
   const aid = getAidPolicy(university.slug);
@@ -474,6 +499,13 @@ function SchoolFolderCard({
             )}
           </div>
         )}
+
+        <EssayTracker
+          essays={app.essays ?? []}
+          onAdd={onAddEssay}
+          onUpdate={onUpdateEssay}
+          onRemove={onRemoveEssay}
+        />
 
         {aid && (
           <p className="mb-md font-caption text-caption text-on-surface-variant">{aidSummaryLine(aid)}</p>

@@ -78,6 +78,20 @@ export interface ChecklistItem {
   dueDate?: string | null;
 }
 
+export type EssayStatus = "not-started" | "drafting" | "done";
+
+export const ESSAY_STATUSES: EssayStatus[] = ["not-started", "drafting", "done"];
+
+/** A single supplemental essay under an application. */
+export interface EssayItem {
+  id: string;
+  prompt: string;
+  status: EssayStatus;
+  wordCount: number;
+  /** Word limit, or null when the school doesn't state one. */
+  wordLimit: number | null;
+}
+
 /** A tracked university application. */
 export interface Application {
   slug: string;
@@ -88,6 +102,7 @@ export interface Application {
   submittedAt?: string | null;
   notes?: string;
   checklist: ChecklistItem[];
+  essays: EssayItem[];
   createdAt: string;
   updatedAt: string;
 }

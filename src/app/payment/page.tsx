@@ -15,6 +15,7 @@ import { Tilt3D } from "@/components/motion/Tilt3D";
 import { Icon } from "@/components/ui/Icon";
 import { EASE } from "@/lib/motion";
 import { TIERS, PAYMENT_DETAILS, type Tier } from "@/lib/access/tiers";
+import { consumePaymentContextLabel } from "@/lib/access/paymentContext";
 
 type Method = "telebirr" | "abyssinia";
 type LatestSubmission = {
@@ -137,7 +138,16 @@ export default function PaymentPage() {
   const [error, setError] = useState<string | null>(null);
   const [latest, setLatest] = useState<LatestSubmission>(null);
   const [loadingLatest, setLoadingLatest] = useState(true);
+  const [contextLabel, setContextLabel] = useState<string | null>(null);
+  const [referralCode, setReferralCode] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Read once on mount — set by AccessGate or the quiz page right before
+  // sending the user into sign-in, so we can explain what they're unlocking
+  // instead of showing a generic tier grid. Self-clearing (see paymentContext.ts).
+  useEffect(() => {
+    setContextLabel(consumePaymentContextLabel());
+  }, []);
 
   const loadLatest = useCallback(async () => {
     const supabase = getSupabase();
@@ -214,6 +224,7 @@ export default function PaymentPage() {
         amount_etb: tierInfo.priceEtb,
         method,
         screenshot_path: path,
+        referral_code: referralCode.trim() || null,
       });
       if (insertError) throw insertError;
 
@@ -315,10 +326,12 @@ export default function PaymentPage() {
                     Choose the plan that fits you best
                   </span>
                   <h1 className="text-4xl font-extrabold text-on-surface sm:text-5xl">
-                    Pick Your Plan
+                    {contextLabel ? "You're one step from unlocking this" : "Pick Your Plan"}
                   </h1>
                   <p className="mt-sm max-w-md font-body-md text-body-md text-on-surface-variant">
-                    Unlock powerful tools and features to ace your application journey.
+                    {contextLabel
+                      ? `Pick a plan below to unlock ${contextLabel}, plus everything else on UniPath.`
+                      : "Unlock powerful tools and features to ace your application journey."}
                   </p>
                 </Reveal>
 
@@ -565,6 +578,19 @@ export default function PaymentPage() {
                       </button>
                     </div>
                   )}
+
+                  <div className="mb-md">
+                    <label className="mb-1 block font-label-sm text-label-sm text-on-surface-variant">
+                      Referral code (optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={referralCode}
+                      onChange={(e) => setReferralCode(e.target.value)}
+                      placeholder="Got a code from a friend?"
+                      className="w-full rounded-lg border border-outline-variant bg-surface-container-low px-md py-2.5 font-body-sm text-body-sm focus:border-primary focus:ring-0"
+                    />
+                  </div>
 
                   {error && <p className="mb-md font-body-sm text-body-sm text-error">{error}</p>}
 

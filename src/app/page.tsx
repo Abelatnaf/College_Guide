@@ -12,6 +12,8 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 import { Tilt3D } from "@/components/motion/Tilt3D";
 import { ScrollParallax } from "@/components/motion/ScrollParallax";
 import { CinematicHeroMedia } from "@/components/hero/CinematicHeroMedia";
+import { FreePreviewStrip } from "@/components/ui/FreePreviewStrip";
+import { ReturningVisitorNudge } from "@/components/ui/ReturningVisitorNudge";
 import { Icon } from "@/components/ui/Icon";
 
 const FEATURES = [
@@ -79,6 +81,8 @@ export default function HomePage() {
 
   return (
     <main>
+      <ReturningVisitorNudge />
+
       {/* ————— Hero ————— */}
       <section className="relative overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="relative z-10 mx-auto max-w-container-max px-md md:px-lg">
@@ -103,7 +107,8 @@ export default function HomePage() {
                 <p className="mx-auto mt-md max-w-lg font-body-lg text-body-lg text-on-surface-variant lg:mx-0">
                   A short quiz matches you with schools that fit your budget, grades,
                   and goals — with honest, explained admission-chance estimates and
-                  side-by-side comparison. All in one place, all free.
+                  side-by-side comparison. Take the quiz and browse featured schools
+                  free, no account needed.
                 </p>
               </StaggerItem>
               <StaggerItem>
@@ -203,6 +208,9 @@ export default function HomePage() {
 
       {/* ————— University ticker ————— */}
       <UniversityMarquee />
+
+      {/* ————— Free preview strip ————— */}
+      <FreePreviewStrip />
 
       {/* ————— 01 · Explore ————— */}
       <section id="explore" className="scroll-mt-20 py-xl md:py-24">

@@ -5,6 +5,7 @@ import type {
   ApplicationStatus,
   ChecklistItem,
   CostScenario,
+  EssayItem,
   ShortlistItem,
 } from "@/lib/storage/types";
 
@@ -105,6 +106,7 @@ export async function remoteUpsertApplication(sb: SupabaseClient, userId: string
       submitted_at: a.submittedAt ?? null,
       notes: a.notes ?? null,
       checklist: a.checklist,
+      essays: a.essays,
     },
     { onConflict: "user_id,university_slug" },
   );
@@ -171,6 +173,7 @@ function rowToApplication(r: Record<string, unknown>): Application {
     submittedAt: (r.submitted_at as string) ?? null,
     notes: (r.notes as string) ?? undefined,
     checklist: Array.isArray(r.checklist) ? (r.checklist as ChecklistItem[]) : [],
+    essays: Array.isArray(r.essays) ? (r.essays as EssayItem[]) : [],
     createdAt: (r.created_at as string) ?? new Date().toISOString(),
     updatedAt: (r.updated_at as string) ?? new Date().toISOString(),
   };

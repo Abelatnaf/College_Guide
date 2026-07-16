@@ -6,6 +6,7 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { useAccess } from "@/components/auth/AccessProvider";
 import { LockScreen } from "@/components/auth/LockScreen";
 import { isFreePreviewSlug } from "@/lib/access/freePreview";
+import { contextKeyForPathname, setPaymentContext } from "@/lib/access/paymentContext";
 
 /**
  * App-wide hard paywall. Everything except marketing/legal pages, the payment
@@ -43,8 +44,12 @@ export function AccessGate({ children }: { children: React.ReactNode }) {
   const blocked = enabled && !exempt && !loading && (!user || !isUnlocked);
 
   useEffect(() => {
-    if (blocked && user) router.replace("/payment");
-  }, [blocked, user, router]);
+    if (blocked && user) {
+      const key = contextKeyForPathname(pathname);
+      if (key) setPaymentContext(key);
+      router.replace("/payment");
+    }
+  }, [blocked, user, pathname, router]);
 
   if (exempt || !enabled) return <>{children}</>;
 

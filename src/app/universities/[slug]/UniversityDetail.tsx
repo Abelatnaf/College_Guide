@@ -25,6 +25,8 @@ import { UniversityLogo } from "@/components/ui/UniversityLogo";
 import { useAcademicProfile } from "@/components/providers/StorageProvider";
 import { estimateChance } from "@/lib/chances";
 import { getAidPolicy } from "@/data/aidPolicy";
+import { getEnglishTestPolicy } from "@/data/englishTests";
+import { VerifiedBadge } from "@/components/ui/VerifiedBadge";
 import { RealOutcomesBlock } from "@/components/university/RealOutcomesBlock";
 import { universityDeadlines, type ResolvedDeadline } from "@/lib/deadlines";
 import { daysUntil, buildDeadlineIcs, downloadIcs } from "@/lib/ics";
@@ -406,6 +408,39 @@ export function UniversityDetail({
                   <p className="mb-sm font-caption text-caption text-on-surface-variant">{aid.note}</p>
                   <a
                     href={aid.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-caption text-caption text-primary underline hover:no-underline"
+                  >
+                    Source
+                  </a>
+                </div>
+              );
+            })()}
+
+            {(() => {
+              const testPolicy = getEnglishTestPolicy(u.slug);
+              if (!testPolicy) return null;
+              return (
+                <div className="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-lg shadow-[0_4px_15px_rgba(0,0,0,0.05)]">
+                  <div className="mb-sm flex items-center gap-2">
+                    <Icon name="translate" className="text-primary" />
+                    <h3 className="font-headline-md text-headline-md">English Test Policy</h3>
+                    <VerifiedBadge />
+                  </div>
+                  <p className="mb-sm font-caption text-caption text-on-surface-variant">{testPolicy.policyNote}</p>
+                  <div className="mb-sm flex flex-wrap gap-1">
+                    {testPolicy.acceptedTests.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full bg-surface-container-high px-2.5 py-1 font-caption text-caption text-on-surface-variant"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={testPolicy.sourceUrls[0]}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-caption text-caption text-primary underline hover:no-underline"

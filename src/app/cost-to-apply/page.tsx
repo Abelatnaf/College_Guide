@@ -253,7 +253,10 @@ export default function CostToApplyPage() {
         <h2 className="mb-xs font-headline-md text-headline-md text-on-surface">Testing costs</h2>
         <p className="mb-md font-caption text-caption text-on-surface-variant">
           Check the tests you still need to take. Defaults are based on scores already in your
-          academic profile.
+          academic profile.{" "}
+          <Link href="/test-planner" className="text-primary hover:underline">
+            See which of your schools accept the cheaper Duolingo test →
+          </Link>
         </p>
         <div className="grid grid-cols-1 gap-sm sm:grid-cols-2">
           {testFees.map((t) => (

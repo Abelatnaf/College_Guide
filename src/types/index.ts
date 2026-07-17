@@ -20,6 +20,22 @@ export interface USInstitution {
   level?: string;
 }
 
+/**
+ * A raw international (non-US) institution record — name, country, and a
+ * website link only, no ranking/cost data. Sourced from the Hipo
+ * university-domains-list project (MIT-licensed, community-maintained),
+ * the same class of source as the IPEDS-derived US directory. Distinct from
+ * `University`: these back the bulk international directory browser, not
+ * the compare/quiz/chances tools, which need the richer curated fields.
+ */
+export interface IntlInstitution {
+  id: string;
+  name: string;
+  country: string;
+  stateProvince: string | null;
+  website: string | null;
+}
+
 export interface Scholarship {
   available: boolean;
   types: string[];

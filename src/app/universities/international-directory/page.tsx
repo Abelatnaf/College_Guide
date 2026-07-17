@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { curatedSlugFor, searchUSInstitutions, usInstitutions, usSectors, usStates } from "@/lib/usInstitutions";
+import { curatedSlugForIntl, intlCountries, intlInstitutions, searchIntlInstitutions } from "@/lib/intlInstitutions";
+import { flagFor } from "@/data/flags";
 import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = {
-  title: "US Institution Directory — UniPath",
+  title: "International Institution Directory — UniPath",
   description:
-    "Browse all 5,994 active US institutions from the IPEDS 2024 dataset, with direct admissions, financial aid, and application links.",
+    "Browse thousands of universities and colleges outside the US, sourced from the Hipo university-domains-list project, with direct website links.",
 };
 
 const PER_PAGE = 30;
@@ -20,19 +21,17 @@ function buildQuery(params: Record<string, string | number | undefined>): string
   return qs ? `?${qs}` : "";
 }
 
-export default function USDirectoryPage({
+export default function IntlDirectoryPage({
   searchParams,
 }: {
-  searchParams: { q?: string; state?: string; sector?: string; page?: string };
+  searchParams: { q?: string; country?: string; page?: string };
 }) {
   const q = searchParams.q ?? "";
-  const state = searchParams.state ?? "";
-  const sector = searchParams.sector ?? "";
+  const country = searchParams.country ?? "";
   const page = Number(searchParams.page ?? "1") || 1;
 
-  const { items, total, totalPages } = searchUSInstitutions({ q, state, sector, page, perPage: PER_PAGE });
-  const states = usStates();
-  const sectors = usSectors();
+  const { items, total, totalPages } = searchIntlInstitutions({ q, country, page, perPage: PER_PAGE });
+  const countries = intlCountries();
 
   return (
     <main className="mx-auto max-w-container-max px-md py-xl md:px-lg">
@@ -44,17 +43,25 @@ export default function USDirectoryPage({
           <Icon name="arrow_back" className="text-[18px]" />
           Back to curated University Directory
         </Link>
-        <h1 className="font-display text-display-md text-on-background">US Institution Directory</h1>
+        <h1 className="font-display text-display-md text-on-background">International Institution Directory</h1>
         <p className="max-w-3xl font-body-md text-body-md text-on-surface-variant">
-          All {usInstitutions.length.toLocaleString()} active US institutions from the IPEDS 2024
-          dataset — contact info, sector, and direct admissions / financial aid / application links
-          only. For rankings, tuition, acceptance rates, and full profiles, see the{" "}
+          {intlInstitutions.length.toLocaleString()} universities and colleges outside the US, across{" "}
+          {countries.length} countries — name and direct website link only, sourced from the{" "}
+          <a
+            href="https://github.com/Hipo/university-domains-list"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline hover:no-underline"
+          >
+            Hipo university-domains-list
+          </a>{" "}
+          project. For rankings, tuition, acceptance rates, and full profiles, see the{" "}
           <Link href="/universities" className="text-primary hover:underline">
             curated directory
           </Link>{" "}
-          — or for schools outside the US, the{" "}
-          <Link href="/universities/international-directory" className="text-primary hover:underline">
-            International Institution Directory
+          — or for US institutions specifically, the{" "}
+          <Link href="/universities/us-directory" className="text-primary hover:underline">
+            US Institution Directory
           </Link>
           .
         </p>
@@ -62,36 +69,24 @@ export default function USDirectoryPage({
 
       <form
         method="GET"
-        className="mb-lg grid grid-cols-1 gap-sm rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-md sm:grid-cols-[1fr_auto_auto_auto]"
+        className="mb-lg grid grid-cols-1 gap-sm rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-md sm:grid-cols-[1fr_auto_auto]"
       >
         <input
           type="text"
           name="q"
           defaultValue={q}
-          placeholder="Search by name or city…"
+          placeholder="Search by name…"
           className="rounded-lg border border-outline-variant/40 bg-surface px-md py-sm font-body-md text-body-md text-on-surface outline-none focus:border-primary"
         />
         <select
-          name="state"
-          defaultValue={state}
+          name="country"
+          defaultValue={country}
           className="rounded-lg border border-outline-variant/40 bg-surface px-md py-sm font-body-md text-body-md text-on-surface outline-none focus:border-primary"
         >
-          <option value="">All states</option>
-          {states.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-        <select
-          name="sector"
-          defaultValue={sector}
-          className="rounded-lg border border-outline-variant/40 bg-surface px-md py-sm font-body-md text-body-md text-on-surface outline-none focus:border-primary"
-        >
-          <option value="">All sectors</option>
-          {sectors.map((s) => (
-            <option key={s} value={s}>
-              {s}
+          <option value="">All countries</option>
+          {countries.map((c) => (
+            <option key={c} value={c}>
+              {c}
             </option>
           ))}
         </select>
@@ -119,20 +114,16 @@ export default function USDirectoryPage({
       ) : (
         <ul className="divide-y divide-outline-variant/20 rounded-xl border border-outline-variant/30 bg-surface-container-lowest">
           {items.map((inst) => {
-            const slug = curatedSlugFor(inst.id);
+            const slug = curatedSlugForIntl(inst.id);
             return (
               <li key={inst.id} className="flex flex-col gap-sm p-md sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-base leading-none">{flagFor(inst.country)}</span>
                     <span className="font-headline-sm text-headline-sm text-on-surface">{inst.name}</span>
-                    {inst.sector && (
-                      <span className="rounded-full bg-secondary-container px-2 py-0.5 font-caption text-[11px] text-on-surface-variant">
-                        {inst.sector}
-                      </span>
-                    )}
                   </div>
                   <p className="font-body-md text-body-md text-on-surface-variant">
-                    {[inst.city, inst.state].filter(Boolean).join(", ")}
+                    {[inst.stateProvince, inst.country].filter(Boolean).join(", ")}
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 flex-wrap items-center gap-md font-label-md text-caption">
@@ -146,21 +137,6 @@ export default function USDirectoryPage({
                       Website ↗
                     </a>
                   )}
-                  {inst.admissionsUrl && (
-                    <a href={inst.admissionsUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                      Admissions ↗
-                    </a>
-                  )}
-                  {inst.financialAidUrl && (
-                    <a href={inst.financialAidUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                      Financial Aid ↗
-                    </a>
-                  )}
-                  {inst.applicationUrl && (
-                    <a href={inst.applicationUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                      Apply ↗
-                    </a>
-                  )}
                 </div>
               </li>
             );
@@ -172,7 +148,7 @@ export default function USDirectoryPage({
         <nav className="mt-xl flex items-center justify-center gap-md">
           <Link
             aria-disabled={page <= 1}
-            href={`/universities/us-directory${buildQuery({ q, state, sector, page: page - 1 })}`}
+            href={`/universities/international-directory${buildQuery({ q, country, page: page - 1 })}`}
             className={
               page <= 1
                 ? "pointer-events-none flex h-10 items-center justify-center rounded-full px-md text-on-surface-variant opacity-40"
@@ -186,7 +162,7 @@ export default function USDirectoryPage({
           </span>
           <Link
             aria-disabled={page >= totalPages}
-            href={`/universities/us-directory${buildQuery({ q, state, sector, page: page + 1 })}`}
+            href={`/universities/international-directory${buildQuery({ q, country, page: page + 1 })}`}
             className={
               page >= totalPages
                 ? "pointer-events-none flex h-10 items-center justify-center rounded-full px-md text-on-surface-variant opacity-40"

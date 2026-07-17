@@ -184,6 +184,10 @@ export function DirectoryClient() {
               criteria ·{" "}
               <Link href="/universities/us-directory" className="text-primary hover:underline">
                 browse all 5,994 US institutions
+              </Link>{" "}
+              ·{" "}
+              <Link href="/universities/international-directory" className="text-primary hover:underline">
+                or 7,899 international institutions
               </Link>
             </p>
           </div>
